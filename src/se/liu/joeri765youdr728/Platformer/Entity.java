@@ -1,6 +1,6 @@
 package se.liu.joeri765youdr728.Platformer;
 
-public interface MapObjects
+public interface Entity
 {
     int getX();
 
@@ -10,5 +10,5 @@ public interface MapObjects
 
     int getWidth();
 
-    int getObjectType();
+    EntityType getEntityType();
 }
