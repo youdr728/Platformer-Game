@@ -20,8 +20,5 @@ public class Frame
     public static void main(String[] args) {
 	Frame frame = new Frame();
 	frame.show();
-
-	GameWorld gameWorld = new GameWorld();
-	gameWorld.loadMapFromFile("maps01");
     }
 }

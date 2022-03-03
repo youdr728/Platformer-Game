@@ -7,12 +7,14 @@ import java.util.Arrays;
 
 public class GameWorld
 {
-    int row = 16;
-    int col = 12;
-    int mapTileNum[][];
+    private int row = 12;
+    private int col = 16;
+    private int mapTileNum[][];
+
 
     public GameWorld() {
-	this.mapTileNum = new int[col][row];
+	this.mapTileNum = new int[row][col];
+	loadMapFromFile("map01");
     }
 
     public void loadMapFromFile(String mapfile){
@@ -20,16 +22,30 @@ public class GameWorld
 	    InputStream is = getClass().getResourceAsStream(mapfile);
 	    BufferedReader br = new BufferedReader(new InputStreamReader(is));
 
-	    for (int c = 0; c < col; c++) {
+	    for (int h = 0; h < row; h++) {
 		String line = br.readLine();
 		String numbers[] = line.split(" ");
-		for (int r = 0; r < row; r++) {
-		    mapTileNum[c][r] = Integer.parseInt(numbers[r]);
+		for (int w = 0; w < col; w++) {
+		    mapTileNum[h][w] = Integer.parseInt(numbers[w]);
 		}
 	    }
 	}catch(Exception e){
 
 	}
 	System.out.println(Arrays.deepToString(mapTileNum));
+    }
+
+
+
+    public int getRow() {
+	return row;
+    }
+
+    public int getCol() {
+	return col;
+    }
+
+    public int[][] getMapTileNum() {
+	return mapTileNum;
     }
 }
