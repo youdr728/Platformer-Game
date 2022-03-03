@@ -8,7 +8,7 @@ public class Frame
 	JFrame frame = new JFrame();
 	frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 	frame.setResizable(false);
-	frame.setLocationRelativeTo(null);
+	//frame.setLocationRelativeTo(null);
 
 	GamePanel gamePanel = new GamePanel();
 	frame.add(gamePanel);
