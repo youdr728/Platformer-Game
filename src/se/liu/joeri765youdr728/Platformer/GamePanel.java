@@ -21,6 +21,7 @@ public class GamePanel extends JComponent
     final int rows = 12;
     final int screenHeight = rows * tileSize;
     final int screenWidth = columns * tileSize;
+
     public static BufferedImage wall, platform, player;
     private GameWorld world;
     protected final EnumMap<EntityType, BufferedImage> tileMap = creatTileMap();
