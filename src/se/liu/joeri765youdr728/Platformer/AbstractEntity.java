@@ -22,12 +22,13 @@ public abstract class AbstractEntity implements Entity
     public static Map<Integer, EntityType> creatEntityTypeMap(){
 	Map<Integer, EntityType> entityTypeMap = new HashMap<>();
 	entityTypeMap.put(1, EntityType.PLATFORM);
-	entityTypeMap.put(2, EntityType.OBSTACLE);
-	entityTypeMap.put(3, EntityType.GOAL);
-	entityTypeMap.put(4, EntityType.COINS);
-	entityTypeMap.put(5, EntityType.POWER_UP1);
-	entityTypeMap.put(6, EntityType.POWER_UP2);
-	entityTypeMap.put(7, EntityType.POWER_UP3);
+	entityTypeMap.put(2, EntityType.PLAYER);
+	entityTypeMap.put(3, EntityType.OBSTACLE);
+	entityTypeMap.put(4, EntityType.GOAL);
+	entityTypeMap.put(5, EntityType.COINS);
+	entityTypeMap.put(6, EntityType.POWER_UP1);
+	entityTypeMap.put(7, EntityType.POWER_UP2);
+	entityTypeMap.put(8, EntityType.POWER_UP3);
 
 	return entityTypeMap;
     }

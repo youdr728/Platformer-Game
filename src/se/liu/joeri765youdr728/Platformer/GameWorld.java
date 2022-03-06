@@ -13,6 +13,8 @@ public class GameWorld
     private int col = 16;
     private int mapTileNum[][];
     private List<Entity> entityList;
+    private Platform platform;
+    private Player player;
 
 
     public GameWorld() {
@@ -44,8 +46,14 @@ public class GameWorld
 		    int n = mapTileNum[h][w];
 		    switch (n) {
 			case 1:
-			    Platform platform = new Platform(w, h, n);
+			    platform = new Platform(w, h, n);
 			    entityList.add(platform);
+			    break;
+			case 2:
+			    player = new Player(platform.getX(), platform.getY(), n,20, this);
+			    entityList.add(player);
+			    player.tryCollision();
+			    break;
 		    }
 
 		}
