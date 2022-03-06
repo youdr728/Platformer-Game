@@ -15,6 +15,7 @@ public class Frame
 
 	frame.pack();
 	frame.setVisible(true);
+	gamePanel.startGameThread();
     }
 
     public static void main(String[] args) {

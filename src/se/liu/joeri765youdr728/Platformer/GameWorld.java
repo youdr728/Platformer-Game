@@ -16,13 +16,10 @@ public class GameWorld
     private Platform platform;
     private Player player;
 
-    private List<WorldListener> listeners;
-
 
     public GameWorld() {
 	this.mapTileNum = new int[row][col];
 	this.entityList = new ArrayList<>();
-	this.listeners = new ArrayList<>();
 	//this.player = createPlayer();
 	loadMapFromFile("Maps/map01");
 	createEntityList();
@@ -55,7 +52,7 @@ public class GameWorld
 			    break;
 			case 2:
 
-			    player = new Player(w * 48, h * 48, n,20, this);
+			    player = new Player(w * 48, h * 48, n,3, this);
 
 		    }
 
@@ -69,15 +66,6 @@ public class GameWorld
 	//return player;
    // }
 
-    public void addWorldListener(WorldListener wl){
-	listeners.add(wl);
-    }
-
-    public void notifyListeners(){
-	for (WorldListener elem: listeners) {
-	    elem.worldChanged();
-	}
-    }
 
     public int getRow() {
 	return row;
