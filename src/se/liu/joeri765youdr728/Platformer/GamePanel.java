@@ -73,16 +73,17 @@ public class GamePanel extends JComponent implements WorldListener
         //Paint Entitys
         for (int i = 0; i < world.getEntityList().size(); i++) {
             g.drawImage(tileMap.get(world.getEntityList().get(i).getEntityType()),
-                        world.getEntityList().get(i).getX() * tileSize,
-                        world.getEntityList().get(i).getY() * tileSize,
+                        world.getEntityList().get(i).getX(),
+                        world.getEntityList().get(i).getY(),
                            world.getEntityList().get(i).getWidth(),
                            world.getEntityList().get(i).getHeight(),null);
         }
+
         g.drawImage(tileMap.get(EntityType.PLAYER),
-                    world.getPlayer().x * tileSize,
-                    world.getPlayer().y * tileSize,
-                       world.getPlayer().getWidth(),
-                       world.getPlayer().getHeight(),null);
+                    world.getPlayer().x,
+                    world.getPlayer().y,
+                    world.getPlayer().getWidth(),
+                    world.getPlayer().getHeight(),null);
 
     }
 
@@ -123,6 +124,8 @@ public class GamePanel extends JComponent implements WorldListener
 
         act.put("left", new MoveAction(Direction.LEFT));
         act.put("right", new MoveAction(Direction.RIGHT));
+        act.put("up", new MoveAction(Direction.UP));
+        act.put("down", new MoveAction(Direction.DOWN));
 
 
 

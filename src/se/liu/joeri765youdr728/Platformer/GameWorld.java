@@ -50,11 +50,12 @@ public class GameWorld
 		    int n = mapTileNum[h][w];
 		    switch (n) {
 			case 1:
-			    platform = new Platform(w, h, n);
+			    platform = new Platform(w * 48, h * 48, n);
 			    entityList.add(platform);
 			    break;
 			case 2:
-			    player = new Player(w, h, n,20, this);
+
+			    player = new Player(w * 48, h * 48, n,20, this);
 
 		    }
 
