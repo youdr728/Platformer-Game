@@ -16,10 +16,14 @@ public class GameWorld
     private Platform platform;
     private Player player;
 
+    private List<WorldListener> listeners;
+
 
     public GameWorld() {
 	this.mapTileNum = new int[row][col];
 	this.entityList = new ArrayList<>();
+	this.listeners = new ArrayList<>();
+	//this.player = createPlayer();
 	loadMapFromFile("Maps/map01");
 	createEntityList();
     }
@@ -50,10 +54,8 @@ public class GameWorld
 			    entityList.add(platform);
 			    break;
 			case 2:
-			    player = new Player(platform.getX(), platform.getY(), n,20, this);
-			    entityList.add(player);
-			    player.tryCollision();
-			    break;
+			    player = new Player(w, h, n,20, this);
+
 		    }
 
 		}
@@ -61,7 +63,20 @@ public class GameWorld
 
 	}
     }
+    //public Player createPlayer(){
+	//Player player = new Player(2,10, 2, 13, this);
+	//return player;
+   // }
 
+    public void addWorldListener(WorldListener wl){
+	listeners.add(wl);
+    }
+
+    public void notifyListeners(){
+	for (WorldListener elem: listeners) {
+	    elem.worldChanged();
+	}
+    }
 
     public int getRow() {
 	return row;
@@ -77,5 +92,9 @@ public class GameWorld
 
     public List<Entity> getEntityList() {
 	return entityList;
+    }
+
+    public Player getPlayer() {
+	return player;
     }
 }

@@ -6,25 +6,27 @@ public class Player extends AbstractEntity
     private GameWorld world;
     private EntityType collidedEntity;
 
-    public Player(final int x, final int y, final int typeNumber, final int speed, final GameWorld world) {
+    public Player(int x,int y, final int typeNumber, final int speed, final GameWorld world) {
 	super(x, y, typeNumber);
 	this.world = world;
 	this.speed = speed;
     }
 
-    private void respawnPlayer(){
+    public void respawnPlayer(){
 
     }
-    private void movePlayer(Direction dir){
+    public void movePlayer(Direction dir){
 	if (dir.equals(Direction.RIGHT)){
-	    this.x += 5;
+	    this.x += 1;
 	    // If collision put -5 on x
 
 	}
 	else if (dir.equals(Direction.LEFT)){
-	    this.x -= 5;
+	    this.x -= 1;
 	    // If collision put +5 on x
 	}
+	tryCollision();
+	world.notifyListeners();
     }
 
     public void tryCollision() {
