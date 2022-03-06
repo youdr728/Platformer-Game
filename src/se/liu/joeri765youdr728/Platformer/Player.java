@@ -41,8 +41,7 @@ public class Player extends AbstractEntity
 
     public void tryCollision() {
 	for (Entity entity : world.getEntityList()) {
-
-	    if(this.x == entity.getX() && this.y == entity.getY() ) {
+	    if(this.x == entity.getX() && this.y == entity.getY()) {
 		collidedEntity = entity.getEntityType();
 		System.out.println("hey");
 	    }
