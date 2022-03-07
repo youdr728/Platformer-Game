@@ -55,6 +55,9 @@ public class GameWorld
 			case 3:
 			    entityList.add(new Obstacle(w * 48, h * 48, n));
 			    break;
+			case 4:
+			    entityList.add(new Goal(w * 48, h * 48, n, this));
+			    break;
 		    }
 
 		}

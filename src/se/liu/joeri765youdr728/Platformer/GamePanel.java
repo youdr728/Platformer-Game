@@ -23,7 +23,7 @@ public class GamePanel extends JComponent implements  Runnable
     final int screenHeight = rows * tileSize;
     final int screenWidth = columns * tileSize;
 
-    public static BufferedImage wall, platform, player, spikes;
+    public static BufferedImage wall, platform, player, spikes, door;
     private GameWorld world;
     protected final EnumMap<EntityType, BufferedImage> tileMap = creatTileMap();
 
@@ -49,6 +49,7 @@ public class GamePanel extends JComponent implements  Runnable
             wall = ImageIO.read(GamePanel.class.getResourceAsStream("Tiles/wall.png"));
             player = ImageIO.read(GamePanel.class.getResourceAsStream("Tiles/player.png"));
             spikes = ImageIO.read(GamePanel.class.getResourceAsStream("Tiles/spikes.png"));
+            door = ImageIO.read(GamePanel.class.getResourceAsStream("Tiles/door.png"));
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -58,6 +59,7 @@ public class GamePanel extends JComponent implements  Runnable
         tileMap.put(EntityType.PLATFORM, platform);
         tileMap.put(EntityType.PLAYER, player);
         tileMap.put(EntityType.OBSTACLE, spikes);
+        tileMap.put(EntityType.GOAL, door);
 
         return tileMap;
     }
@@ -136,6 +138,7 @@ public class GamePanel extends JComponent implements  Runnable
                         world.getEntityList().get(i).getHeight(),null);
         }
 
+        //Paint player
         g.drawImage(tileMap.get(EntityType.PLAYER),
                     world.getPlayer().x,
                     world.getPlayer().y,
