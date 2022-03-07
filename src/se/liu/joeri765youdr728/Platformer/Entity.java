@@ -1,5 +1,7 @@
 package se.liu.joeri765youdr728.Platformer;
 
+import java.awt.*;
+
 public interface Entity
 {
     int getX();
@@ -9,6 +11,8 @@ public interface Entity
     int getHeight();
 
     int getWidth();
+
+    Rectangle getRectangle();
 
     EntityType getEntityType();
 }

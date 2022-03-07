@@ -1,5 +1,6 @@
 package se.liu.joeri765youdr728.Platformer;
 
+import java.awt.*;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -64,4 +65,6 @@ public abstract class AbstractEntity implements Entity
     @Override public EntityType getEntityType() {
 	return entityTypeMap.get(typeNumber);
     }
+
+    @Override public Rectangle getRectangle() {return new Rectangle(getX(), getY(), getWidth(), getHeight());}
 }
