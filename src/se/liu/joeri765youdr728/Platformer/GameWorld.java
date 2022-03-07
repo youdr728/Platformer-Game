@@ -4,13 +4,15 @@ import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class GameWorld
 {
     private int row = 12;
     private int col = 16;
+    private int worldWidth = col * 48;
+    private int worldHeight = row * 48;
+
     private int mapTileNum[][];
     private List<Entity> entityList;
     private Player player;
@@ -19,7 +21,6 @@ public class GameWorld
     public GameWorld() {
 	this.mapTileNum = new int[row][col];
 	this.entityList = new ArrayList<>();
-	//this.player = createPlayer();
 	loadMapFromFile("Maps/map01");
 	createEntityList();
     }
@@ -50,6 +51,9 @@ public class GameWorld
 			    break;
 			case 2:
 			    player = new Player(w * 48, h * 48, n,3, this);
+			    break;
+			case 3:
+			    entityList.add(new Obstacle(w * 48, h * 48, n));
 			    break;
 		    }
 
@@ -110,5 +114,13 @@ public class GameWorld
 
     public Player getPlayer() {
 	return player;
+    }
+
+    public int getWorldWidth() {
+	return worldWidth;
+    }
+
+    public int getWorldHeigt() {
+	return worldHeight;
     }
 }

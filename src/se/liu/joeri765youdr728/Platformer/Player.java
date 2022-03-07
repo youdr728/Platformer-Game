@@ -21,10 +21,11 @@ public class Player extends AbstractEntity
 
     }
     public void movePlayer(Direction dir){
+
 	if (dir.equals(Direction.RIGHT)){
 	    this.x += speed;
 	    tryCollision();
-	    if (platformCollision) {
+	    if (platformCollision || (this.x > world.getWorldWidth()- 48)) {
 		this.x -= speed;
 		setPlatformCollision(false);
 	    }
@@ -33,7 +34,7 @@ public class Player extends AbstractEntity
 	else if (dir.equals(Direction.LEFT)){
 	    this.x -= speed;
 	    tryCollision();
-	    if (platformCollision) {
+	    if (platformCollision || this.x < 0) {
 		this.x += speed;
 		setPlatformCollision(false);
 	    }
@@ -41,7 +42,7 @@ public class Player extends AbstractEntity
 	else if (dir.equals(Direction.UP)){
 	    this.y -= speed;
 	    tryCollision();
-	    if (platformCollision) {
+	    if (platformCollision || this.y < 0) {
 		this.y += speed;
 		setPlatformCollision(false);
 	    }
@@ -49,7 +50,7 @@ public class Player extends AbstractEntity
 	else if (dir.equals(Direction.DOWN)){
 	    this.y += speed;
 	    tryCollision();
-	    if (platformCollision) {
+	    if (platformCollision || this.y > (world.getWorldHeigt()-48)) {
 		this.y -= speed;
 		setPlatformCollision(false);
 	    }
@@ -75,3 +76,4 @@ public class Player extends AbstractEntity
 
     public void setPlatformCollision(boolean bool) {this.platformCollision = bool;}
 }
+
