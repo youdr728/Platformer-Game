@@ -8,17 +8,47 @@ public class Player extends AbstractEntity
     private GameWorld world;
     private Entity collidedEntity;
     private boolean platformCollision;
+    private boolean isJumping;
+    private int jumpCounter = 0;
+    private boolean canJump = true;
 
     public Player(int x,int y, final int typeNumber, final int speed, final GameWorld world) {
 	super(x, y, typeNumber);
 	this.world = world;
 	this.speed = speed;
+	this.isJumping = false;
 
 
     }
 
     public void respawnPlayer(){
 
+    }
+    public void jump(){
+	canJump = false;
+	this.jumpCounter += 1;
+	this.y -= 6;
+	if (jumpCounter > 20) {
+
+	    setJumping(false);
+	    tryCollision();
+	    if (platformCollision || this.y < 0) {
+		this.y += 6;
+		setPlatformCollision(false);
+
+	    }
+	}
+
+    }
+    public void moveDown(){
+	this.y += 3;
+	tryCollision();
+	if (platformCollision || this.y > (world.getWorldHeigt()-48)) {
+	    this.y -= 3;
+	    setPlatformCollision(false);
+	    jumpCounter = 0;
+	    setCanJump(true);
+	}
     }
     public void movePlayer(Direction dir){
 
@@ -75,5 +105,25 @@ public class Player extends AbstractEntity
     }
 
     public void setPlatformCollision(boolean bool) {this.platformCollision = bool;}
+
+    public void setJumping(boolean jumping) {
+	this.isJumping = jumping;
+    }
+
+    public boolean isJumping() {
+	return isJumping;
+    }
+
+    public boolean isPlatformCollision() {
+	return platformCollision;
+    }
+
+    public boolean CanJump() {
+	return canJump;
+    }
+
+    public void setCanJump(boolean canJump) {
+	this.canJump = canJump;
+    }
 }
 

@@ -73,7 +73,17 @@ public class GameWorld
 	//return player;
    // }
 
+    public void updateWorld(){
 
+	if(!player.isJumping()){
+	    player.moveDown();
+	}
+	else{
+	    player.jump();
+	}
+
+
+    }
 
     public void applyCollision(Entity entity) {
 	EntityType entityType = entity.getEntityType();

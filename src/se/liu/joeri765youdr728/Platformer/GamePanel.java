@@ -79,7 +79,10 @@ public class GamePanel extends JComponent implements  Runnable
 
         while(gameThread != null){
             long currentTime = System.nanoTime();
+
             update();
+
+            world.updateWorld();
 
             repaint();
 
@@ -115,6 +118,9 @@ public class GamePanel extends JComponent implements  Runnable
         }
         if (keyH.rightPressed){
             world.getPlayer().movePlayer(Direction.RIGHT);
+        }
+        if (keyH.spacePressed && world.getPlayer().CanJump()){
+            world.getPlayer().setJumping(true);
         }
     }
 
