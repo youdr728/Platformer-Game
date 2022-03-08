@@ -48,7 +48,7 @@ public class GamePanel extends JComponent implements  Runnable
             platform = ImageIO.read(GamePanel.class.getResourceAsStream("Tiles/earth.png"));
             wall = ImageIO.read(GamePanel.class.getResourceAsStream("Tiles/wall.png"));
             player = ImageIO.read(GamePanel.class.getResourceAsStream("Tiles/player.png"));
-            spikes = ImageIO.read(GamePanel.class.getResourceAsStream("Tiles/spikes.png"));
+            spikes = ImageIO.read(GamePanel.class.getResourceAsStream("Tiles/new_spikes.png"));
             door = ImageIO.read(GamePanel.class.getResourceAsStream("Tiles/door.png"));
             chest = ImageIO.read(GamePanel.class.getResourceAsStream("Tiles/chest.png"));
 
