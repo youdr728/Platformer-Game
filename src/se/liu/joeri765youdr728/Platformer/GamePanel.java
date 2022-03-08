@@ -45,7 +45,7 @@ public class GamePanel extends JComponent implements  Runnable
     public static EnumMap<EntityType, BufferedImage> creatTileMap(){
 
         try {
-            platform = ImageIO.read(GamePanel.class.getResourceAsStream("Tiles/earth.png"));
+            platform = ImageIO.read(GamePanel.class.getResourceAsStream("Tiles/platform.png"));
             wall = ImageIO.read(GamePanel.class.getResourceAsStream("Tiles/wall.png"));
             player = ImageIO.read(GamePanel.class.getResourceAsStream("Tiles/player.png"));
             spikes = ImageIO.read(GamePanel.class.getResourceAsStream("Tiles/new_spikes.png"));

@@ -13,15 +13,6 @@ public class Coin extends AbstractEntity
 
     }
 
-    public void removeCoin(){
-        List<Entity> entityList = world.getEntityList();
-
-        for (Entity entity : entityList) {
-            if (entity.getX() == this.x && entity.getY() == this.y){
-                entityList.remove(entity);
-            }
-        }
-    }
 
     public void addToScore(){
 	//adds to player score

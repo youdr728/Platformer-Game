@@ -84,6 +84,7 @@ public class GameWorld
 		break;
 
 	    case COINS:
+		entityList.remove(entity);
 		break;
 
 	    case GOAL:

@@ -60,9 +60,9 @@ public class Player extends AbstractEntity
     public void tryCollision() {
 	Rectangle playerRec = this.getRectangle();
 
-	for (Entity entity : world.getEntityList()) {
+	for (int i=0; i<world.getEntityList().size(); i++) {
+	    Entity entity = world.getEntityList().get(i);
 	    Rectangle entityRec = entity.getRectangle();
-
 	    if(playerRec.intersects(entityRec)) {
 		collidedEntity = entity;
 		world.applyCollision(entity);
