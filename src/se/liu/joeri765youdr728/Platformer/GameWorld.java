@@ -53,7 +53,7 @@ public class GameWorld
 			    player = new Player(w * 48, h * 48, n,4, this);
 			    break;
 			case 3:
-			    entityList.add(new Obstacle(w * 48, h * 48, n));
+			    entityList.add(new Obstacle(w * 48, (h * 48)+ 10, n));
 			    break;
 			case 4:
 			    entityList.add(new Goal(w * 48, h * 48, n, this));
@@ -101,6 +101,7 @@ public class GameWorld
 		break;
 
 	    case OBSTACLE:
+		player.respawnPlayer();
 		break;
 	}
 

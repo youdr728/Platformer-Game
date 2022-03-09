@@ -5,34 +5,47 @@ import java.awt.*;
 public class Player extends AbstractEntity
 {
     private int speed;
+    private int jumpSpeed = 14;
+    private int fallspeed = 7;
+
+
     private GameWorld world;
     private Entity collidedEntity;
     private boolean platformCollision;
-    private boolean isJumping;
+    private boolean isJumping = false;
     private int jumpCounter = 0;
     private boolean canJump = true;
+
+    private final int startX;
+    private final int startY;
+
+
 
     public Player(int x,int y, final int typeNumber, final int speed, final GameWorld world) {
 	super(x, y, typeNumber);
 	this.world = world;
 	this.speed = speed;
-	this.isJumping = false;
+	this.startX = x;
+	this.startY = y;
 
 
     }
 
     public void respawnPlayer(){
+	this.x = startX;
+	this.y = startY;
 
     }
     public void jump(){
 	isJumping = true;
 	canJump = false;
 	this.jumpCounter += 2;
-	this.y -= 7;
+	this.y -= jumpSpeed;
+	jumpSpeed -= 1;
 	tryCollision();
 	if (platformCollision || this.y < 0) {
-	    this.y += 7;
-	    jumpCounter = 31;
+	    this.y += jumpSpeed;
+	    jumpSpeed = 14;
 	    setPlatformCollision(false);
 	    setJumping(false);
 
@@ -44,13 +57,14 @@ public class Player extends AbstractEntity
 
     }
     public void moveDown(){
-	this.y += 5;
+	canJump = false;
+	this.y += fallspeed;
 	tryCollision();
 	if (platformCollision || this.y > (world.getWorldHeigt()-48)) {
-	    this.y -= 5;
+	    this.y -= fallspeed;
 	    setPlatformCollision(false);
 	    jumpCounter = 0;
-	    setCanJump(true);
+	    canJump = true;
 	}
     }
     public void movePlayer(Direction dir){
@@ -72,6 +86,7 @@ public class Player extends AbstractEntity
 		setPlatformCollision(false);
 	    }
 	}
+
     }
 
     public void tryCollision() {
@@ -89,6 +104,14 @@ public class Player extends AbstractEntity
 
     public int getSpeed() {
 	return speed;
+    }
+
+    public int getStartX() {
+	return startX;
+    }
+
+    public int getStartY() {
+	return startY;
     }
 
     public void setPlatformCollision(boolean bool) {this.platformCollision = bool;}
@@ -109,8 +132,6 @@ public class Player extends AbstractEntity
 	return canJump;
     }
 
-    public void setCanJump(boolean canJump) {
-	this.canJump = canJump;
-    }
+
 }
 

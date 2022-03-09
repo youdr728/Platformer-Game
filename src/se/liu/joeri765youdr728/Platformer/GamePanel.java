@@ -45,10 +45,10 @@ public class GamePanel extends JComponent implements  Runnable
     public static EnumMap<EntityType, BufferedImage> creatTileMap(){
 
         try {
-            platform = ImageIO.read(GamePanel.class.getResourceAsStream("Tiles/platform.png"));
+            platform = ImageIO.read(GamePanel.class.getResourceAsStream("Tiles/platform2.png"));
             wall = ImageIO.read(GamePanel.class.getResourceAsStream("Tiles/wall.png"));
             player = ImageIO.read(GamePanel.class.getResourceAsStream("Tiles/player.png"));
-            spikes = ImageIO.read(GamePanel.class.getResourceAsStream("Tiles/new_spikes.png"));
+            spikes = ImageIO.read(GamePanel.class.getResourceAsStream("Tiles/spikes4.png"));
             door = ImageIO.read(GamePanel.class.getResourceAsStream("Tiles/door.png"));
             chest = ImageIO.read(GamePanel.class.getResourceAsStream("Tiles/chest.png"));
 
@@ -106,7 +106,6 @@ public class GamePanel extends JComponent implements  Runnable
     }
 
     public void update(){
-
         if (keyH.upPressed){
             world.getPlayer().movePlayer(Direction.UP);
         }
@@ -136,6 +135,12 @@ public class GamePanel extends JComponent implements  Runnable
                 g.drawImage(tileMap.get(EntityType.WALL), w * tileSize, h * tileSize, tileSize, tileSize,null);
             }
         }
+        //Paint start door
+        g.drawImage(tileMap.get(EntityType.GOAL),
+                    world.getPlayer().getStartX(),
+                    world.getPlayer().getStartY(),
+                    tileSize,
+                    tileSize,null);
 
         //Paint Entitys
         for (int i = 0; i < world.getEntityList().size(); i++) {
