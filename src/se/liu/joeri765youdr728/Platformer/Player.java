@@ -25,26 +25,29 @@ public class Player extends AbstractEntity
 
     }
     public void jump(){
+	isJumping = true;
 	canJump = false;
-	this.jumpCounter += 1;
-	this.y -= 6;
-	if (jumpCounter > 20) {
-
+	this.jumpCounter += 2;
+	this.y -= 7;
+	tryCollision();
+	if (platformCollision || this.y < 0) {
+	    this.y += 7;
+	    jumpCounter = 31;
+	    setPlatformCollision(false);
 	    setJumping(false);
-	    tryCollision();
-	    if (platformCollision || this.y < 0) {
-		this.y += 6;
-		setPlatformCollision(false);
 
-	    }
+	}
+	else if (jumpCounter > 30) {
+	    setJumping(false);
+
 	}
 
     }
     public void moveDown(){
-	this.y += 3;
+	this.y += 5;
 	tryCollision();
 	if (platformCollision || this.y > (world.getWorldHeigt()-48)) {
-	    this.y -= 3;
+	    this.y -= 5;
 	    setPlatformCollision(false);
 	    jumpCounter = 0;
 	    setCanJump(true);
@@ -66,22 +69,6 @@ public class Player extends AbstractEntity
 	    tryCollision();
 	    if (platformCollision || this.x < 0) {
 		this.x += speed;
-		setPlatformCollision(false);
-	    }
-	}
-	else if (dir.equals(Direction.UP)){
-	    this.y -= speed;
-	    tryCollision();
-	    if (platformCollision || this.y < 0) {
-		this.y += speed;
-		setPlatformCollision(false);
-	    }
-	}
-	else if (dir.equals(Direction.DOWN)){
-	    this.y += speed;
-	    tryCollision();
-	    if (platformCollision || this.y > (world.getWorldHeigt()-48)) {
-		this.y -= speed;
 		setPlatformCollision(false);
 	    }
 	}

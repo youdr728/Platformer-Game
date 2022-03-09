@@ -50,7 +50,7 @@ public class GameWorld
 			    entityList.add(new Platform(w * 48, h * 48, n));
 			    break;
 			case 2:
-			    player = new Player(w * 48, h * 48, n,3, this);
+			    player = new Player(w * 48, h * 48, n,4, this);
 			    break;
 			case 3:
 			    entityList.add(new Obstacle(w * 48, h * 48, n));
