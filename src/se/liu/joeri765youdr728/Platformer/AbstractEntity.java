@@ -15,10 +15,15 @@ public abstract class AbstractEntity implements Entity
     protected final Map<Integer, Integer> sizeMap = creatSizeMap();
     protected int collisionX, collisionY, collisionWidth, collisionHeight;
 
-    public AbstractEntity(final int x, final int y, final int typeNumber) {
+    public AbstractEntity(final int x, final int y, final int typeNumber,
+		      int collisionX, int collisionY, int collisionWidth, int collisionHeight) {
 	this.x = x;
 	this.y = y;
 	this.typeNumber = typeNumber;
+	this.collisionX = collisionX;
+	this.collisionY = collisionY;
+	this.collisionWidth = collisionWidth;
+	this.collisionHeight = collisionHeight;
     }
 
     public static Map<Integer, EntityType> creatEntityTypeMap(){

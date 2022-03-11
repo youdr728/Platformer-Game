@@ -16,6 +16,7 @@ public class GameWorld
     private int mapTileNum[][];
     private List<Entity> entityList;
     private Player player;
+    private Goal goal;
 
 
     public GameWorld() {
@@ -47,19 +48,19 @@ public class GameWorld
 		    int n = mapTileNum[h][w];
 		    switch (n) {
 			case 1:
-			    entityList.add(new Platform(w * 48, h * 48, n));
+			    entityList.add(new Platform(w * 48, h * 48, n, 0,0 ,48, 48));
 			    break;
 			case 2:
-			    player = new Player(w * 48, h * 48, n,4, this);
+			    player = new Player(w * 48, h * 48, n,9, 0, 30, 48, 4, this);
 			    break;
 			case 3:
-			    entityList.add(new Obstacle(w * 48, (h * 48)+ 10, n));
+			    entityList.add(new Obstacle(w * 48, (h * 48)+ 10, n, 0, 0, 48, 48));
 			    break;
 			case 4:
-			    entityList.add(new Goal(w * 48, h * 48, n, this));
+			    entityList.add(new Goal(w * 48, h * 48, n, 24, 36, 6, 12, this));
 			    break;
 			case 5:
-			    entityList.add(new Goal(w * 48, h * 48, n, this));
+			    entityList.add(new Coin(w * 48, h * 48, n, 3, 24, 42,24, this));
 			    break;
 		    }
 
@@ -87,7 +88,7 @@ public class GameWorld
 
     public void applyCollision(Entity entity) {
 	EntityType entityType = entity.getEntityType();
-
+player.respawnPlayer();
 	switch(entityType) {
 	    case PLATFORM:
 		player.setPlatformCollision(true);
@@ -98,6 +99,9 @@ public class GameWorld
 		break;
 
 	    case GOAL:
+		System.out.println("hey");
+		loadMapFromFile(goal.moveToNextMap());
+		this.createEntityList();
 		break;
 
 	    case OBSTACLE:

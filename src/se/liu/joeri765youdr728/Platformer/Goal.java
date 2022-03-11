@@ -6,16 +6,18 @@ public class Goal extends AbstractEntity
 {
 
     private GameWorld world;
-    public Goal(final int x, final int y, final int typeNumber, final GameWorld world) {
-	super(x, y, typeNumber);
+    private int mapNumber;
+
+    public Goal(final int x, final int y, final int typeNumber,
+		int collisionX, int collisionY, int collisionWidth, int collisionHeight, final GameWorld world) {
+	super(x, y, typeNumber, collisionX, collisionY, collisionWidth, collisionHeight);
 	this.world = world;
     }
 
-    public void moveToNextMap(){
-	String map = JOptionPane.showInputDialog("select map number");
-	world.loadMapFromFile("Maps/map" + map);
-	world.createEntityList();
-
+    public String moveToNextMap(){
+	mapNumber = mapNumber + 1;
+	String nextMap = "Maps/map" + mapNumber;
+	return "Maps/map" + mapNumber;
     }
 
 }
