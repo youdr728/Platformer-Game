@@ -14,10 +14,5 @@ public class Goal extends AbstractEntity
 	this.world = world;
     }
 
-    public String moveToNextMap(){
-	mapNumber = mapNumber + 1;
-	String nextMap = "Maps/map" + mapNumber;
-	return "Maps/map" + mapNumber;
-    }
 
 }

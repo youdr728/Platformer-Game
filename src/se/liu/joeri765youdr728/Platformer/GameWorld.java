@@ -17,6 +17,7 @@ public class GameWorld
     private List<Entity> entityList;
     private Player player;
     private Goal goal;
+    private int mapNumber = 1;
 
 
     public GameWorld() {
@@ -86,6 +87,12 @@ public class GameWorld
 
     }
 
+    public String getNextMap(){
+	mapNumber = mapNumber + 1;
+	String nextMap = "Maps/map0" + mapNumber;
+	return nextMap;
+    }
+
     public void applyCollision(Entity entity) {
 	EntityType entityType = entity.getEntityType();
 
@@ -99,9 +106,12 @@ public class GameWorld
 		break;
 
 	    case GOAL:
-		System.out.println("hey");
-		loadMapFromFile(goal.moveToNextMap());
+		System.out.println("hey" + 1);
+		this.mapTileNum = new int[row][col];
+		this.entityList = new ArrayList<>();
+		loadMapFromFile(this.getNextMap());
 		this.createEntityList();
+		player.respawnPlayer();
 		break;
 
 	    case OBSTACLE:
