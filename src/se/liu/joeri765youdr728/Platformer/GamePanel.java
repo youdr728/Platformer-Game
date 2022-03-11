@@ -47,7 +47,7 @@ public class GamePanel extends JComponent implements  Runnable
         try {
             platform = ImageIO.read(GamePanel.class.getResourceAsStream("Tiles/platform2.png"));
             wall = ImageIO.read(GamePanel.class.getResourceAsStream("Tiles/wall.png"));
-            player = ImageIO.read(GamePanel.class.getResourceAsStream("Tiles/player.png"));
+            player = ImageIO.read(GamePanel.class.getResourceAsStream("Tiles/knight3.png"));
             spikes = ImageIO.read(GamePanel.class.getResourceAsStream("Tiles/spikes4.png"));
             door = ImageIO.read(GamePanel.class.getResourceAsStream("Tiles/door.png"));
             chest = ImageIO.read(GamePanel.class.getResourceAsStream("Tiles/chest.png"));
