@@ -88,7 +88,7 @@ public class GameWorld
 
     public void applyCollision(Entity entity) {
 	EntityType entityType = entity.getEntityType();
-player.respawnPlayer();
+
 	switch(entityType) {
 	    case PLATFORM:
 		player.setPlatformCollision(true);
