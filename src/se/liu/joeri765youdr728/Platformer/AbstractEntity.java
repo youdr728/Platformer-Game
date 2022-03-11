@@ -13,6 +13,7 @@ public abstract class AbstractEntity implements Entity
 
     protected final Map<Integer, EntityType> entityTypeMap = creatEntityTypeMap();
     protected final Map<Integer, Integer> sizeMap = creatSizeMap();
+    protected int collisionX, collisionY, collisionWidth, collisionHeight;
 
     public AbstractEntity(final int x, final int y, final int typeNumber) {
 	this.x = x;
@@ -66,5 +67,23 @@ public abstract class AbstractEntity implements Entity
 	return entityTypeMap.get(typeNumber);
     }
 
-    @Override public Rectangle getRectangle() {return new Rectangle(getX(), getY(), getWidth(), getHeight());}
+
+    @Override public int getCollisionX() {
+	return getX() + collisionX;
+    }
+
+    @Override public int getCollisionY() {
+	return getY() + collisionY;
+    }
+
+    public int getCollisionWidth() {
+	return collisionWidth;
+    }
+
+    public int getCollisionHeight() {
+	return collisionHeight;
+    }
+
+    @Override public Rectangle getRectangle() {return new Rectangle(getCollisionX(),
+						getCollisionY(), getCollisionWidth(), getCollisionHeight());}
 }

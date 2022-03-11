@@ -14,7 +14,12 @@ public class Coin extends AbstractEntity
     }
 
 
+
     public void addToScore(){
 	//adds to player score
     }
+
+
+
+
 }

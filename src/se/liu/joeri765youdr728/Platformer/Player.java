@@ -94,6 +94,7 @@ public class Player extends AbstractEntity
 
 	for (int i=0; i<world.getEntityList().size(); i++) {
 	    Entity entity = world.getEntityList().get(i);
+
 	    Rectangle entityRec = entity.getRectangle();
 	    if(playerRec.intersects(entityRec)) {
 		collidedEntity = entity;
