@@ -5,7 +5,7 @@ import java.awt.*;
 public class Player extends AbstractEntity
 {
     private int speed;
-    private int jumpSpeed = 14;
+    private int jumpSpeed = 16;
     private int fallspeed = 7;
 
 
@@ -47,7 +47,7 @@ public class Player extends AbstractEntity
 	tryCollision();
 	if (platformCollision || this.y < 0) {
 	    this.y += jumpSpeed;
-	    jumpSpeed = 14;
+	    jumpSpeed = 16;
 	    setPlatformCollision(false);
 	    setJumping(false);
 

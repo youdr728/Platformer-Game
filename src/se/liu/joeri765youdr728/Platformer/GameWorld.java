@@ -8,8 +8,8 @@ import java.util.List;
 
 public class GameWorld
 {
-    private int row = 12;
-    private int col = 16;
+    private int row = 20;
+    private int col = 20;
     private int worldWidth = col * 48;
     private int worldHeight = row * 48;
 
@@ -52,10 +52,10 @@ public class GameWorld
 			    entityList.add(new Platform(w * 48, h * 48, n, 0,0 ,48, 48));
 			    break;
 			case 2:
-			    player = new Player(w * 48, h * 48, n,9, 0, 30, 48, 4, this);
+			    player = new Player(w * 48, h * 48, n,9, 3, 30, 45, 4, this);
 			    break;
 			case 3:
-			    entityList.add(new Obstacle(w * 48, (h * 48)+ 10, n, 0, 0, 48, 48));
+			    entityList.add(new Obstacle(w * 48, h * 48, n, 0, 15, 48, 33));
 			    break;
 			case 4:
 			    entityList.add(new Goal(w * 48, h * 48, n, 24, 36, 6, 12, this));

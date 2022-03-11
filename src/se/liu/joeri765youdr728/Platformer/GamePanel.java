@@ -18,8 +18,8 @@ public class GamePanel extends JComponent implements  Runnable
     final  int scale = 3;
 
     final int tileSize = originalTileSize * scale;
-    final int columns = 16;
-    final int rows = 12;
+    final int columns = 20;
+    final int rows = 20;
     final int screenHeight = rows * tileSize;
     final int screenWidth = columns * tileSize;
 
