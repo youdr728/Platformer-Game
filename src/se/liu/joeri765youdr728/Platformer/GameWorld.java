@@ -8,10 +8,11 @@ import java.util.List;
 
 public class GameWorld
 {
-    private int row = 12;
-    private int col = 16;
-    private int worldWidth = col * 48;
-    private int worldHeight = row * 48;
+    private final int row = 20;
+    private final int col = 20;
+    private final int worldWidth = col * 48;
+    private final int worldHeight = row * 48;
+    private final int tileSize = 48;
 
     private int mapTileNum[][];
     private List<Entity> entityList;
@@ -49,19 +50,19 @@ public class GameWorld
 		    int n = mapTileNum[h][w];
 		    switch (n) {
 			case 1:
-			    entityList.add(new Platform(w * 48, h * 48, n, 0,0 ,48, 48));
+			    entityList.add(new Platform(w * tileSize, h * tileSize, n, 0,0 ,tileSize, tileSize));
 			    break;
 			case 2:
-			    player = new Player(w * 48, h * 48, n,9, 0, 30, 48, 4, this);
+			    player = new Player(w * tileSize, h * tileSize, n,9, 3, 30, 45, 4, this);
 			    break;
 			case 3:
-			    entityList.add(new Obstacle(w * 48, (h * 48)+ 10, n, 0, 0, 48, 48));
+			    entityList.add(new Obstacle(w * tileSize, h * tileSize, n, 0, 15, 48, 33));
 			    break;
 			case 4:
-			    entityList.add(new Goal(w * 48, h * 48, n, 24, 36, 6, 12, this));
+			    entityList.add(new Goal(w * tileSize, h * tileSize, n, 24, 36, 6, 12, this));
 			    break;
 			case 5:
-			    entityList.add(new Coin(w * 48, h * 48, n, 3, 24, 42,24, this));
+			    entityList.add(new Coin(w * tileSize, h * tileSize, n, 3, 24, 42,24, this));
 			    break;
 		    }
 
@@ -99,6 +100,7 @@ public class GameWorld
 	switch(entityType) {
 	    case PLATFORM:
 		player.setPlatformCollision(true);
+		player.setPlatformY(entity.getY() - tileSize);
 		break;
 
 	    case COINS:
