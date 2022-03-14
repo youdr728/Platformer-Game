@@ -23,7 +23,7 @@ public class GamePanel extends JComponent implements  Runnable
     final int screenHeight = rows * tileSize;
     final int screenWidth = columns * tileSize;
 
-    public static BufferedImage wall, platform, player, spikes, door, chest;
+    public static BufferedImage wall, platform, player, spikes, door, chest, timeBoost, jumpBoost, speedBoost;
     private GameWorld world;
     protected final EnumMap<EntityType, BufferedImage> tileMap = creatTileMap();
 
@@ -51,6 +51,9 @@ public class GamePanel extends JComponent implements  Runnable
             spikes = ImageIO.read(GamePanel.class.getResourceAsStream("Tiles/spikes4.png"));
             door = ImageIO.read(GamePanel.class.getResourceAsStream("Tiles/door.png"));
             chest = ImageIO.read(GamePanel.class.getResourceAsStream("Tiles/chest.png"));
+            timeBoost = ImageIO.read(GamePanel.class.getResourceAsStream("Tiles/time_powerup.png"));
+            jumpBoost = ImageIO.read(GamePanel.class.getResourceAsStream("Tiles/jump_powerup.png"));
+            speedBoost = ImageIO.read(GamePanel.class.getResourceAsStream("Tiles/speed_powerup.png"));
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -63,6 +66,9 @@ public class GamePanel extends JComponent implements  Runnable
         tileMap.put(EntityType.OBSTACLE, spikes);
         tileMap.put(EntityType.GOAL, door);
         tileMap.put(EntityType.COINS, chest);
+        tileMap.put(EntityType.POWER_UP_TIME, timeBoost);
+        tileMap.put(EntityType.POWER_UP_JUMP, jumpBoost);
+        tileMap.put(EntityType.POWER_UP_SPEED, speedBoost);
 
         return tileMap;
     }

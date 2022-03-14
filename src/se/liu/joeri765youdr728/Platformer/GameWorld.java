@@ -17,11 +17,12 @@ public class GameWorld
     private int mapTileNum[][];
     private List<Entity> entityList;
     private Player player;
-    private Goal goal;
     private int mapNumber = 1;
 
     private int gameTime= 200;
     private int gameTimeCounter = 0;
+
+    private int boostTimeCounter = 0;
 
 
     public GameWorld() {
@@ -56,7 +57,7 @@ public class GameWorld
 			    entityList.add(new Platform(w * tileSize, h * tileSize, n, 0,0 ,tileSize, tileSize));
 			    break;
 			case 2:
-			    player = new Player(w * tileSize, h * tileSize, n,9, 3, 30, 45, 4, this);
+			    player = new Player(w * tileSize, h * tileSize, n,9, 3, 30, 45, this);
 			    break;
 			case 3:
 			    entityList.add(new Obstacle(w * tileSize, h * tileSize, n, 0, 15, 48, 33));
@@ -67,7 +68,17 @@ public class GameWorld
 			case 5:
 			    entityList.add(new Coin(w * tileSize, h * tileSize, n, 3, 24, 42,24, this));
 			    break;
+			case 6:
+			    entityList.add(new TimeBoost(w * tileSize, h * tileSize, n, 9, 12, 30, 30));
+			    break;
+			case 7:
+			    entityList.add(new TimeBoost(w * tileSize, h * tileSize, n, 12, 18, 24, 24));
+			    break;
+			case 8:
+			    entityList.add(new JumpBoost(w * tileSize, h * tileSize, n, 12, 18, 24, 24));
+			    break;
 		    }
+
 
 		}
 	    }
@@ -76,7 +87,7 @@ public class GameWorld
     }
     //public Player createPlayer(){
 	//Player player = new Player(2,10, 2, 13, this);
-	//return player;
+	//return player;a
    // }
 
     public void updateWorld(){
@@ -92,6 +103,18 @@ public class GameWorld
 	    gameTimeCounter = 0;
 	    gameTime -= 1;
 	}
+
+	if (player.isOnJumpBoost() || player.isOnSpeedBoost()) {
+	    boostTimeCounter += 1;
+
+	    if(boostTimeCounter == 240) {
+		player.jumpBoostOff();
+		player.speedBoostOff();
+		boostTimeCounter = 0;
+	    }
+	}
+
+
 
 
     }
@@ -127,7 +150,25 @@ public class GameWorld
 	    case OBSTACLE:
 		player.respawnPlayer();
 		break;
+
+	    case POWER_UP_TIME:
+		entityList.remove(entity);
+		gameTime += TimeBoost.getTime(this);
+		break;
+
+	    case POWER_UP_JUMP:
+		entityList.remove(entity);
+		player.jumpBoostOn();
+		boostTimeCounter = 0;
+		break;
+
+	    case POWER_UP_SPEED:
+		entityList.remove(entity);
+		player.speedBoostOn();
+		boostTimeCounter = 0;
+		break;
 	}
+
 
     }
 

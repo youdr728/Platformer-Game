@@ -33,9 +33,9 @@ public abstract class AbstractEntity implements Entity
 	entityTypeMap.put(3, EntityType.OBSTACLE);
 	entityTypeMap.put(4, EntityType.GOAL);
 	entityTypeMap.put(5, EntityType.COINS);
-	entityTypeMap.put(6, EntityType.POWER_UP1);
-	entityTypeMap.put(7, EntityType.POWER_UP2);
-	entityTypeMap.put(8, EntityType.POWER_UP3);
+	entityTypeMap.put(6, EntityType.POWER_UP_TIME);
+	entityTypeMap.put(7, EntityType.POWER_UP_JUMP);
+	entityTypeMap.put(8, EntityType.POWER_UP_SPEED);
 
 	return entityTypeMap;
     }
@@ -48,6 +48,7 @@ public abstract class AbstractEntity implements Entity
 	SizeMap.put(5, 48);
 	SizeMap.put(6, 48);
 	SizeMap.put(7, 48);
+	SizeMap.put(8, 48);
 
 	return SizeMap;
     }
