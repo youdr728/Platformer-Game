@@ -152,12 +152,29 @@ public class GamePanel extends JComponent implements  Runnable
                         world.getEntityList().get(i).getHeight(),null);
         }
 
+        //Paint time
+       // g.setColor(Color.BLACK);
+       // g.drawRect(world.getWorldWidth(),30,200,100 );
+       // g.drawImage(tileMap.get(EntityType.PLATFORM), world.getWorldWidth()/2 - 5,5,98,60,null );
+        String text = Integer.toString(world.getGameTime());
+        Font font = new Font("Ubuntu", Font.BOLD,50);
+        g.setFont(font);
+        FontMetrics fm = g.getFontMetrics();
+        int x = ((getWidth() - fm.stringWidth(text)) / 2);
+        //int y = ((getHeight() - fm.getHeight()) / 2) + fm.getAscent();
+
+        g.setColor(Color.WHITE);
+        g.drawString(text, x,tileSize);
+
+
         //Paint player
         g.drawImage(tileMap.get(EntityType.PLAYER),
                     world.getPlayer().x,
                     world.getPlayer().y,
                     world.getPlayer().getWidth(),
                     world.getPlayer().getHeight(),null);
+
+
 
     }
 }

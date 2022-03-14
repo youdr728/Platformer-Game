@@ -20,6 +20,9 @@ public class GameWorld
     private Goal goal;
     private int mapNumber = 1;
 
+    private int gameTime= 200;
+    private int gameTimeCounter = 0;
+
 
     public GameWorld() {
 	this.mapTileNum = new int[row][col];
@@ -83,6 +86,11 @@ public class GameWorld
 	}
 	else{
 	    player.jump();
+	}
+	gameTimeCounter += 1;
+	if(gameTimeCounter == 60){
+	    gameTimeCounter = 0;
+	    gameTime -= 1;
 	}
 
 
@@ -156,5 +164,9 @@ public class GameWorld
 
     public int getWorldHeigt() {
 	return worldHeight;
+    }
+
+    public int getGameTime() {
+	return gameTime;
     }
 }
