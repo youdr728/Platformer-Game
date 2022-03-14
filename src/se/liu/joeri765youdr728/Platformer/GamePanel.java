@@ -55,6 +55,7 @@ public class GamePanel extends JComponent implements  Runnable
         } catch (IOException e) {
             e.printStackTrace();
         }
+
         EnumMap<EntityType, BufferedImage> tileMap = new EnumMap<>(EntityType.class);
         tileMap.put(EntityType.WALL, wall);
         tileMap.put(EntityType.PLATFORM, platform);
