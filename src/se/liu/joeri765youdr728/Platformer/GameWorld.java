@@ -91,7 +91,7 @@ public class GameWorld
    // }
 
     public void updateWorld(){
-
+	powerupTimer();
 	if(!player.isJumping()){
 	    player.moveDown();
 	}
@@ -104,17 +104,20 @@ public class GameWorld
 	    gameTime -= 1;
 	}
 
+
+
+    }
+
+    public void powerupTimer(){
 	if (player.isOnJumpBoost() || player.isOnSpeedBoost()) {
 	    boostTimeCounter += 1;
-
 	    if(boostTimeCounter == 240) {
-		player.jumpBoostOff();
 		player.speedBoostOff();
+		player.jumpBoostOff();
 		boostTimeCounter = 0;
 	    }
+
 	}
-
-
 
 
     }
@@ -159,12 +162,14 @@ public class GameWorld
 	    case POWER_UP_JUMP:
 		entityList.remove(entity);
 		player.jumpBoostOn();
+		player.speedBoostOff();
 		boostTimeCounter = 0;
 		break;
 
 	    case POWER_UP_SPEED:
 		entityList.remove(entity);
 		player.speedBoostOn();
+		player.jumpBoostOff();
 		boostTimeCounter = 0;
 		break;
 	}

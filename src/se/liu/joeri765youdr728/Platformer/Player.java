@@ -7,8 +7,9 @@ public class Player extends AbstractEntity
     private int speed = 4;
     private int jumpSpeed = 16;
     private int fallspeed = 8;
-    private int boostJumpSpeed = 50;
 
+    private int boostSpeed = 7;
+    private int boostJumpSpeed = 20;
 
 
     private GameWorld world;
@@ -121,7 +122,7 @@ public class Player extends AbstractEntity
 
     public void speedBoostOn() {
 	isOnSpeedBoost = true;
-	speed = 100;
+	speed = boostSpeed;
     }
 
     public void speedBoostOff() {
