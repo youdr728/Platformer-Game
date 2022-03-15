@@ -92,20 +92,25 @@ public class GameWorld
 
     public void updateWorld(){
 	powerupTimer();
+	timer();
 	if(!player.isJumping()){
 	    player.moveDown();
 	}
 	else{
 	    player.jump();
 	}
+
+
+
+
+    }
+
+    public void timer(){
 	gameTimeCounter += 1;
 	if(gameTimeCounter == 60){
 	    gameTimeCounter = 0;
 	    gameTime -= 1;
 	}
-
-
-
     }
 
     public void powerupTimer(){
