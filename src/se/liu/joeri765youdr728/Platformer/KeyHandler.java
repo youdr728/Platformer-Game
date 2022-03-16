@@ -48,4 +48,10 @@ public class KeyHandler extends KeyAdapter
 	    spacePressed = false;
 	}
     }
+
+    public void keyReset() {
+	leftPressed = false;
+	rightPressed = false;
+	spacePressed = false;
+    }
 }

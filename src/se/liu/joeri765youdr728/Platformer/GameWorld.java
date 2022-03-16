@@ -19,7 +19,7 @@ public class GameWorld
     private Player player;
     private int mapNumber = 1;
 
-    private int gameTime= 200;
+    private int gameTime;
     private int gameTimeCounter = 0;
 
     private int boostTimeCounter = 0;
@@ -28,6 +28,7 @@ public class GameWorld
     public GameWorld() {
 	this.mapTileNum = new int[row][col];
 	this.entityList = new ArrayList<>();
+	this.gameTime = 200;
 	loadMapFromFile("Maps/map01");
 	createEntityList();
     }
@@ -99,13 +100,10 @@ public class GameWorld
 	else{
 	    player.jump();
 	}
-
-
-
-
     }
 
     public void timer(){
+	System.out.println(gameTime);
 	gameTimeCounter += 1;
 	if(gameTimeCounter == 60){
 	    gameTimeCounter = 0;
@@ -219,5 +217,9 @@ public class GameWorld
 
     public int getGameTime() {
 	return gameTime;
+    }
+
+    public void setGameTime(final int gameTime) {
+	this.gameTime = gameTime;
     }
 }

@@ -72,8 +72,8 @@ public class Player extends AbstractEntity
 	if(this.y > world.getWorldHeigt()){
 	    respawnPlayer();
 	}
-
     }
+
     public void movePlayer(Direction dir){
 
 	if (dir.equals(Direction.RIGHT)){

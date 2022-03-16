@@ -3,13 +3,9 @@ package se.liu.joeri765youdr728.Platformer;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
-import java.nio.Buffer;
 import java.util.EnumMap;
-import java.util.HashMap;
-import java.util.Map;
 
 public class GamePanel extends JComponent implements  Runnable
 {
@@ -23,9 +19,10 @@ public class GamePanel extends JComponent implements  Runnable
     final int screenHeight = rows * tileSize;
     final int screenWidth = columns * tileSize;
 
+
     public static BufferedImage wall, platform, player, spikes, door, chest, timeBoost, jumpBoost, speedBoost;
     private GameWorld world;
-    protected final EnumMap<EntityType, BufferedImage> tileMap = creatTileMap();
+    protected final EnumMap<EntityType, BufferedImage> tileMap = createTileMap();
 
     final int FPS = 60;
 
@@ -42,7 +39,7 @@ public class GamePanel extends JComponent implements  Runnable
 
     }
 
-    public static EnumMap<EntityType, BufferedImage> creatTileMap(){
+    public static EnumMap<EntityType, BufferedImage> createTileMap(){
 
         try {
             platform = ImageIO.read(GamePanel.class.getResourceAsStream("Tiles/platform2.png"));
@@ -78,6 +75,13 @@ public class GamePanel extends JComponent implements  Runnable
         gameThread.start();
     }
 
+    public boolean gameOver() {
+        if (world.getGameTime() <= 0) {
+            return true;
+        }
+        return false;
+    }
+
 
     @Override public void run() {
 
@@ -107,6 +111,19 @@ public class GamePanel extends JComponent implements  Runnable
                 nextDrawTime += drawInterval;
             } catch (InterruptedException e) {
                 e.printStackTrace();
+            }
+
+            if (gameOver()) {
+                int reply = JOptionPane.showConfirmDialog(null, "Play Again?", "", JOptionPane.YES_NO_OPTION);
+
+                if (reply == JOptionPane.NO_OPTION) {
+                    break;
+                }
+                else if (reply == JOptionPane.YES_OPTION) {
+                    world = new GameWorld();
+                    world.setGameTime(100);
+                    keyH.keyReset();
+                }
             }
         }
 
@@ -142,6 +159,7 @@ public class GamePanel extends JComponent implements  Runnable
                 g.drawImage(tileMap.get(EntityType.WALL), w * tileSize, h * tileSize, tileSize, tileSize,null);
             }
         }
+
         //Paint start door
         g.drawImage(tileMap.get(EntityType.GOAL),
                     world.getPlayer().getStartX(),
