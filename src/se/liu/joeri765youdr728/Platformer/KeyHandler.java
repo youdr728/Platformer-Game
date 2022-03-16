@@ -6,7 +6,8 @@ import java.awt.event.KeyListener;
 
 public class KeyHandler extends KeyAdapter
 {
-    public boolean upPressed, downPressed, leftPressed, rightPressed, spacePressed;
+    public boolean upPressed, downPressed, leftPressed, rightPressed, spacePressed, replayPressed, quitPressed;
+
 
     @Override public void keyPressed(final KeyEvent e) {
 	int code = e.getKeyCode();
@@ -26,6 +27,13 @@ public class KeyHandler extends KeyAdapter
 	if(code == KeyEvent.VK_SPACE){
 	    spacePressed = true;
 	}
+	if(code == KeyEvent.VK_P){
+	    replayPressed = true;
+	}
+	if(code == KeyEvent.VK_O){
+	    quitPressed = true;
+	}
+
 
     }
 
@@ -46,6 +54,12 @@ public class KeyHandler extends KeyAdapter
 	}
 	if(code == KeyEvent.VK_SPACE){
 	    spacePressed = false;
+	}
+	if(code == KeyEvent.VK_P){
+	    replayPressed = false;
+	}
+	if(code == KeyEvent.VK_O){
+	    quitPressed = false;
 	}
     }
 

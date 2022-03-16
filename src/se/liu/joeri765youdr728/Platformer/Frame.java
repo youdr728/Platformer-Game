@@ -13,6 +13,9 @@ public class Frame
 	GamePanel gamePanel = new GamePanel();
 	frame.add(gamePanel);
 
+	//MenuPanel menuPanel = new MenuPanel();
+	//frame.add(menuPanel);
+
 	frame.pack();
 	frame.setVisible(true);
 	gamePanel.startGameThread();

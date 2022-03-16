@@ -4,9 +4,12 @@ import java.awt.*;
 
 public class Player extends AbstractEntity
 {
-    private int speed = 4;
-    private int jumpSpeed = 16;
+    private int speed;
+    private int jumpSpeed;
     private int fallspeed = 8;
+
+    private int normalSpeed = 4;
+    private int normalJumpSpeed = 16;
 
     private int boostSpeed = 7;
     private int boostJumpSpeed = 20;
@@ -33,6 +36,8 @@ public class Player extends AbstractEntity
 	this.world = world;
 	this.startX = x;
 	this.startY = y;
+	this.speed = this.normalSpeed;
+	this.jumpSpeed = this.normalJumpSpeed;
     }
 
     public void respawnPlayer(){
@@ -41,18 +46,20 @@ public class Player extends AbstractEntity
 
     }
     public void jump(){
-	setJumping(true);
 	canJump = false;
 	this.y -= jumpSpeed;
 	tryCollision();
 	if (platformCollision || this.y < 0 || jumpSpeed == 0) {
 	    this.y += jumpSpeed;
-	    jumpSpeed = 16;
 	    if(isOnJumpBoost) {
 		jumpSpeed = boostJumpSpeed;
 	    }
+	    else{
+		jumpSpeed = normalJumpSpeed;
+	    }
 	    setPlatformCollision(false);
-	    setJumping(false);
+	    setIsJumping(false);
+
 	}else{
 	    jumpSpeed -= 1;
 	}
@@ -69,17 +76,17 @@ public class Player extends AbstractEntity
 	    setPlatformCollision(false);
 	    canJump = true;
 	}
-	if(this.y > world.getWorldHeigt()){
+	if(this.y > world.getWorldHeight()){
 	    respawnPlayer();
 	}
-    }
 
+    }
     public void movePlayer(Direction dir){
 
 	if (dir.equals(Direction.RIGHT)){
 	    this.x += speed;
 	    tryCollision();
-	    if (platformCollision || (this.x > world.getWorldWidth()- 48)) {
+	    if (platformCollision || (this.x > world.getWorldWidth() - this.getWidth())) {
 		this.x -= speed;
 		setPlatformCollision(false);
 	    }
@@ -117,7 +124,7 @@ public class Player extends AbstractEntity
 
     public void jumpBoostOff() {
 	isOnJumpBoost = false;
-	jumpSpeed = 16;
+	jumpSpeed = normalJumpSpeed;
     }
 
     public void speedBoostOn() {
@@ -127,7 +134,7 @@ public class Player extends AbstractEntity
 
     public void speedBoostOff() {
 	isOnSpeedBoost = false;
-	speed = 4;
+	speed = normalSpeed;
     }
 
     public int getSpeed() {
@@ -144,7 +151,7 @@ public class Player extends AbstractEntity
 
     public void setPlatformCollision(boolean bool) {this.platformCollision = bool;}
 
-    public void setJumping(boolean jumping) {
+    public void setIsJumping(boolean jumping) {
 	this.isJumping = jumping;
     }
 

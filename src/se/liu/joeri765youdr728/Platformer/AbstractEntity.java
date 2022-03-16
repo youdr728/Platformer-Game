@@ -12,8 +12,10 @@ public abstract class AbstractEntity implements Entity
     protected int typeNumber;
 
     protected final Map<Integer, EntityType> entityTypeMap = creatEntityTypeMap();
-    protected final Map<Integer, Integer> sizeMap = creatSizeMap();
     protected int collisionX, collisionY, collisionWidth, collisionHeight;
+
+    protected int height = 48;
+    protected int width = 48;
 
     public AbstractEntity(final int x, final int y, final int typeNumber,
 		      int collisionX, int collisionY, int collisionWidth, int collisionHeight) {
@@ -39,19 +41,7 @@ public abstract class AbstractEntity implements Entity
 
 	return entityTypeMap;
     }
-    public static Map<Integer, Integer> creatSizeMap(){
-	Map<Integer, Integer> SizeMap = new HashMap<>();
-	SizeMap.put(1, 48);
-	SizeMap.put(2, 48);
-	SizeMap.put(3, 48);
-	SizeMap.put(4, 48);
-	SizeMap.put(5, 48);
-	SizeMap.put(6, 48);
-	SizeMap.put(7, 48);
-	SizeMap.put(8, 48);
 
-	return SizeMap;
-    }
 
     @Override public int getX() {
 	return x;
@@ -62,17 +52,16 @@ public abstract class AbstractEntity implements Entity
     }
 
     @Override public int getHeight() {
-	return sizeMap.get(typeNumber);
+	return height;
     }
 
     @Override public int getWidth() {
-	return sizeMap.get(typeNumber);
+	return width;
     }
 
     @Override public EntityType getEntityType() {
 	return entityTypeMap.get(typeNumber);
     }
-
 
     @Override public int getCollisionX() {
 	return getX() + collisionX;

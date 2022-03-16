@@ -3,15 +3,19 @@ package se.liu.joeri765youdr728.Platformer;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.nio.Buffer;
 import java.util.EnumMap;
+import java.util.HashMap;
+import java.util.Map;
 
 public class GamePanel extends JComponent implements  Runnable
 {
     //Screen settings
     final int originalTileSize = 16;
-    final  int scale = 3;
+    final int scale = 3;
 
     final int tileSize = originalTileSize * scale;
     final int columns = 20;
@@ -19,12 +23,15 @@ public class GamePanel extends JComponent implements  Runnable
     final int screenHeight = rows * tileSize;
     final int screenWidth = columns * tileSize;
 
+    final static int fontSize = 50;
 
-    public static BufferedImage wall, platform, player, spikes, door, chest, timeBoost, jumpBoost, speedBoost;
+    private static BufferedImage wall, platform, player, spikes, door, chest, timeBoost, jumpBoost, speedBoost;
     private GameWorld world;
     protected final EnumMap<EntityType, BufferedImage> tileMap = createTileMap();
 
     final int FPS = 60;
+    private boolean gameOver = false;
+    private boolean replay = false;
 
     KeyHandler keyH = new KeyHandler();
     Thread gameThread;
@@ -36,7 +43,6 @@ public class GamePanel extends JComponent implements  Runnable
         this.world = new GameWorld();
         this.addKeyListener(keyH);
         this.setFocusable(true);
-
     }
 
     public static EnumMap<EntityType, BufferedImage> createTileMap(){
@@ -75,11 +81,11 @@ public class GamePanel extends JComponent implements  Runnable
         gameThread.start();
     }
 
-    public boolean gameOver() {
-        if (world.getGameTime() <= 0) {
-            return true;
+    public void checkGameOver() {
+        if (world.getGameTime() == 0) {
+            gameOver = true;
         }
-        return false;
+
     }
 
 
@@ -91,17 +97,27 @@ public class GamePanel extends JComponent implements  Runnable
         while(gameThread != null){
             long currentTime = System.nanoTime();
 
-            update();
+            if(gameOver){
+                updatePauseKeys();
+                if(replay){
+                    world = new GameWorld();
+                    keyH.keyReset();
+                    gameOver = false;
+                    replay = false;
+                }
+            }else{
+                checkGameOver();
+                world.updateWorld();
+                updateGameKeys();
 
-            world.updateWorld();
+            }
 
             repaint();
 
 
-
             try {
                 double remaningTime = nextDrawTime - System.nanoTime();
-                remaningTime = remaningTime/1000000;
+                remaningTime /= 1000000;
                 if(remaningTime < 0){
                     remaningTime = 0;
                 }
@@ -113,23 +129,12 @@ public class GamePanel extends JComponent implements  Runnable
                 e.printStackTrace();
             }
 
-            if (gameOver()) {
-                int reply = JOptionPane.showConfirmDialog(null, "Play Again?", "", JOptionPane.YES_NO_OPTION);
 
-                if (reply == JOptionPane.NO_OPTION) {
-                    break;
-                }
-                else if (reply == JOptionPane.YES_OPTION) {
-                    world = new GameWorld();
-                    world.setGameTime(100);
-                    keyH.keyReset();
-                }
-            }
         }
 
     }
 
-    public void update(){
+    public void updateGameKeys(){
         if (keyH.upPressed){
             world.getPlayer().movePlayer(Direction.UP);
         }
@@ -143,7 +148,16 @@ public class GamePanel extends JComponent implements  Runnable
             world.getPlayer().movePlayer(Direction.RIGHT);
         }
         if (keyH.spacePressed && world.getPlayer().CanJump()){
-            world.getPlayer().setJumping(true);
+            world.getPlayer().setIsJumping(true);
+        }
+
+    }
+    public void updatePauseKeys(){
+        if(keyH.replayPressed){
+            replay = true;
+        }
+        if(keyH.quitPressed){
+            System.exit(0);
         }
     }
 
@@ -151,7 +165,8 @@ public class GamePanel extends JComponent implements  Runnable
     protected void paintComponent(Graphics g) {
 
         super.paintComponent(g);
-        final Graphics2D g2d = (Graphics2D) g;
+
+
 
         //Paint background
         for (int h = 0; h < rows; h++) {
@@ -159,14 +174,12 @@ public class GamePanel extends JComponent implements  Runnable
                 g.drawImage(tileMap.get(EntityType.WALL), w * tileSize, h * tileSize, tileSize, tileSize,null);
             }
         }
-
         //Paint start door
         g.drawImage(tileMap.get(EntityType.GOAL),
                     world.getPlayer().getStartX(),
                     world.getPlayer().getStartY(),
                     tileSize,
                     tileSize,null);
-
         //Paint Entitys
         for (int i = 0; i < world.getEntityList().size(); i++) {
             g.drawImage(tileMap.get(world.getEntityList().get(i).getEntityType()),
@@ -175,21 +188,14 @@ public class GamePanel extends JComponent implements  Runnable
                         world.getEntityList().get(i).getWidth(),
                         world.getEntityList().get(i).getHeight(),null);
         }
-
-        //Paint time
-       // g.setColor(Color.BLACK);
-       // g.drawRect(world.getWorldWidth(),30,200,100 );
-       // g.drawImage(tileMap.get(EntityType.PLATFORM), world.getWorldWidth()/2 - 5,5,98,60,null );
+        //Paint timer
         String text = Integer.toString(world.getGameTime());
-        Font font = new Font("Ubuntu", Font.BOLD,50);
+        Font font = new Font("Ubuntu", Font.BOLD, fontSize);
         g.setFont(font);
         FontMetrics fm = g.getFontMetrics();
         int x = ((getWidth() - fm.stringWidth(text)) / 2);
-        //int y = ((getHeight() - fm.getHeight()) / 2) + fm.getAscent();
-
         g.setColor(Color.WHITE);
         g.drawString(text, x,tileSize);
-
 
         //Paint player
         g.drawImage(tileMap.get(EntityType.PLAYER),
@@ -198,7 +204,21 @@ public class GamePanel extends JComponent implements  Runnable
                     world.getPlayer().getWidth(),
                     world.getPlayer().getHeight(),null);
 
+        // Game Over
+        if(gameOver){
+            String gameOverText = "You lost, press p to replay and o to quit";
+            g.setFont(font);
+            g.setColor(Color.WHITE);
 
+            x = ((getWidth() - fm.stringWidth(gameOverText)) / 2);
+            int y = ((getHeight() - fm.getHeight()) / 2) + fm.getAscent();
+
+            g.setColor(Color.WHITE);
+            g.drawString(gameOverText, x,y);
+
+        }
 
     }
+
+
 }

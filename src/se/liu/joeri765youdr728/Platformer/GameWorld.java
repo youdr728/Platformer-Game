@@ -28,10 +28,12 @@ public class GameWorld
     public GameWorld() {
 	this.mapTileNum = new int[row][col];
 	this.entityList = new ArrayList<>();
-	this.gameTime = 200;
+	this.gameTime = 120;
 	loadMapFromFile("Maps/map01");
 	createEntityList();
     }
+
+
 
     public void loadMapFromFile(String mapfile){
 	try {
@@ -86,10 +88,6 @@ public class GameWorld
 
 	}
     }
-    //public Player createPlayer(){
-	//Player player = new Player(2,10, 2, 13, this);
-	//return player;a
-   // }
 
     public void updateWorld(){
 	powerupTimer();
@@ -100,10 +98,10 @@ public class GameWorld
 	else{
 	    player.jump();
 	}
+
     }
 
     public void timer(){
-	System.out.println(gameTime);
 	gameTimeCounter += 1;
 	if(gameTimeCounter == 60){
 	    gameTimeCounter = 0;
@@ -125,6 +123,8 @@ public class GameWorld
 
     }
 
+
+
     public String getNextMap(){
 	mapNumber = mapNumber + 1;
 	String nextMap = "Maps/map0" + mapNumber;
@@ -145,10 +145,10 @@ public class GameWorld
 		break;
 
 	    case GOAL:
-		System.out.println("hey" + 1);
 		this.mapTileNum = new int[row][col];
 		this.entityList = new ArrayList<>();
 		loadMapFromFile(this.getNextMap());
+		gameTime = 120;
 		this.createEntityList();
 		player.respawnPlayer();
 		break;
@@ -180,13 +180,6 @@ public class GameWorld
 
     }
 
-
-
-
-
-
-
-
     public int getRow() {
 	return row;
     }
@@ -211,7 +204,7 @@ public class GameWorld
 	return worldWidth;
     }
 
-    public int getWorldHeigt() {
+    public int getWorldHeight() {
 	return worldHeight;
     }
 
