@@ -39,13 +39,17 @@ public class MenuPanel extends JPanel
     }
 
     public void createButtons(){
-	buttonPlay = new MyButton(1, screenWidth/2-100, 400, 200, 100);
+	buttonPlay = new MyButton(1, screenWidth/2-240, 505, 480, 75);
+	buttonHighscore = new MyButton(2, screenWidth/2 - 220, 600, 440,75);
+	buttonQuit = new MyButton(3, screenWidth/2 - 120, 695, 240, 75);
 
 
     }
 
     public void drawButtons(Graphics g){
 	buttonPlay.draw(g);
+	buttonHighscore.draw(g);
+	buttonQuit.draw(g);
     }
 
     public void startGame(){
@@ -60,7 +64,7 @@ public class MenuPanel extends JPanel
     @Override protected void paintComponent(final Graphics g) {
 	super.paintComponent(g);
 	try {
-	    background = ImageIO.read(MenuPanel.class.getResourceAsStream("Tiles/GameName.png"));
+	    background = ImageIO.read(MenuPanel.class.getResourceAsStream("Tiles/menu_background.png"));
 	} catch (IOException e) {
 	    e.printStackTrace();
 	}
@@ -74,12 +78,26 @@ public class MenuPanel extends JPanel
 	    System.out.println("click");
 	    frame.startGame();
 	}
+	if(buttonHighscore.getBounds().contains(x, y)){
+	    //Start highscore frame
+	}
+	if(buttonQuit.getBounds().contains(x, y)){
+	    System.exit(0);
+	}
     }
     public void mouseMoved(int x, int y){
 	buttonPlay.setMouseOver(false);
+	buttonHighscore.setMouseOver(false);
+	buttonQuit.setMouseOver(false);
 
 	if(buttonPlay.getBounds().contains(x, y)){
 	    buttonPlay.setMouseOver(true);
+	}
+	if(buttonHighscore.getBounds().contains(x, y)){
+	    buttonHighscore.setMouseOver(true);
+	}
+	if(buttonQuit.getBounds().contains(x, y)){
+	    buttonQuit.setMouseOver(true);
 	}
 	repaint();
     }

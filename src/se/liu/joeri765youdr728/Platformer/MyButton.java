@@ -49,9 +49,11 @@ public class MyButton
 	//g.drawRect(x, y, width, height);
 
 	//text
-	g.drawImage(buttonImageMap.get(1), x, y, width, height, null);
+	g.drawImage(buttonImageMap.get(imageNumber), x, y, width, height, null);
+	g.setColor(Color.WHITE);
+	g.drawRect(x, y, width, height);
 	if(mouseOver){
-	    g.setColor(Color.YELLOW);
+	    g.setColor(Color.CYAN);
 	    g.drawRect(x,y,width,height);
 	}
 
@@ -66,7 +68,9 @@ public class MyButton
     public static Map<Integer, BufferedImage> createButtonImageMap(){
 
 	try {
-	    playImage = ImageIO.read(GamePanel.class.getResourceAsStream("Tiles/platform2.png"));
+	    playImage = ImageIO.read(GamePanel.class.getResourceAsStream("Tiles/button_start.png"));
+	    highscoreImage = ImageIO.read(GamePanel.class.getResourceAsStream("Tiles/button_highscore.png"));
+	    quitImage = ImageIO.read(GamePanel.class.getResourceAsStream("Tiles/button_close.png"));
 
 	} catch (IOException e) {
 	    e.printStackTrace();
@@ -74,6 +78,8 @@ public class MyButton
 
 	Map<Integer, BufferedImage> buttonImageMap = new HashMap<>();
 	buttonImageMap.put(1, playImage);
+	buttonImageMap.put(2, highscoreImage);
+	buttonImageMap.put(3,quitImage);
 
 
 	return buttonImageMap;
