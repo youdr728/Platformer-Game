@@ -1,24 +1,53 @@
 package se.liu.joeri765youdr728.Platformer;
 
 import javax.swing.*;
+import java.awt.*;
 
 public class Frame
 {
+    private JFrame menuFrame = new JFrame();
+    private JFrame gameFrame = new JFrame();
+
+    private CardLayout cardLayout = new CardLayout();
+
+    private JPanel panel = new JPanel(cardLayout);
+
+    MenuPanel menuPanel = new MenuPanel(this);
+    GamePanel gamePanel = new GamePanel();
+
     public void show(){
-	JFrame frame = new JFrame();
-	frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-	frame.setResizable(false);
+
+	menuFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+	menuFrame.setResizable(false);
 	//frame.setLocationRelativeTo(null);
 
-	GamePanel gamePanel = new GamePanel();
-	frame.add(gamePanel);
 
-	//MenuPanel menuPanel = new MenuPanel();
-	//frame.add(menuPanel);
+	//panel.add(gamePanel, "game");
+	//panel.add(menuPanel, "menu");
 
-	frame.pack();
-	frame.setVisible(true);
+	//cardLayout.show(panel, "menu");
+	menuFrame.add(menuPanel);
+	menuFrame.pack();
+	menuFrame.setVisible(true);
+
+    }
+
+    public void startGame(){
+	menuFrame.dispose();
+	gameFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+	gameFrame.setResizable(false);
+	//frame.setLocationRelativeTo(null);
+
+
+	//panel.add(gamePanel, "game");
+	//panel.add(menuPanel, "menu");
+
+	//cardLayout.show(panel, "menu");
+	gameFrame.add(gamePanel);
+	gameFrame.pack();
+	gameFrame.setVisible(true);
 	gamePanel.startGameThread();
+
     }
 
     public static void main(String[] args) {

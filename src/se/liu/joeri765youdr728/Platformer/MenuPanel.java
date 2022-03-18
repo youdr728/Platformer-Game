@@ -21,28 +21,38 @@ public class MenuPanel extends JPanel
 
     private MyButton buttonPlay, buttonHighscore, buttonQuit;
 
+    private Frame frame;
+
     MouseHandler mouseHandler = new MouseHandler(this);
 
-    public MenuPanel() {
+    public MenuPanel(Frame frame) {
 	this.setPreferredSize(new Dimension(screenWidth, screenHeight));
 	this.setDoubleBuffered(true);
 	this.repaint();
 	this.setFocusable(true);
 	this.addMouseListener(mouseHandler);
 	this.addMouseMotionListener(mouseHandler);
+	this.frame = frame;
 
 	createButtons();
 
     }
 
     public void createButtons(){
-	buttonPlay = new MyButton(1, screenWidth/2, 400, 100, 50);
+	buttonPlay = new MyButton(1, screenWidth/2-100, 400, 200, 100);
 
 
     }
 
     public void drawButtons(Graphics g){
 	buttonPlay.draw(g);
+    }
+
+    public void startGame(){
+	//frame.getContentPane().removeAll();
+	//GamePanel gamePanel = new GamePanel();
+	//frame.getContentPane().add(gamePanel);
+	//gamePanel.startGameThread();
     }
 
 
@@ -62,6 +72,7 @@ public class MenuPanel extends JPanel
     public void mouseClicked(int x, int y){
 	if(buttonPlay.getBounds().contains(x, y)){
 	    System.out.println("click");
+	    frame.startGame();
 	}
     }
     public void mouseMoved(int x, int y){
