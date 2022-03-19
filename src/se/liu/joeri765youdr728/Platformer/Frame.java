@@ -13,7 +13,7 @@ public class Frame
     private JPanel panel = new JPanel(cardLayout);
 
     MenuPanel menuPanel = new MenuPanel(this);
-    GamePanel gamePanel = new GamePanel();
+
 
     public void show(){
 
@@ -33,6 +33,7 @@ public class Frame
     }
 
     public void startGame(){
+	GamePanel gamePanel = new GamePanel();
 	menuFrame.dispose();
 	gameFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 	gameFrame.setResizable(false);

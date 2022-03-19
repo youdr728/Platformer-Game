@@ -24,13 +24,18 @@ public class GameWorld
 
     private int boostTimeCounter = 0;
 
+    private GamePanel panel;
 
-    public GameWorld() {
+
+
+    public GameWorld(GamePanel panel) {
 	this.mapTileNum = new int[row][col];
 	this.entityList = new ArrayList<>();
 	this.gameTime = 120;
-	loadMapFromFile("Maps/map01");
+	this.panel = panel;
+	loadMapFromFile("Maps/map03");
 	createEntityList();
+	panel.playMusic(1);
     }
 
 
@@ -142,6 +147,7 @@ public class GameWorld
 
 	    case COINS:
 		entityList.remove(entity);
+		panel.playSoundEffect(3);
 		break;
 
 	    case GOAL:
@@ -151,15 +157,18 @@ public class GameWorld
 		gameTime = 120;
 		this.createEntityList();
 		player.respawnPlayer();
+		panel.playSoundEffect(2);
 		break;
 
 	    case OBSTACLE:
 		player.respawnPlayer();
+		panel.playSoundEffect(0);
 		break;
 
 	    case POWER_UP_TIME:
 		entityList.remove(entity);
 		gameTime += TimeBoost.getTime(this);
+		panel.playSoundEffect(5);
 		break;
 
 	    case POWER_UP_JUMP:
@@ -167,6 +176,7 @@ public class GameWorld
 		player.jumpBoostOn();
 		player.speedBoostOff();
 		boostTimeCounter = 0;
+		panel.playSoundEffect(4);
 		break;
 
 	    case POWER_UP_SPEED:
@@ -174,11 +184,16 @@ public class GameWorld
 		player.speedBoostOn();
 		player.jumpBoostOff();
 		boostTimeCounter = 0;
+		panel.playSoundEffect(4);
 		break;
 	}
 
 
     }
+    public void playJumpSound(){
+	panel.playSoundEffect(6);
+    }
+
 
     public int getRow() {
 	return row;
@@ -215,4 +230,5 @@ public class GameWorld
     public void setGameTime(final int gameTime) {
 	this.gameTime = gameTime;
     }
+
 }

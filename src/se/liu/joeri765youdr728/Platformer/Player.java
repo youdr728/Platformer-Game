@@ -46,6 +46,7 @@ public class Player extends AbstractEntity
 
     }
     public void jump(){
+
 	canJump = false;
 	this.y -= jumpSpeed;
 	tryCollision();

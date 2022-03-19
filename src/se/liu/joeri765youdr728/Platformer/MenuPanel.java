@@ -25,6 +25,8 @@ public class MenuPanel extends JPanel
 
     MouseHandler mouseHandler = new MouseHandler(this);
 
+    Sound sound = new Sound();
+
     public MenuPanel(Frame frame) {
 	this.setPreferredSize(new Dimension(screenWidth, screenHeight));
 	this.setDoubleBuffered(true);
@@ -33,6 +35,8 @@ public class MenuPanel extends JPanel
 	this.addMouseListener(mouseHandler);
 	this.addMouseMotionListener(mouseHandler);
 	this.frame = frame;
+
+	playMusic(7);
 
 	createButtons();
 
@@ -52,11 +56,18 @@ public class MenuPanel extends JPanel
 	buttonQuit.draw(g);
     }
 
-    public void startGame(){
-	//frame.getContentPane().removeAll();
-	//GamePanel gamePanel = new GamePanel();
-	//frame.getContentPane().add(gamePanel);
-	//gamePanel.startGameThread();
+    public void playMusic(int i){
+	sound.setFile(i);
+	sound.play();
+	sound.loop();
+    }
+    public void stopMusic(){
+	sound.stop();
+    }
+    public void playSoundEffect(int i){
+	sound.setFile(i);
+	sound.play();
+
     }
 
 
@@ -76,6 +87,7 @@ public class MenuPanel extends JPanel
     public void mouseClicked(int x, int y){
 	if(buttonPlay.getBounds().contains(x, y)){
 	    System.out.println("click");
+	    stopMusic();
 	    frame.startGame();
 	}
 	if(buttonHighscore.getBounds().contains(x, y)){

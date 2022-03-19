@@ -33,6 +33,8 @@ public class GamePanel extends JComponent implements  Runnable
     private boolean gameOver = false;
     private boolean replay = false;
 
+    Sound sound = new Sound();
+
     KeyHandler keyH = new KeyHandler();
     Thread gameThread;
 
@@ -40,7 +42,7 @@ public class GamePanel extends JComponent implements  Runnable
 	this.setPreferredSize(new Dimension(screenWidth, screenHeight));
 	this.setDoubleBuffered(true);
         this.repaint();
-        this.world = new GameWorld();
+        this.world = new GameWorld(this);
         this.addKeyListener(keyH);
         this.setFocusable(true);
     }
@@ -87,7 +89,19 @@ public class GamePanel extends JComponent implements  Runnable
         }
 
     }
+    public void playMusic(int i){
+        sound.setFile(i);
+        sound.play();
+        sound.loop();
+    }
+    public void stopMusic(){
+        sound.stop();
+    }
+    public void playSoundEffect(int i){
+        sound.setFile(i);
+        sound.play();
 
+    }
 
     @Override public void run() {
 
@@ -100,7 +114,7 @@ public class GamePanel extends JComponent implements  Runnable
             if(gameOver){
                 updatePauseKeys();
                 if(replay){
-                    world = new GameWorld();
+                    world = new GameWorld(this);
                     keyH.keyReset();
                     gameOver = false;
                     replay = false;
@@ -149,6 +163,7 @@ public class GamePanel extends JComponent implements  Runnable
         }
         if (keyH.spacePressed && world.getPlayer().CanJump()){
             world.getPlayer().setIsJumping(true);
+            playSoundEffect(6);
         }
 
     }
@@ -160,6 +175,7 @@ public class GamePanel extends JComponent implements  Runnable
             System.exit(0);
         }
     }
+
 
     @Override
     protected void paintComponent(Graphics g) {
