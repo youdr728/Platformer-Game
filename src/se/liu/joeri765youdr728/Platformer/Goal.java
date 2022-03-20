@@ -6,7 +6,7 @@ public class Goal extends AbstractEntity
 {
 
     private GameWorld world;
-    private int mapNumber;
+    //private int mapNumber;
 
     public Goal(final int x, final int y, final int typeNumber,
 		int collisionX, int collisionY, int collisionWidth, int collisionHeight, final GameWorld world) {

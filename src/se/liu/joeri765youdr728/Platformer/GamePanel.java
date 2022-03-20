@@ -25,7 +25,7 @@ public class GamePanel extends JComponent implements  Runnable
 
     final static int fontSize = 50;
 
-    private static BufferedImage wall, platform, player, spikes, door, chest, timeBoost, jumpBoost, speedBoost;
+    private static BufferedImage wall, platform, player, spikes, door, chest, timeBoost, jumpBoost, speedBoost, enemy, enemyAttack;
     private GameWorld world;
     protected final EnumMap<EntityType, BufferedImage> tileMap = createTileMap();
 
@@ -59,6 +59,8 @@ public class GamePanel extends JComponent implements  Runnable
             timeBoost = ImageIO.read(GamePanel.class.getResourceAsStream("Tiles/time_powerup.png"));
             jumpBoost = ImageIO.read(GamePanel.class.getResourceAsStream("Tiles/jump_powerup.png"));
             speedBoost = ImageIO.read(GamePanel.class.getResourceAsStream("Tiles/speed_powerup.png"));
+            enemy = ImageIO.read(GamePanel.class.getResourceAsStream("Tiles/enemy.png"));
+            enemyAttack = ImageIO.read(GamePanel.class.getResourceAsStream("Tiles/enemy_attack.png"));
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -74,6 +76,9 @@ public class GamePanel extends JComponent implements  Runnable
         tileMap.put(EntityType.POWER_UP_TIME, timeBoost);
         tileMap.put(EntityType.POWER_UP_JUMP, jumpBoost);
         tileMap.put(EntityType.POWER_UP_SPEED, speedBoost);
+        tileMap.put(EntityType.ENEMY, enemy);
+        tileMap.put(EntityType.ENEMY_ATTACK, enemyAttack);
+
 
         return tileMap;
     }
@@ -204,6 +209,12 @@ public class GamePanel extends JComponent implements  Runnable
                         world.getEntityList().get(i).getWidth(),
                         world.getEntityList().get(i).getHeight(),null);
         }
+
+        //Paint Enemy Attacks
+        for (EnemyAttack attack: world.getEnemyAttack()) {
+            g.drawImage(tileMap.get(EntityType.ENEMY_ATTACK),attack.x, attack.y, attack.width, attack.height,null);
+        }
+
         //Paint timer
         String text = Integer.toString(world.getGameTime());
         Font font = new Font("Ubuntu", Font.BOLD, fontSize);

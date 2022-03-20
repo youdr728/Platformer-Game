@@ -26,6 +26,8 @@ public class GameWorld
 
     private GamePanel panel;
 
+    private Enemy enemy;
+
 
 
     public GameWorld(GamePanel panel) {
@@ -33,9 +35,9 @@ public class GameWorld
 	this.entityList = new ArrayList<>();
 	this.gameTime = 120;
 	this.panel = panel;
-	loadMapFromFile("Maps/map03");
+	loadMapFromFile("Maps/map05");
 	createEntityList();
-	panel.playMusic(1);
+	//panel.playMusic(1);
     }
 
 
@@ -85,6 +87,12 @@ public class GameWorld
 			case 8:
 			    entityList.add(new JumpBoost(w * tileSize, h * tileSize, n, 12, 18, 24, 24));
 			    break;
+			case 9:
+			    enemy = new Enemy(w * tileSize, h * tileSize, n, 0, 0, 48, 48, this);
+			    entityList.add(enemy);
+			    break;
+
+
 		    }
 
 
@@ -97,6 +105,7 @@ public class GameWorld
     public void updateWorld(){
 	powerupTimer();
 	timer();
+	updateEnemy();
 	if(!player.isJumping()){
 	    player.moveDown();
 	}
@@ -104,8 +113,12 @@ public class GameWorld
 	    player.jump();
 	}
 
-    }
 
+    }
+    public void updateEnemy(){
+	enemy.shootAttack();
+	enemy.moveAttack();
+    }
     public void timer(){
 	gameTimeCounter += 1;
 	if(gameTimeCounter == 60){
@@ -186,6 +199,11 @@ public class GameWorld
 		boostTimeCounter = 0;
 		panel.playSoundEffect(4);
 		break;
+
+	    case ENEMY:
+		player.respawnPlayer();
+		break;
+
 	}
 
 
@@ -194,6 +212,9 @@ public class GameWorld
 	panel.playSoundEffect(6);
     }
 
+    public void addToEntityList(Entity entity){
+	entityList.add(entity);
+    }
 
     public int getRow() {
 	return row;
@@ -201,6 +222,9 @@ public class GameWorld
 
     public int getCol() {
 	return col;
+    }
+    public List<EnemyAttack> getEnemyAttack(){
+	return enemy.getEnemyAttackList();
     }
 
     public int[][] getMapTileNum() {

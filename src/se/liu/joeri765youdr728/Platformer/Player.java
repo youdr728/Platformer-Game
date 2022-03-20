@@ -41,6 +41,8 @@ public class Player extends AbstractEntity
     }
 
     public void respawnPlayer(){
+	//System.out.println(startX);
+	//System.out.println(startY);
 	this.x = startX;
 	this.y = startY;
 
@@ -114,6 +116,17 @@ public class Player extends AbstractEntity
 	    if(playerRec.intersects(entityRec)) {
 		collidedEntity = entity;
 		world.applyCollision(entity);
+	    }
+	}
+
+	for (int i = 0; i < world.getEnemyAttack().size(); i++) {
+	    EnemyAttack attack = world.getEnemyAttack().get(i);
+	    Rectangle attackRec = attack.getRectangle();
+
+	    if(playerRec.intersects(attackRec)){
+		respawnPlayer();
+		world.getEnemyAttack().remove(attack);
+		break;
 	    }
 	}
     }
