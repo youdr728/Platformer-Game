@@ -25,7 +25,7 @@ public class GamePanel extends JComponent implements  Runnable
 
     final static int fontSize = 50;
 
-    private static BufferedImage wall, platform, player, spikes, door, chest, timeBoost, jumpBoost, speedBoost, enemy, enemyAttack;
+    private static BufferedImage wall, platform, player, spikes, door, chest, timeBoost, jumpBoost, speedBoost, enemy, enemyAttack, loseImage, winImage;
     private GameWorld world;
     protected final EnumMap<EntityType, BufferedImage> tileMap = createTileMap();
 
@@ -61,6 +61,7 @@ public class GamePanel extends JComponent implements  Runnable
             speedBoost = ImageIO.read(GamePanel.class.getResourceAsStream("Tiles/speed_powerup.png"));
             enemy = ImageIO.read(GamePanel.class.getResourceAsStream("Tiles/wizard4.png"));
             enemyAttack = ImageIO.read(GamePanel.class.getResourceAsStream("Tiles/enemy_attack3.png"));
+
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -238,15 +239,25 @@ public class GamePanel extends JComponent implements  Runnable
 
         // Game Over
         if(gameOver){
-            String gameOverText = "You lost, press p to replay and o to quit";
-            g.setFont(font);
-            g.setColor(Color.WHITE);
+            //BufferedImage loseImage;
+            try {
+                loseImage = ImageIO.read(GamePanel.class.getResourceAsStream("Tiles/lose_image.png"));
 
-            x = ((getWidth() - fm.stringWidth(gameOverText)) / 2);
-            int y = ((getHeight() - fm.getHeight()) / 2) + fm.getAscent();
+                winImage = ImageIO.read(GamePanel.class.getResourceAsStream("Tiles/win_image2.png"));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            g.drawImage(loseImage, 0, 0 ,731, 400, this);
+          //  g.drawImage(winImage, 0, 500 ,731, 500, this);
+            //String gameOverText = "You lost, press p to replay and o to quit";
+           // g.setFont(font);
+            //g.setColor(Color.WHITE);
 
-            g.setColor(Color.WHITE);
-            g.drawString(gameOverText, x,y);
+           // x = ((getWidth() - fm.stringWidth(gameOverText)) / 2);
+           // int y = ((getHeight() - fm.getHeight()) / 2) + fm.getAscent();
+
+           // g.setColor(Color.WHITE);
+           // g.drawString(gameOverText, x,y);
 
         }
 

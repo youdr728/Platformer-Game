@@ -33,9 +33,9 @@ public class GameWorld
     public GameWorld(GamePanel panel) {
 	this.mapTileNum = new int[row][col];
 	this.entityList = new ArrayList<>();
-	this.gameTime = 120;
+	this.gameTime = 10;
 	this.panel = panel;
-	loadMapFromFile("Maps/map01");
+	loadMapFromFile("Maps/map05");
 	createEntityList();
 	panel.playMusic(0);
     }
