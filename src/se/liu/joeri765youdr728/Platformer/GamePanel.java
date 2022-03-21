@@ -59,8 +59,8 @@ public class GamePanel extends JComponent implements  Runnable
             timeBoost = ImageIO.read(GamePanel.class.getResourceAsStream("Tiles/time_powerup.png"));
             jumpBoost = ImageIO.read(GamePanel.class.getResourceAsStream("Tiles/jump_powerup.png"));
             speedBoost = ImageIO.read(GamePanel.class.getResourceAsStream("Tiles/speed_powerup.png"));
-            enemy = ImageIO.read(GamePanel.class.getResourceAsStream("Tiles/enemy.png"));
-            enemyAttack = ImageIO.read(GamePanel.class.getResourceAsStream("Tiles/enemy_attack.png"));
+            enemy = ImageIO.read(GamePanel.class.getResourceAsStream("Tiles/wizard4.png"));
+            enemyAttack = ImageIO.read(GamePanel.class.getResourceAsStream("Tiles/enemy_attack3.png"));
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -95,16 +95,15 @@ public class GamePanel extends JComponent implements  Runnable
 
     }
     public void playMusic(int i){
-        sound.setFile(i);
-        sound.play();
+        sound.setFileMusic(i);
         sound.loop();
     }
     public void stopMusic(){
         sound.stop();
     }
     public void playSoundEffect(int i){
-        sound.setFile(i);
-        sound.play();
+        sound.setFileSound(i);
+        sound.playSound();
 
     }
 
@@ -117,12 +116,15 @@ public class GamePanel extends JComponent implements  Runnable
             long currentTime = System.nanoTime();
 
             if(gameOver){
+                stopMusic();
                 updatePauseKeys();
                 if(replay){
                     world = new GameWorld(this);
                     keyH.keyReset();
                     gameOver = false;
                     replay = false;
+
+                    //playMusic(1);
                 }
             }else{
                 checkGameOver();
@@ -168,7 +170,7 @@ public class GamePanel extends JComponent implements  Runnable
         }
         if (keyH.spacePressed && world.getPlayer().CanJump()){
             world.getPlayer().setIsJumping(true);
-            playSoundEffect(6);
+            playSoundEffect(5);
         }
 
     }
@@ -211,9 +213,12 @@ public class GamePanel extends JComponent implements  Runnable
         }
 
         //Paint Enemy Attacks
-        for (EnemyAttack attack: world.getEnemyAttack()) {
-            g.drawImage(tileMap.get(EntityType.ENEMY_ATTACK),attack.x, attack.y, attack.width, attack.height,null);
+        if(world.getEnemy() != null){
+            for (EnemyAttack attack: world.getEnemyAttack()) {
+                g.drawImage(tileMap.get(EntityType.ENEMY_ATTACK),attack.x, attack.y, attack.width, attack.height,null);
+            }
         }
+
 
         //Paint timer
         String text = Integer.toString(world.getGameTime());

@@ -6,4 +6,5 @@ public class EnemyAttack extends AbstractEntity
 		       final int collisionHeight) {
 	super(x, y, typeNumber, collisionX, collisionY, collisionWidth, collisionHeight);
     }
+
 }

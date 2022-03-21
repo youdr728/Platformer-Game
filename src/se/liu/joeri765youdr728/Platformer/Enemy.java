@@ -23,8 +23,9 @@ public class Enemy extends AbstractEntity
     public void shootAttack(){
 
 	if(attackCounter == randomNumber){
-	    randomNumber = getRandomNumberUsingNextInt(30,45);
-	    EnemyAttack attack = new EnemyAttack(x, y, 10, 12, 12, 27, 27);
+	    randomNumber = getRandomNumberUsingNextInt(30,50);
+	    EnemyAttack attack = new EnemyAttack(x - 48, y, 10, 12, 12, 27, 27);
+	    world.playSound(6);
 	    enemyAttackList.add(attack);
 	    attackCounter = 0;
 	}else {
@@ -38,13 +39,14 @@ public class Enemy extends AbstractEntity
     }
 
     public void moveAttack(){
-	for (EnemyAttack attack: enemyAttackList) {
-		attack.x -= 6;
-		if(attack.x < 0){
-		    enemyAttackList.remove(attack);
-		    break;
-		}
+	for (int i = 0; i < enemyAttackList.size(); i++) {
+	    enemyAttackList.get(i).x -= 6;
+	    if( enemyAttackList.get(i).x < 0){
+		enemyAttackList.remove(enemyAttackList.get(i));
+		break;
+	    }
 	}
+
     }
 
     public List<EnemyAttack> getEnemyAttackList() {

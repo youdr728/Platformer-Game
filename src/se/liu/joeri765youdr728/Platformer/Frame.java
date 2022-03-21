@@ -8,19 +8,16 @@ public class Frame
     private JFrame menuFrame = new JFrame();
     private JFrame gameFrame = new JFrame();
 
-    private CardLayout cardLayout = new CardLayout();
-
-    private JPanel panel = new JPanel(cardLayout);
-
-    MenuPanel menuPanel = new MenuPanel(this);
 
 
-    public void show(){
 
+
+
+    public void startMenu(){
+	MenuPanel menuPanel = new MenuPanel(this);
 	menuFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 	menuFrame.setResizable(false);
 	//frame.setLocationRelativeTo(null);
-
 
 	//panel.add(gamePanel, "game");
 	//panel.add(menuPanel, "menu");
@@ -53,6 +50,6 @@ public class Frame
 
     public static void main(String[] args) {
 	Frame frame = new Frame();
-	frame.show();
+	frame.startMenu();
     }
 }

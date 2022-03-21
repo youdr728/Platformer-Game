@@ -36,7 +36,7 @@ public class MenuPanel extends JPanel
 	this.addMouseMotionListener(mouseHandler);
 	this.frame = frame;
 
-	playMusic(7);
+	playMusic(2);
 
 	createButtons();
 
@@ -57,16 +57,15 @@ public class MenuPanel extends JPanel
     }
 
     public void playMusic(int i){
-	sound.setFile(i);
-	sound.play();
+	sound.setFileMusic(i);
 	sound.loop();
     }
     public void stopMusic(){
 	sound.stop();
     }
     public void playSoundEffect(int i){
-	sound.setFile(i);
-	sound.play();
+	sound.setFileSound(i);
+	sound.playSound();
 
     }
 
@@ -86,7 +85,6 @@ public class MenuPanel extends JPanel
 
     public void mouseClicked(int x, int y){
 	if(buttonPlay.getBounds().contains(x, y)){
-	    System.out.println("click");
 	    stopMusic();
 	    frame.startGame();
 	}
