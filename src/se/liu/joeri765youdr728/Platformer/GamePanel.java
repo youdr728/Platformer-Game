@@ -247,7 +247,7 @@ public class GamePanel extends JComponent implements  Runnable
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            g.drawImage(loseImage, 0, 0 ,731, 400, this);
+            g.drawImage(loseImage, 100, 100 ,731, 400, this);
           //  g.drawImage(winImage, 0, 500 ,731, 500, this);
             //String gameOverText = "You lost, press p to replay and o to quit";
            // g.setFont(font);

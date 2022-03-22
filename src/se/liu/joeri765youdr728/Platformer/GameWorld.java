@@ -17,7 +17,7 @@ public class GameWorld
     private int mapTileNum[][];
     private List<Entity> entityList;
     private Player player;
-    private int mapNumber = 1;
+    private int mapNumber = 4;
 
     private int gameTime;
     private int gameTimeCounter = 0;
@@ -33,9 +33,9 @@ public class GameWorld
     public GameWorld(GamePanel panel) {
 	this.mapTileNum = new int[row][col];
 	this.entityList = new ArrayList<>();
-	this.gameTime = 10;
+	this.gameTime = 120;
 	this.panel = panel;
-	loadMapFromFile("Maps/map05");
+	loadMapFromFile("Maps/map04");
 	createEntityList();
 	panel.playMusic(0);
     }
