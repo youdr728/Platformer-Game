@@ -126,8 +126,7 @@ public class GamePanel extends JComponent implements  Runnable
                     keyH.keyReset();
                     gameOver = false;
                     replay = false;
-
-                    //playMusic(1);
+                    playMusic(0);
                 }
             }else{
 
@@ -249,7 +248,22 @@ public class GamePanel extends JComponent implements  Runnable
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            g.drawImage(loseImage, 100, 100 ,731, 400, this);
+            if(world.isGameWon()){
+                String time = Integer.toString(world.getScoreTime());
+                String deaths = Integer.toString(world.getDeathCounter());
+                String coins = Integer.toString(world.getCoinCounter());
+
+                g.setFont(new Font("Comic Sans MS", Font.PLAIN, fontSize));
+                g.setColor(Color.WHITE);
+                g.drawImage(winImage, 100, 100 ,731, 500, this);
+                g.drawString(time, 170, 352);
+                g.drawString(deaths, 422, 352);
+                g.drawString(coins, 690, 352);
+            }
+            else{
+                g.drawImage(loseImage, 100, 100 ,731, 400, this);
+            }
+
           //  g.drawImage(winImage, 0, 500 ,731, 500, this);
             //String gameOverText = "You lost, press p to replay and o to quit";
            // g.setFont(font);
