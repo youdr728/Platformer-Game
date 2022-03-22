@@ -14,10 +14,13 @@ public class MenuPanel extends AbstractPanel
 
     private Frame frame;
 
+    Sound sound = new Sound();
 
     public MenuPanel(Frame frame, int typeNumber) {
 	super.typeNumber = typeNumber;
 	this.frame = frame;
+
+	playMusic(2);
 
 	createButtons();
 
@@ -37,11 +40,17 @@ public class MenuPanel extends AbstractPanel
 	buttonQuit.draw(g);
     }
 
-    public void startGame(){
-	//frame.getContentPane().removeAll();
-	//GamePanel gamePanel = new GamePanel();
-	//frame.getContentPane().add(gamePanel);
-	//gamePanel.startGameThread();
+    public void playMusic(int i){
+	sound.setFileMusic(i);
+	sound.loop();
+    }
+    public void stopMusic(){
+	sound.stop();
+    }
+    public void playSoundEffect(int i){
+	sound.setFileSound(i);
+	sound.playSound();
+
     }
 
 
@@ -61,6 +70,7 @@ public class MenuPanel extends AbstractPanel
     @Override
     public void mouseClicked(int x, int y){
 	if(buttonPlay.getBounds().contains(x, y)){
+	    stopMusic();
 	    frame.startGame();
 	}
 	if(buttonHighscore.getBounds().contains(x, y)){

@@ -40,15 +40,7 @@ public class MyButton
     }
 
     public void draw(Graphics g){
-	//Body
-	//g.setColor(Color.WHITE);
-	//g.fillRect(x, y, width, height);
 
-	//Boarder
-	//g.setColor(Color.BLACK);
-	//g.drawRect(x, y, width, height);
-
-	//text
 	g.drawImage(buttonImageMap.get(imageNumber), x, y, width, height, null);
 	g.setColor(Color.WHITE);
 	g.drawRect(x, y, width, height);

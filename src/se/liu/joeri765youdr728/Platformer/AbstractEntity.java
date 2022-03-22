@@ -38,6 +38,8 @@ public abstract class AbstractEntity implements Entity
 	entityTypeMap.put(6, EntityType.POWER_UP_TIME);
 	entityTypeMap.put(7, EntityType.POWER_UP_JUMP);
 	entityTypeMap.put(8, EntityType.POWER_UP_SPEED);
+	entityTypeMap.put(9, EntityType.ENEMY);
+	entityTypeMap.put(10, EntityType.ENEMY_ATTACK);
 
 	return entityTypeMap;
     }

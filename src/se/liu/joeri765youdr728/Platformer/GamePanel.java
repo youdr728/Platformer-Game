@@ -25,13 +25,15 @@ public class GamePanel extends JComponent implements  Runnable
 
     final static int fontSize = 50;
 
-    private static BufferedImage wall, platform, player, spikes, door, chest, timeBoost, jumpBoost, speedBoost;
+    private static BufferedImage wall, platform, player, spikes, door, chest, timeBoost, jumpBoost, speedBoost, enemy, enemyAttack;
     private GameWorld world;
     protected final EnumMap<EntityType, BufferedImage> tileMap = createTileMap();
 
     final int FPS = 60;
     private boolean gameOver = false;
     private boolean replay = false;
+
+    Sound sound = new Sound();
 
     KeyHandler keyH = new KeyHandler();
     Thread gameThread;
@@ -40,7 +42,7 @@ public class GamePanel extends JComponent implements  Runnable
 	this.setPreferredSize(new Dimension(screenWidth, screenHeight));
 	this.setDoubleBuffered(true);
         this.repaint();
-        this.world = new GameWorld();
+        this.world = new GameWorld(this);
         this.addKeyListener(keyH);
         this.setFocusable(true);
     }
@@ -57,6 +59,8 @@ public class GamePanel extends JComponent implements  Runnable
             timeBoost = ImageIO.read(GamePanel.class.getResourceAsStream("Tiles/time_powerup.png"));
             jumpBoost = ImageIO.read(GamePanel.class.getResourceAsStream("Tiles/jump_powerup.png"));
             speedBoost = ImageIO.read(GamePanel.class.getResourceAsStream("Tiles/speed_powerup.png"));
+            enemy = ImageIO.read(GamePanel.class.getResourceAsStream("Tiles/wizard4.png"));
+            enemyAttack = ImageIO.read(GamePanel.class.getResourceAsStream("Tiles/enemy_attack3.png"));
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -72,6 +76,9 @@ public class GamePanel extends JComponent implements  Runnable
         tileMap.put(EntityType.POWER_UP_TIME, timeBoost);
         tileMap.put(EntityType.POWER_UP_JUMP, jumpBoost);
         tileMap.put(EntityType.POWER_UP_SPEED, speedBoost);
+        tileMap.put(EntityType.ENEMY, enemy);
+        tileMap.put(EntityType.ENEMY_ATTACK, enemyAttack);
+
 
         return tileMap;
     }
@@ -87,7 +94,18 @@ public class GamePanel extends JComponent implements  Runnable
         }
 
     }
+    public void playMusic(int i){
+        sound.setFileMusic(i);
+        sound.loop();
+    }
+    public void stopMusic(){
+        sound.stop();
+    }
+    public void playSoundEffect(int i){
+        sound.setFileSound(i);
+        sound.playSound();
 
+    }
 
     @Override public void run() {
 
@@ -100,12 +118,15 @@ public class GamePanel extends JComponent implements  Runnable
             checkGameOver();
 
             if(gameOver){
+                stopMusic();
                 updatePauseKeys();
                 if(replay){
-                    world = new GameWorld();
+                    world = new GameWorld(this);
                     keyH.keyReset();
                     gameOver = false;
                     replay = false;
+
+                    //playMusic(1);
                 }
             }else{
 
@@ -151,6 +172,7 @@ public class GamePanel extends JComponent implements  Runnable
         }
         if (keyH.spacePressed && world.getPlayer().CanJump()){
             world.getPlayer().setIsJumping(true);
+            playSoundEffect(5);
         }
 
     }
@@ -162,6 +184,7 @@ public class GamePanel extends JComponent implements  Runnable
             System.exit(0);
         }
     }
+
 
     @Override
     protected void paintComponent(Graphics g) {
@@ -190,6 +213,15 @@ public class GamePanel extends JComponent implements  Runnable
                         world.getEntityList().get(i).getWidth(),
                         world.getEntityList().get(i).getHeight(),null);
         }
+
+        //Paint Enemy Attacks
+        if(world.getEnemy() != null){
+            for (EnemyAttack attack: world.getEnemyAttack()) {
+                g.drawImage(tileMap.get(EntityType.ENEMY_ATTACK),attack.x, attack.y, attack.width, attack.height,null);
+            }
+        }
+
+
         //Paint timer
         String text = Integer.toString(world.getGameTime());
         Font font = new Font("Ubuntu", Font.BOLD, fontSize);

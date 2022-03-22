@@ -9,9 +9,6 @@ public class Frame
     private JFrame gameFrame = new JFrame();
     private JFrame scoreFrame = new JFrame();
 
-    private CardLayout cardLayout = new CardLayout();
-
-    private JPanel panel = new JPanel(cardLayout);
 
     MenuPanel menuPanel = new MenuPanel(this, 1);
     GamePanel gamePanel = new GamePanel();
@@ -24,15 +21,10 @@ public class Frame
 	    scoreFrame.dispose();
 	    isOnMenu = false;
 	}
+
 	menuFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 	menuFrame.setResizable(false);
-	//frame.setLocationRelativeTo(null);
 
-
-	//panel.add(gamePanel, "game");
-	//panel.add(menuPanel, "menu");
-
-	//cardLayout.show(panel, "menu");
 	menuFrame.add(menuPanel);
 	menuFrame.pack();
 	menuFrame.setVisible(true);

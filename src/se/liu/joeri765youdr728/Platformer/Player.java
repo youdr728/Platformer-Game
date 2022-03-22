@@ -16,7 +16,6 @@ public class Player extends AbstractEntity
 
 
     private GameWorld world;
-    private Entity collidedEntity;
     private boolean platformCollision;
     private boolean isJumping = false;
     private boolean canJump = true;
@@ -41,11 +40,14 @@ public class Player extends AbstractEntity
     }
 
     public void respawnPlayer(){
+	//System.out.println(startX);
+	//System.out.println(startY);
 	this.x = startX;
 	this.y = startY;
 
     }
     public void jump(){
+
 	canJump = false;
 	this.y -= jumpSpeed;
 	tryCollision();
@@ -111,10 +113,21 @@ public class Player extends AbstractEntity
 	    Rectangle entityRec = entity.getRectangle();
 
 	    if(playerRec.intersects(entityRec)) {
-		collidedEntity = entity;
 		world.applyCollision(entity);
 	    }
 	}
+	if(world.getEnemy() != null){
+	    for (int i = 0; i < world.getEnemyAttack().size(); i++) {
+		EnemyAttack attack = world.getEnemyAttack().get(i);
+		Rectangle attackRec = attack.getRectangle();
+
+		if(playerRec.intersects(attackRec)){
+		    world.applyCollision(attack);
+
+		}
+	    }
+	}
+
     }
 
     public void jumpBoostOn() {

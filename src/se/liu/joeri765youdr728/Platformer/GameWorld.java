@@ -17,7 +17,7 @@ public class GameWorld
     private int mapTileNum[][];
     private List<Entity> entityList;
     private Player player;
-    private int mapNumber = 5;
+    private int mapNumber = 1;
 
     private int gameTime;
     private int gameTimeCounter = 0;
@@ -30,13 +30,20 @@ public class GameWorld
 
     private boolean gameWon = false;
     private boolean playerDead = false;
+    private GamePanel panel;
 
-    public GameWorld() {
+    private Enemy enemy;
+
+
+
+    public GameWorld(GamePanel panel) {
 	this.mapTileNum = new int[row][col];
 	this.entityList = new ArrayList<>();
-	this.gameTime = 50;
-	loadMapFromFile("Maps/map05");
+	this.gameTime = 120;
+	this.panel = panel;
+	loadMapFromFile("Maps/map01");
 	createEntityList();
+	panel.playMusic(0);
     }
 
 
@@ -69,7 +76,7 @@ public class GameWorld
 			    player = new Player(w * tileSize, h * tileSize, n,9, 3, 30, 45, this);
 			    break;
 			case 3:
-			    entityList.add(new Obstacle(w * tileSize, h * tileSize, n, 0, 15, 48, 33));
+			    entityList.add(new Obstacle(w * tileSize, h * tileSize, n, 3, 15, 42, 33));
 			    break;
 			case 4:
 			    entityList.add(new Goal(w * tileSize, h * tileSize, n, 24, 36, 6, 12, this));
@@ -86,6 +93,12 @@ public class GameWorld
 			case 8:
 			    entityList.add(new JumpBoost(w * tileSize, h * tileSize, n, 12, 18, 24, 24));
 			    break;
+			case 9:
+			    enemy = new Enemy(w * tileSize, h * tileSize, n, 0, 0, 48, 48, this);
+			    entityList.add(enemy);
+			    break;
+
+
 		    }
 
 
@@ -98,6 +111,9 @@ public class GameWorld
     public void updateWorld(){
 	powerupTimer();
 	timer();
+	if(enemy != null){
+	    updateEnemy();
+	}
 	if(!player.isJumping()){
 	    player.moveDown();
 	}
@@ -111,7 +127,10 @@ public class GameWorld
 	}
 
     }
-
+    public void updateEnemy(){
+	enemy.shootAttack();
+	enemy.moveAttack();
+    }
     public void timer(){
 	gameTimeCounter += 1;
 	if(gameTimeCounter == 60){
@@ -159,34 +178,52 @@ public class GameWorld
 
 	    case COINS:
 		entityList.remove(entity);
+		panel.playSoundEffect(2);
 		coinCounter += 1;
 		break;
 
 	    case GOAL:
-		if (mapNumber == 5) {
-		    this.gameWon = true;
-		    highScoreList.addHighscore(this);
-
-		}
-		else {
+		if(mapNumber == 4){
+		    panel.stopMusic();
+		    panel.playMusic(1);
 		    this.mapTileNum = new int[row][col];
 		    this.entityList = new ArrayList<>();
 		    loadMapFromFile(this.getNextMap());
 		    gameTime = 120;
 		    this.createEntityList();
 		    player.respawnPlayer();
+		    panel.playSoundEffect(1);
+		}else if(mapNumber == 5){
+		    this.gameWon = true;
+		    highScoreList.addHighscore(this);
 		}
+		else{
+		    this.mapTileNum = new int[row][col];
+		    this.entityList = new ArrayList<>();
+		    loadMapFromFile(this.getNextMap());
+		    gameTime = 120;
+		    this.createEntityList();
+		    player.respawnPlayer();
+		    panel.playSoundEffect(1);
+		}
+
+
+
+
+
 
 		break;
 
 	    case OBSTACLE:
 		player.respawnPlayer();
+		panel.playSoundEffect(0);
 		playerDead = true;
 		break;
 
 	    case POWER_UP_TIME:
 		entityList.remove(entity);
 		gameTime += TimeBoost.getTime(this);
+		panel.playSoundEffect(4);
 		break;
 
 	    case POWER_UP_JUMP:
@@ -194,6 +231,7 @@ public class GameWorld
 		player.jumpBoostOn();
 		player.speedBoostOff();
 		boostTimeCounter = 0;
+		panel.playSoundEffect(3);
 		break;
 
 	    case POWER_UP_SPEED:
@@ -201,10 +239,28 @@ public class GameWorld
 		player.speedBoostOn();
 		player.jumpBoostOff();
 		boostTimeCounter = 0;
+		panel.playSoundEffect(3);
+		break;
+
+	    case ENEMY:
+		player.respawnPlayer();
+		break;
+
+	    case ENEMY_ATTACK:
+		panel.playSoundEffect(0);
+		player.respawnPlayer();
+		getEnemyAttack().remove(entity);
 		break;
 	}
 
 
+    }
+    public void playSound(int i){
+	panel.playSoundEffect(i);
+    }
+
+    public void addToEntityList(Entity entity){
+	entityList.add(entity);
     }
 
     public int getRow() {
@@ -213,6 +269,14 @@ public class GameWorld
 
     public int getCol() {
 	return col;
+    }
+
+    public Enemy getEnemy() {
+	return enemy;
+    }
+
+    public List<EnemyAttack> getEnemyAttack(){
+	return enemy.getEnemyAttackList();
     }
 
     public int[][] getMapTileNum() {
