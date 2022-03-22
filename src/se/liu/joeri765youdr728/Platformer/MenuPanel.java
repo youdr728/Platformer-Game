@@ -6,32 +6,17 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
-public class MenuPanel extends JPanel
+public class MenuPanel extends AbstractPanel
 {
-    final int originalTileSize = 16;
-    final int scale = 3;
-
-    final int tileSize = originalTileSize * scale;
-    final int columns = 20;
-    final int rows = 20;
-    final int screenHeight = rows * tileSize;
-    final int screenWidth = columns * tileSize;
-
     BufferedImage background;
 
     private MyButton buttonPlay, buttonHighscore, buttonQuit;
 
     private Frame frame;
 
-    MouseHandler mouseHandler = new MouseHandler(this);
 
-    public MenuPanel(Frame frame) {
-	this.setPreferredSize(new Dimension(screenWidth, screenHeight));
-	this.setDoubleBuffered(true);
-	this.repaint();
-	this.setFocusable(true);
-	this.addMouseListener(mouseHandler);
-	this.addMouseMotionListener(mouseHandler);
+    public MenuPanel(Frame frame, int typeNumber) {
+	super.typeNumber = typeNumber;
 	this.frame = frame;
 
 	createButtons();
@@ -73,18 +58,21 @@ public class MenuPanel extends JPanel
 	drawButtons(g);
     }
 
+    @Override
     public void mouseClicked(int x, int y){
 	if(buttonPlay.getBounds().contains(x, y)){
-	    System.out.println("click");
 	    frame.startGame();
 	}
 	if(buttonHighscore.getBounds().contains(x, y)){
-	    //Start highscore frame
+	    frame.openHighScore();
+	    frame.setOnMenu(true);
 	}
 	if(buttonQuit.getBounds().contains(x, y)){
 	    System.exit(0);
 	}
     }
+
+    @Override
     public void mouseMoved(int x, int y){
 	buttonPlay.setMouseOver(false);
 	buttonHighscore.setMouseOver(false);

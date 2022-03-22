@@ -7,19 +7,21 @@ import java.awt.event.MouseMotionListener;
 
 public class MouseHandler extends MouseAdapter
 {
-    private MenuPanel menu;
-    public MouseHandler(MenuPanel menu) {
-	this.menu = menu;
+    private AbstractPanel panel;
+
+    public MouseHandler(AbstractPanel panel) {
+	this.panel = panel;
     }
 
     @Override public void mouseClicked(final MouseEvent e) {
 	if(e.getButton() == MouseEvent.BUTTON1){
-	    menu.mouseClicked(e.getX(), e.getY());
+	    panel.mouseClicked(e.getX(), e.getY());
 	}
     }
 
     @Override public void mouseMoved(final MouseEvent e) {
-	menu.mouseMoved(e.getX(), e.getY());
+	panel.mouseMoved(e.getX(), e.getY());
     }
+
 
 }

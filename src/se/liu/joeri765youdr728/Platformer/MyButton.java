@@ -24,7 +24,7 @@ public class MyButton
 
     protected final Map<Integer, BufferedImage> buttonImageMap = createButtonImageMap();
 
-    private static BufferedImage playImage, highscoreImage, quitImage;
+    private static BufferedImage playImage, highscoreImage, quitImage, backImage, timeImage, deathsImage, coinsImage;
 
     public MyButton(int imageNumber, int x,  int y, int width, int height) {
 	this.x = x;
@@ -65,12 +65,20 @@ public class MyButton
 	this.mouseOver = mouseOver;
     }
 
+    public int getImageNumber() {
+	return imageNumber;
+    }
+
     public static Map<Integer, BufferedImage> createButtonImageMap(){
 
 	try {
 	    playImage = ImageIO.read(GamePanel.class.getResourceAsStream("Tiles/button_start.png"));
 	    highscoreImage = ImageIO.read(GamePanel.class.getResourceAsStream("Tiles/button_highscore.png"));
 	    quitImage = ImageIO.read(GamePanel.class.getResourceAsStream("Tiles/button_close.png"));
+	    backImage = ImageIO.read(GamePanel.class.getResourceAsStream("Tiles/button_back.png"));
+	    timeImage = ImageIO.read(GamePanel.class.getResourceAsStream("Tiles/button_time.png"));
+	    deathsImage = ImageIO.read(GamePanel.class.getResourceAsStream("Tiles/button_deaths.png"));
+	    coinsImage = ImageIO.read(GamePanel.class.getResourceAsStream("Tiles/button_coins.png"));
 
 	} catch (IOException e) {
 	    e.printStackTrace();
@@ -79,7 +87,11 @@ public class MyButton
 	Map<Integer, BufferedImage> buttonImageMap = new HashMap<>();
 	buttonImageMap.put(1, playImage);
 	buttonImageMap.put(2, highscoreImage);
-	buttonImageMap.put(3,quitImage);
+	buttonImageMap.put(3, quitImage);
+	buttonImageMap.put(4, backImage);
+	buttonImageMap.put(5,timeImage);
+	buttonImageMap.put(6, deathsImage);
+	buttonImageMap.put(7, coinsImage);
 
 
 	return buttonImageMap;

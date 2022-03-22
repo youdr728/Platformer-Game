@@ -82,7 +82,7 @@ public class GamePanel extends JComponent implements  Runnable
     }
 
     public void checkGameOver() {
-        if (world.getGameTime() == 0) {
+        if (world.getGameTime() == 0 || world.isGameWon()) {
             gameOver = true;
         }
 
@@ -97,6 +97,8 @@ public class GamePanel extends JComponent implements  Runnable
         while(gameThread != null){
             long currentTime = System.nanoTime();
 
+            checkGameOver();
+
             if(gameOver){
                 updatePauseKeys();
                 if(replay){
@@ -106,7 +108,7 @@ public class GamePanel extends JComponent implements  Runnable
                     replay = false;
                 }
             }else{
-                checkGameOver();
+
                 world.updateWorld();
                 updateGameKeys();
 

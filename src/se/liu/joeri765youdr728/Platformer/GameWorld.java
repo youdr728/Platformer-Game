@@ -17,19 +17,25 @@ public class GameWorld
     private int mapTileNum[][];
     private List<Entity> entityList;
     private Player player;
-    private int mapNumber = 1;
+    private int mapNumber = 5;
 
     private int gameTime;
     private int gameTimeCounter = 0;
 
     private int boostTimeCounter = 0;
 
+    private int deathCounter = 0, scoreTime = 0, coinCounter = 0;
+
+    private HighScoreList highScoreList = HighScoreList.loadHighscoreList();
+
+    private boolean gameWon = false;
+    private boolean playerDead = false;
 
     public GameWorld() {
 	this.mapTileNum = new int[row][col];
 	this.entityList = new ArrayList<>();
-	this.gameTime = 120;
-	loadMapFromFile("Maps/map01");
+	this.gameTime = 50;
+	loadMapFromFile("Maps/map05");
 	createEntityList();
     }
 
@@ -99,6 +105,11 @@ public class GameWorld
 	    player.jump();
 	}
 
+	if (playerDead) {
+	    deathCounter += 1;
+	    playerDead = false;
+	}
+
     }
 
     public void timer(){
@@ -106,6 +117,8 @@ public class GameWorld
 	if(gameTimeCounter == 60){
 	    gameTimeCounter = 0;
 	    gameTime -= 1;
+	    scoreTime += 1;
+
 	}
     }
 
@@ -131,6 +144,10 @@ public class GameWorld
 	return nextMap;
     }
 
+    public boolean isGameWon() {
+	return gameWon;
+    }
+
     public void applyCollision(Entity entity) {
 	EntityType entityType = entity.getEntityType();
 
@@ -142,19 +159,29 @@ public class GameWorld
 
 	    case COINS:
 		entityList.remove(entity);
+		coinCounter += 1;
 		break;
 
 	    case GOAL:
-		this.mapTileNum = new int[row][col];
-		this.entityList = new ArrayList<>();
-		loadMapFromFile(this.getNextMap());
-		gameTime = 120;
-		this.createEntityList();
-		player.respawnPlayer();
+		if (mapNumber == 5) {
+		    this.gameWon = true;
+		    highScoreList.addHighscore(this);
+
+		}
+		else {
+		    this.mapTileNum = new int[row][col];
+		    this.entityList = new ArrayList<>();
+		    loadMapFromFile(this.getNextMap());
+		    gameTime = 120;
+		    this.createEntityList();
+		    player.respawnPlayer();
+		}
+
 		break;
 
 	    case OBSTACLE:
 		player.respawnPlayer();
+		playerDead = true;
 		break;
 
 	    case POWER_UP_TIME:
@@ -214,5 +241,16 @@ public class GameWorld
 
     public void setGameTime(final int gameTime) {
 	this.gameTime = gameTime;
+    }
+
+    public int getDeathCounter() {
+	return deathCounter;
+    }
+
+    public int getScoreTime() {
+	return scoreTime;
+    }
+    public int getCoinCounter() {
+	return coinCounter;
     }
 }

@@ -7,16 +7,23 @@ public class Frame
 {
     private JFrame menuFrame = new JFrame();
     private JFrame gameFrame = new JFrame();
+    private JFrame scoreFrame = new JFrame();
 
     private CardLayout cardLayout = new CardLayout();
 
     private JPanel panel = new JPanel(cardLayout);
 
-    MenuPanel menuPanel = new MenuPanel(this);
+    MenuPanel menuPanel = new MenuPanel(this, 1);
     GamePanel gamePanel = new GamePanel();
+    ScorePanel scorePanel = new ScorePanel(this, 2);
+
+    private boolean isOnMenu = false;
 
     public void show(){
-
+	if (isOnMenu) {
+	    scoreFrame.dispose();
+	    isOnMenu = false;
+	}
 	menuFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 	menuFrame.setResizable(false);
 	//frame.setLocationRelativeTo(null);
@@ -48,6 +55,21 @@ public class Frame
 	gameFrame.setVisible(true);
 	gamePanel.startGameThread();
 
+    }
+
+    public void openHighScore() {
+	menuFrame.dispose();
+	scoreFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+	scoreFrame.setResizable(false);
+	scoreFrame.add(scorePanel);
+	scoreFrame.pack();
+	scoreFrame.setVisible(true);
+    }
+
+
+
+    public void setOnMenu(final boolean onMenu) {
+	isOnMenu = onMenu;
     }
 
     public static void main(String[] args) {
