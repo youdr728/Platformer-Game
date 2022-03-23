@@ -23,8 +23,7 @@ public class ScorePanel extends AbstractPanel
 
 
 
-    public ScorePanel(Frame frame, int typeNumber) {
-        super.typeNumber = typeNumber;
+    public ScorePanel(Frame frame) {
         this.frame = frame;
         scores = new String[scoresHeight][scoresWidth];
 

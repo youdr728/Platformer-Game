@@ -7,39 +7,30 @@ import java.util.Map;
 
 public abstract class AbstractPanel extends JPanel
 {
-    final int originalTileSize = 16;
-    final int scale = 3;
+    protected final int originalTileSize = 16;
+    protected final int scale = 3;
 
-    final int tileSize = originalTileSize * scale;
-    final int columns = 20;
-    final int rows = 20;
-    final int screenHeight = rows * tileSize;
-    final int screenWidth = columns * tileSize;
+    protected final int tileSize = originalTileSize * scale;
+    protected final int columns = 20;
+    protected final int rows = 20;
+    protected int screenHeight = rows * tileSize;
+    protected int screenWidth = columns * tileSize;
 
     protected int typeNumber;
 
-    private Frame frame;
-
-    MouseHandler mouseHandler = new MouseHandler(this);
-
-    public AbstractPanel() {
+    protected AbstractPanel() {
 	this.setPreferredSize(new Dimension(screenWidth, screenHeight));
 	this.setDoubleBuffered(true);
 	this.repaint();
 	this.setFocusable(true);
+	MouseHandler mouseHandler = new MouseHandler(this);
 	this.addMouseListener(mouseHandler);
 	this.addMouseMotionListener(mouseHandler);
-	this.frame = frame;
     }
 
 
-    public void mouseClicked(int x, int y){
+    public void mouseClicked(int x, int y){}
 
-    }
-
-
-    public void mouseMoved(int x, int y){
-
-    }
+    public void mouseMoved(int x, int y){}
 
 }

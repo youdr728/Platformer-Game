@@ -14,29 +14,29 @@ import java.util.Map;
 public class GamePanel extends JComponent implements  Runnable
 {
     //Screen settings
-    final int originalTileSize = 16;
-    final int scale = 3;
+    private final int originalTileSize = 16;
+    private final int scale = 3;
 
-    final int tileSize = originalTileSize * scale;
-    final int columns = 20;
-    final int rows = 20;
-    final int screenHeight = rows * tileSize;
-    final int screenWidth = columns * tileSize;
+    private final int tileSize = originalTileSize * scale;
+    private final int columns = 20;
+    private final int rows = 20;
+    private final int screenHeight = rows * tileSize;
+    private final int screenWidth = columns * tileSize;
 
-    final static int fontSize = 50;
+    private final static int fontSize = 50;
 
     private static BufferedImage wall, platform, player, spikes, door, chest, timeBoost, jumpBoost, speedBoost, enemy, enemyAttack, loseImage, winImage;
     private GameWorld world;
     protected final EnumMap<EntityType, BufferedImage> tileMap = createTileMap();
 
-    final int FPS = 60;
+    private final int FPS = 60;
     private boolean gameOver = false;
     private boolean replay = false;
 
-    Sound sound = new Sound();
+    private Sound sound = new Sound();
 
-    KeyHandler keyH = new KeyHandler();
-    Thread gameThread;
+    private KeyHandler keyH = new KeyHandler();
+    private Thread gameThread;
 
     public GamePanel() {
 	this.setPreferredSize(new Dimension(screenWidth, screenHeight));
@@ -263,17 +263,6 @@ public class GamePanel extends JComponent implements  Runnable
             else{
                 g.drawImage(loseImage, 100, 100 ,731, 400, this);
             }
-
-          //  g.drawImage(winImage, 0, 500 ,731, 500, this);
-            //String gameOverText = "You lost, press p to replay and o to quit";
-           // g.setFont(font);
-            //g.setColor(Color.WHITE);
-
-           // x = ((getWidth() - fm.stringWidth(gameOverText)) / 2);
-           // int y = ((getHeight() - fm.getHeight()) / 2) + fm.getAscent();
-
-           // g.setColor(Color.WHITE);
-           // g.drawString(gameOverText, x,y);
 
         }
 

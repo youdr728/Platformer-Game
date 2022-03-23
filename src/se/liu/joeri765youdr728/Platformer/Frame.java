@@ -10,9 +10,9 @@ public class Frame
     private JFrame scoreFrame = new JFrame();
 
 
-    MenuPanel menuPanel = new MenuPanel(this, 1);
+    MenuPanel menuPanel = new MenuPanel(this);
     GamePanel gamePanel = new GamePanel();
-    ScorePanel scorePanel = new ScorePanel(this, 2);
+    ScorePanel scorePanel = new ScorePanel(this);
 
     private boolean isOnMenu = false;
 

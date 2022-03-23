@@ -11,24 +11,25 @@ public class Enemy extends AbstractEntity
 
     private int attackCounter = 0;
     private int randomNumber;
+    private final int SLOWEST_ATTACK = 50, FASTEST_ATTACK = 30;
 
     public Enemy(final int x, final int y, final int typeNumber, final int collisionX, final int collisionY, final int collisionWidth,
 		 final int collisionHeight, final GameWorld world) {
 	super(x, y, typeNumber, collisionX, collisionY, collisionWidth, collisionHeight);
 	this.world = world;
 	this.enemyAttackList = new ArrayList<>();
-	this.randomNumber = getRandomNumberUsingNextInt(20,45);
     }
 
     public void shootAttack(){
 
 	if(attackCounter == randomNumber){
-	    randomNumber = getRandomNumberUsingNextInt(30,50);
+	    randomNumber = getRandomNumberUsingNextInt(FASTEST_ATTACK, SLOWEST_ATTACK);
 	    EnemyAttack attack = new EnemyAttack(x - 48, y, 10, 12, 12, 27, 27);
 	    world.playSound(6);
 	    enemyAttackList.add(attack);
 	    attackCounter = 0;
-	}else {
+	}
+	else {
 	    attackCounter += 1;
 	}
 
@@ -46,7 +47,6 @@ public class Enemy extends AbstractEntity
 		break;
 	    }
 	}
-
     }
 
     public List<EnemyAttack> getEnemyAttackList() {
