@@ -15,8 +15,7 @@ public class MenuPanel extends AbstractPanel
 
     Sound sound = new Sound();
 
-    public MenuPanel(Frame frame, int typeNumber) {
-	super.typeNumber = typeNumber;
+    public MenuPanel(Frame frame) {
 	this.frame = frame;
 
 	playMusic(2);

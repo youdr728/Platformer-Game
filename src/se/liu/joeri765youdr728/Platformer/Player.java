@@ -4,15 +4,18 @@ import java.awt.*;
 
 public class Player extends AbstractEntity
 {
+    // Initialize player stats
+    private final int startX;
+    private final int startY;
+
     private int speed;
     private int jumpSpeed;
-    private int fallspeed = 8;
 
-    private int normalSpeed = 4;
-    private int normalJumpSpeed = 16;
-
-    private int boostSpeed = 7;
-    private int boostJumpSpeed = 20;
+    private static final int FALLSPEED = 8;
+    private static final int NORMAL_SPEED = 4;
+    private static final int NORMAL_JUMP_SPEED = 16;
+    private static final int BOOST_SPEED = 7;
+    private static final int BOOST_JUMP_SPEED = 20;
 
 
     private GameWorld world;
@@ -22,8 +25,7 @@ public class Player extends AbstractEntity
     private boolean isOnJumpBoost = false;
     private boolean isOnSpeedBoost = false;
 
-    private final int startX;
-    private final int startY;
+
 
     private int platformY;
 
@@ -35,13 +37,11 @@ public class Player extends AbstractEntity
 	this.world = world;
 	this.startX = x;
 	this.startY = y;
-	this.speed = this.normalSpeed;
-	this.jumpSpeed = this.normalJumpSpeed;
+	this.speed = NORMAL_SPEED;
+	this.jumpSpeed = NORMAL_JUMP_SPEED;
     }
 
     public void respawnPlayer(){
-	//System.out.println(startX);
-	//System.out.println(startY);
 	this.x = startX;
 	this.y = startY;
 
@@ -54,10 +54,10 @@ public class Player extends AbstractEntity
 	if (platformCollision || this.y < 0 || jumpSpeed == 0) {
 	    this.y += jumpSpeed;
 	    if(isOnJumpBoost) {
-		jumpSpeed = boostJumpSpeed;
+		jumpSpeed = BOOST_JUMP_SPEED;
 	    }
 	    else{
-		jumpSpeed = normalJumpSpeed;
+		jumpSpeed = NORMAL_JUMP_SPEED;
 	    }
 	    setPlatformCollision(false);
 	    setIsJumping(false);
@@ -71,7 +71,7 @@ public class Player extends AbstractEntity
     }
     public void moveDown(){
 	canJump = false;
-	this.y += fallspeed;
+	this.y += FALLSPEED;
 	tryCollision();
 	if (platformCollision) {
 	    this.y = platformY;
@@ -84,7 +84,6 @@ public class Player extends AbstractEntity
 
     }
     public void movePlayer(Direction dir){
-
 	if (dir.equals(Direction.RIGHT)){
 	    this.x += speed;
 	    tryCollision();
@@ -92,7 +91,6 @@ public class Player extends AbstractEntity
 		this.x -= speed;
 		setPlatformCollision(false);
 	    }
-
 	}
 	else if (dir.equals(Direction.LEFT)){
 	    this.x -= speed;
@@ -127,27 +125,26 @@ public class Player extends AbstractEntity
 		}
 	    }
 	}
-
     }
 
     public void jumpBoostOn() {
 	isOnJumpBoost = true;
-	jumpSpeed = boostJumpSpeed;
+	jumpSpeed = BOOST_JUMP_SPEED;
     }
 
     public void jumpBoostOff() {
 	isOnJumpBoost = false;
-	jumpSpeed = normalJumpSpeed;
+	jumpSpeed = NORMAL_JUMP_SPEED;
     }
 
     public void speedBoostOn() {
 	isOnSpeedBoost = true;
-	speed = boostSpeed;
+	speed = BOOST_SPEED;
     }
 
     public void speedBoostOff() {
 	isOnSpeedBoost = false;
-	speed = normalSpeed;
+	speed = NORMAL_SPEED;
     }
 
     public int getSpeed() {
@@ -162,7 +159,7 @@ public class Player extends AbstractEntity
 	return startY;
     }
 
-    public void setPlatformCollision(boolean bool) {this.platformCollision = bool;}
+    public void setPlatformCollision(boolean b) {this.platformCollision = b;}
 
     public void setIsJumping(boolean jumping) {
 	this.isJumping = jumping;

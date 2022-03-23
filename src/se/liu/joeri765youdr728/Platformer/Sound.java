@@ -7,10 +7,10 @@ import java.net.URL;
 
 public class Sound
 {
-    Clip clipSound;
-    Clip clipMusic;
-    URL soundURL[] = new URL[10];
-    URL musicURL[] = new URL[10];
+    private Clip clipSound = null;
+    private Clip clipMusic = null;
+    private URL[] soundURL = new URL[10];
+    private URL[] musicURL = new URL[10];
 
     public Sound() {
 	soundURL[0] = getClass().getResource("Sounds/player_death.wav");

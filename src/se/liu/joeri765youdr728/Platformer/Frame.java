@@ -19,7 +19,7 @@ public class Frame
     private String currentFrame = menuFrameString;
 
     public void startMenu(){
-	menuPanel = new MenuPanel(this, 1);
+	menuPanel = new MenuPanel(this);
 
 	if(currentFrame.equals(highscoreFrameString)){
 	    scorePanel.stopMusic();
@@ -57,7 +57,7 @@ public class Frame
     }
 
     public void startHighscore() {
-	scorePanel = new ScorePanel(this, 2);
+	scorePanel = new ScorePanel(this);
 
 	menuPanel.stopMusic();
 	menuFrame.remove(menuPanel);

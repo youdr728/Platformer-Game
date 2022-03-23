@@ -1,32 +1,30 @@
 package se.liu.joeri765youdr728.Platformer;
 
 import javax.imageio.ImageIO;
-import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
 public class ScorePanel extends AbstractPanel
 {
-    BufferedImage background;
+    private BufferedImage background = null;
 
-    private MyButton button_back, sortScore_time, sortScore_coins, sortScore_deaths;
+    private MyButton buttonBack = null, sortScoreTime = null, sortScoreCoins = null, sortScoreDeaths = null;
 
     private Frame frame;
 
-    private HighScoreList highScoreList;
+    private HighScoreList highScoreList = null;
 
-    private String text;
+    private String text = null;
 
-    private final int fontSize = 35, scoresWidth = 1, scoresHeight = 10, offset = 35, startX = 130, startY = 275;
+    private static final int FONT_SIZE = 35, SCORES_WIDTH = 1, SCORES_HEIGHT = 10, OFFSET = 35, START_X = 130, START_Y = 275;
     private String[][] scores;
 
     private Sound sound = new Sound();
 
-    public ScorePanel(Frame frame, int typeNumber) {
-        super.typeNumber = typeNumber;
+    public ScorePanel(Frame frame) {
         this.frame = frame;
-        scores = new String[scoresHeight][scoresWidth];
+        scores = new String[SCORES_HEIGHT][SCORES_WIDTH];
         playMusic(3);
         createButtons();
 
@@ -46,58 +44,58 @@ public class ScorePanel extends AbstractPanel
     }
 
     public void createButtons(){
-        button_back = new MyButton(4, screenWidth - 210, screenHeight/2 + 130, 100, 50);
-        sortScore_time = new MyButton(5, screenWidth/2 - 170, 135, 150, 65);
-        sortScore_deaths = new MyButton(6, screenWidth/2 + 10, 135, 150, 65);
-        sortScore_coins = new MyButton(7, screenWidth/2 + 180, 135, 150, 65);
+        buttonBack = new MyButton(4, screenWidth - 210, screenHeight/2 + 130, 100, 50);
+        sortScoreTime = new MyButton(5, screenWidth/2 - 170, 135, 150, 65);
+        sortScoreDeaths = new MyButton(6, screenWidth/2 + 10, 135, 150, 65);
+        sortScoreCoins = new MyButton(7, screenWidth/2 + 180, 135, 150, 65);
     }
 
     public void drawButtons(Graphics g){
-        button_back.draw(g);
-        sortScore_time.draw(g);
-        sortScore_deaths.draw(g);
-        sortScore_coins.draw(g);
+        buttonBack.draw(g);
+        sortScoreTime.draw(g);
+        sortScoreDeaths.draw(g);
+        sortScoreCoins.draw(g);
     }
 
     @Override
     public void mouseClicked(int x, int y){
-        if(button_back.getBounds().contains(x, y)){
+        if(buttonBack.getBounds().contains(x, y)){
             frame.setCurrentFrame("highscoreFrame");
             frame.startMenu();
 
         }
-        if(sortScore_time.getBounds().contains(x, y)){
+        if(sortScoreTime.getBounds().contains(x, y)){
             highScoreList = HighScoreList.loadHighscoreList();
-            showHighScores(sortScore_time);
+            showHighScores(sortScoreTime);
         }
-        if(sortScore_deaths.getBounds().contains(x, y)){
+        if(sortScoreDeaths.getBounds().contains(x, y)){
             highScoreList = HighScoreList.loadHighscoreList();
-            showHighScores(sortScore_deaths);
+            showHighScores(sortScoreDeaths);
         }
-        if(sortScore_coins.getBounds().contains(x, y)){
+        if(sortScoreCoins.getBounds().contains(x, y)){
             highScoreList = HighScoreList.loadHighscoreList();
-            showHighScores(sortScore_coins);
+            showHighScores(sortScoreCoins);
         }
     }
 
     @Override
     public void mouseMoved(int x, int y){
-        button_back.setMouseOver(false);
-        sortScore_time.setMouseOver(false);
-        sortScore_deaths.setMouseOver(false);
-        sortScore_coins.setMouseOver(false);
+        buttonBack.setMouseOver(false);
+        sortScoreTime.setMouseOver(false);
+        sortScoreDeaths.setMouseOver(false);
+        sortScoreCoins.setMouseOver(false);
 
-        if(button_back.getBounds().contains(x, y)){
-            button_back.setMouseOver(true);
+        if(buttonBack.getBounds().contains(x, y)){
+            buttonBack.setMouseOver(true);
         }
-        if(sortScore_time.getBounds().contains(x, y)){
-            sortScore_time.setMouseOver(true);
+        if(sortScoreTime.getBounds().contains(x, y)){
+            sortScoreTime.setMouseOver(true);
         }
-        if(sortScore_deaths.getBounds().contains(x, y)){
-            sortScore_deaths.setMouseOver(true);
+        if(sortScoreDeaths.getBounds().contains(x, y)){
+            sortScoreDeaths.setMouseOver(true);
         }
-        if(sortScore_coins.getBounds().contains(x, y)){
-            sortScore_coins.setMouseOver(true);
+        if(sortScoreCoins.getBounds().contains(x, y)){
+            sortScoreCoins.setMouseOver(true);
         }
 
         repaint();
@@ -107,8 +105,8 @@ public class ScorePanel extends AbstractPanel
         highScoreList.getHighscoreList().sort(new ScoreComparator(button));
 
 
-        for(int columns = 0; columns<scoresWidth; columns++) {
-            for(int rows = 0; rows<scoresHeight; rows++) {
+        for(int columns = 0; columns < SCORES_WIDTH; columns++) {
+            for(int rows = 0; rows < SCORES_HEIGHT; rows++) {
                 if(rows < highScoreList.getLength()){
                 HighScore highscore = highScoreList.getHighscore(rows);
                 scores[rows][columns] = "\n" + (rows + 1)  + ".  TIME: " + highscore.getTime() + "   DEATHS: " + highscore.getDeaths() +
@@ -131,11 +129,11 @@ public class ScorePanel extends AbstractPanel
 
         g.drawImage(background,0,0, screenWidth, screenHeight, this);
 
-        g.setFont(new Font("Comic Sans MS", Font.PLAIN, fontSize));
-        for(int columns = 0; columns<scoresWidth; columns++) {
-            for(int rows = 0; rows<scoresHeight; rows++) {
+        g.setFont(new Font("Comic Sans MS", Font.PLAIN, FONT_SIZE));
+        for(int columns = 0; columns < SCORES_WIDTH; columns++) {
+            for(int rows = 0; rows < SCORES_HEIGHT; rows++) {
                 if (scores[rows][columns] != null){
-                    g.drawString(scores[rows][columns], startX, startY + offset*rows);
+                    g.drawString(scores[rows][columns], START_X, START_Y + OFFSET * rows);
             }
         }
        }
