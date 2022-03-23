@@ -7,21 +7,19 @@ import java.io.IOException;
 
 public class MenuPanel extends AbstractPanel
 {
-    BufferedImage background;
+    private BufferedImage background = null;
 
-    private MyButton buttonPlay, buttonHighscore, buttonQuit;
+    private MyButton buttonPlay = null, buttonHighscore = null, buttonQuit = null;
 
     private Frame frame;
 
-    Sound sound = new Sound();
+    private Sound sound = new Sound();
 
     public MenuPanel(Frame frame) {
 	this.frame = frame;
 
 	playMusic(2);
-
 	createButtons();
-
     }
 
     public void createButtons(){

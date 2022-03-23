@@ -22,7 +22,8 @@ public class MyButton
 
     protected final Map<Integer, BufferedImage> buttonImageMap = createButtonImageMap();
 
-    private static BufferedImage playImage, highscoreImage, quitImage, backImage, timeImage, deathsImage, coinsImage;
+    private static BufferedImage playImage = null, highscoreImage = null, quitImage = null, backImage = null, timeImage = null, deathsImage =
+	    null, coinsImage = null;
 
     public MyButton(int imageNumber, int x,  int y, int width, int height) {
 	this.x = x;
