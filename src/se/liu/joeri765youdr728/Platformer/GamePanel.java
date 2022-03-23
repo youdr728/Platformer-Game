@@ -38,7 +38,11 @@ public class GamePanel extends JComponent implements  Runnable
     KeyHandler keyH = new KeyHandler();
     Thread gameThread;
 
-    public GamePanel() {
+    private Frame frame;
+
+    public GamePanel(Frame frame) {
+        this.frame = frame;
+
 	this.setPreferredSize(new Dimension(screenWidth, screenHeight));
 	this.setDoubleBuffered(true);
         this.repaint();
@@ -88,6 +92,9 @@ public class GamePanel extends JComponent implements  Runnable
         gameThread = new Thread(this);
         gameThread.start();
     }
+    public void stopGameThread(){
+        gameThread = null;
+    }
 
     public void checkGameOver() {
         if (world.getGameTime() == 0 || world.isGameWon()) {
@@ -115,7 +122,6 @@ public class GamePanel extends JComponent implements  Runnable
 
         while(gameThread != null){
             long currentTime = System.nanoTime();
-
             checkGameOver();
 
             if(gameOver){
@@ -126,7 +132,7 @@ public class GamePanel extends JComponent implements  Runnable
                     keyH.keyReset();
                     gameOver = false;
                     replay = false;
-                    playMusic(0);
+
                 }
             }else{
 
@@ -178,10 +184,15 @@ public class GamePanel extends JComponent implements  Runnable
     }
     public void updatePauseKeys(){
         if(keyH.replayPressed){
+            stopMusic();
             replay = true;
         }
         if(keyH.quitPressed){
-            System.exit(0);
+            stopMusic();
+            //gameThread.interrupt();
+            frame.setCurrentFrame("gameFrame");
+            frame.startMenu();
+
         }
     }
 
@@ -263,17 +274,6 @@ public class GamePanel extends JComponent implements  Runnable
             else{
                 g.drawImage(loseImage, 100, 100 ,731, 400, this);
             }
-
-          //  g.drawImage(winImage, 0, 500 ,731, 500, this);
-            //String gameOverText = "You lost, press p to replay and o to quit";
-           // g.setFont(font);
-            //g.setColor(Color.WHITE);
-
-           // x = ((getWidth() - fm.stringWidth(gameOverText)) / 2);
-           // int y = ((getHeight() - fm.getHeight()) / 2) + fm.getAscent();
-
-           // g.setColor(Color.WHITE);
-           // g.drawString(gameOverText, x,y);
 
         }
 

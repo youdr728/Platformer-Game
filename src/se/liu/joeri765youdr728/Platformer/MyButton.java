@@ -1,12 +1,10 @@
 package se.liu.joeri765youdr728.Platformer;
 
-import org.w3c.dom.css.Rect;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
-import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.Map;
 

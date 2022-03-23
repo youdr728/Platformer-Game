@@ -1,7 +1,6 @@
 package se.liu.joeri765youdr728.Platformer;
 
 import javax.imageio.ImageIO;
-import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
@@ -74,8 +73,7 @@ public class MenuPanel extends AbstractPanel
 	    frame.startGame();
 	}
 	if(buttonHighscore.getBounds().contains(x, y)){
-	    frame.openHighScore();
-	    frame.setOnMenu(true);
+	    frame.startHighscore();
 	}
 	if(buttonQuit.getBounds().contains(x, y)){
 	    System.exit(0);

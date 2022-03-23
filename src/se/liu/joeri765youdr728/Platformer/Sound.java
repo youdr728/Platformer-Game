@@ -26,7 +26,7 @@ public class Sound
 	musicURL[0] = getClass().getResource("Sounds/game_background_music.wav");
 	musicURL[1] = getClass().getResource("Sounds/boss_background_music.wav");
 	musicURL[2] = getClass().getResource("Sounds/menu_background_music.wav");
-
+	musicURL[3] = getClass().getResource("Sounds/score_background_music.wav");
     }
 
 

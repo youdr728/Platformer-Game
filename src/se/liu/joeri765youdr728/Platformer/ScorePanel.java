@@ -21,14 +21,27 @@ public class ScorePanel extends AbstractPanel
     private final int fontSize = 35, scoresWidth = 1, scoresHeight = 10, offset = 35, startX = 130, startY = 275;
     private String[][] scores;
 
-
+    private Sound sound = new Sound();
 
     public ScorePanel(Frame frame, int typeNumber) {
         super.typeNumber = typeNumber;
         this.frame = frame;
         scores = new String[scoresHeight][scoresWidth];
-
+        playMusic(3);
         createButtons();
+
+    }
+
+    public void playMusic(int i){
+        sound.setFileMusic(i);
+        sound.loop();
+    }
+    public void stopMusic(){
+        sound.stop();
+    }
+    public void playSoundEffect(int i){
+        sound.setFileSound(i);
+        sound.playSound();
 
     }
 
@@ -49,7 +62,9 @@ public class ScorePanel extends AbstractPanel
     @Override
     public void mouseClicked(int x, int y){
         if(button_back.getBounds().contains(x, y)){
-            frame.show();
+            frame.setCurrentFrame("highscoreFrame");
+            frame.startMenu();
+
         }
         if(sortScore_time.getBounds().contains(x, y)){
             highScoreList = HighScoreList.loadHighscoreList();

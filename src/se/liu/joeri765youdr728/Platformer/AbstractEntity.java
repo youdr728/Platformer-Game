@@ -17,8 +17,8 @@ public abstract class AbstractEntity implements Entity
     protected int height = 48;
     protected int width = 48;
 
-    public AbstractEntity(final int x, final int y, final int typeNumber,
-		      int collisionX, int collisionY, int collisionWidth, int collisionHeight) {
+    protected AbstractEntity(final int x, final int y, final int typeNumber, int collisionX, int collisionY, int collisionWidth,
+			     int collisionHeight) {
 	this.x = x;
 	this.y = y;
 	this.typeNumber = typeNumber;
@@ -73,11 +73,11 @@ public abstract class AbstractEntity implements Entity
 	return getY() + collisionY;
     }
 
-    public int getCollisionWidth() {
+    @Override public int getCollisionWidth() {
 	return collisionWidth;
     }
 
-    public int getCollisionHeight() {
+    @Override public int getCollisionHeight() {
 	return collisionHeight;
     }
 
