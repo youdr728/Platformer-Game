@@ -27,10 +27,10 @@ public class KeyHandler extends KeyAdapter
 	if(code == KeyEvent.VK_SPACE){
 	    spacePressed = true;
 	}
-	if(code == KeyEvent.VK_P){
+	if(code == KeyEvent.VK_ENTER){
 	    replayPressed = true;
 	}
-	if(code == KeyEvent.VK_O){
+	if(code == KeyEvent.VK_ESCAPE){
 	    quitPressed = true;
 	}
 
@@ -55,10 +55,10 @@ public class KeyHandler extends KeyAdapter
 	if(code == KeyEvent.VK_SPACE){
 	    spacePressed = false;
 	}
-	if(code == KeyEvent.VK_P){
+	if(code == KeyEvent.VK_ENTER){
 	    replayPressed = false;
 	}
-	if(code == KeyEvent.VK_O){
+	if(code == KeyEvent.VK_ESCAPE){
 	    quitPressed = false;
 	}
     }

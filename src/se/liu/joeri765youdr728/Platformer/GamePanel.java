@@ -38,7 +38,11 @@ public class GamePanel extends JComponent implements  Runnable
     private KeyHandler keyH = new KeyHandler();
     private Thread gameThread;
 
-    public GamePanel() {
+    private Frame frame;
+
+    public GamePanel(Frame frame) {
+        this.frame = frame;
+
 	this.setPreferredSize(new Dimension(screenWidth, screenHeight));
 	this.setDoubleBuffered(true);
         this.repaint();
@@ -88,6 +92,9 @@ public class GamePanel extends JComponent implements  Runnable
         gameThread = new Thread(this);
         gameThread.start();
     }
+    public void stopGameThread(){
+        gameThread = null;
+    }
 
     public void checkGameOver() {
         if (world.getGameTime() == 0 || world.isGameWon()) {
@@ -115,7 +122,6 @@ public class GamePanel extends JComponent implements  Runnable
 
         while(gameThread != null){
             long currentTime = System.nanoTime();
-
             checkGameOver();
 
             if(gameOver){
@@ -126,7 +132,7 @@ public class GamePanel extends JComponent implements  Runnable
                     keyH.keyReset();
                     gameOver = false;
                     replay = false;
-                    playMusic(0);
+
                 }
             }else{
 
@@ -178,10 +184,15 @@ public class GamePanel extends JComponent implements  Runnable
     }
     public void updatePauseKeys(){
         if(keyH.replayPressed){
+            stopMusic();
             replay = true;
         }
         if(keyH.quitPressed){
-            System.exit(0);
+            stopMusic();
+            //gameThread.interrupt();
+            frame.setCurrentFrame("gameFrame");
+            frame.startMenu();
+
         }
     }
 

@@ -72,11 +72,11 @@ public abstract class AbstractEntity implements Entity
 	return getY() + collisionY;
     }
 
-    public int getCollisionWidth() {
+    @Override public int getCollisionWidth() {
 	return collisionWidth;
     }
 
-    public int getCollisionHeight() {
+    @Override public int getCollisionHeight() {
 	return collisionHeight;
     }
 

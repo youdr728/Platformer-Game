@@ -1,12 +1,10 @@
 package se.liu.joeri765youdr728.Platformer;
 
-import org.w3c.dom.css.Rect;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
-import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -24,7 +22,8 @@ public class MyButton
 
     protected final Map<Integer, BufferedImage> buttonImageMap = createButtonImageMap();
 
-    private static BufferedImage playImage, highscoreImage, quitImage, backImage, timeImage, deathsImage, coinsImage;
+    private static BufferedImage playImage = null, highscoreImage = null, quitImage = null, backImage = null, timeImage = null, deathsImage =
+	    null, coinsImage = null;
 
     public MyButton(int imageNumber, int x,  int y, int width, int height) {
 	this.x = x;

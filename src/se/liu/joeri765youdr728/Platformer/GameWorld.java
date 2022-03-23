@@ -8,15 +8,15 @@ import java.util.List;
 
 public class GameWorld
 {
-    private final int row = 20;
-    private final int col = 20;
-    private final int worldWidth = col * 48;
-    private final int worldHeight = row * 48;
-    private final int tileSize = 48;
+    private static final int ROW = 20;
+    private static final int COL = 20;
+    private static final int WORLD_WIDTH = COL * 48;
+    private static final int WORLD_HEIGHT = ROW * 48;
+    private static final int TILE_SIZE = 48;
 
-    private int mapTileNum[][];
+    private int[][] mapTileNum;
     private List<Entity> entityList;
-    private Player player;
+    private Player player = null;
     private int mapNumber = 1;
 
     private int gameTime;
@@ -32,16 +32,16 @@ public class GameWorld
     private boolean playerDead = false;
     private GamePanel panel;
 
-    private Enemy enemy;
+    private Enemy enemy = null;
 
 
 
     public GameWorld(GamePanel panel) {
-	this.mapTileNum = new int[row][col];
+	this.mapTileNum = new int[ROW][COL];
 	this.entityList = new ArrayList<>();
 	this.gameTime = 120;
 	this.panel = panel;
-	loadMapFromFile("Maps/map01");
+	loadMapFromFile("Maps/map0" + mapNumber);
 	createEntityList();
 	panel.playMusic(0);
     }
@@ -53,10 +53,10 @@ public class GameWorld
 	    InputStream is = getClass().getResourceAsStream(mapfile);
 	    BufferedReader br = new BufferedReader(new InputStreamReader(is));
 
-	    for (int h = 0; h < row; h++) {
+	    for (int h = 0; h < ROW; h++) {
 		String line = br.readLine();
-		String numbers[] = line.split(" ");
-		for (int w = 0; w < col; w++) {
+		String[] numbers = line.split(" ");
+		for (int w = 0; w < COL; w++) {
 		    mapTileNum[h][w] = Integer.parseInt(numbers[w]);
 		}
 	    }
@@ -64,37 +64,37 @@ public class GameWorld
 	}
     }
     public void createEntityList(){
-	for (int h = 0; h < row; h++) {
-	    for (int w = 0; w < col; w++) {
+	for (int h = 0; h < ROW; h++) {
+	    for (int w = 0; w < COL; w++) {
 		if (mapTileNum[h][w] != 0){
 		    int n = mapTileNum[h][w];
 		    switch (n) {
 			case 1:
-			    entityList.add(new Platform(w * tileSize, h * tileSize, n, 0,0 ,tileSize, tileSize));
+			    entityList.add(new Platform(w * TILE_SIZE, h * TILE_SIZE, n, 0, 0 , TILE_SIZE, TILE_SIZE));
 			    break;
 			case 2:
-			    player = new Player(w * tileSize, h * tileSize, n,9, 3, 30, 45, this);
+			    player = new Player(w * TILE_SIZE, h * TILE_SIZE, n, 9, 3, 30, 45, this);
 			    break;
 			case 3:
-			    entityList.add(new Obstacle(w * tileSize, h * tileSize, n, 3, 15, 42, 33));
+			    entityList.add(new Obstacle(w * TILE_SIZE, h * TILE_SIZE, n, 3, 15, 42, 33));
 			    break;
 			case 4:
-			    entityList.add(new Goal(w * tileSize, h * tileSize, n, 24, 36, 6, 12, this));
+			    entityList.add(new Goal(w * TILE_SIZE, h * TILE_SIZE, n, 24, 36, 6, 12, this));
 			    break;
 			case 5:
-			    entityList.add(new Coin(w * tileSize, h * tileSize, n, 3, 24, 42,24, this));
+			    entityList.add(new Coin(w * TILE_SIZE, h * TILE_SIZE, n, 3, 24, 42, 24, this));
 			    break;
 			case 6:
-			    entityList.add(new TimeBoost(w * tileSize, h * tileSize, n, 9, 12, 30, 30));
+			    entityList.add(new TimeBoost(w * TILE_SIZE, h * TILE_SIZE, n, 9, 12, 30, 30));
 			    break;
 			case 7:
-			    entityList.add(new TimeBoost(w * tileSize, h * tileSize, n, 12, 18, 24, 24));
+			    entityList.add(new TimeBoost(w * TILE_SIZE, h * TILE_SIZE, n, 12, 18, 24, 24));
 			    break;
 			case 8:
-			    entityList.add(new JumpBoost(w * tileSize, h * tileSize, n, 12, 18, 24, 24));
+			    entityList.add(new JumpBoost(w * TILE_SIZE, h * TILE_SIZE, n, 12, 18, 24, 24));
 			    break;
 			case 9:
-			    enemy = new Enemy(w * tileSize, h * tileSize, n, 0, 0, 48, 48, this);
+			    enemy = new Enemy(w * TILE_SIZE, h * TILE_SIZE, n, 0, 0, 48, 48, this);
 			    entityList.add(enemy);
 			    break;
 
@@ -158,7 +158,7 @@ public class GameWorld
 
 
     public String getNextMap(){
-	mapNumber = mapNumber + 1;
+	mapNumber += 1;
 	String nextMap = "Maps/map0" + mapNumber;
 	return nextMap;
     }
@@ -171,7 +171,7 @@ public class GameWorld
 	switch(entityType) {
 	    case PLATFORM:
 		player.setPlatformCollision(true);
-		player.setPlatformY(entity.getY() - tileSize);
+		player.setPlatformY(entity.getY() - TILE_SIZE);
 		break;
 
 	    case COINS:
@@ -181,22 +181,25 @@ public class GameWorld
 		break;
 
 	    case GOAL:
+		System.out.println(mapNumber);
 		if(mapNumber == 4){
 		    panel.stopMusic();
 		    panel.playMusic(1);
-		    this.mapTileNum = new int[row][col];
+		    this.mapTileNum = new int[ROW][COL];
 		    this.entityList = new ArrayList<>();
 		    loadMapFromFile(this.getNextMap());
 		    gameTime = 120;
 		    this.createEntityList();
 		    player.respawnPlayer();
 		    panel.playSoundEffect(1);
-		}else if(mapNumber == 5){
+		}
+		else if(mapNumber == 5){
 		    this.gameWon = true;
 		    highScoreList.addHighscore(this);
 		}
 		else{
-		    this.mapTileNum = new int[row][col];
+		    System.out.println("Hello");
+		    this.mapTileNum = new int[ROW][COL];
 		    this.entityList = new ArrayList<>();
 		    loadMapFromFile(this.getNextMap());
 		    gameTime = 120;
@@ -204,12 +207,6 @@ public class GameWorld
 		    player.respawnPlayer();
 		    panel.playSoundEffect(1);
 		}
-
-
-
-
-
-
 		break;
 
 	    case OBSTACLE:
@@ -262,11 +259,11 @@ public class GameWorld
     }
 
     public int getRow() {
-	return row;
+	return ROW;
     }
 
     public int getCol() {
-	return col;
+	return COL;
     }
 
     public Enemy getEnemy() {
@@ -290,11 +287,11 @@ public class GameWorld
     }
 
     public int getWorldWidth() {
-	return worldWidth;
+	return WORLD_WIDTH;
     }
 
     public int getWorldHeight() {
-	return worldHeight;
+	return WORLD_HEIGHT;
     }
 
     public int getGameTime() {
