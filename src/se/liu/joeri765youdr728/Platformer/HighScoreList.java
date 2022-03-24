@@ -7,8 +7,10 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.FileHandler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.logging.SimpleFormatter;
 
 /**
  * @author      Johannes Eriksson <joeri765 @ student.liu.se>
@@ -18,7 +20,7 @@ import java.util.logging.Logger;
  */
 public class HighScoreList
 {
-    private static final Logger LOGGER = Logger.getLogger(HighScoreList.class.getName() );
+
     private List<HighScore> highscoreList = new ArrayList<>();
 
     private static final Logger LOGGER = Logger.getLogger(HighScoreList.class.getName() );

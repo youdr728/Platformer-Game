@@ -20,8 +20,6 @@ import java.util.logging.SimpleFormatter;
  */
 public class GameWorld
 {
-    private static final Logger LOGGER = Logger.getLogger(GameWorld.class.getName() );
-
     private static final int ROW = 20;
     private static final int COL = 20;
     private static final int WORLD_WIDTH = COL * 48;
