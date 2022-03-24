@@ -7,10 +7,8 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.FileHandler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.util.logging.SimpleFormatter;
 
 /**
  * @author      Johannes Eriksson <joeri765 @ student.liu.se>
@@ -20,7 +18,7 @@ import java.util.logging.SimpleFormatter;
  */
 public class HighScoreList
 {
-
+    private static final Logger LOGGER = Logger.getLogger(HighScoreList.class.getName() );
     private List<HighScore> highscoreList = new ArrayList<>();
 
     private static final Logger LOGGER = Logger.getLogger(HighScoreList.class.getName() );
@@ -47,11 +45,10 @@ public class HighScoreList
 	Gson gson = new Gson();
 
 
-	try  {
+	try  (PrintWriter pw = new PrintWriter("Highscores.txt")){
 	    LOGGER.addHandler(fh);
 	    fh.setFormatter(formatter);
 
-	    PrintWriter pw = new PrintWriter("Highscores.txt");
 	    pw.println(gson.toJson(this));
 	    pw.flush();
 	}
@@ -63,12 +60,11 @@ public class HighScoreList
     }
 
     public static HighScoreList loadHighscoreList()  {
-	try{
+	Gson gson = new Gson();
+	try (FileReader fr = new FileReader("Highscores.txt")){
 	    LOGGER.addHandler(fh);
 	    fh.setFormatter(formatter);
 
-	    Gson gson = new Gson();
-	    FileReader fr = new FileReader("Highscores.txt");
 	    HighScoreList scores = gson.fromJson(fr, HighScoreList.class);
 
 	    return scores;

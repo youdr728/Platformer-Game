@@ -20,7 +20,7 @@ import java.util.logging.SimpleFormatter;
  */
 public class GameWorld
 {
-
+    private static final Logger LOGGER = Logger.getLogger(GameWorld.class.getName() );
 
     private static final int ROW = 20;
     private static final int COL = 20;
@@ -74,11 +74,10 @@ public class GameWorld
 
 
     public void loadMapFromFile(String mapFile){
-	try {
+	try (InputStream is = getClass().getResourceAsStream(mapFile)) {
 	    LOGGER.addHandler(fh);
 	    fh.setFormatter(formatter);
 
-	    InputStream is = getClass().getResourceAsStream(mapFile);
 	    BufferedReader br = new BufferedReader(new InputStreamReader(is));
 
 	    for (int h = 0; h < ROW; h++) {
