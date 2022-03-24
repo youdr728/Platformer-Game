@@ -29,20 +29,20 @@ public class Sound
     private final static String SEPARATOR = File.separator;
 
     public Sound() {
-	soundURL[0] = getClass().getResource("Sounds" + SEPARATOR + "player_death.wav");
-	soundURL[1] = getClass().getResource("Sounds" + SEPARATOR +"door.wav");
-	soundURL[2] = getClass().getResource("Sounds" + SEPARATOR +"point.wav");
-	soundURL[3] = getClass().getResource("Sounds" + SEPARATOR +"speed_jump_powerup.wav");
-	soundURL[4] = getClass().getResource("Sounds" + SEPARATOR +"time_powerup.wav");
-	soundURL[5] = getClass().getResource("Sounds" + SEPARATOR +"jump8bits.wav");
-	soundURL[6] = getClass().getResource("Sounds" + SEPARATOR +"fireball.wav");
-	soundURL[7] = getClass().getResource("Sounds" + SEPARATOR +"menu_button.wav");
+	soundURL[0] = ClassLoader.getSystemResource("audio" + SEPARATOR + "player_death.wav");
+	soundURL[1] = ClassLoader.getSystemResource("audio" + SEPARATOR +"door.wav");
+	soundURL[2] = ClassLoader.getSystemResource("audio" + SEPARATOR +"point.wav");
+	soundURL[3] = ClassLoader.getSystemResource("audio" + SEPARATOR +"speed_jump_powerup.wav");
+	soundURL[4] = ClassLoader.getSystemResource("audio" + SEPARATOR +"time_powerup.wav");
+	soundURL[5] = ClassLoader.getSystemResource("audio" + SEPARATOR +"jump8bits.wav");
+	soundURL[6] = ClassLoader.getSystemResource("audio" + SEPARATOR +"fireball.wav");
+	soundURL[7] = ClassLoader.getSystemResource("audio" + SEPARATOR +"menu_button.wav");
 
 
-	musicURL[0] = getClass().getResource("Sounds" + SEPARATOR +"game_background_music.wav");
-	musicURL[1] = getClass().getResource("Sounds" + SEPARATOR +"boss_background_music.wav");
-	musicURL[2] = getClass().getResource("Sounds" + SEPARATOR +"menu_background_music.wav");
-	musicURL[3] = getClass().getResource("Sounds" + SEPARATOR +"score_background_music.wav");
+	musicURL[0] = ClassLoader.getSystemResource("audio" + SEPARATOR +"game_background_music.wav");
+	musicURL[1] = ClassLoader.getSystemResource("audio" + SEPARATOR +"boss_background_music.wav");
+	musicURL[2] = ClassLoader.getSystemResource("audio" + SEPARATOR +"menu_background_music.wav");
+	musicURL[3] = ClassLoader.getSystemResource("audio" + SEPARATOR +"score_background_music.wav");
     }
 
 

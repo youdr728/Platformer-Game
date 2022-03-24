@@ -40,7 +40,7 @@ public class ScorePanel extends AbstractPanel
         createButtons();
 
         try {
-            background = ImageIO.read(MenuPanel.class.getResourceAsStream("Tiles" + SEPARATOR + "HighScore_list.png"));
+            background = ImageIO.read(ClassLoader.getSystemResource("images" + SEPARATOR + "HighScore_list.png"));
         }
         catch (IOException e) {
             LOGGER.log(Level.FINE, e.getMessage());
