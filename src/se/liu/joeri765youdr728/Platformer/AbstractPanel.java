@@ -1,5 +1,7 @@
 package se.liu.joeri765youdr728.Platformer;
 
+import se.liu.joeri765youdr728.Platformer.Input.MouseHandler;
+
 import javax.swing.*;
 import java.awt.*;
 

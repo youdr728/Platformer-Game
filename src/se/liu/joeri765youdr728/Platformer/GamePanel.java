@@ -1,5 +1,7 @@
 package se.liu.joeri765youdr728.Platformer;
 
+import se.liu.joeri765youdr728.Platformer.Input.KeyHandler;
+
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
@@ -21,16 +23,16 @@ import java.util.logging.SimpleFormatter;
 public class GamePanel extends JComponent implements  Runnable
 {
     //Screen settings
-    private final int originalTileSize = 16;
-    private final int scale = 3;
+    private static final int ORIGINAL_TILE_SIZE = 16;
+    private static final int SCALE = 3;
 
-    private final int tileSize = originalTileSize * scale;
-    private final int columns = 20;
-    private final int rows = 20;
-    private final int screenHeight = rows * tileSize;
-    private final int screenWidth = columns * tileSize;
+    private static final int TILE_SIZE = ORIGINAL_TILE_SIZE * SCALE;
+    private static final int COLUMNS = 20;
+    private static final int ROWS = 20;
+    private static final int SCREEN_HEIGHT = ROWS * TILE_SIZE;
+    private static final int SCREEN_WIDTH = COLUMNS * TILE_SIZE;
 
-    private final static int fontSize = 50;
+    private static final int FONT_SIZE = 50;
 
     private static final Logger LOGGER = Logger.getLogger(GamePanel.class.getName() );
     private static SimpleFormatter formatter = new SimpleFormatter();
@@ -47,7 +49,6 @@ public class GamePanel extends JComponent implements  Runnable
     private GameWorld world;
     protected final EnumMap<EntityType, BufferedImage> tileMap = createTileMap();
 
-    private final int FPS = 60;
     private boolean gameOver = false;
     private boolean replay = false;
 
@@ -67,7 +68,7 @@ public class GamePanel extends JComponent implements  Runnable
     public GamePanel(MainFrame mainFrame) {
         this.mainFrame = mainFrame;
 
-	this.setPreferredSize(new Dimension(screenWidth, screenHeight));
+	this.setPreferredSize(new Dimension(SCREEN_WIDTH, SCREEN_HEIGHT));
 	this.setDoubleBuffered(true);
         this.repaint();
         this.world = new GameWorld(this);
@@ -135,7 +136,7 @@ public class GamePanel extends JComponent implements  Runnable
         gameThread.start();
     }
 
-    public void isGameOver() {
+    public void tryIfGameOver() {
         if (world.getGameTime() == 0 || world.isGameWon()) {
             gameOver = true;
         }
@@ -155,12 +156,12 @@ public class GamePanel extends JComponent implements  Runnable
     }
 
     @Override public void run() {
-
-        double drawInterval = 1000000000/(double)FPS; // 1 second in nanoseconds
+        int fps = 60;
+        double drawInterval = 1000000000/(double)fps; // 1 second in nanoseconds
         double nextDrawTime = System.nanoTime() + drawInterval;
 
         while(gameThread != null){
-            isGameOver();
+            tryIfGameOver();
 
             if(gameOver){
                 stopMusic();
@@ -245,17 +246,15 @@ public class GamePanel extends JComponent implements  Runnable
 
 
         //Paint background
-        for (int h = 0; h < rows; h++) {
-            for (int w = 0; w < columns; w++) {
-                g.drawImage(tileMap.get(EntityType.WALL), w * tileSize, h * tileSize, tileSize, tileSize,null);
+        for (int h = 0; h < ROWS; h++) {
+            for (int w = 0; w < COLUMNS; w++) {
+                g.drawImage(tileMap.get(EntityType.WALL), w * TILE_SIZE, h * TILE_SIZE, TILE_SIZE, TILE_SIZE, null);
             }
         }
         //Paint start door
         g.drawImage(tileMap.get(EntityType.GOAL),
                     world.getPlayer().getStartX(),
-                    world.getPlayer().getStartY(),
-                    tileSize,
-                    tileSize,null);
+                    world.getPlayer().getStartY(), TILE_SIZE, TILE_SIZE, null);
         //Paint Entitys
         for (int i = 0; i < world.getEntities().size(); i++) {
             g.drawImage(tileMap.get(world.getEntities().get(i).getEntityType()),
@@ -275,12 +274,12 @@ public class GamePanel extends JComponent implements  Runnable
 
         //Paint timer
         String text = Integer.toString(world.getGameTime());
-        Font font = new Font("Ubuntu", Font.BOLD, fontSize);
+        Font font = new Font("Ubuntu", Font.BOLD, FONT_SIZE);
         g.setFont(font);
         FontMetrics fm = g.getFontMetrics();
         int x = ((getWidth() - fm.stringWidth(text)) / 2);
         g.setColor(Color.WHITE);
-        g.drawString(text, x,tileSize);
+        g.drawString(text, x, TILE_SIZE);
 
         //Paint player
         g.drawImage(tileMap.get(EntityType.PLAYER),
@@ -297,7 +296,7 @@ public class GamePanel extends JComponent implements  Runnable
                 String deaths = Integer.toString(world.getDeathCounter());
                 String coins = Integer.toString(world.getCoinCounter());
 
-                g.setFont(new Font("Comic Sans MS", Font.PLAIN, fontSize));
+                g.setFont(new Font("Comic Sans MS", Font.PLAIN, FONT_SIZE));
                 g.setColor(Color.WHITE);
                 g.drawImage(winImage, 100, 100 ,731, 500, this);
                 g.drawString(time, 170, 352);

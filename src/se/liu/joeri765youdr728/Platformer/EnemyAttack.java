@@ -1,4 +1,7 @@
 package se.liu.joeri765youdr728.Platformer;
+
+import se.liu.joeri765youdr728.Platformer.AbstractEntity;
+
 /**
  * @author      Johannes Eriksson <joeri765 @ student.liu.se>
  * @author      Yousef Drgham <youdr728 @ student.liu.se>
@@ -11,5 +14,6 @@ public class EnemyAttack extends AbstractEntity
 		       final int collisionHeight) {
 	super(x, y, typeNumber, collisionX, collisionY, collisionWidth, collisionHeight);
     }
+
 
 }

@@ -1,4 +1,4 @@
-package se.liu.joeri765youdr728.Platformer;
+package se.liu.joeri765youdr728.Platformer.Input;
 
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
