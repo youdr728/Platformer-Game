@@ -46,23 +46,23 @@ public class GameWorld
 
     private Enemy enemy = null;
 
-
+    private final static String SEPARATOR = File.separator;
 
     public GameWorld(GamePanel panel) {
 	this.mapTileNum = new int[ROW][COL];
 	this.entityList = new ArrayList<>();
 	this.gameTime = 120;
 	this.panel = panel;
-	loadMapFromFile("Maps" + File.separator + "map0" + mapNumber);
+	loadMapFromFile("Maps" + SEPARATOR + "map0" + mapNumber);
 	createEntityList();
 	panel.playMusic(0);
     }
 
 
 
-    public void loadMapFromFile(String mapfile){
+    public void loadMapFromFile(String mapFile){
 	try {
-	    InputStream is = getClass().getResourceAsStream(mapfile);
+	    InputStream is = getClass().getResourceAsStream(mapFile);
 	    BufferedReader br = new BufferedReader(new InputStreamReader(is));
 
 	    for (int h = 0; h < ROW; h++) {
@@ -123,7 +123,7 @@ public class GameWorld
     }
 
     public void updateWorld(){
-	powerupTimer();
+	startPowerupTimer();
 	timer();
 	if(enemy != null){
 	    updateEnemy();
@@ -155,7 +155,7 @@ public class GameWorld
 	}
     }
 
-    public void powerupTimer(){
+    public void startPowerupTimer(){
 	if (player.isOnJumpBoost() || player.isOnSpeedBoost()) {
 	    boostTimeCounter += 1;
 	    if(boostTimeCounter == 240) {
@@ -173,7 +173,7 @@ public class GameWorld
 
     public String getNextMap(){
 	mapNumber += 1;
-	String nextMap = "Maps" + File.separator +"map0" + mapNumber;
+	String nextMap = "Maps" + SEPARATOR + "map0" + mapNumber;
 	return nextMap;
     }
 
@@ -195,23 +195,16 @@ public class GameWorld
 		break;
 
 	    case GOAL:
-		System.out.println(mapNumber);
 		if(mapNumber == 4){
 		    panel.stopMusic();
 		    panel.playMusic(1);
-		    this.mapTileNum = new int[ROW][COL];
-		    this.entityList = new ArrayList<>();
-		    loadMapFromFile(this.getNextMap());
-		    gameTime = 120;
-		    this.createEntityList();
-		    player.respawnPlayer();
-		    panel.playSoundEffect(1);
 		}
 		else if(mapNumber == 5){
 		    this.gameWon = true;
 		    highScoreList.addHighscore(this);
 		}
-		else{
+
+		if (mapNumber != 5) {
 		    this.mapTileNum = new int[ROW][COL];
 		    this.entityList = new ArrayList<>();
 		    loadMapFromFile(this.getNextMap());
@@ -220,6 +213,7 @@ public class GameWorld
 		    player.respawnPlayer();
 		    panel.playSoundEffect(1);
 		}
+
 		break;
 
 	    case OBSTACLE:
@@ -267,28 +261,12 @@ public class GameWorld
 	panel.playSoundEffect(i);
     }
 
-    public void addToEntityList(Entity entity){
-	entityList.add(entity);
-    }
-
-    public int getRow() {
-	return ROW;
-    }
-
-    public int getCol() {
-	return COL;
-    }
-
     public Enemy getEnemy() {
 	return enemy;
     }
 
     public List<EnemyAttack> getEnemyAttack(){
 	return enemy.getEnemyAttacks();
-    }
-
-    public int[][] getMapTileNum() {
-	return mapTileNum;
     }
 
     public List<Entity> getEntityList() {
@@ -309,10 +287,6 @@ public class GameWorld
 
     public int getGameTime() {
 	return gameTime;
-    }
-
-    public void setGameTime(final int gameTime) {
-	this.gameTime = gameTime;
     }
 
     public int getDeathCounter() {

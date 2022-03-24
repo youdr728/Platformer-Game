@@ -33,6 +33,8 @@ public class ScorePanel extends AbstractPanel
 
     private Sound sound = new Sound();
 
+    private final static String SEPARATOR = File.separator;
+
     public ScorePanel(MainFrame mainFrame) {
         this.mainFrame = mainFrame;
         scores = new String[SCORES_HEIGHT][SCORES_WIDTH];
@@ -40,7 +42,7 @@ public class ScorePanel extends AbstractPanel
         createButtons();
 
         try {
-            background = ImageIO.read(MenuPanel.class.getResourceAsStream("Tiles" + File.separator + "HighScore_list.png"));
+            background = ImageIO.read(MenuPanel.class.getResourceAsStream("Tiles" + SEPARATOR + "HighScore_list.png"));
         }
         catch (IOException e) {
             LOGGER.log(Level.FINE, e.getMessage());

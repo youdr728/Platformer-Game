@@ -48,6 +48,8 @@ public class GamePanel extends JComponent implements  Runnable
 
     private BufferedImage loseImage = null, winImage = null;
 
+    private final static String SEPARATOR = File.separator;
+
     public GamePanel(MainFrame mainFrame) {
         this.mainFrame = mainFrame;
 
@@ -59,9 +61,9 @@ public class GamePanel extends JComponent implements  Runnable
         this.setFocusable(true);
 
         try {
-            loseImage = ImageIO.read(GamePanel.class.getResourceAsStream("Tiles" + File.separator +"lose_image.png"));
+            loseImage = ImageIO.read(GamePanel.class.getResourceAsStream("Tiles" + SEPARATOR + "lose_image.png"));
 
-            winImage = ImageIO.read(GamePanel.class.getResourceAsStream("Tiles" + File.separator +"win_image2.png"));
+            winImage = ImageIO.read(GamePanel.class.getResourceAsStream("Tiles" + SEPARATOR + "win_image2.png"));
         } catch (IOException e) {
             LOGGER.log(Level.FINE, e.getMessage());
             e.printStackTrace();
@@ -73,17 +75,17 @@ public class GamePanel extends JComponent implements  Runnable
                 jumpBoost = null, speedBoost = null, enemy = null, enemyAttack = null;
 
         try{
-            platform = ImageIO.read(GamePanel.class.getResourceAsStream("Tiles" + File.separator +"platform2.png"));
-            wall = ImageIO.read(GamePanel.class.getResourceAsStream("Tiles" + File.separator +"wall.png"));
-            player = ImageIO.read(GamePanel.class.getResourceAsStream("Tiles" + File.separator +"knight3.png"));
-            spikes = ImageIO.read(GamePanel.class.getResourceAsStream("Tiles" + File.separator +"spikes4.png"));
-            door = ImageIO.read(GamePanel.class.getResourceAsStream("Tiles" + File.separator +"door.png"));
-            chest = ImageIO.read(GamePanel.class.getResourceAsStream("Tiles" + File.separator +"chest.png"));
-            timeBoost = ImageIO.read(GamePanel.class.getResourceAsStream("Tiles" + File.separator +"time_powerup.png"));
-            jumpBoost = ImageIO.read(GamePanel.class.getResourceAsStream("Tiles" + File.separator +"jump_powerup.png"));
-            speedBoost = ImageIO.read(GamePanel.class.getResourceAsStream("Tiles" + File.separator +"speed_powerup.png"));
-            enemy = ImageIO.read(GamePanel.class.getResourceAsStream("Tiles" + File.separator +"wizard4.png"));
-            enemyAttack = ImageIO.read(GamePanel.class.getResourceAsStream("Tiles" + File.separator +"enemy_attack3.png"));
+            platform = ImageIO.read(GamePanel.class.getResourceAsStream("Tiles" + SEPARATOR + "platform2.png"));
+            wall = ImageIO.read(GamePanel.class.getResourceAsStream("Tiles" + SEPARATOR + "wall.png"));
+            player = ImageIO.read(GamePanel.class.getResourceAsStream("Tiles" + SEPARATOR + "knight3.png"));
+            spikes = ImageIO.read(GamePanel.class.getResourceAsStream("Tiles" + SEPARATOR + "spikes4.png"));
+            door = ImageIO.read(GamePanel.class.getResourceAsStream("Tiles" + SEPARATOR + "door.png"));
+            chest = ImageIO.read(GamePanel.class.getResourceAsStream("Tiles" + SEPARATOR + "chest.png"));
+            timeBoost = ImageIO.read(GamePanel.class.getResourceAsStream("Tiles" + SEPARATOR + "time_powerup.png"));
+            jumpBoost = ImageIO.read(GamePanel.class.getResourceAsStream("Tiles" + SEPARATOR + "jump_powerup.png"));
+            speedBoost = ImageIO.read(GamePanel.class.getResourceAsStream("Tiles" + SEPARATOR + "speed_powerup.png"));
+            enemy = ImageIO.read(GamePanel.class.getResourceAsStream("Tiles" + SEPARATOR + "wizard4.png"));
+            enemyAttack = ImageIO.read(GamePanel.class.getResourceAsStream("Tiles" + SEPARATOR + "enemy_attack3.png"));
 
 
         } catch (IOException e) {

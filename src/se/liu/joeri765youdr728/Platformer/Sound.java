@@ -26,21 +26,23 @@ public class Sound
     private URL[] soundURL = new URL[10];
     private URL[] musicURL = new URL[10];
 
+    private final static String SEPARATOR = File.separator;
+
     public Sound() {
-	soundURL[0] = getClass().getResource("Sounds" + File.separator + "player_death.wav");
-	soundURL[1] = getClass().getResource("Sounds" + File.separator +"door.wav");
-	soundURL[2] = getClass().getResource("Sounds" + File.separator +"point.wav");
-	soundURL[3] = getClass().getResource("Sounds" + File.separator +"speed_jump_powerup.wav");
-	soundURL[4] = getClass().getResource("Sounds" + File.separator +"time_powerup.wav");
-	soundURL[5] = getClass().getResource("Sounds" + File.separator +"jump.wav");
-	soundURL[6] = getClass().getResource("Sounds" + File.separator +"fireball.wav");
-	soundURL[7] = getClass().getResource("Sounds" + File.separator +"menu_button.wav");
+	soundURL[0] = getClass().getResource("Sounds" + SEPARATOR + "player_death.wav");
+	soundURL[1] = getClass().getResource("Sounds" + SEPARATOR +"door.wav");
+	soundURL[2] = getClass().getResource("Sounds" + SEPARATOR +"point.wav");
+	soundURL[3] = getClass().getResource("Sounds" + SEPARATOR +"speed_jump_powerup.wav");
+	soundURL[4] = getClass().getResource("Sounds" + SEPARATOR +"time_powerup.wav");
+	soundURL[5] = getClass().getResource("Sounds" + SEPARATOR +"jump8bits.wav");
+	soundURL[6] = getClass().getResource("Sounds" + SEPARATOR +"fireball.wav");
+	soundURL[7] = getClass().getResource("Sounds" + SEPARATOR +"menu_button.wav");
 
 
-	musicURL[0] = getClass().getResource("Sounds" + File.separator +"game_background_music.wav");
-	musicURL[1] = getClass().getResource("Sounds" + File.separator +"boss_background_music.wav");
-	musicURL[2] = getClass().getResource("Sounds" + File.separator +"menu_background_music.wav");
-	musicURL[3] = getClass().getResource("Sounds" + File.separator +"score_background_music.wav");
+	musicURL[0] = getClass().getResource("Sounds" + SEPARATOR +"game_background_music.wav");
+	musicURL[1] = getClass().getResource("Sounds" + SEPARATOR +"boss_background_music.wav");
+	musicURL[2] = getClass().getResource("Sounds" + SEPARATOR +"menu_background_music.wav");
+	musicURL[3] = getClass().getResource("Sounds" + SEPARATOR +"score_background_music.wav");
     }
 
 

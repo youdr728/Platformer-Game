@@ -17,8 +17,6 @@ public class MainFrame
     private GamePanel gamePanel = null;
     private ScorePanel scorePanel = null;
 
-    private String gameFrameString = "gameFrame";
-    private String highscoreFrameString = "highscoreFrame";
     private String menuFrameString = "menuFrame";
 
     private String currentFrame = menuFrameString;
@@ -26,6 +24,8 @@ public class MainFrame
     public void startMenu(){
 	menuPanel = new MenuPanel(this);
 
+	String gameFrameString = "gameFrame";
+	String highscoreFrameString = "highscoreFrame";
 	if(currentFrame.equals(highscoreFrameString)){
 	    scorePanel.stopMusic();
 	    scoreFrame.remove(scorePanel);

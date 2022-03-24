@@ -49,9 +49,9 @@ public class HighScoreList
 	try{
 	    Gson gson = new Gson();
 	    FileReader fr = new FileReader("Highscores.txt");
-	    HighScoreList list = gson.fromJson(fr, HighScoreList.class);
+	    HighScoreList scores = gson.fromJson(fr, HighScoreList.class);
 
-	    return list;
+	    return scores;
 
 	} catch (IOException e){
 	    LOGGER.log(Level.FINE,e.getMessage());
