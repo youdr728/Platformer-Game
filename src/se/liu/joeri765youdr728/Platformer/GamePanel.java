@@ -234,18 +234,18 @@ public class GamePanel extends JComponent implements  Runnable
                     tileSize,
                     tileSize,null);
         //Paint Entitys
-        for (int i = 0; i < world.getEntityList().size(); i++) {
-            g.drawImage(tileMap.get(world.getEntityList().get(i).getEntityType()),
-                        world.getEntityList().get(i).getX(),
-                        world.getEntityList().get(i).getY(),
-                        world.getEntityList().get(i).getWidth(),
-                        world.getEntityList().get(i).getHeight(),null);
+        for (int i = 0; i < world.getEntities().size(); i++) {
+            g.drawImage(tileMap.get(world.getEntities().get(i).getEntityType()),
+                        world.getEntities().get(i).getX(),
+                        world.getEntities().get(i).getY(),
+                        world.getEntities().get(i).getWidth(),
+                        world.getEntities().get(i).getHeight(), null);
         }
 
         //Paint Enemy Attacks
         if(world.getEnemy() != null){
             for (EnemyAttack attack: world.getEnemyAttack()) {
-                g.drawImage(tileMap.get(EntityType.ENEMY_ATTACK), attack.x, attack.y, AbstractEntity.width, AbstractEntity.height, null);
+                g.drawImage(tileMap.get(EntityType.ENEMY_ATTACK), attack.x, attack.y, AbstractEntity.WIDTH, AbstractEntity.HEIGHT, null);
             }
         }
 
