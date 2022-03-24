@@ -7,6 +7,9 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  * @author      Johannes Eriksson <joeri765 @ student.liu.se>
  * @author      Yousef Drgham <youdr728 @ student.liu.se>
@@ -15,7 +18,7 @@ import java.util.List;
  */
 public class HighScoreList
 {
-
+    private static final Logger LOGGER = Logger.getLogger(HighScoreList.class.getName() );
     private List<HighScore> highscoreList = new ArrayList<>();
 
     public void addHighscore(GameWorld world){
@@ -29,12 +32,14 @@ public class HighScoreList
 
 	Gson gson = new Gson();
 
+
 	try  {
 	    PrintWriter pw = new PrintWriter("Highscores.txt");
 	    pw.println(gson.toJson(this));
 	    pw.flush();
 	}
 	catch (IOException e) {
+	    LOGGER.log(Level.FINE,e.getMessage());
 	    e.printStackTrace();
 	}
 
@@ -48,8 +53,8 @@ public class HighScoreList
 
 	    return list;
 
-	} catch (IOException ignored){
-
+	} catch (IOException e){
+	    LOGGER.log(Level.FINE,e.getMessage());
 	}
 	return new HighScoreList();
     }

@@ -126,7 +126,7 @@ public class ScorePanel extends AbstractPanel
         super.paintComponent(g);
 
         try {
-            background = ImageIO.read(MenuPanel.class.getResourceAsStream("Tiles/HighScore_list.png"));
+            background = ImageIO.read(MenuPanel.class.getResourceAsStream("Tiles\\HighScore_list.png"));
         }
         catch (IOException e) {
             e.printStackTrace();

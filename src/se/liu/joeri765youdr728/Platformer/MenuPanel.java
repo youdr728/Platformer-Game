@@ -59,7 +59,7 @@ public class MenuPanel extends AbstractPanel
     @Override protected void paintComponent(final Graphics g) {
 	super.paintComponent(g);
 	try {
-	    background = ImageIO.read(MenuPanel.class.getResourceAsStream("Tiles/menu_background.png"));
+	    background = ImageIO.read(MenuPanel.class.getResourceAsStream("Tiles\\menu_background.png"));
 	} catch (IOException e) {
 	    e.printStackTrace();
 	}

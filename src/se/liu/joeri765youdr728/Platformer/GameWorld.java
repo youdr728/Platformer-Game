@@ -1,6 +1,7 @@
 package se.liu.joeri765youdr728.Platformer;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
@@ -46,7 +47,7 @@ public class GameWorld
 	this.entityList = new ArrayList<>();
 	this.gameTime = 120;
 	this.panel = panel;
-	loadMapFromFile("Maps/map0" + mapNumber);
+	loadMapFromFile("Maps\\map0" + mapNumber);
 	createEntityList();
 	panel.playMusic(0);
     }
@@ -65,7 +66,8 @@ public class GameWorld
 		    mapTileNum[h][w] = Integer.parseInt(numbers[w]);
 		}
 	    }
-	}catch(Exception e){
+	}catch(IOException e){
+	    e.printStackTrace();
 	}
     }
     public void createEntityList(){
@@ -164,7 +166,7 @@ public class GameWorld
 
     public String getNextMap(){
 	mapNumber += 1;
-	String nextMap = "Maps/map0" + mapNumber;
+	String nextMap = "Maps\\map0" + mapNumber;
 	return nextMap;
     }
 
@@ -203,7 +205,6 @@ public class GameWorld
 		    highScoreList.addHighscore(this);
 		}
 		else{
-		    System.out.println("Hello");
 		    this.mapTileNum = new int[ROW][COL];
 		    this.entityList = new ArrayList<>();
 		    loadMapFromFile(this.getNextMap());

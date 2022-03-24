@@ -56,18 +56,18 @@ public class GamePanel extends JComponent implements  Runnable
         BufferedImage wall = null, platform = null, player = null, spikes = null, door = null, chest = null, timeBoost = null,
                 jumpBoost = null, speedBoost = null, enemy = null, enemyAttack = null;
 
-        try {
-            platform = ImageIO.read(GamePanel.class.getResourceAsStream("Tiles/platform2.png"));
-            wall = ImageIO.read(GamePanel.class.getResourceAsStream("Tiles/wall.png"));
-            player = ImageIO.read(GamePanel.class.getResourceAsStream("Tiles/knight3.png"));
-            spikes = ImageIO.read(GamePanel.class.getResourceAsStream("Tiles/spikes4.png"));
-            door = ImageIO.read(GamePanel.class.getResourceAsStream("Tiles/door.png"));
-            chest = ImageIO.read(GamePanel.class.getResourceAsStream("Tiles/chest.png"));
-            timeBoost = ImageIO.read(GamePanel.class.getResourceAsStream("Tiles/time_powerup.png"));
-            jumpBoost = ImageIO.read(GamePanel.class.getResourceAsStream("Tiles/jump_powerup.png"));
-            speedBoost = ImageIO.read(GamePanel.class.getResourceAsStream("Tiles/speed_powerup.png"));
-            enemy = ImageIO.read(GamePanel.class.getResourceAsStream("Tiles/wizard4.png"));
-            enemyAttack = ImageIO.read(GamePanel.class.getResourceAsStream("Tiles/enemy_attack3.png"));
+        try{
+            platform = ImageIO.read(GamePanel.class.getResourceAsStream("Tiles\\platform2.png"));
+            wall = ImageIO.read(GamePanel.class.getResourceAsStream("Tiles\\wall.png"));
+            player = ImageIO.read(GamePanel.class.getResourceAsStream("Tiles\\knight3.png"));
+            spikes = ImageIO.read(GamePanel.class.getResourceAsStream("Tiles\\spikes4.png"));
+            door = ImageIO.read(GamePanel.class.getResourceAsStream("Tiles\\door.png"));
+            chest = ImageIO.read(GamePanel.class.getResourceAsStream("Tiles\\chest.png"));
+            timeBoost = ImageIO.read(GamePanel.class.getResourceAsStream("Tiles\\time_powerup.png"));
+            jumpBoost = ImageIO.read(GamePanel.class.getResourceAsStream("Tiles\\jump_powerup.png"));
+            speedBoost = ImageIO.read(GamePanel.class.getResourceAsStream("Tiles\\speed_powerup.png"));
+            enemy = ImageIO.read(GamePanel.class.getResourceAsStream("Tiles\\wizard4.png"));
+            enemyAttack = ImageIO.read(GamePanel.class.getResourceAsStream("Tiles\\enemy_attack3.png"));
 
 
         } catch (IOException e) {
@@ -256,9 +256,9 @@ public class GamePanel extends JComponent implements  Runnable
         if(gameOver){
             BufferedImage loseImage = null, winImage = null;
             try {
-                loseImage = ImageIO.read(GamePanel.class.getResourceAsStream("Tiles/lose_image.png"));
+                loseImage = ImageIO.read(GamePanel.class.getResourceAsStream("Tiles\\lose_image.png"));
 
-                winImage = ImageIO.read(GamePanel.class.getResourceAsStream("Tiles/win_image2.png"));
+                winImage = ImageIO.read(GamePanel.class.getResourceAsStream("Tiles\\win_image2.png"));
             } catch (IOException e) {
                 e.printStackTrace();
             }
