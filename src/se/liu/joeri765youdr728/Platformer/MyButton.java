@@ -8,6 +8,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.logging.FileHandler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -32,6 +33,8 @@ public class MyButton
     protected final Map<Integer, BufferedImage> buttonImageMap = createButtonImageMap();
 
     private static final Logger LOGGER = Logger.getLogger(MyButton.class.getName() );
+
+
 
     public MyButton(int imageNumber, int x,  int y, int width, int height) {
 	this.x = x;

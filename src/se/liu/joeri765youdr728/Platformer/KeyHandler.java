@@ -10,7 +10,7 @@ import java.awt.event.KeyEvent;
  */
 public class KeyHandler extends KeyAdapter
 {
-    public boolean upPressed, downPressed, leftPressed, rightPressed, spacePressed, replayPressed, quitPressed;
+    private boolean upPressed, downPressed, leftPressed, rightPressed, spacePressed, replayPressed, quitPressed;
 
 
     @Override public void keyPressed(final KeyEvent e) {
@@ -65,6 +65,34 @@ public class KeyHandler extends KeyAdapter
 	if(code == KeyEvent.VK_ESCAPE){
 	    quitPressed = false;
 	}
+    }
+
+    public boolean isUpPressed() {
+	return upPressed;
+    }
+
+    public boolean isDownPressed() {
+	return downPressed;
+    }
+
+    public boolean isLeftPressed() {
+	return leftPressed;
+    }
+
+    public boolean isRightPressed() {
+	return rightPressed;
+    }
+
+    public boolean isSpacePressed() {
+	return spacePressed;
+    }
+
+    public boolean isReplayPressed() {
+	return replayPressed;
+    }
+
+    public boolean isQuitPressed() {
+	return quitPressed;
     }
 
     public void keyReset() {

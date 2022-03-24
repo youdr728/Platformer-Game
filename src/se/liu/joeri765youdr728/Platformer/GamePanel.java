@@ -184,32 +184,31 @@ public class GamePanel extends JComponent implements  Runnable
     }
 
     public void updateGameKeys(){
-        if (keyH.upPressed){
+        if (keyH.isUpPressed()){
             world.getPlayer().movePlayer(Direction.UP);
         }
-        if (keyH.downPressed){
+        if (keyH.isDownPressed()){
             world.getPlayer().movePlayer(Direction.DOWN);
         }
-        if (keyH.leftPressed){
+        if (keyH.isLeftPressed()){
             world.getPlayer().movePlayer(Direction.LEFT);
         }
-        if (keyH.rightPressed){
+        if (keyH.isRightPressed()){
             world.getPlayer().movePlayer(Direction.RIGHT);
         }
-        if (keyH.spacePressed && world.getPlayer().canJump()){
+        if (keyH.isSpacePressed() && world.getPlayer().canJump()){
             world.getPlayer().setIsJumping(true);
             playSoundEffect(5);
         }
 
     }
     public void updatePauseKeys(){
-        if(keyH.replayPressed){
+        if(keyH.isReplayPressed()){
             stopMusic();
             replay = true;
         }
-        if(keyH.quitPressed){
+        if(keyH.isQuitPressed()){
             stopMusic();
-            //gameThread.interrupt();
             frame.setCurrentFrame("gameFrame");
             frame.startMenu();
 
