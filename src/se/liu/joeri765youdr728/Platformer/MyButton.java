@@ -27,8 +27,6 @@ public class MyButton
 
     protected final Map<Integer, BufferedImage> buttonImageMap = createButtonImageMap();
 
-    private static BufferedImage playImage = null, highscoreImage = null, quitImage = null, backImage = null, timeImage = null, deathsImage =
-	    null, coinsImage = null;
 
     public MyButton(int imageNumber, int x,  int y, int width, int height) {
 	this.x = x;
@@ -66,7 +64,8 @@ public class MyButton
     }
 
     public static Map<Integer, BufferedImage> createButtonImageMap(){
-
+	BufferedImage playImage = null, highscoreImage = null, quitImage = null, backImage = null, timeImage = null, deathsImage =
+		null, coinsImage = null;
 	try {
 	    playImage = ImageIO.read(GamePanel.class.getResourceAsStream("Tiles/button_start.png"));
 	    highscoreImage = ImageIO.read(GamePanel.class.getResourceAsStream("Tiles/button_highscore.png"));

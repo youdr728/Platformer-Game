@@ -27,7 +27,6 @@ public class GamePanel extends JComponent implements  Runnable
 
     private final static int fontSize = 50;
 
-    private static BufferedImage wall, platform, player, spikes, door, chest, timeBoost, jumpBoost, speedBoost, enemy, enemyAttack, loseImage, winImage;
     private GameWorld world;
     protected final EnumMap<EntityType, BufferedImage> tileMap = createTileMap();
 
@@ -54,6 +53,8 @@ public class GamePanel extends JComponent implements  Runnable
     }
 
     public static EnumMap<EntityType, BufferedImage> createTileMap(){
+        BufferedImage wall = null, platform = null, player = null, spikes = null, door = null, chest = null, timeBoost = null,
+                jumpBoost = null, speedBoost = null, enemy = null, enemyAttack = null;
 
         try {
             platform = ImageIO.read(GamePanel.class.getResourceAsStream("Tiles/platform2.png"));
@@ -253,7 +254,7 @@ public class GamePanel extends JComponent implements  Runnable
 
         // Game Over
         if(gameOver){
-            //BufferedImage loseImage;
+            BufferedImage loseImage = null, winImage = null;
             try {
                 loseImage = ImageIO.read(GamePanel.class.getResourceAsStream("Tiles/lose_image.png"));
 
