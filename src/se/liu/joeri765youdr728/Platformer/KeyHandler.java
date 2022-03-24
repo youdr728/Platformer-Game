@@ -95,7 +95,7 @@ public class KeyHandler extends KeyAdapter
 	return quitPressed;
     }
 
-    public void keyReset() {
+    public void resetKeys() {
 	leftPressed = false;
 	rightPressed = false;
 	spacePressed = false;
