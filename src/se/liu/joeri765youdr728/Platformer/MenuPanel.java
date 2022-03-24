@@ -32,7 +32,7 @@ public class MenuPanel extends AbstractPanel
 	this.mainFrame = mainFrame;
 
 	try {
-	    background = ImageIO.read(MenuPanel.class.getResourceAsStream("Tiles" + SEPARATOR + "menu_background.png"));
+	    background = ImageIO.read(ClassLoader.getSystemResource("images" + SEPARATOR + "menu_background.png"));
 	} catch (IOException e) {
 	    LOGGER.log(Level.FINE, e.getMessage());
 	    e.printStackTrace();
