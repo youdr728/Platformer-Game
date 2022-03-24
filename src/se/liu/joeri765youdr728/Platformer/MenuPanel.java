@@ -41,9 +41,9 @@ public class MenuPanel extends AbstractPanel
     }
 
     public void createButtons(){
-	buttonPlay = new MyButton(1, screenWidth/2-240, 505, 480, 75);
-	buttonHighscore = new MyButton(2, screenWidth/2 - 220, 600, 440,75);
-	buttonQuit = new MyButton(3, screenWidth/2 - 120, 695, 240, 75);
+	buttonPlay = new MyButton(1, SCREEN_WIDTH / 2 - 240, 505, 480, 75);
+	buttonHighscore = new MyButton(2, SCREEN_WIDTH / 2 - 220, 600, 440, 75);
+	buttonQuit = new MyButton(3, SCREEN_WIDTH / 2 - 120, 695, 240, 75);
 
 
     }
@@ -61,18 +61,12 @@ public class MenuPanel extends AbstractPanel
     public void stopMusic(){
 	sound.stop();
     }
-    public void playSoundEffect(int i){
-	sound.setFileSound(i);
-	sound.playSound();
-
-    }
-
 
 
     @Override protected void paintComponent(final Graphics g) {
 	super.paintComponent(g);
 
-	g.drawImage(background,0,0, screenWidth, screenHeight, this);
+	g.drawImage(background, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, this);
 
 	drawButtons(g);
     }

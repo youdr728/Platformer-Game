@@ -48,6 +48,8 @@ public class GamePanel extends JComponent implements  Runnable
 
     private BufferedImage loseImage = null, winImage = null;
 
+
+
     public GamePanel(MainFrame mainFrame) {
         this.mainFrame = mainFrame;
 
@@ -112,11 +114,8 @@ public class GamePanel extends JComponent implements  Runnable
         gameThread = new Thread(this);
         gameThread.start();
     }
-    public void stopGameThread(){
-        gameThread = null;
-    }
 
-    public void checkGameOver() {
+    public void isGameOver() {
         if (world.getGameTime() == 0 || world.isGameWon()) {
             gameOver = true;
         }
@@ -137,19 +136,18 @@ public class GamePanel extends JComponent implements  Runnable
 
     @Override public void run() {
 
-        double drawInterval = 1000000000/FPS; // 1 second in nanoseconds
+        double drawInterval = 1000000000/(double)FPS; // 1 second in nanoseconds
         double nextDrawTime = System.nanoTime() + drawInterval;
 
         while(gameThread != null){
-            long currentTime = System.nanoTime();
-            checkGameOver();
+            isGameOver();
 
             if(gameOver){
                 stopMusic();
                 updatePauseKeys();
                 if(replay){
                     world = new GameWorld(this);
-                    keyH.keyReset();
+                    keyH.resetKeys();
                     gameOver = false;
                     replay = false;
 
@@ -165,13 +163,13 @@ public class GamePanel extends JComponent implements  Runnable
 
 
             try {
-                double remaningTime = nextDrawTime - System.nanoTime();
-                remaningTime /= 1000000;
-                if(remaningTime < 0){
-                    remaningTime = 0;
+                double remainingTime = nextDrawTime - System.nanoTime();
+                remainingTime /= 1000000;
+                if(remainingTime < 0){
+                    remainingTime = 0;
                 }
 
-                Thread.sleep((long) remaningTime);
+                Thread.sleep((long) remainingTime);
 
                 nextDrawTime += drawInterval;
             } catch (InterruptedException e) {
@@ -247,7 +245,7 @@ public class GamePanel extends JComponent implements  Runnable
         //Paint Enemy Attacks
         if(world.getEnemy() != null){
             for (EnemyAttack attack: world.getEnemyAttack()) {
-                g.drawImage(tileMap.get(EntityType.ENEMY_ATTACK),attack.x, attack.y, attack.width, attack.height,null);
+                g.drawImage(tileMap.get(EntityType.ENEMY_ATTACK), attack.x, attack.y, AbstractEntity.width, AbstractEntity.height, null);
             }
         }
 

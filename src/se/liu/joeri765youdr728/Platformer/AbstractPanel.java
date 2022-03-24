@@ -2,8 +2,7 @@ package se.liu.joeri765youdr728.Platformer;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.HashMap;
-import java.util.Map;
+
 /**
  * @author      Johannes Eriksson <joeri765 @ student.liu.se>
  * @author      Yousef Drgham <youdr728 @ student.liu.se>
@@ -12,19 +11,17 @@ import java.util.Map;
  */
 public abstract class AbstractPanel extends JPanel
 {
-    protected final int originalTileSize = 16;
-    protected final int scale = 3;
+    protected static final int ORIGINAL_TILE_SIZE = 16;
+    protected static final int SCALE = 3;
 
-    protected final int tileSize = originalTileSize * scale;
-    protected final int columns = 20;
-    protected final int rows = 20;
-    protected int screenHeight = rows * tileSize;
-    protected int screenWidth = columns * tileSize;
-
-    protected int typeNumber;
+    protected static final int TILE_SIZE = ORIGINAL_TILE_SIZE * SCALE;
+    protected static final int COLUMNS = 20;
+    protected static final int ROWS = 20;
+    protected static final int SCREEN_HEIGHT = ROWS * TILE_SIZE;
+    protected static final int SCREEN_WIDTH = COLUMNS * TILE_SIZE;
 
     protected AbstractPanel() {
-	this.setPreferredSize(new Dimension(screenWidth, screenHeight));
+	this.setPreferredSize(new Dimension(SCREEN_WIDTH, SCREEN_HEIGHT));
 	this.setDoubleBuffered(true);
 	this.repaint();
 	this.setFocusable(true);
@@ -34,8 +31,8 @@ public abstract class AbstractPanel extends JPanel
     }
 
 
-    public void mouseClicked(int x, int y){}
+    public abstract void mouseClicked(int x, int y);
 
-    public void mouseMoved(int x, int y){}
+    public abstract void mouseMoved(int x, int y);
 
 }

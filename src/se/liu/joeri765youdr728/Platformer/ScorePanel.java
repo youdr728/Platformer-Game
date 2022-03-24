@@ -26,8 +26,6 @@ public class ScorePanel extends AbstractPanel
 
     private HighScoreList highScoreList = null;
 
-    private String text = null;
-
     private static final int FONT_SIZE = 35, SCORES_WIDTH = 1, SCORES_HEIGHT = 10, OFFSET = 35, START_X = 130, START_Y = 275;
     private String[][] scores;
 
@@ -40,7 +38,7 @@ public class ScorePanel extends AbstractPanel
         createButtons();
 
         try {
-            background = ImageIO.read(MenuPanel.class.getResourceAsStream("Tiles" + File.separator + "HighScore_list.png"));
+            background = ImageIO.read(ScorePanel.class.getResourceAsStream("Tiles" + File.separator + "HighScore_list.png"));
         }
         catch (IOException e) {
             LOGGER.log(Level.FINE, e.getMessage());
@@ -56,17 +54,13 @@ public class ScorePanel extends AbstractPanel
     public void stopMusic(){
         sound.stop();
     }
-    public void playSoundEffect(int i){
-        sound.setFileSound(i);
-        sound.playSound();
 
-    }
 
     public void createButtons(){
-        buttonBack = new MyButton(4, screenWidth - 210, screenHeight/2 + 130, 100, 50);
-        sortScoreTime = new MyButton(5, screenWidth/2 - 170, 135, 150, 65);
-        sortScoreDeaths = new MyButton(6, screenWidth/2 + 10, 135, 150, 65);
-        sortScoreCoins = new MyButton(7, screenWidth/2 + 180, 135, 150, 65);
+        buttonBack = new MyButton(4, SCREEN_WIDTH - 210, SCREEN_HEIGHT / 2 + 130, 100, 50);
+        sortScoreTime = new MyButton(5, SCREEN_WIDTH / 2 - 170, 135, 150, 65);
+        sortScoreDeaths = new MyButton(6, SCREEN_WIDTH / 2 + 10, 135, 150, 65);
+        sortScoreCoins = new MyButton(7, SCREEN_WIDTH / 2 + 180, 135, 150, 65);
     }
 
     public void drawButtons(Graphics g){
@@ -140,7 +134,7 @@ public class ScorePanel extends AbstractPanel
         super.paintComponent(g);
 
 
-        g.drawImage(background,0,0, screenWidth, screenHeight, this);
+        g.drawImage(background, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, this);
 
         g.setFont(new Font("Comic Sans MS", Font.PLAIN, FONT_SIZE));
         for(int columns = 0; columns < SCORES_WIDTH; columns++) {
