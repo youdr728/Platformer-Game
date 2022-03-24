@@ -26,11 +26,13 @@ public class MenuPanel extends AbstractPanel
 
     private Sound sound = new Sound();
 
+    private final static String SEPARATOR = File.separator;
+
     public MenuPanel(MainFrame mainFrame) {
 	this.mainFrame = mainFrame;
 
 	try {
-	    background = ImageIO.read(MenuPanel.class.getResourceAsStream("Tiles" + File.separator + "menu_background.png"));
+	    background = ImageIO.read(MenuPanel.class.getResourceAsStream("Tiles" + SEPARATOR + "menu_background.png"));
 	} catch (IOException e) {
 	    LOGGER.log(Level.FINE, e.getMessage());
 	    e.printStackTrace();

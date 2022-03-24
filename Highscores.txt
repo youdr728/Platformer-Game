@@ -1,1 +1,1 @@
-{"highscoreList":[{"time":275,"coins":6,"deaths":18},{"time":6,"coins":0,"deaths":0},{"time":107,"coins":3,"deaths":3}]}
+{"highscoreList":[{"time":275,"coins":6,"deaths":18},{"time":6,"coins":0,"deaths":0},{"time":107,"coins":3,"deaths":3},{"time":1,"coins":0,"deaths":0},{"time":2,"coins":0,"deaths":0},{"time":0,"coins":0,"deaths":0}]}
