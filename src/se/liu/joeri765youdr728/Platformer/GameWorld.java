@@ -7,8 +7,10 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.FileHandler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.logging.SimpleFormatter;
 
 /**
  * @author      Johannes Eriksson <joeri765 @ student.liu.se>
@@ -18,7 +20,7 @@ import java.util.logging.Logger;
  */
 public class GameWorld
 {
-    private static final Logger LOGGER = Logger.getLogger(GameWorld.class.getName() );
+
 
     private static final int ROW = 20;
     private static final int COL = 20;
@@ -47,6 +49,17 @@ public class GameWorld
     private Enemy enemy = null;
 
     private final static String SEPARATOR = File.separator;
+    private static final Logger LOGGER = Logger.getLogger(GameWorld.class.getName() );
+    private static SimpleFormatter formatter = new SimpleFormatter();
+    private static FileHandler fh;
+
+    static {
+	try {
+	    fh = new FileHandler("LogFile.log", 0, 1, true);
+	} catch (IOException e) {
+	    e.printStackTrace();
+	}
+    }
 
     public GameWorld(GamePanel panel) {
 	this.mapTileNum = new int[ROW][COL];
@@ -62,6 +75,9 @@ public class GameWorld
 
     public void loadMapFromFile(String mapFile){
 	try {
+	    LOGGER.addHandler(fh);
+	    fh.setFormatter(formatter);
+
 	    InputStream is = getClass().getResourceAsStream(mapFile);
 	    BufferedReader br = new BufferedReader(new InputStreamReader(is));
 

@@ -8,8 +8,10 @@ import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.logging.FileHandler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.logging.SimpleFormatter;
 
 /**
  * @author      Johannes Eriksson <joeri765 @ student.liu.se>
@@ -31,9 +33,21 @@ public class MyButton
 
     protected final Map<Integer, BufferedImage> buttonImageMap = createButtonImageMap();
 
-    private static final Logger LOGGER = Logger.getLogger(MyButton.class.getName() );
+
 
     private final static String SEPARATOR = File.separator;
+
+    private static final Logger LOGGER = Logger.getLogger(MyButton.class.getName() );
+    private static SimpleFormatter formatter = new SimpleFormatter();
+    private static FileHandler fh;
+
+    static {
+	try {
+	    fh = new FileHandler("LogFile.log", 0, 1, true);
+	} catch (IOException e) {
+	    e.printStackTrace();
+	}
+    }
 
     public MyButton(int imageNumber, int x,  int y, int width, int height) {
 	this.x = x;
@@ -74,7 +88,10 @@ public class MyButton
 	BufferedImage playImage = null, highscoreImage = null, quitImage = null, backImage = null, timeImage = null, deathsImage =
 		null, coinsImage = null;
 	try {
-	    playImage = ImageIO.read(ClassLoader.getSystemResource("images" + SEPARATOR + "button_start.png"));
+	    LOGGER.addHandler(fh);
+	    fh.setFormatter(formatter);
+
+	    playImage = ImageIO.read(ClassLoader.getSystemResource("images" + SEPARATOR + "button_star.png"));
 	    highscoreImage = ImageIO.read(ClassLoader.getSystemResource("images" + SEPARATOR + "button_highscore.png"));
 	    quitImage = ImageIO.read(ClassLoader.getSystemResource("images" + SEPARATOR + "button_close.png"));
 	    backImage = ImageIO.read(ClassLoader.getSystemResource("images" + SEPARATOR + "button_back.png"));
@@ -82,8 +99,8 @@ public class MyButton
 	    deathsImage = ImageIO.read(ClassLoader.getSystemResource("images" + SEPARATOR + "button_deaths.png"));
 	    coinsImage = ImageIO.read(ClassLoader.getSystemResource("images" + SEPARATOR + "button_coins.png"));
 
-	} catch (IOException e) {
-	    LOGGER.log(Level.FINE, e.getMessage());
+	} catch (IOException | IllegalArgumentException e) {
+	    LOGGER.info(e.getMessage());
 	    e.printStackTrace();
 	}
 

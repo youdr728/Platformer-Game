@@ -5,8 +5,10 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.logging.FileHandler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.logging.SimpleFormatter;
 
 /**
  * @author      Johannes Eriksson <joeri765 @ student.liu.se>
@@ -16,7 +18,7 @@ import java.util.logging.Logger;
  */
 public class ScorePanel extends AbstractPanel
 {
-    private static final Logger LOGGER = Logger.getLogger(ScorePanel.class.getName() );
+
 
     private BufferedImage background = null;
 
@@ -33,6 +35,18 @@ public class ScorePanel extends AbstractPanel
 
     private final static String SEPARATOR = File.separator;
 
+    private static final Logger LOGGER = Logger.getLogger(ScorePanel.class.getName() );
+    private static SimpleFormatter formatter = new SimpleFormatter();
+    private static FileHandler fh;
+
+    static {
+        try {
+            fh = new FileHandler("LogFile.log", 0, 1, true);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     public ScorePanel(MainFrame mainFrame) {
         this.mainFrame = mainFrame;
         scores = new String[SCORES_HEIGHT][SCORES_WIDTH];
@@ -40,6 +54,9 @@ public class ScorePanel extends AbstractPanel
         createButtons();
 
         try {
+            LOGGER.addHandler(fh);
+            fh.setFormatter(formatter);
+
             background = ImageIO.read(ClassLoader.getSystemResource("images" + SEPARATOR + "HighScore_list.png"));
         }
         catch (IOException e) {

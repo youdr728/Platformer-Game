@@ -7,8 +7,10 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.EnumMap;
+import java.util.logging.FileHandler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.logging.SimpleFormatter;
 
 /**
  * @author      Johannes Eriksson <joeri765 @ student.liu.se>
@@ -31,6 +33,16 @@ public class GamePanel extends JComponent implements  Runnable
     private final static int fontSize = 50;
 
     private static final Logger LOGGER = Logger.getLogger(GamePanel.class.getName() );
+    private static SimpleFormatter formatter = new SimpleFormatter();
+    private static FileHandler fh;
+
+    static {
+        try {
+            fh = new FileHandler("LogFile.log", 0, 1, true);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
     private GameWorld world;
     protected final EnumMap<EntityType, BufferedImage> tileMap = createTileMap();
@@ -50,6 +62,8 @@ public class GamePanel extends JComponent implements  Runnable
 
     private final static String SEPARATOR = File.separator;
 
+
+
     public GamePanel(MainFrame mainFrame) {
         this.mainFrame = mainFrame;
 
@@ -61,9 +75,12 @@ public class GamePanel extends JComponent implements  Runnable
         this.setFocusable(true);
 
         try {
-            loseImage = ImageIO.read(ClassLoader.getSystemResource("images" + SEPARATOR + "lose_image.png"));
+            LOGGER.addHandler(fh);
+            fh.setFormatter(formatter);
 
+            loseImage = ImageIO.read(ClassLoader.getSystemResource("images" + SEPARATOR + "lose_image.png"));
             winImage = ImageIO.read(ClassLoader.getSystemResource("images" + SEPARATOR + "win_image2.png"));
+
         } catch (IOException e) {
             LOGGER.log(Level.FINE, e.getMessage());
             e.printStackTrace();
@@ -75,6 +92,9 @@ public class GamePanel extends JComponent implements  Runnable
                 jumpBoost = null, speedBoost = null, enemy = null, enemyAttack = null;
 
         try{
+            LOGGER.addHandler(fh);
+            fh.setFormatter(formatter);
+
             platform = ImageIO.read(ClassLoader.getSystemResource("images" + SEPARATOR + "platform2.png"));
             wall = ImageIO.read(ClassLoader.getSystemResource("images" + SEPARATOR + "wall.png"));
             player = ImageIO.read(ClassLoader.getSystemResource("images" + SEPARATOR + "knight3.png"));
@@ -163,6 +183,9 @@ public class GamePanel extends JComponent implements  Runnable
 
 
             try {
+                LOGGER.addHandler(fh);
+                fh.setFormatter(formatter);
+
                 double remainingTime = nextDrawTime - System.nanoTime();
                 remainingTime /= 1000000;
                 if(remainingTime < 0){
