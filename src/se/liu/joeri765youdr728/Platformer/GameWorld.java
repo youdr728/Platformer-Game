@@ -27,7 +27,7 @@ public class GameWorld
     private static final int TILE_SIZE = 48;
 
     private int[][] mapTileNum;
-    private List<Entity> entityList;
+    private List<Entity> entities;
     private Player player = null;
     private int mapNumber = 1;
 
@@ -50,7 +50,7 @@ public class GameWorld
 
     public GameWorld(GamePanel panel) {
 	this.mapTileNum = new int[ROW][COL];
-	this.entityList = new ArrayList<>();
+	this.entities = new ArrayList<>();
 	this.gameTime = 120;
 	this.panel = panel;
 	loadMapFromFile("Maps" + SEPARATOR + "map0" + mapNumber);
@@ -84,32 +84,32 @@ public class GameWorld
 		    int n = mapTileNum[h][w];
 		    switch (n) {
 			case 1:
-			    entityList.add(new Platform(w * TILE_SIZE, h * TILE_SIZE, n, 0, 0 , TILE_SIZE, TILE_SIZE));
+			    entities.add(new Platform(w * TILE_SIZE, h * TILE_SIZE, n, 0, 0 , TILE_SIZE, TILE_SIZE));
 			    break;
 			case 2:
 			    player = new Player(w * TILE_SIZE, h * TILE_SIZE, n, 9, 3, 30, 45, this);
 			    break;
 			case 3:
-			    entityList.add(new Obstacle(w * TILE_SIZE, h * TILE_SIZE, n, 3, 15, 42, 33));
+			    entities.add(new Obstacle(w * TILE_SIZE, h * TILE_SIZE, n, 3, 15, 42, 33));
 			    break;
 			case 4:
-			    entityList.add(new Goal(w * TILE_SIZE, h * TILE_SIZE, n, 24, 36, 6, 12, this));
+			    entities.add(new Goal(w * TILE_SIZE, h * TILE_SIZE, n, 24, 36, 6, 12, this));
 			    break;
 			case 5:
-			    entityList.add(new Coin(w * TILE_SIZE, h * TILE_SIZE, n, 3, 24, 42, 24));
+			    entities.add(new Coin(w * TILE_SIZE, h * TILE_SIZE, n, 3, 24, 42, 24));
 			    break;
 			case 6:
-			    entityList.add(new TimeBoost(w * TILE_SIZE, h * TILE_SIZE, n, 9, 12, 30, 30));
+			    entities.add(new TimeBoost(w * TILE_SIZE, h * TILE_SIZE, n, 9, 12, 30, 30));
 			    break;
 			case 7:
-			    entityList.add(new TimeBoost(w * TILE_SIZE, h * TILE_SIZE, n, 12, 18, 24, 24));
+			    entities.add(new TimeBoost(w * TILE_SIZE, h * TILE_SIZE, n, 12, 18, 24, 24));
 			    break;
 			case 8:
-			    entityList.add(new JumpBoost(w * TILE_SIZE, h * TILE_SIZE, n, 12, 18, 24, 24));
+			    entities.add(new JumpBoost(w * TILE_SIZE, h * TILE_SIZE, n, 12, 18, 24, 24));
 			    break;
 			case 9:
 			    enemy = new Enemy(w * TILE_SIZE, h * TILE_SIZE, n, 0, 0, 48, 48, this);
-			    entityList.add(enemy);
+			    entities.add(enemy);
 			    break;
 
 
@@ -189,7 +189,7 @@ public class GameWorld
 		break;
 
 	    case COINS:
-		entityList.remove(entity);
+		entities.remove(entity);
 		panel.playSoundEffect(2);
 		coinCounter += 1;
 		break;
@@ -206,7 +206,7 @@ public class GameWorld
 
 		if (mapNumber != 5) {
 		    this.mapTileNum = new int[ROW][COL];
-		    this.entityList = new ArrayList<>();
+		    this.entities = new ArrayList<>();
 		    loadMapFromFile(this.getNextMap());
 		    gameTime = 120;
 		    this.createEntityList();
@@ -223,13 +223,13 @@ public class GameWorld
 		break;
 
 	    case POWER_UP_TIME:
-		entityList.remove(entity);
+		entities.remove(entity);
 		gameTime += TimeBoost.getTime(this);
 		panel.playSoundEffect(4);
 		break;
 
 	    case POWER_UP_JUMP:
-		entityList.remove(entity);
+		entities.remove(entity);
 		player.setJumpBoostOn();
 		player.setSpeedBoostOff();
 		boostTimeCounter = 0;
@@ -237,7 +237,7 @@ public class GameWorld
 		break;
 
 	    case POWER_UP_SPEED:
-		entityList.remove(entity);
+		entities.remove(entity);
 		player.setSpeedBoostOn();
 		player.setJumpBoostOff();
 		boostTimeCounter = 0;
@@ -269,8 +269,8 @@ public class GameWorld
 	return enemy.getEnemyAttacks();
     }
 
-    public List<Entity> getEntityList() {
-	return entityList;
+    public List<Entity> getEntities() {
+	return entities;
     }
 
     public Player getPlayer() {
