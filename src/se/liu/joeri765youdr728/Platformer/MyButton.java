@@ -91,7 +91,7 @@ public class MyButton
 	    LOGGER.addHandler(fh);
 	    fh.setFormatter(formatter);
 
-	    playImage = ImageIO.read(ClassLoader.getSystemResource("images" + SEPARATOR + "button_star.png"));
+	    playImage = ImageIO.read(ClassLoader.getSystemResource("images" + SEPARATOR + "button_start.png"));
 	    highscoreImage = ImageIO.read(ClassLoader.getSystemResource("images" + SEPARATOR + "button_highscore.png"));
 	    quitImage = ImageIO.read(ClassLoader.getSystemResource("images" + SEPARATOR + "button_close.png"));
 	    backImage = ImageIO.read(ClassLoader.getSystemResource("images" + SEPARATOR + "button_back.png"));
