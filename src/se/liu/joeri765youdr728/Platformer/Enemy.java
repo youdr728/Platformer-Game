@@ -12,26 +12,28 @@ import java.util.Random;
 public class Enemy extends AbstractEntity
 {
     private GameWorld world;
-    private List<EnemyAttack> enemyAttackList;
+    private List<EnemyAttack> enemyAttacks;
 
     private int attackCounter = 0;
     private int randomNumber;
-    private final int SLOWEST_ATTACK = 50, FASTEST_ATTACK = 30;
+
+    private static final Random RANDOM = new Random();
 
     public Enemy(final int x, final int y, final int typeNumber, final int collisionX, final int collisionY, final int collisionWidth,
 		 final int collisionHeight, final GameWorld world) {
 	super(x, y, typeNumber, collisionX, collisionY, collisionWidth, collisionHeight);
 	this.world = world;
-	this.enemyAttackList = new ArrayList<>();
+	this.enemyAttacks = new ArrayList<>();
     }
 
     public void shootAttack(){
-
 	if(attackCounter == randomNumber){
-	    randomNumber = getRandomNumberUsingNextInt(FASTEST_ATTACK, SLOWEST_ATTACK);
+	    int slowestAttack = 50;
+	    int fastestAttack = 30;
+	    randomNumber = getRandomNumberUsingNextInt(fastestAttack, slowestAttack);
 	    EnemyAttack attack = new EnemyAttack(x - 48, y, 10, 12, 12, 27, 27);
 	    world.playSound(6);
-	    enemyAttackList.add(attack);
+	    enemyAttacks.add(attack);
 	    attackCounter = 0;
 	}
 	else {
@@ -40,21 +42,20 @@ public class Enemy extends AbstractEntity
 
     }
     public int getRandomNumberUsingNextInt(int min, int max) {
-	Random random = new Random();
-	return random.nextInt(max - min) + min;
+	return RANDOM.nextInt(max - min) + min;
     }
 
     public void moveAttack(){
-	for (int i = 0; i < enemyAttackList.size(); i++) {
-	    enemyAttackList.get(i).x -= 6;
-	    if( enemyAttackList.get(i).x < 0){
-		enemyAttackList.remove(enemyAttackList.get(i));
+	for (int i = 0; i < enemyAttacks.size(); i++) {
+	    enemyAttacks.get(i).x -= 6;
+	    if( enemyAttacks.get(i).x < 0){
+		enemyAttacks.remove(enemyAttacks.get(i));
 		break;
 	    }
 	}
     }
 
     public List<EnemyAttack> getEnemyAttackList() {
-	return enemyAttackList;
+	return enemyAttacks;
     }
 }

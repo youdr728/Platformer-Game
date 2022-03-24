@@ -96,7 +96,7 @@ public class GameWorld
 			    entityList.add(new Goal(w * TILE_SIZE, h * TILE_SIZE, n, 24, 36, 6, 12, this));
 			    break;
 			case 5:
-			    entityList.add(new Coin(w * TILE_SIZE, h * TILE_SIZE, n, 3, 24, 42, 24, this));
+			    entityList.add(new Coin(w * TILE_SIZE, h * TILE_SIZE, n, 3, 24, 42, 24));
 			    break;
 			case 6:
 			    entityList.add(new TimeBoost(w * TILE_SIZE, h * TILE_SIZE, n, 9, 12, 30, 30));

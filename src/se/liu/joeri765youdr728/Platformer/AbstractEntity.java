@@ -15,11 +15,11 @@ public abstract class AbstractEntity implements Entity
     protected int y;
     protected int typeNumber;
 
-    protected final Map<Integer, EntityType> entityTypeMap = creatEntityTypeMap();
+    protected final Map<Integer, EntityType> entityTypeMap = createEntityTypeMap();
     protected int collisionX, collisionY, collisionWidth, collisionHeight;
 
-    protected int height = 48;
-    protected int width = 48;
+    protected final int height = 48;
+    protected final int width = 48;
 
     protected AbstractEntity(final int x, final int y, final int typeNumber, int collisionX, int collisionY, int collisionWidth,
 			     int collisionHeight) {
@@ -32,7 +32,7 @@ public abstract class AbstractEntity implements Entity
 	this.collisionHeight = collisionHeight;
     }
 
-    public static Map<Integer, EntityType> creatEntityTypeMap(){
+    public static Map<Integer, EntityType> createEntityTypeMap(){
 	Map<Integer, EntityType> entityTypeMap = new HashMap<>();
 	entityTypeMap.put(1, EntityType.PLATFORM);
 	entityTypeMap.put(2, EntityType.PLAYER);
