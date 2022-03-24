@@ -42,9 +42,11 @@ public class GamePanel extends JComponent implements  Runnable
     private Sound sound = new Sound();
 
     private KeyHandler keyH = new KeyHandler();
-    private Thread gameThread;
+    private Thread gameThread = null;
 
     private Frame frame;
+
+    private BufferedImage loseImage = null, winImage = null;
 
     public GamePanel(Frame frame) {
         this.frame = frame;
@@ -55,6 +57,15 @@ public class GamePanel extends JComponent implements  Runnable
         this.world = new GameWorld(this);
         this.addKeyListener(keyH);
         this.setFocusable(true);
+
+        try {
+            loseImage = ImageIO.read(GamePanel.class.getResourceAsStream("Tiles" + File.separator +"lose_image.png"));
+
+            winImage = ImageIO.read(GamePanel.class.getResourceAsStream("Tiles" + File.separator +"win_image2.png"));
+        } catch (IOException e) {
+            LOGGER.log(Level.FINE, e.getMessage());
+            e.printStackTrace();
+        }
     }
 
     public static EnumMap<EntityType, BufferedImage> createTileMap(){
@@ -185,7 +196,7 @@ public class GamePanel extends JComponent implements  Runnable
         if (keyH.rightPressed){
             world.getPlayer().movePlayer(Direction.RIGHT);
         }
-        if (keyH.spacePressed && world.getPlayer().CanJump()){
+        if (keyH.spacePressed && world.getPlayer().canJump()){
             world.getPlayer().setIsJumping(true);
             playSoundEffect(5);
         }
@@ -260,15 +271,7 @@ public class GamePanel extends JComponent implements  Runnable
 
         // Game Over
         if(gameOver){
-            BufferedImage loseImage = null, winImage = null;
-            try {
-                loseImage = ImageIO.read(GamePanel.class.getResourceAsStream("Tiles" + File.separator +"lose_image.png"));
 
-                winImage = ImageIO.read(GamePanel.class.getResourceAsStream("Tiles" + File.separator +"win_image2.png"));
-            } catch (IOException e) {
-                LOGGER.log(Level.FINE, e.getMessage());
-                e.printStackTrace();
-            }
             if(world.isGameWon()){
                 String time = Integer.toString(world.getScoreTime());
                 String deaths = Integer.toString(world.getDeathCounter());

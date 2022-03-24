@@ -39,6 +39,14 @@ public class ScorePanel extends AbstractPanel
         playMusic(3);
         createButtons();
 
+        try {
+            background = ImageIO.read(MenuPanel.class.getResourceAsStream("Tiles" + File.separator + "HighScore_list.png"));
+        }
+        catch (IOException e) {
+            LOGGER.log(Level.FINE, e.getMessage());
+            e.printStackTrace();
+        }
+
     }
 
     public void playMusic(int i){
@@ -131,13 +139,6 @@ public class ScorePanel extends AbstractPanel
     @Override protected void paintComponent(final Graphics g) {
         super.paintComponent(g);
 
-        try {
-            background = ImageIO.read(MenuPanel.class.getResourceAsStream("Tiles" + File.separator + "HighScore_list.png"));
-        }
-        catch (IOException e) {
-            LOGGER.log(Level.FINE, e.getMessage());
-            e.printStackTrace();
-        }
 
         g.drawImage(background,0,0, screenWidth, screenHeight, this);
 

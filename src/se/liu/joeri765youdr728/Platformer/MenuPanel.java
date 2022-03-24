@@ -29,6 +29,13 @@ public class MenuPanel extends AbstractPanel
     public MenuPanel(Frame frame) {
 	this.frame = frame;
 
+	try {
+	    background = ImageIO.read(MenuPanel.class.getResourceAsStream("Tiles" + File.separator + "menu_background.png"));
+	} catch (IOException e) {
+	    LOGGER.log(Level.FINE, e.getMessage());
+	    e.printStackTrace();
+	}
+
 	playMusic(2);
 	createButtons();
     }
@@ -64,12 +71,7 @@ public class MenuPanel extends AbstractPanel
 
     @Override protected void paintComponent(final Graphics g) {
 	super.paintComponent(g);
-	try {
-	    background = ImageIO.read(MenuPanel.class.getResourceAsStream("Tiles" + File.separator + "menu_background.png"));
-	} catch (IOException e) {
-	    LOGGER.log(Level.FINE, e.getMessage());
-	    e.printStackTrace();
-	}
+
 	g.drawImage(background,0,0, screenWidth, screenHeight, this);
 
 	drawButtons(g);

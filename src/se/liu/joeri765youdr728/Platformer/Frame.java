@@ -13,9 +13,9 @@ public class Frame
     private JFrame gameFrame = new JFrame();
     private JFrame scoreFrame = new JFrame();
 
-    private MenuPanel menuPanel;
-    private GamePanel gamePanel;
-    private ScorePanel scorePanel;
+    private MenuPanel menuPanel = null;
+    private GamePanel gamePanel = null;
+    private ScorePanel scorePanel = null;
 
     private String gameFrameString = "gameFrame";
     private String highscoreFrameString = "highscoreFrame";
