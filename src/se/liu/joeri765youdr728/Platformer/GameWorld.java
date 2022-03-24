@@ -1,11 +1,15 @@
 package se.liu.joeri765youdr728.Platformer;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  * @author      Johannes Eriksson <joeri765 @ student.liu.se>
  * @author      Yousef Drgham <youdr728 @ student.liu.se>
@@ -14,6 +18,8 @@ import java.util.List;
  */
 public class GameWorld
 {
+    private static final Logger LOGGER = Logger.getLogger(GameWorld.class.getName() );
+
     private static final int ROW = 20;
     private static final int COL = 20;
     private static final int WORLD_WIDTH = COL * 48;
@@ -47,7 +53,7 @@ public class GameWorld
 	this.entityList = new ArrayList<>();
 	this.gameTime = 120;
 	this.panel = panel;
-	loadMapFromFile("Maps\\map0" + mapNumber);
+	loadMapFromFile("Maps" + File.separator + "map0" + mapNumber);
 	createEntityList();
 	panel.playMusic(0);
     }
@@ -67,6 +73,7 @@ public class GameWorld
 		}
 	    }
 	}catch(IOException e){
+	    LOGGER.log(Level.FINE, e.getMessage());
 	    e.printStackTrace();
 	}
     }
@@ -166,7 +173,7 @@ public class GameWorld
 
     public String getNextMap(){
 	mapNumber += 1;
-	String nextMap = "Maps\\map0" + mapNumber;
+	String nextMap = "Maps" + File.separator +"map0" + mapNumber;
 	return nextMap;
     }
 

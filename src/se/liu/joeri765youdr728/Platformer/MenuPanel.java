@@ -3,7 +3,11 @@ package se.liu.joeri765youdr728.Platformer;
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  * @author      Johannes Eriksson <joeri765 @ student.liu.se>
  * @author      Yousef Drgham <youdr728 @ student.liu.se>
@@ -12,6 +16,8 @@ import java.io.IOException;
  */
 public class MenuPanel extends AbstractPanel
 {
+    private static final Logger LOGGER = Logger.getLogger(MenuPanel.class.getName() );
+
     private BufferedImage background = null;
 
     private MyButton buttonPlay = null, buttonHighscore = null, buttonQuit = null;
@@ -59,8 +65,9 @@ public class MenuPanel extends AbstractPanel
     @Override protected void paintComponent(final Graphics g) {
 	super.paintComponent(g);
 	try {
-	    background = ImageIO.read(MenuPanel.class.getResourceAsStream("Tiles\\menu_background.png"));
+	    background = ImageIO.read(MenuPanel.class.getResourceAsStream("Tiles" + File.separator + "menu_background.png"));
 	} catch (IOException e) {
+	    LOGGER.log(Level.FINE, e.getMessage());
 	    e.printStackTrace();
 	}
 	g.drawImage(background,0,0, screenWidth, screenHeight, this);

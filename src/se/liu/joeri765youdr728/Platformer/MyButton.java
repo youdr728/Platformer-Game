@@ -4,9 +4,13 @@ package se.liu.joeri765youdr728.Platformer;
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  * @author      Johannes Eriksson <joeri765 @ student.liu.se>
  * @author      Yousef Drgham <youdr728 @ student.liu.se>
@@ -27,6 +31,7 @@ public class MyButton
 
     protected final Map<Integer, BufferedImage> buttonImageMap = createButtonImageMap();
 
+    private static final Logger LOGGER = Logger.getLogger(MyButton.class.getName() );
 
     public MyButton(int imageNumber, int x,  int y, int width, int height) {
 	this.x = x;
@@ -67,15 +72,16 @@ public class MyButton
 	BufferedImage playImage = null, highscoreImage = null, quitImage = null, backImage = null, timeImage = null, deathsImage =
 		null, coinsImage = null;
 	try {
-	    playImage = ImageIO.read(GamePanel.class.getResourceAsStream("Tiles\\button_start.png"));
-	    highscoreImage = ImageIO.read(GamePanel.class.getResourceAsStream("Tiles\\button_highscore.png"));
-	    quitImage = ImageIO.read(GamePanel.class.getResourceAsStream("Tiles\\button_close.png"));
-	    backImage = ImageIO.read(GamePanel.class.getResourceAsStream("Tiles\\button_back.png"));
-	    timeImage = ImageIO.read(GamePanel.class.getResourceAsStream("Tiles\\button_time.png"));
-	    deathsImage = ImageIO.read(GamePanel.class.getResourceAsStream("Tiles\\button_deaths.png"));
-	    coinsImage = ImageIO.read(GamePanel.class.getResourceAsStream("Tiles\\button_coins.png"));
+	    playImage = ImageIO.read(GamePanel.class.getResourceAsStream("Tiles" + File.separator + "button_start.png"));
+	    highscoreImage = ImageIO.read(GamePanel.class.getResourceAsStream("Tiles" + File.separator +"button_highscore.png"));
+	    quitImage = ImageIO.read(GamePanel.class.getResourceAsStream("Tiles" + File.separator +"button_close.png"));
+	    backImage = ImageIO.read(GamePanel.class.getResourceAsStream("Tiles" + File.separator +"button_back.png"));
+	    timeImage = ImageIO.read(GamePanel.class.getResourceAsStream("Tiles" + File.separator +"button_time.png"));
+	    deathsImage = ImageIO.read(GamePanel.class.getResourceAsStream("Tiles" + File.separator +"button_deaths.png"));
+	    coinsImage = ImageIO.read(GamePanel.class.getResourceAsStream("Tiles" + File.separator +"button_coins.png"));
 
 	} catch (IOException e) {
+	    LOGGER.log(Level.FINE, e.getMessage());
 	    e.printStackTrace();
 	}
 

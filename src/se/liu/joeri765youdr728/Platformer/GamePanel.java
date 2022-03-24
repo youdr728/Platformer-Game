@@ -4,8 +4,11 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 import java.util.EnumMap;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * @author      Johannes Eriksson <joeri765 @ student.liu.se>
@@ -26,6 +29,8 @@ public class GamePanel extends JComponent implements  Runnable
     private final int screenWidth = columns * tileSize;
 
     private final static int fontSize = 50;
+
+    private static final Logger LOGGER = Logger.getLogger(GamePanel.class.getName() );
 
     private GameWorld world;
     protected final EnumMap<EntityType, BufferedImage> tileMap = createTileMap();
@@ -57,20 +62,21 @@ public class GamePanel extends JComponent implements  Runnable
                 jumpBoost = null, speedBoost = null, enemy = null, enemyAttack = null;
 
         try{
-            platform = ImageIO.read(GamePanel.class.getResourceAsStream("Tiles\\platform2.png"));
-            wall = ImageIO.read(GamePanel.class.getResourceAsStream("Tiles\\wall.png"));
-            player = ImageIO.read(GamePanel.class.getResourceAsStream("Tiles\\knight3.png"));
-            spikes = ImageIO.read(GamePanel.class.getResourceAsStream("Tiles\\spikes4.png"));
-            door = ImageIO.read(GamePanel.class.getResourceAsStream("Tiles\\door.png"));
-            chest = ImageIO.read(GamePanel.class.getResourceAsStream("Tiles\\chest.png"));
-            timeBoost = ImageIO.read(GamePanel.class.getResourceAsStream("Tiles\\time_powerup.png"));
-            jumpBoost = ImageIO.read(GamePanel.class.getResourceAsStream("Tiles\\jump_powerup.png"));
-            speedBoost = ImageIO.read(GamePanel.class.getResourceAsStream("Tiles\\speed_powerup.png"));
-            enemy = ImageIO.read(GamePanel.class.getResourceAsStream("Tiles\\wizard4.png"));
-            enemyAttack = ImageIO.read(GamePanel.class.getResourceAsStream("Tiles\\enemy_attack3.png"));
+            platform = ImageIO.read(GamePanel.class.getResourceAsStream("Tiles" + File.separator +"platform2.png"));
+            wall = ImageIO.read(GamePanel.class.getResourceAsStream("Tiles" + File.separator +"wall.png"));
+            player = ImageIO.read(GamePanel.class.getResourceAsStream("Tiles" + File.separator +"knight3.png"));
+            spikes = ImageIO.read(GamePanel.class.getResourceAsStream("Tiles" + File.separator +"spikes4.png"));
+            door = ImageIO.read(GamePanel.class.getResourceAsStream("Tiles" + File.separator +"door.png"));
+            chest = ImageIO.read(GamePanel.class.getResourceAsStream("Tiles" + File.separator +"chest.png"));
+            timeBoost = ImageIO.read(GamePanel.class.getResourceAsStream("Tiles" + File.separator +"time_powerup.png"));
+            jumpBoost = ImageIO.read(GamePanel.class.getResourceAsStream("Tiles" + File.separator +"jump_powerup.png"));
+            speedBoost = ImageIO.read(GamePanel.class.getResourceAsStream("Tiles" + File.separator +"speed_powerup.png"));
+            enemy = ImageIO.read(GamePanel.class.getResourceAsStream("Tiles" + File.separator +"wizard4.png"));
+            enemyAttack = ImageIO.read(GamePanel.class.getResourceAsStream("Tiles" + File.separator +"enemy_attack3.png"));
 
 
         } catch (IOException e) {
+            LOGGER.log(Level.FINE, e.getMessage());
             e.printStackTrace();
         }
 
@@ -256,10 +262,11 @@ public class GamePanel extends JComponent implements  Runnable
         if(gameOver){
             BufferedImage loseImage = null, winImage = null;
             try {
-                loseImage = ImageIO.read(GamePanel.class.getResourceAsStream("Tiles\\lose_image.png"));
+                loseImage = ImageIO.read(GamePanel.class.getResourceAsStream("Tiles" + File.separator +"lose_image.png"));
 
-                winImage = ImageIO.read(GamePanel.class.getResourceAsStream("Tiles\\win_image2.png"));
+                winImage = ImageIO.read(GamePanel.class.getResourceAsStream("Tiles" + File.separator +"win_image2.png"));
             } catch (IOException e) {
+                LOGGER.log(Level.FINE, e.getMessage());
                 e.printStackTrace();
             }
             if(world.isGameWon()){

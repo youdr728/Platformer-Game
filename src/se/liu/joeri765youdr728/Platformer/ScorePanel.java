@@ -3,7 +3,11 @@ package se.liu.joeri765youdr728.Platformer;
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  * @author      Johannes Eriksson <joeri765 @ student.liu.se>
  * @author      Yousef Drgham <youdr728 @ student.liu.se>
@@ -12,6 +16,8 @@ import java.io.IOException;
  */
 public class ScorePanel extends AbstractPanel
 {
+    private static final Logger LOGGER = Logger.getLogger(ScorePanel.class.getName() );
+
     private BufferedImage background = null;
 
     private MyButton buttonBack = null, sortScoreTime = null, sortScoreCoins = null, sortScoreDeaths = null;
@@ -126,9 +132,10 @@ public class ScorePanel extends AbstractPanel
         super.paintComponent(g);
 
         try {
-            background = ImageIO.read(MenuPanel.class.getResourceAsStream("Tiles\\HighScore_list.png"));
+            background = ImageIO.read(MenuPanel.class.getResourceAsStream("Tiles" + File.separator + "HighScore_list.png"));
         }
         catch (IOException e) {
+            LOGGER.log(Level.FINE, e.getMessage());
             e.printStackTrace();
         }
 
