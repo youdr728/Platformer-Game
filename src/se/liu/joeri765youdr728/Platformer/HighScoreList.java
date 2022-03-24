@@ -33,8 +33,8 @@ public class HighScoreList
 	Gson gson = new Gson();
 
 
-	try  {
-	    PrintWriter pw = new PrintWriter("Highscores.txt");
+	try(PrintWriter pw = new PrintWriter("Highscores.txt"))  {
+
 	    pw.println(gson.toJson(this));
 	    pw.flush();
 	}
@@ -46,9 +46,8 @@ public class HighScoreList
     }
 
     public static HighScoreList loadHighscoreList()  {
-	try{
-	    Gson gson = new Gson();
-	    FileReader fr = new FileReader("Highscores.txt");
+	Gson gson = new Gson();
+	try(FileReader fr = new FileReader("Highscores.txt")){
 	    HighScoreList scores = gson.fromJson(fr, HighScoreList.class);
 
 	    return scores;

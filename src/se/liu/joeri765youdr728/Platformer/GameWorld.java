@@ -61,8 +61,8 @@ public class GameWorld
 
 
     public void loadMapFromFile(String mapFile){
-	try {
-	    InputStream is = getClass().getResourceAsStream(mapFile);
+	try(InputStream is = getClass().getResourceAsStream(mapFile)) {
+
 	    BufferedReader br = new BufferedReader(new InputStreamReader(is));
 
 	    for (int h = 0; h < ROW; h++) {
