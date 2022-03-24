@@ -1,7 +1,12 @@
 package se.liu.joeri765youdr728.Platformer;
 
 import javax.swing.*;
-
+/**
+ * @author      Johannes Eriksson <joeri765 @ student.liu.se>
+ * @author      Yousef Drgham <youdr728 @ student.liu.se>
+ * @version     1.0
+ * @since       1.0
+ */
 public class Frame
 {
     private JFrame menuFrame = new JFrame();

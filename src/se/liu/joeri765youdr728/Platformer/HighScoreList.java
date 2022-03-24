@@ -7,7 +7,12 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
-
+/**
+ * @author      Johannes Eriksson <joeri765 @ student.liu.se>
+ * @author      Yousef Drgham <youdr728 @ student.liu.se>
+ * @version     1.0
+ * @since       1.0
+ */
 public class HighScoreList
 {
 

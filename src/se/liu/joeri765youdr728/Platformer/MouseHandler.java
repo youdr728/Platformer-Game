@@ -2,9 +2,13 @@ package se.liu.joeri765youdr728.Platformer;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseMotionAdapter;
-import java.awt.event.MouseMotionListener;
 
+/**
+ * @author      Johannes Eriksson <joeri765 @ student.liu.se>
+ * @author      Yousef Drgham <youdr728 @ student.liu.se>
+ * @version     1.0
+ * @since       1.0
+ */
 public class MouseHandler extends MouseAdapter
 {
     private AbstractPanel panel;

@@ -4,7 +4,12 @@ import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import java.net.URL;
-
+/**
+ * @author      Johannes Eriksson <joeri765 @ student.liu.se>
+ * @author      Yousef Drgham <youdr728 @ student.liu.se>
+ * @version     1.0
+ * @since       1.0
+ */
 public class Sound
 {
     private Clip clipSound = null;

@@ -1,11 +1,15 @@
 package se.liu.joeri765youdr728.Platformer;
 
 import javax.imageio.ImageIO;
-import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
-
+/**
+ * @author      Johannes Eriksson <joeri765 @ student.liu.se>
+ * @author      Yousef Drgham <youdr728 @ student.liu.se>
+ * @version     1.0
+ * @since       1.0
+ */
 public class ScorePanel extends AbstractPanel
 {
     private BufferedImage background = null;

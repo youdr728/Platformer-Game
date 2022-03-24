@@ -3,14 +3,16 @@ package se.liu.joeri765youdr728.Platformer;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
-import java.nio.Buffer;
 import java.util.EnumMap;
-import java.util.HashMap;
-import java.util.Map;
 
+/**
+ * @author      Johannes Eriksson <joeri765 @ student.liu.se>
+ * @author      Yousef Drgham <youdr728 @ student.liu.se>
+ * @version     1.0
+ * @since       1.0
+ */
 public class GamePanel extends JComponent implements  Runnable
 {
     //Screen settings

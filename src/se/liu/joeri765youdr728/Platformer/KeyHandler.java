@@ -2,8 +2,12 @@ package se.liu.joeri765youdr728.Platformer;
 
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-
+/**
+ * @author      Johannes Eriksson <joeri765 @ student.liu.se>
+ * @author      Yousef Drgham <youdr728 @ student.liu.se>
+ * @version     1.0
+ * @since       1.0
+ */
 public class KeyHandler extends KeyAdapter
 {
     public boolean upPressed, downPressed, leftPressed, rightPressed, spacePressed, replayPressed, quitPressed;
