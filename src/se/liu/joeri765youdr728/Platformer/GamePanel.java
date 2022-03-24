@@ -44,12 +44,12 @@ public class GamePanel extends JComponent implements  Runnable
     private KeyHandler keyH = new KeyHandler();
     private Thread gameThread = null;
 
-    private Frame frame;
+    private MainFrame mainFrame;
 
     private BufferedImage loseImage = null, winImage = null;
 
-    public GamePanel(Frame frame) {
-        this.frame = frame;
+    public GamePanel(MainFrame mainFrame) {
+        this.mainFrame = mainFrame;
 
 	this.setPreferredSize(new Dimension(screenWidth, screenHeight));
 	this.setDoubleBuffered(true);
@@ -209,8 +209,8 @@ public class GamePanel extends JComponent implements  Runnable
         }
         if(keyH.isQuitPressed()){
             stopMusic();
-            frame.setCurrentFrame("gameFrame");
-            frame.startMenu();
+            mainFrame.setCurrentFrame("gameFrame");
+            mainFrame.startMenu();
 
         }
     }

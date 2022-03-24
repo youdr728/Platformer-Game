@@ -55,7 +55,7 @@ public class Enemy extends AbstractEntity
 	}
     }
 
-    public List<EnemyAttack> getEnemyAttackList() {
+    public List<EnemyAttack> getEnemyAttacks() {
 	return enemyAttacks;
     }
 }

@@ -22,7 +22,7 @@ public class ScorePanel extends AbstractPanel
 
     private MyButton buttonBack = null, sortScoreTime = null, sortScoreCoins = null, sortScoreDeaths = null;
 
-    private Frame frame;
+    private MainFrame mainFrame;
 
     private HighScoreList highScoreList = null;
 
@@ -33,8 +33,8 @@ public class ScorePanel extends AbstractPanel
 
     private Sound sound = new Sound();
 
-    public ScorePanel(Frame frame) {
-        this.frame = frame;
+    public ScorePanel(MainFrame mainFrame) {
+        this.mainFrame = mainFrame;
         scores = new String[SCORES_HEIGHT][SCORES_WIDTH];
         playMusic(3);
         createButtons();
@@ -79,8 +79,8 @@ public class ScorePanel extends AbstractPanel
     @Override
     public void mouseClicked(int x, int y){
         if(buttonBack.getBounds().contains(x, y)){
-            frame.setCurrentFrame("highscoreFrame");
-            frame.startMenu();
+            mainFrame.setCurrentFrame("highscoreFrame");
+            mainFrame.startMenu();
 
         }
         if(sortScoreTime.getBounds().contains(x, y)){

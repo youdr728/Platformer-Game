@@ -159,8 +159,8 @@ public class GameWorld
 	if (player.isOnJumpBoost() || player.isOnSpeedBoost()) {
 	    boostTimeCounter += 1;
 	    if(boostTimeCounter == 240) {
-		player.speedBoostOff();
-		player.jumpBoostOff();
+		player.setSpeedBoostOff();
+		player.setJumpBoostOff();
 		boostTimeCounter = 0;
 	    }
 
@@ -236,16 +236,16 @@ public class GameWorld
 
 	    case POWER_UP_JUMP:
 		entityList.remove(entity);
-		player.jumpBoostOn();
-		player.speedBoostOff();
+		player.setJumpBoostOn();
+		player.setSpeedBoostOff();
 		boostTimeCounter = 0;
 		panel.playSoundEffect(3);
 		break;
 
 	    case POWER_UP_SPEED:
 		entityList.remove(entity);
-		player.speedBoostOn();
-		player.jumpBoostOff();
+		player.setSpeedBoostOn();
+		player.setJumpBoostOff();
 		boostTimeCounter = 0;
 		panel.playSoundEffect(3);
 		break;
@@ -284,7 +284,7 @@ public class GameWorld
     }
 
     public List<EnemyAttack> getEnemyAttack(){
-	return enemy.getEnemyAttackList();
+	return enemy.getEnemyAttacks();
     }
 
     public int[][] getMapTileNum() {

@@ -7,7 +7,7 @@ import javax.swing.*;
  * @version     1.0
  * @since       1.0
  */
-public class Frame
+public class MainFrame
 {
     private JFrame menuFrame = new JFrame();
     private JFrame gameFrame = new JFrame();
@@ -82,7 +82,7 @@ public class Frame
     }
 
     public static void main(String[] args) {
-	Frame frame = new Frame();
-	frame.startMenu();
+	MainFrame mainFrame = new MainFrame();
+	mainFrame.startMenu();
     }
 }

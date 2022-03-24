@@ -22,12 +22,12 @@ public class MenuPanel extends AbstractPanel
 
     private MyButton buttonPlay = null, buttonHighscore = null, buttonQuit = null;
 
-    private Frame frame;
+    private MainFrame mainFrame;
 
     private Sound sound = new Sound();
 
-    public MenuPanel(Frame frame) {
-	this.frame = frame;
+    public MenuPanel(MainFrame mainFrame) {
+	this.mainFrame = mainFrame;
 
 	try {
 	    background = ImageIO.read(MenuPanel.class.getResourceAsStream("Tiles" + File.separator + "menu_background.png"));
@@ -81,10 +81,10 @@ public class MenuPanel extends AbstractPanel
     public void mouseClicked(int x, int y){
 	if(buttonPlay.getBounds().contains(x, y)){
 	    stopMusic();
-	    frame.startGame();
+	    mainFrame.startGame();
 	}
 	if(buttonHighscore.getBounds().contains(x, y)){
-	    frame.startHighscore();
+	    mainFrame.startHighscore();
 	}
 	if(buttonQuit.getBounds().contains(x, y)){
 	    System.exit(0);

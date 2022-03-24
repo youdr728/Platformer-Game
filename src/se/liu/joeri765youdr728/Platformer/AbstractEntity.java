@@ -18,8 +18,8 @@ public abstract class AbstractEntity implements Entity
     protected final Map<Integer, EntityType> entityTypeMap = createEntityTypeMap();
     protected int collisionX, collisionY, collisionWidth, collisionHeight;
 
-    protected final int height = 48;
-    protected final int width = 48;
+    protected final static int height = 48;
+    protected final static int width = 48;
 
     protected AbstractEntity(final int x, final int y, final int typeNumber, int collisionX, int collisionY, int collisionWidth,
 			     int collisionHeight) {

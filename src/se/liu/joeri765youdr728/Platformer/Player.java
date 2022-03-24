@@ -9,14 +9,16 @@ import java.awt.*;
  */
 public class Player extends AbstractEntity
 {
-    // Initialize player stats
+    /**
+     * Initialize player stats
+     */
     private final int startX;
     private final int startY;
 
     private int speed;
     private int jumpSpeed;
 
-    private static final int FALLSPEED = 8;
+    private static final int FALL_SPEED = 8;
     private static final int NORMAL_SPEED = 4;
     private static final int NORMAL_JUMP_SPEED = 16;
     private static final int BOOST_SPEED = 7;
@@ -76,7 +78,7 @@ public class Player extends AbstractEntity
     }
     public void moveDown(){
 	canJump = false;
-	this.y += FALLSPEED;
+	this.y += FALL_SPEED;
 	tryCollision();
 	if (platformCollision) {
 	    this.y = platformY;
@@ -132,28 +134,24 @@ public class Player extends AbstractEntity
 	}
     }
 
-    public void jumpBoostOn() {
+    public void setJumpBoostOn() {
 	isOnJumpBoost = true;
 	jumpSpeed = BOOST_JUMP_SPEED;
     }
 
-    public void jumpBoostOff() {
+    public void setJumpBoostOff() {
 	isOnJumpBoost = false;
 	jumpSpeed = NORMAL_JUMP_SPEED;
     }
 
-    public void speedBoostOn() {
+    public void setSpeedBoostOn() {
 	isOnSpeedBoost = true;
 	speed = BOOST_SPEED;
     }
 
-    public void speedBoostOff() {
+    public void setSpeedBoostOff() {
 	isOnSpeedBoost = false;
 	speed = NORMAL_SPEED;
-    }
-
-    public int getSpeed() {
-	return speed;
     }
 
     public int getStartX() {
