@@ -59,7 +59,7 @@ public class Player extends AbstractEntity
 	this.y = startY;
 
     }
-    public void jump() throws UnsupportedAudioFileException, LineUnavailableException, IOException {
+    public void jump() throws Exception {
 
 	canJump = false;
 	this.y -= jumpSpeed;
@@ -82,7 +82,7 @@ public class Player extends AbstractEntity
 
 
     }
-    public void moveDown() throws UnsupportedAudioFileException, LineUnavailableException, IOException {
+    public void moveDown() throws Exception {
 	canJump = false;
 	this.y += FALL_SPEED;
 	tryCollision();
@@ -96,7 +96,7 @@ public class Player extends AbstractEntity
 	}
 
     }
-    public void movePlayer(Direction dir) throws UnsupportedAudioFileException, LineUnavailableException, IOException {
+    public void movePlayer(Direction dir) throws Exception {
 	if (dir.equals(Direction.RIGHT)){
 	    this.x += speed;
 	    tryCollision();
@@ -116,7 +116,7 @@ public class Player extends AbstractEntity
 
     }
 
-    public void tryCollision() throws UnsupportedAudioFileException, LineUnavailableException, IOException {
+    public void tryCollision() throws Exception {
 	Rectangle playerRec = this.getRectangle();
 
 	for (int i = 0; i<world.getEntities().size(); i++) {

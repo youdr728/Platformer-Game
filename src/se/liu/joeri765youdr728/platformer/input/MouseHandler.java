@@ -2,8 +2,6 @@ package se.liu.joeri765youdr728.platformer.input;
 
 import se.liu.joeri765youdr728.platformer.AbstractPanel;
 
-import javax.sound.sampled.LineUnavailableException;
-import javax.sound.sampled.UnsupportedAudioFileException;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.IOException;
@@ -44,7 +42,7 @@ public class MouseHandler extends MouseAdapter
 		fileHandler.setFormatter(formatter);
 		panel.mouseClicked(e.getX(), e.getY());
 
-	    } catch (IOException | UnsupportedAudioFileException | LineUnavailableException ex) {
+	    } catch (Exception ex) {
 		logger.info(ex.getMessage());
 		ex.printStackTrace();
 	    }

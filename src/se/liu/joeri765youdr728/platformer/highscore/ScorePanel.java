@@ -38,7 +38,7 @@ public class ScorePanel extends AbstractPanel
 
     private final static String SEPARATOR = File.separator;
 
-    public ScorePanel(MainFrame mainFrame) throws IOException, UnsupportedAudioFileException, LineUnavailableException {
+    public ScorePanel(MainFrame mainFrame) throws Exception {
         this.mainFrame = mainFrame;
         scores = new String[SCORES_HEIGHT][SCORES_WIDTH];
         playMusic(3);
@@ -48,7 +48,7 @@ public class ScorePanel extends AbstractPanel
 
     }
 
-    public void playMusic(int i) throws UnsupportedAudioFileException, LineUnavailableException, IOException {
+    public void playMusic(int i) throws Exception {
         sound.setFileMusic(i);
         sound.loop();
     }
@@ -57,7 +57,7 @@ public class ScorePanel extends AbstractPanel
     }
 
 
-    public void createButtons() throws IOException {
+    public void createButtons() throws Exception {
         buttonBack = new MyButton(4, SCREEN_WIDTH - 210, SCREEN_HEIGHT / 2 + 130, 100, 50);
         sortScoreTime = new MyButton(5, SCREEN_WIDTH / 2 - 170, 135, 150, 65);
         sortScoreDeaths = new MyButton(6, SCREEN_WIDTH / 2 + 10, 135, 150, 65);
@@ -72,7 +72,7 @@ public class ScorePanel extends AbstractPanel
     }
 
     @Override
-    public void mouseClicked(int x, int y) throws IOException, UnsupportedAudioFileException, LineUnavailableException {
+    public void mouseClicked(int x, int y) throws Exception {
         if(buttonBack.getBounds().contains(x, y)){
             mainFrame.setCurrentFrame("highscoreFrame");
             mainFrame.startMenu();

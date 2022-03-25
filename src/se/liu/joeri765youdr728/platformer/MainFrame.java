@@ -4,8 +4,6 @@ import se.liu.joeri765youdr728.platformer.game.GamePanel;
 import se.liu.joeri765youdr728.platformer.highscore.ScorePanel;
 import se.liu.joeri765youdr728.platformer.menu.MenuPanel;
 
-import javax.sound.sampled.LineUnavailableException;
-import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.*;
 import java.io.IOException;
 import java.util.logging.FileHandler;
@@ -34,7 +32,7 @@ public class MainFrame
 
 
 
-    public void startMenu() throws IOException, UnsupportedAudioFileException, LineUnavailableException {
+    public void startMenu() throws Exception {
 
 	menuPanel = new MenuPanel(this);
 
@@ -61,7 +59,7 @@ public class MainFrame
 
     }
 
-    public void startGame() throws IOException, UnsupportedAudioFileException, LineUnavailableException {
+    public void startGame() throws Exception {
 	gamePanel = new GamePanel(this);
 
 	menuFrame.remove(menuPanel);
@@ -76,7 +74,7 @@ public class MainFrame
 
     }
 
-    public void startHighscore() throws UnsupportedAudioFileException, LineUnavailableException, IOException {
+    public void startHighscore() throws Exception {
 	scorePanel = new ScorePanel(this);
 
 	menuPanel.stopMusic();
@@ -95,19 +93,20 @@ public class MainFrame
 	this.currentFrame = currentFrame;
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
 	MainFrame mainFrame = new MainFrame();
 	Logger logger = Logger.getLogger(MainFrame.class.getName() );
 	SimpleFormatter formatter = new SimpleFormatter();
+	FileHandler fileHandler = new FileHandler("LogFile.log", 0, 1, true);
 
 	try {
-	    FileHandler fileHandler = new FileHandler("LogFile.log", 0, 1, true);
 	    logger.addHandler(fileHandler);
 	    fileHandler.setFormatter(formatter);
 	    mainFrame.startMenu();
 
 	}
-	catch (IOException | UnsupportedAudioFileException | LineUnavailableException e) {
+	catch (Exception e) {
+	    System.out.println("hey");
 	    logger.info(e.getMessage());
 	    e.printStackTrace();
 	}

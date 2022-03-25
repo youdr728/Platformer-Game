@@ -2,11 +2,8 @@ package se.liu.joeri765youdr728.platformer.game;
 
 import se.liu.joeri765youdr728.platformer.highscore.HighScoreList;
 
-import javax.sound.sampled.LineUnavailableException;
-import javax.sound.sampled.UnsupportedAudioFileException;
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
@@ -48,7 +45,7 @@ public class GameWorld
 
     private final static String SEPARATOR = File.separator;
 
-    public GameWorld(GamePanel panel) throws IOException, UnsupportedAudioFileException, LineUnavailableException {
+    public GameWorld(GamePanel panel) throws Exception {
 	this.mapTileNum = new int[ROW][COL];
 	this.entities = new ArrayList<>();
 	this.gameTime = 120;
@@ -60,7 +57,7 @@ public class GameWorld
 
 
 
-    public void loadMapFromFile(String mapFile) throws IOException {
+    public void loadMapFromFile(String mapFile) throws Exception {
 	InputStream is = getClass().getResourceAsStream(mapFile);
 	    BufferedReader br = new BufferedReader(new InputStreamReader(is));
 
@@ -117,7 +114,7 @@ public class GameWorld
 	}
     }
 
-    public void updateWorld() throws UnsupportedAudioFileException, LineUnavailableException, IOException {
+    public void updateWorld() throws Exception {
 	startPowerupTimer();
 	timer();
 	if(enemy != null){
@@ -136,7 +133,7 @@ public class GameWorld
 	}
 
     }
-    public void updateEnemy() throws UnsupportedAudioFileException, LineUnavailableException, IOException {
+    public void updateEnemy() throws Exception {
 	enemy.shootAttack();
 	enemy.moveAttack();
     }
@@ -177,7 +174,7 @@ public class GameWorld
 
 
 
-    public void applyCollision(Entity entity) throws UnsupportedAudioFileException, LineUnavailableException, IOException {
+    public void applyCollision(Entity entity) throws Exception {
 	EntityType entityType = entity.getEntityType();
 
 	switch(entityType) {
@@ -255,7 +252,7 @@ public class GameWorld
 
 
     }
-    public void playSound(int i) throws UnsupportedAudioFileException, LineUnavailableException, IOException {
+    public void playSound(int i) throws Exception {
 	panel.playSoundEffect(i);
     }
 

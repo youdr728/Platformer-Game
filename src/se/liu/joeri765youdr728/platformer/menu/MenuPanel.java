@@ -6,12 +6,9 @@ import se.liu.joeri765youdr728.platformer.input.MyButton;
 import se.liu.joeri765youdr728.platformer.Sound;
 
 import javax.imageio.ImageIO;
-import javax.sound.sampled.LineUnavailableException;
-import javax.sound.sampled.UnsupportedAudioFileException;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
-import java.io.IOException;
 
 /**
  * @author      Johannes Eriksson <joeri765 @ student.liu.se>
@@ -34,7 +31,7 @@ public class MenuPanel extends AbstractPanel
     private final static String SEPARATOR = File.separator;
 
 
-    public MenuPanel(MainFrame mainFrame) throws IOException, UnsupportedAudioFileException, LineUnavailableException {
+    public MenuPanel(MainFrame mainFrame) throws Exception {
 	this.mainFrame = mainFrame;
 	    background = ImageIO.read(ClassLoader.getSystemResource("images" + SEPARATOR + "menu_background.png"));
 
@@ -42,7 +39,7 @@ public class MenuPanel extends AbstractPanel
 	createButtons();
     }
 
-    public void createButtons() throws IOException {
+    public void createButtons() throws Exception {
 	buttonPlay = new MyButton(1, SCREEN_WIDTH / 2 - 240, 505, 480, 75);
 	buttonHighscore = new MyButton(2, SCREEN_WIDTH / 2 - 220, 600, 440, 75);
 	buttonQuit = new MyButton(3, SCREEN_WIDTH / 2 - 120, 695, 240, 75);
@@ -56,7 +53,7 @@ public class MenuPanel extends AbstractPanel
 	buttonQuit.draw(g);
     }
 
-    public void playMusic(int i) throws UnsupportedAudioFileException, LineUnavailableException, IOException {
+    public void playMusic(int i) throws Exception {
 	sound.setFileMusic(i);
 	sound.loop();
     }
@@ -74,7 +71,7 @@ public class MenuPanel extends AbstractPanel
     }
 
     @Override
-    public void mouseClicked(int x, int y) throws IOException, UnsupportedAudioFileException, LineUnavailableException {
+    public void mouseClicked(int x, int y) throws Exception {
 	if(buttonPlay.getBounds().contains(x, y)){
 	    stopMusic();
 	    mainFrame.startGame();

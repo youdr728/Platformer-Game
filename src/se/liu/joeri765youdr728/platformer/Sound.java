@@ -3,10 +3,7 @@ package se.liu.joeri765youdr728.platformer;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
-import javax.sound.sampled.LineUnavailableException;
-import javax.sound.sampled.UnsupportedAudioFileException;
 import java.io.File;
-import java.io.IOException;
 import java.net.URL;
 
 /**
@@ -44,14 +41,14 @@ public class Sound
     }
 
 
-    public void setFileSound(int i) throws IOException, UnsupportedAudioFileException, LineUnavailableException {
+    public void setFileSound(int i) throws Exception {
 
 	    AudioInputStream ais = AudioSystem.getAudioInputStream(soundURL[i]);
 	    clipSound = AudioSystem.getClip();
 	    clipSound.open(ais);
 
     }
-    public void setFileMusic(int i) throws LineUnavailableException, IOException, UnsupportedAudioFileException {
+    public void setFileMusic(int i) throws Exception {
 	    AudioInputStream ais = AudioSystem.getAudioInputStream(musicURL[i]);
 	    clipMusic = AudioSystem.getClip();
 	    clipMusic.open(ais);

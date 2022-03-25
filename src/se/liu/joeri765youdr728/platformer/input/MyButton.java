@@ -5,7 +5,6 @@ import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -31,7 +30,7 @@ public class MyButton
 
     private final static String SEPARATOR = File.separator;
 
-    public MyButton(int imageNumber, int x,  int y, int width, int height) throws IOException {
+    public MyButton(int imageNumber, int x,  int y, int width, int height) throws Exception {
 	this.x = x;
 	this.y = y;
 	this.width = width;
@@ -66,7 +65,7 @@ public class MyButton
 	return imageNumber;
     }
 
-    public static Map<Integer, BufferedImage> createButtonImageMap() throws IOException {
+    public static Map<Integer, BufferedImage> createButtonImageMap() throws Exception {
 
 	BufferedImage playImage = ImageIO.read(ClassLoader.getSystemResource("images" + SEPARATOR + "button_start.png"));
 	BufferedImage highscoreImage = ImageIO.read(ClassLoader.getSystemResource("images" + SEPARATOR + "button_highscore.png"));

@@ -2,11 +2,8 @@ package se.liu.joeri765youdr728.platformer;
 
 import se.liu.joeri765youdr728.platformer.input.MouseHandler;
 
-import javax.sound.sampled.LineUnavailableException;
-import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.*;
 import java.awt.*;
-import java.io.IOException;
 
 /**
  * @author      Johannes Eriksson <joeri765 @ student.liu.se>
@@ -36,7 +33,7 @@ public abstract class AbstractPanel extends JPanel
     }
 
 
-    public abstract void mouseClicked(int x, int y) throws IOException, UnsupportedAudioFileException, LineUnavailableException;
+    public abstract void mouseClicked(int x, int y) throws Exception;
 
     public abstract void mouseMoved(int x, int y);
 

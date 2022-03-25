@@ -6,13 +6,10 @@ import se.liu.joeri765youdr728.platformer.Sound;
 import se.liu.joeri765youdr728.platformer.input.KeyHandler;
 
 import javax.imageio.ImageIO;
-import javax.sound.sampled.LineUnavailableException;
-import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
-import java.io.IOException;
 import java.util.EnumMap;
 import java.util.logging.FileHandler;
 import java.util.logging.Logger;
@@ -41,7 +38,7 @@ public class GamePanel extends JComponent implements  Runnable
     {
         try {
             fileHandler = new FileHandler("LogFile.log", 0, 1, true);
-        } catch (IOException e) {
+        } catch (Exception e) {
             logger.info(e.getMessage());
             e.printStackTrace();
         }
@@ -73,7 +70,7 @@ public class GamePanel extends JComponent implements  Runnable
 
 
 
-    public GamePanel(MainFrame mainFrame) throws IOException, UnsupportedAudioFileException, LineUnavailableException {
+    public GamePanel(MainFrame mainFrame) throws Exception {
         this.mainFrame = mainFrame;
 
 	this.setPreferredSize(new Dimension(SCREEN_WIDTH, SCREEN_HEIGHT));
@@ -89,7 +86,7 @@ public class GamePanel extends JComponent implements  Runnable
 
     }
 
-    public EnumMap<EntityType, BufferedImage> createTileMap() throws IOException {
+    public EnumMap<EntityType, BufferedImage> createTileMap() throws Exception {
 
 
         BufferedImage platform = ImageIO.read(ClassLoader.getSystemResource("images" + SEPARATOR + "platform2.png"));
@@ -134,14 +131,14 @@ public class GamePanel extends JComponent implements  Runnable
         }
 
     }
-    public void playMusic(int i) throws UnsupportedAudioFileException, LineUnavailableException, IOException {
+    public void playMusic(int i) throws Exception {
         sound.setFileMusic(i);
         sound.loop();
     }
     public void stopMusic(){
         sound.stop();
     }
-    public void playSoundEffect(int i) throws UnsupportedAudioFileException, LineUnavailableException, IOException {
+    public void playSoundEffect(int i) throws Exception {
         sound.setFileSound(i);
         sound.playSound();
 
@@ -162,7 +159,7 @@ public class GamePanel extends JComponent implements  Runnable
                     logger.addHandler(fileHandler);
                     fileHandler.setFormatter(formatter);
                     updatePauseKeys();
-                } catch (IOException | UnsupportedAudioFileException | LineUnavailableException e) {
+                } catch (Exception e) {
                     logger.info(e.getMessage());
                     e.printStackTrace();
                 }
@@ -171,7 +168,7 @@ public class GamePanel extends JComponent implements  Runnable
                         logger.addHandler(fileHandler);
                         fileHandler.setFormatter(formatter);
                         world = new GameWorld(this);
-                    }  catch (IOException | UnsupportedAudioFileException | LineUnavailableException e) {
+                    }  catch (Exception e) {
                     logger.info(e.getMessage());
                     e.printStackTrace();
                 }
@@ -188,7 +185,7 @@ public class GamePanel extends JComponent implements  Runnable
                     fileHandler.setFormatter(formatter);
                     world.updateWorld();
                     updateGameKeys();
-                } catch (UnsupportedAudioFileException| LineUnavailableException| IOException e) {
+                } catch (Exception e) {
                     logger.info(e.getMessage());
                     e.printStackTrace();
                 }
@@ -211,7 +208,7 @@ public class GamePanel extends JComponent implements  Runnable
                 Thread.sleep((long) remainingTime);
 
                 nextDrawTime += drawInterval;
-            } catch (InterruptedException e) {
+            } catch (Exception e) {
                 logger.info(e.getMessage());
                 e.printStackTrace();
             }
@@ -221,7 +218,7 @@ public class GamePanel extends JComponent implements  Runnable
 
     }
 
-    public void updateGameKeys() throws UnsupportedAudioFileException, LineUnavailableException, IOException {
+    public void updateGameKeys() throws Exception {
         if (keyH.isUpPressed()){
             world.getPlayer().movePlayer(Direction.UP);
         }
@@ -240,7 +237,7 @@ public class GamePanel extends JComponent implements  Runnable
         }
 
     }
-    public void updatePauseKeys() throws IOException, UnsupportedAudioFileException, LineUnavailableException {
+    public void updatePauseKeys() throws Exception {
         if(keyH.isReplayPressed()){
             stopMusic();
             replay = true;

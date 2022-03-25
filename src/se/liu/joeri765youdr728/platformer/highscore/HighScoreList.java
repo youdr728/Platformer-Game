@@ -21,14 +21,14 @@ public class HighScoreList
 
     private List<HighScore> highscoreList = new ArrayList<>();
 
-    public void addHighscore(GameWorld world) throws FileNotFoundException {
+    public void addHighscore(GameWorld world) throws Exception {
 
 	HighScore highscore = new HighScore(world.getScoreTime(), world.getDeathCounter(), world.getCoinCounter() );
 	highscoreList.add(highscore);
 	saveHighscoreList();
     }
 
-    public void saveHighscoreList() throws FileNotFoundException {
+    public void saveHighscoreList() throws Exception {
 
 	Gson gson = new Gson();
 
@@ -40,7 +40,7 @@ public class HighScoreList
 
     }
 
-    public static HighScoreList loadHighscoreList() throws FileNotFoundException {
+    public static HighScoreList loadHighscoreList() throws Exception {
 	Gson gson = new Gson();
 	FileReader fileReader = new FileReader("Highscores.txt");
 
