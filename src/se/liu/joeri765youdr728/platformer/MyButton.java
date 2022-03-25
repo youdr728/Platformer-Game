@@ -1,4 +1,4 @@
-package se.liu.joeri765youdr728.Platformer;
+package se.liu.joeri765youdr728.platformer;
 
 
 import javax.imageio.ImageIO;
@@ -9,7 +9,6 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.FileHandler;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
 
@@ -99,7 +98,7 @@ public class MyButton
 	    deathsImage = ImageIO.read(ClassLoader.getSystemResource("images" + SEPARATOR + "button_deaths.png"));
 	    coinsImage = ImageIO.read(ClassLoader.getSystemResource("images" + SEPARATOR + "button_coins.png"));
 
-	} catch (IOException | IllegalArgumentException e) {
+	} catch (IOException e) {
 	    LOGGER.info(e.getMessage());
 	    e.printStackTrace();
 	}

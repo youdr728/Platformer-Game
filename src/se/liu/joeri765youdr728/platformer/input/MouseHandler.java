@@ -1,6 +1,6 @@
-package se.liu.joeri765youdr728.Platformer.Input;
+package se.liu.joeri765youdr728.platformer.input;
 
-import se.liu.joeri765youdr728.Platformer.AbstractPanel;
+import se.liu.joeri765youdr728.platformer.AbstractPanel;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;

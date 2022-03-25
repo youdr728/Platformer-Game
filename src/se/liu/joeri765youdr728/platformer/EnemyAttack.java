@@ -1,6 +1,4 @@
-package se.liu.joeri765youdr728.Platformer;
-
-import se.liu.joeri765youdr728.Platformer.AbstractEntity;
+package se.liu.joeri765youdr728.platformer;
 
 /**
  * @author      Johannes Eriksson <joeri765 @ student.liu.se>

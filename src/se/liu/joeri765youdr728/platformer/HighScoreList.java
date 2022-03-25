@@ -1,4 +1,4 @@
-package se.liu.joeri765youdr728.Platformer;
+package se.liu.joeri765youdr728.platformer;
 
 import com.google.gson.Gson;
 

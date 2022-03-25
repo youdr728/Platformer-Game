@@ -1,4 +1,4 @@
-package se.liu.joeri765youdr728.Platformer;
+package se.liu.joeri765youdr728.platformer;
 
 /**
  * @author      Johannes Eriksson <joeri765 @ student.liu.se>

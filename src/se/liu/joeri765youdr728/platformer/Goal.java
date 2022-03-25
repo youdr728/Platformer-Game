@@ -1,4 +1,4 @@
-package se.liu.joeri765youdr728.Platformer;
+package se.liu.joeri765youdr728.platformer;
 
 /**
  * @author      Johannes Eriksson <joeri765 @ student.liu.se>
@@ -6,12 +6,12 @@ package se.liu.joeri765youdr728.Platformer;
  * @version     1.0
  * @since       1.0
  */
-public class Coin extends AbstractEntity
+public class Goal extends AbstractEntity
 {
-
-    public Coin(final int x, final int y, final int typeNumber,
-                int collisionX, int collisionY, int collisionWidth, int collisionHeight) {
+    public Goal(final int x, final int y, final int typeNumber,
+		int collisionX, int collisionY, int collisionWidth, int collisionHeight, final GameWorld world) {
 	super(x, y, typeNumber, collisionX, collisionY, collisionWidth, collisionHeight);
-
     }
+
+
 }

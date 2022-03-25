@@ -1,6 +1,6 @@
-package se.liu.joeri765youdr728.Platformer;
+package se.liu.joeri765youdr728.platformer;
 
-import se.liu.joeri765youdr728.Platformer.Input.MouseHandler;
+import se.liu.joeri765youdr728.platformer.input.MouseHandler;
 
 import javax.swing.*;
 import java.awt.*;
