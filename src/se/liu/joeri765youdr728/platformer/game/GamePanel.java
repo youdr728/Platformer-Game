@@ -35,12 +35,13 @@ public class GamePanel extends JComponent implements  Runnable
 
     //------Logging
     private static final Logger LOGGER = Logger.getLogger(GamePanel.class.getName() );
-    private static SimpleFormatter formatter = new SimpleFormatter();
-    private static FileHandler fh;
-    static {
+    private SimpleFormatter formatter = new SimpleFormatter();
+    private FileHandler fileHandler;
+    {
         try {
-            fh = new FileHandler("LogFile.log", 0, 1, true);
+            fileHandler = new FileHandler("LogFile.log", 0, 1, true);
         } catch (IOException e) {
+            LOGGER.info(e.getMessage());
             e.printStackTrace();
         }
     }
@@ -82,25 +83,25 @@ public class GamePanel extends JComponent implements  Runnable
         this.setFocusable(true);
 
         try {
-            LOGGER.addHandler(fh);
-            fh.setFormatter(formatter);
+            LOGGER.addHandler(fileHandler);
+            fileHandler.setFormatter(formatter);
 
             loseImage = ImageIO.read(ClassLoader.getSystemResource("images" + SEPARATOR + "lose_image.png"));
             winImage = ImageIO.read(ClassLoader.getSystemResource("images" + SEPARATOR + "win_image2.png"));
 
         } catch (IOException e) {
-            LOGGER.log(Level.FINE, e.getMessage());
+            LOGGER.info(e.getMessage());
             e.printStackTrace();
         }
     }
 
-    public static EnumMap<EntityType, BufferedImage> createTileMap(){
+    public EnumMap<EntityType, BufferedImage> createTileMap(){
         BufferedImage wall = null, platform = null, player = null, spikes = null, door = null, chest = null, timeBoost = null,
                 jumpBoost = null, speedBoost = null, enemy = null, enemyAttack = null;
 
         try{
-            LOGGER.addHandler(fh);
-            fh.setFormatter(formatter);
+            LOGGER.addHandler(fileHandler);
+            fileHandler.setFormatter(formatter);
 
             platform = ImageIO.read(ClassLoader.getSystemResource("images" + SEPARATOR + "platform2.png"));
             wall = ImageIO.read(ClassLoader.getSystemResource("images" + SEPARATOR + "wall.png"));
@@ -116,7 +117,7 @@ public class GamePanel extends JComponent implements  Runnable
 
 
         } catch (IOException e) {
-            LOGGER.log(Level.FINE, e.getMessage());
+            LOGGER.info(e.getMessage());
             e.printStackTrace();
         }
 
@@ -191,8 +192,8 @@ public class GamePanel extends JComponent implements  Runnable
 
 
             try {
-                LOGGER.addHandler(fh);
-                fh.setFormatter(formatter);
+                LOGGER.addHandler(fileHandler);
+                fileHandler.setFormatter(formatter);
 
                 double remainingTime = nextDrawTime - System.nanoTime();
                 remainingTime /= 1000000;
@@ -204,6 +205,7 @@ public class GamePanel extends JComponent implements  Runnable
 
                 nextDrawTime += drawInterval;
             } catch (InterruptedException e) {
+                LOGGER.info(e.getMessage());
                 e.printStackTrace();
             }
 

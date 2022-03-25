@@ -50,13 +50,14 @@ public class GameWorld
 
     private final static String SEPARATOR = File.separator;
     private static final Logger LOGGER = Logger.getLogger(GameWorld.class.getName() );
-    private static SimpleFormatter formatter = new SimpleFormatter();
-    private static FileHandler fh;
+    private SimpleFormatter formatter = new SimpleFormatter();
+    private FileHandler fileHandler;
 
-    static {
+    {
 	try {
-	    fh = new FileHandler("LogFile.log", 0, 1, true);
+	    fileHandler = new FileHandler("LogFile.log", 0, 1, true);
 	} catch (IOException e) {
+	    LOGGER.info(e.getMessage());
 	    e.printStackTrace();
 	}
     }
@@ -75,8 +76,8 @@ public class GameWorld
 
     public void loadMapFromFile(String mapFile){
 	try (InputStream is = getClass().getResourceAsStream(mapFile)) {
-	    LOGGER.addHandler(fh);
-	    fh.setFormatter(formatter);
+	    LOGGER.addHandler(fileHandler);
+	    fileHandler.setFormatter(formatter);
 
 	    BufferedReader br = new BufferedReader(new InputStreamReader(is));
 
@@ -88,7 +89,7 @@ public class GameWorld
 		}
 	    }
 	}catch(IOException e){
-	    LOGGER.log(Level.FINE, e.getMessage());
+	    LOGGER.info(e.getMessage());
 	    e.printStackTrace();
 	}
     }
