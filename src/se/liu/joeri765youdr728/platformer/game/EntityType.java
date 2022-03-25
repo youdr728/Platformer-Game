@@ -1,4 +1,4 @@
-package se.liu.joeri765youdr728.platformer;
+package se.liu.joeri765youdr728.platformer.game;
 /**
  * @author      Johannes Eriksson <joeri765 @ student.liu.se>
  * @author      Yousef Drgham <youdr728 @ student.liu.se>

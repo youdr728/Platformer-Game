@@ -1,5 +1,8 @@
-package se.liu.joeri765youdr728.platformer;
+package se.liu.joeri765youdr728.platformer.game;
 
+import se.liu.joeri765youdr728.platformer.input.Direction;
+import se.liu.joeri765youdr728.platformer.MainFrame;
+import se.liu.joeri765youdr728.platformer.Sound;
 import se.liu.joeri765youdr728.platformer.input.KeyHandler;
 
 import javax.imageio.ImageIO;

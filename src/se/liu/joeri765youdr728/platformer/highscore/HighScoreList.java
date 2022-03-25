@@ -1,6 +1,7 @@
-package se.liu.joeri765youdr728.platformer;
+package se.liu.joeri765youdr728.platformer.highscore;
 
 import com.google.gson.Gson;
+import se.liu.joeri765youdr728.platformer.game.GameWorld;
 
 import java.io.FileReader;
 import java.io.IOException;

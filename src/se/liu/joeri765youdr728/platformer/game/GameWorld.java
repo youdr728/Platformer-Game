@@ -1,4 +1,6 @@
-package se.liu.joeri765youdr728.platformer;
+package se.liu.joeri765youdr728.platformer.game;
+
+import se.liu.joeri765youdr728.platformer.highscore.HighScoreList;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -64,7 +66,7 @@ public class GameWorld
 	this.entities = new ArrayList<>();
 	this.gameTime = 120;
 	this.panel = panel;
-	loadMapFromFile("Maps" + SEPARATOR + "map0" + mapNumber);
+	loadMapFromFile("maps" + SEPARATOR + "map0" + mapNumber);
 	createEntityList();
 	panel.playMusic(0);
     }
@@ -189,7 +191,7 @@ public class GameWorld
 
     public String getNextMap(){
 	mapNumber += 1;
-	String nextMap = "Maps" + SEPARATOR + "map0" + mapNumber;
+	String nextMap = "maps" + SEPARATOR + "map0" + mapNumber;
 	return nextMap;
     }
 

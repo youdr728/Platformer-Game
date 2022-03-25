@@ -1,4 +1,4 @@
-package se.liu.joeri765youdr728.platformer;
+package se.liu.joeri765youdr728.platformer.game;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,7 +33,8 @@ public class Enemy extends AbstractEntity
 	    final int tileSize = 48;
 
 	    randomNumber = getRandomNumberUsingNextInt(fastestAttack, slowestAttack);
-	    EnemyAttack attack = new EnemyAttack(x - tileSize, y, 10, 12, 12, 27, 27);
+	    EnemyAttack
+		    attack = new EnemyAttack(x - tileSize, y, 10, 12, 12, 27, 27);
 	    world.playSound(6);
 	    enemyAttacks.add(attack);
 	    attackCounter = 0;

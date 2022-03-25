@@ -1,4 +1,4 @@
-package se.liu.joeri765youdr728.platformer;
+package se.liu.joeri765youdr728.platformer.game;
 
 /**
  * @author      Johannes Eriksson <joeri765 @ student.liu.se>
@@ -6,12 +6,11 @@ package se.liu.joeri765youdr728.platformer;
  * @version     1.0
  * @since       1.0
  */
-public class Coin extends AbstractEntity
+public class Obstacle extends AbstractEntity
 {
 
-    public Coin(final int x, final int y, final int typeNumber,
-                int collisionX, int collisionY, int collisionWidth, int collisionHeight) {
+    public Obstacle(final int x, final int y, final int typeNumber,
+		    int collisionX, int collisionY, int collisionWidth, int collisionHeight) {
 	super(x, y, typeNumber, collisionX, collisionY, collisionWidth, collisionHeight);
-
     }
 }

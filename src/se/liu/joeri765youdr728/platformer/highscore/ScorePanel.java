@@ -1,4 +1,9 @@
-package se.liu.joeri765youdr728.platformer;
+package se.liu.joeri765youdr728.platformer.highscore;
+
+import se.liu.joeri765youdr728.platformer.AbstractPanel;
+import se.liu.joeri765youdr728.platformer.MainFrame;
+import se.liu.joeri765youdr728.platformer.input.MyButton;
+import se.liu.joeri765youdr728.platformer.Sound;
 
 import javax.imageio.ImageIO;
 import java.awt.*;

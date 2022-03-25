@@ -1,5 +1,8 @@
 package se.liu.joeri765youdr728.platformer;
 
+import se.liu.joeri765youdr728.platformer.game.GamePanel;
+import se.liu.joeri765youdr728.platformer.highscore.ScorePanel;
+import se.liu.joeri765youdr728.platformer.menu.MenuPanel;
 import javax.swing.*;
 /**
  * @author      Johannes Eriksson <joeri765 @ student.liu.se>

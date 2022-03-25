@@ -1,4 +1,6 @@
-package se.liu.joeri765youdr728.platformer;
+package se.liu.joeri765youdr728.platformer.highscore;
+
+import se.liu.joeri765youdr728.platformer.input.MyButton;
 
 import java.util.Comparator;
 /**

@@ -1,4 +1,6 @@
-package se.liu.joeri765youdr728.platformer;
+package se.liu.joeri765youdr728.platformer.game;
+
+import se.liu.joeri765youdr728.platformer.input.Direction;
 
 import java.awt.*;
 /**

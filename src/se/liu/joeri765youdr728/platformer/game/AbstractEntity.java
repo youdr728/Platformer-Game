@@ -1,4 +1,4 @@
-package se.liu.joeri765youdr728.platformer;
+package se.liu.joeri765youdr728.platformer.game;
 
 import java.awt.*;
 import java.util.HashMap;
