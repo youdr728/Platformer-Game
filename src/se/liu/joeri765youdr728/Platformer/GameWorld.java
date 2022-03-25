@@ -159,8 +159,10 @@ public class GameWorld
 	enemy.moveAttack();
     }
     public void timer(){
+	final int oneSecond = 60;
 	gameTimeCounter += 1;
-	if(gameTimeCounter == 60){
+
+	if(gameTimeCounter == oneSecond){
 	    gameTimeCounter = 0;
 	    gameTime -= 1;
 	    scoreTime += 1;
@@ -170,8 +172,9 @@ public class GameWorld
 
     public void startPowerupTimer(){
 	if (player.isOnJumpBoost() || player.isOnSpeedBoost()) {
+	    final int fourSeconds = 240;
 	    boostTimeCounter += 1;
-	    if(boostTimeCounter == 240) {
+	    if(boostTimeCounter == fourSeconds) {
 		player.setSpeedBoostOff();
 		player.setJumpBoostOff();
 		boostTimeCounter = 0;

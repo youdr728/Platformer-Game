@@ -28,10 +28,12 @@ public class Enemy extends AbstractEntity
 
     public void shootAttack(){
 	if(attackCounter == randomNumber){
-	    int slowestAttack = 50;
-	    int fastestAttack = 30;
+	    final int slowestAttack = 50;
+	    final int fastestAttack = 30;
+	    final int tileSize = 48;
+
 	    randomNumber = getRandomNumberUsingNextInt(fastestAttack, slowestAttack);
-	    EnemyAttack attack = new EnemyAttack(x - 48, y, 10, 12, 12, 27, 27);
+	    EnemyAttack attack = new EnemyAttack(x - tileSize, y, 10, 12, 12, 27, 27);
 	    world.playSound(6);
 	    enemyAttacks.add(attack);
 	    attackCounter = 0;

@@ -22,7 +22,32 @@ import java.util.logging.SimpleFormatter;
  */
 public class GamePanel extends JComponent implements  Runnable
 {
-    //Screen settings
+
+    //------Classes
+    private MainFrame mainFrame;
+    private GameWorld world;
+    private Sound sound = new Sound();
+    private KeyHandler keyH = new KeyHandler();
+    private Thread gameThread = null;
+
+    //------Logging
+    private static final Logger LOGGER = Logger.getLogger(GamePanel.class.getName() );
+    private static SimpleFormatter formatter = new SimpleFormatter();
+    private static FileHandler fh;
+    static {
+        try {
+            fh = new FileHandler("LogFile.log", 0, 1, true);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    //------Images and fileReading
+    protected final EnumMap<EntityType, BufferedImage> tileMap = createTileMap();
+    private BufferedImage loseImage = null, winImage = null;
+    private final static String SEPARATOR = File.separator;
+
+    //------Screen settings
     private static final int ORIGINAL_TILE_SIZE = 16;
     private static final int SCALE = 3;
 
@@ -34,34 +59,12 @@ public class GamePanel extends JComponent implements  Runnable
 
     private static final int FONT_SIZE = 50;
 
-    private static final Logger LOGGER = Logger.getLogger(GamePanel.class.getName() );
-    private static SimpleFormatter formatter = new SimpleFormatter();
-    private static FileHandler fh;
-
-    static {
-        try {
-            fh = new FileHandler("LogFile.log", 0, 1, true);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    private GameWorld world;
-    protected final EnumMap<EntityType, BufferedImage> tileMap = createTileMap();
-
+    //------Booleans
     private boolean gameOver = false;
     private boolean replay = false;
 
-    private Sound sound = new Sound();
 
-    private KeyHandler keyH = new KeyHandler();
-    private Thread gameThread = null;
 
-    private MainFrame mainFrame;
-
-    private BufferedImage loseImage = null, winImage = null;
-
-    private final static String SEPARATOR = File.separator;
 
 
 
@@ -156,8 +159,9 @@ public class GamePanel extends JComponent implements  Runnable
     }
 
     @Override public void run() {
-        int fps = 60;
-        double drawInterval = 1000000000/(double)fps; // 1 second in nanoseconds
+        final int fps = 60;
+        final int billion = 1000000000;
+        double drawInterval = billion/(double)fps; // 1 second in nanoseconds
         double nextDrawTime = System.nanoTime() + drawInterval;
 
         while(gameThread != null){
