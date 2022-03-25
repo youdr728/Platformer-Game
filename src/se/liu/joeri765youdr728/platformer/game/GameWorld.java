@@ -2,6 +2,8 @@ package se.liu.joeri765youdr728.platformer.game;
 
 import se.liu.joeri765youdr728.platformer.highscore.HighScoreList;
 
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
@@ -9,10 +11,6 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.FileHandler;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import java.util.logging.SimpleFormatter;
 
 /**
  * @author      Johannes Eriksson <joeri765 @ student.liu.se>
@@ -49,20 +47,8 @@ public class GameWorld
     private Enemy enemy = null;
 
     private final static String SEPARATOR = File.separator;
-    private static final Logger LOGGER = Logger.getLogger(GameWorld.class.getName() );
-    private SimpleFormatter formatter = new SimpleFormatter();
-    private FileHandler fileHandler;
 
-    {
-	try {
-	    fileHandler = new FileHandler("LogFile.log", 0, 1, true);
-	} catch (IOException e) {
-	    LOGGER.info(e.getMessage());
-	    e.printStackTrace();
-	}
-    }
-
-    public GameWorld(GamePanel panel) {
+    public GameWorld(GamePanel panel) throws IOException, UnsupportedAudioFileException, LineUnavailableException {
 	this.mapTileNum = new int[ROW][COL];
 	this.entities = new ArrayList<>();
 	this.gameTime = 120;
@@ -74,11 +60,8 @@ public class GameWorld
 
 
 
-    public void loadMapFromFile(String mapFile){
-	try (InputStream is = getClass().getResourceAsStream(mapFile)) {
-	    LOGGER.addHandler(fileHandler);
-	    fileHandler.setFormatter(formatter);
-
+    public void loadMapFromFile(String mapFile) throws IOException {
+	InputStream is = getClass().getResourceAsStream(mapFile);
 	    BufferedReader br = new BufferedReader(new InputStreamReader(is));
 
 	    for (int h = 0; h < ROW; h++) {
@@ -88,10 +71,6 @@ public class GameWorld
 		    mapTileNum[h][w] = Integer.parseInt(numbers[w]);
 		}
 	    }
-	}catch(IOException e){
-	    LOGGER.info(e.getMessage());
-	    e.printStackTrace();
-	}
     }
     public void createEntityList(){
 	for (int h = 0; h < ROW; h++) {
@@ -138,7 +117,7 @@ public class GameWorld
 	}
     }
 
-    public void updateWorld(){
+    public void updateWorld() throws UnsupportedAudioFileException, LineUnavailableException, IOException {
 	startPowerupTimer();
 	timer();
 	if(enemy != null){
@@ -157,7 +136,7 @@ public class GameWorld
 	}
 
     }
-    public void updateEnemy(){
+    public void updateEnemy() throws UnsupportedAudioFileException, LineUnavailableException, IOException {
 	enemy.shootAttack();
 	enemy.moveAttack();
     }
@@ -198,7 +177,7 @@ public class GameWorld
 
 
 
-    public void applyCollision(Entity entity) {
+    public void applyCollision(Entity entity) throws UnsupportedAudioFileException, LineUnavailableException, IOException {
 	EntityType entityType = entity.getEntityType();
 
 	switch(entityType) {
@@ -276,7 +255,7 @@ public class GameWorld
 
 
     }
-    public void playSound(int i){
+    public void playSound(int i) throws UnsupportedAudioFileException, LineUnavailableException, IOException {
 	panel.playSoundEffect(i);
     }
 

@@ -2,7 +2,11 @@ package se.liu.joeri765youdr728.platformer.game;
 
 import se.liu.joeri765youdr728.platformer.input.Direction;
 
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import java.awt.*;
+import java.io.IOException;
+
 /**
  * @author      Johannes Eriksson <joeri765 @ student.liu.se>
  * @author      Yousef Drgham <youdr728 @ student.liu.se>
@@ -29,10 +33,10 @@ public class Player extends AbstractEntity
 
     private GameWorld world;
     private boolean platformCollision;
-    private boolean isJumping = false;
+    private boolean jumping = false;
     private boolean canJump = true;
-    private boolean isOnJumpBoost = false;
-    private boolean isOnSpeedBoost = false;
+    private boolean onJumpBoost = false;
+    private boolean onSpeedBoost = false;
 
 
 
@@ -55,14 +59,14 @@ public class Player extends AbstractEntity
 	this.y = startY;
 
     }
-    public void jump(){
+    public void jump() throws UnsupportedAudioFileException, LineUnavailableException, IOException {
 
 	canJump = false;
 	this.y -= jumpSpeed;
 	tryCollision();
 	if (platformCollision || this.y < 0 || jumpSpeed == 0) {
 	    this.y += jumpSpeed;
-	    if(isOnJumpBoost) {
+	    if(onJumpBoost) {
 		jumpSpeed = BOOST_JUMP_SPEED;
 	    }
 	    else{
@@ -78,7 +82,7 @@ public class Player extends AbstractEntity
 
 
     }
-    public void moveDown(){
+    public void moveDown() throws UnsupportedAudioFileException, LineUnavailableException, IOException {
 	canJump = false;
 	this.y += FALL_SPEED;
 	tryCollision();
@@ -92,7 +96,7 @@ public class Player extends AbstractEntity
 	}
 
     }
-    public void movePlayer(Direction dir){
+    public void movePlayer(Direction dir) throws UnsupportedAudioFileException, LineUnavailableException, IOException {
 	if (dir.equals(Direction.RIGHT)){
 	    this.x += speed;
 	    tryCollision();
@@ -112,7 +116,7 @@ public class Player extends AbstractEntity
 
     }
 
-    public void tryCollision() {
+    public void tryCollision() throws UnsupportedAudioFileException, LineUnavailableException, IOException {
 	Rectangle playerRec = this.getRectangle();
 
 	for (int i = 0; i<world.getEntities().size(); i++) {
@@ -137,22 +141,22 @@ public class Player extends AbstractEntity
     }
 
     public void setJumpBoostOn() {
-	isOnJumpBoost = true;
+	onJumpBoost = true;
 	jumpSpeed = BOOST_JUMP_SPEED;
     }
 
     public void setJumpBoostOff() {
-	isOnJumpBoost = false;
+	onJumpBoost = false;
 	jumpSpeed = NORMAL_JUMP_SPEED;
     }
 
     public void setSpeedBoostOn() {
-	isOnSpeedBoost = true;
+	onSpeedBoost = true;
 	speed = BOOST_SPEED;
     }
 
     public void setSpeedBoostOff() {
-	isOnSpeedBoost = false;
+	onSpeedBoost = false;
 	speed = NORMAL_SPEED;
     }
 
@@ -167,11 +171,11 @@ public class Player extends AbstractEntity
     public void setPlatformCollision(boolean b) {this.platformCollision = b;}
 
     public void setIsJumping(boolean jumping) {
-	this.isJumping = jumping;
+	this.jumping = jumping;
     }
 
     public boolean isJumping() {
-	return isJumping;
+	return jumping;
     }
 
     public boolean isPlatformCollision() {
@@ -187,11 +191,11 @@ public class Player extends AbstractEntity
     }
 
     public boolean isOnJumpBoost() {
-	return isOnJumpBoost;
+	return onJumpBoost;
     }
 
     public boolean isOnSpeedBoost() {
-	return isOnSpeedBoost;
+	return onSpeedBoost;
     }
 }
 

@@ -3,7 +3,15 @@ package se.liu.joeri765youdr728.platformer;
 import se.liu.joeri765youdr728.platformer.game.GamePanel;
 import se.liu.joeri765youdr728.platformer.highscore.ScorePanel;
 import se.liu.joeri765youdr728.platformer.menu.MenuPanel;
+
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.*;
+import java.io.IOException;
+import java.util.logging.FileHandler;
+import java.util.logging.Logger;
+import java.util.logging.SimpleFormatter;
+
 /**
  * @author      Johannes Eriksson <joeri765 @ student.liu.se>
  * @author      Yousef Drgham <youdr728 @ student.liu.se>
@@ -24,7 +32,10 @@ public class MainFrame
 
     private String currentFrame = menuFrameString;
 
-    public void startMenu(){
+
+
+    public void startMenu() throws IOException, UnsupportedAudioFileException, LineUnavailableException {
+
 	menuPanel = new MenuPanel(this);
 
 	String gameFrameString = "gameFrame";
@@ -50,7 +61,7 @@ public class MainFrame
 
     }
 
-    public void startGame(){
+    public void startGame() throws IOException, UnsupportedAudioFileException, LineUnavailableException {
 	gamePanel = new GamePanel(this);
 
 	menuFrame.remove(menuPanel);
@@ -65,7 +76,7 @@ public class MainFrame
 
     }
 
-    public void startHighscore() {
+    public void startHighscore() throws UnsupportedAudioFileException, LineUnavailableException, IOException {
 	scorePanel = new ScorePanel(this);
 
 	menuPanel.stopMusic();
@@ -86,6 +97,19 @@ public class MainFrame
 
     public static void main(String[] args) {
 	MainFrame mainFrame = new MainFrame();
-	mainFrame.startMenu();
+	Logger logger = Logger.getLogger(MainFrame.class.getName() );
+	SimpleFormatter formatter = new SimpleFormatter();
+
+	try {
+	    FileHandler fileHandler = new FileHandler("LogFile.log", 0, 1, true);
+	    logger.addHandler(fileHandler);
+	    fileHandler.setFormatter(formatter);
+	    mainFrame.startMenu();
+
+	}
+	catch (IOException | UnsupportedAudioFileException | LineUnavailableException e) {
+	    logger.info(e.getMessage());
+	    e.printStackTrace();
+	}
     }
 }

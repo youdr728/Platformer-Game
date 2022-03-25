@@ -8,9 +8,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.logging.FileHandler;
-import java.util.logging.Logger;
-import java.util.logging.SimpleFormatter;
 
 /**
  * @author      Johannes Eriksson <joeri765 @ student.liu.se>
@@ -32,23 +29,9 @@ public class MyButton
 
     protected final Map<Integer, BufferedImage> buttonImageMap = createButtonImageMap();
 
-
-
     private final static String SEPARATOR = File.separator;
 
-    private static final Logger LOGGER = Logger.getLogger(MyButton.class.getName() );
-    private static SimpleFormatter formatter = new SimpleFormatter();
-    private static FileHandler fh;
-
-    static {
-	try {
-	    fh = new FileHandler("LogFile.log", 0, 1, true);
-	} catch (IOException e) {
-	    e.printStackTrace();
-	}
-    }
-
-    public MyButton(int imageNumber, int x,  int y, int width, int height) {
+    public MyButton(int imageNumber, int x,  int y, int width, int height) throws IOException {
 	this.x = x;
 	this.y = y;
 	this.width = width;
@@ -83,25 +66,17 @@ public class MyButton
 	return imageNumber;
     }
 
-    public static Map<Integer, BufferedImage> createButtonImageMap(){
-	BufferedImage playImage = null, highscoreImage = null, quitImage = null, backImage = null, timeImage = null, deathsImage =
-		null, coinsImage = null;
-	try {
-	    LOGGER.addHandler(fh);
-	    fh.setFormatter(formatter);
+    public static Map<Integer, BufferedImage> createButtonImageMap() throws IOException {
 
-	    playImage = ImageIO.read(ClassLoader.getSystemResource("images" + SEPARATOR + "button_start.png"));
-	    highscoreImage = ImageIO.read(ClassLoader.getSystemResource("images" + SEPARATOR + "button_highscore.png"));
-	    quitImage = ImageIO.read(ClassLoader.getSystemResource("images" + SEPARATOR + "button_close.png"));
-	    backImage = ImageIO.read(ClassLoader.getSystemResource("images" + SEPARATOR + "button_back.png"));
-	    timeImage = ImageIO.read(ClassLoader.getSystemResource("images" + SEPARATOR + "button_time.png"));
-	    deathsImage = ImageIO.read(ClassLoader.getSystemResource("images" + SEPARATOR + "button_deaths.png"));
-	    coinsImage = ImageIO.read(ClassLoader.getSystemResource("images" + SEPARATOR + "button_coins.png"));
+	BufferedImage playImage = ImageIO.read(ClassLoader.getSystemResource("images" + SEPARATOR + "button_start.png"));
+	BufferedImage highscoreImage = ImageIO.read(ClassLoader.getSystemResource("images" + SEPARATOR + "button_highscore.png"));
+	BufferedImage quitImage = ImageIO.read(ClassLoader.getSystemResource("images" + SEPARATOR + "button_close.png"));
+	BufferedImage backImage = ImageIO.read(ClassLoader.getSystemResource("images" + SEPARATOR + "button_back.png"));
+	BufferedImage timeImage = ImageIO.read(ClassLoader.getSystemResource("images" + SEPARATOR + "button_time.png"));
+	BufferedImage deathsImage = ImageIO.read(ClassLoader.getSystemResource("images" + SEPARATOR + "button_deaths.png"));
+	BufferedImage coinsImage = ImageIO.read(ClassLoader.getSystemResource("images" + SEPARATOR + "button_coins.png"));
 
-	} catch (IOException e) {
-	    LOGGER.info(e.getMessage());
-	    e.printStackTrace();
-	}
+
 
 	Map<Integer, BufferedImage> buttonImageMap = new HashMap<>();
 	buttonImageMap.put(1, playImage);

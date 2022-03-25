@@ -6,6 +6,8 @@ import se.liu.joeri765youdr728.platformer.Sound;
 import se.liu.joeri765youdr728.platformer.input.KeyHandler;
 
 import javax.imageio.ImageIO;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -13,7 +15,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.EnumMap;
 import java.util.logging.FileHandler;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
 
@@ -31,17 +32,17 @@ public class GamePanel extends JComponent implements  Runnable
     private GameWorld world;
     private Sound sound = new Sound();
     private KeyHandler keyH = new KeyHandler();
-    private Thread gameThread = null;
+    private volatile Thread gameThread = null;
 
     //------Logging
-    private static final Logger LOGGER = Logger.getLogger(GamePanel.class.getName() );
+    private Logger logger = Logger.getLogger(GamePanel.class.getName() );
     private SimpleFormatter formatter = new SimpleFormatter();
-    private FileHandler fileHandler;
+    private FileHandler fileHandler = null;
     {
         try {
             fileHandler = new FileHandler("LogFile.log", 0, 1, true);
         } catch (IOException e) {
-            LOGGER.info(e.getMessage());
+            logger.info(e.getMessage());
             e.printStackTrace();
         }
     }
@@ -72,7 +73,7 @@ public class GamePanel extends JComponent implements  Runnable
 
 
 
-    public GamePanel(MainFrame mainFrame) {
+    public GamePanel(MainFrame mainFrame) throws IOException, UnsupportedAudioFileException, LineUnavailableException {
         this.mainFrame = mainFrame;
 
 	this.setPreferredSize(new Dimension(SCREEN_WIDTH, SCREEN_HEIGHT));
@@ -82,44 +83,28 @@ public class GamePanel extends JComponent implements  Runnable
         this.addKeyListener(keyH);
         this.setFocusable(true);
 
-        try {
-            LOGGER.addHandler(fileHandler);
-            fileHandler.setFormatter(formatter);
 
             loseImage = ImageIO.read(ClassLoader.getSystemResource("images" + SEPARATOR + "lose_image.png"));
             winImage = ImageIO.read(ClassLoader.getSystemResource("images" + SEPARATOR + "win_image2.png"));
 
-        } catch (IOException e) {
-            LOGGER.info(e.getMessage());
-            e.printStackTrace();
-        }
     }
 
-    public EnumMap<EntityType, BufferedImage> createTileMap(){
-        BufferedImage wall = null, platform = null, player = null, spikes = null, door = null, chest = null, timeBoost = null,
-                jumpBoost = null, speedBoost = null, enemy = null, enemyAttack = null;
-
-        try{
-            LOGGER.addHandler(fileHandler);
-            fileHandler.setFormatter(formatter);
-
-            platform = ImageIO.read(ClassLoader.getSystemResource("images" + SEPARATOR + "platform2.png"));
-            wall = ImageIO.read(ClassLoader.getSystemResource("images" + SEPARATOR + "wall.png"));
-            player = ImageIO.read(ClassLoader.getSystemResource("images" + SEPARATOR + "knight3.png"));
-            spikes = ImageIO.read(ClassLoader.getSystemResource("images" + SEPARATOR + "spikes4.png"));
-            door = ImageIO.read(ClassLoader.getSystemResource("images" + SEPARATOR + "door.png"));
-            chest = ImageIO.read(ClassLoader.getSystemResource("images" + SEPARATOR + "chest.png"));
-            timeBoost = ImageIO.read(ClassLoader.getSystemResource("images" + SEPARATOR + "time_powerup.png"));
-            jumpBoost = ImageIO.read(ClassLoader.getSystemResource("images" + SEPARATOR + "jump_powerup.png"));
-            speedBoost = ImageIO.read(ClassLoader.getSystemResource("images" + SEPARATOR + "speed_powerup.png"));
-            enemy = ImageIO.read(ClassLoader.getSystemResource("images" + SEPARATOR + "wizard4.png"));
-            enemyAttack = ImageIO.read(ClassLoader.getSystemResource("images" + SEPARATOR + "enemy_attack3.png"));
+    public EnumMap<EntityType, BufferedImage> createTileMap() throws IOException {
 
 
-        } catch (IOException e) {
-            LOGGER.info(e.getMessage());
-            e.printStackTrace();
-        }
+        BufferedImage platform = ImageIO.read(ClassLoader.getSystemResource("images" + SEPARATOR + "platform2.png"));
+        BufferedImage wall = ImageIO.read(ClassLoader.getSystemResource("images" + SEPARATOR + "wall.png"));
+        BufferedImage player = ImageIO.read(ClassLoader.getSystemResource("images" + SEPARATOR + "knight3.png"));
+        BufferedImage spikes = ImageIO.read(ClassLoader.getSystemResource("images" + SEPARATOR + "spikes4.png"));
+        BufferedImage door = ImageIO.read(ClassLoader.getSystemResource("images" + SEPARATOR + "door.png"));
+        BufferedImage chest = ImageIO.read(ClassLoader.getSystemResource("images" + SEPARATOR + "chest.png"));
+        BufferedImage timeBoost = ImageIO.read(ClassLoader.getSystemResource("images" + SEPARATOR + "time_powerup.png"));
+        BufferedImage jumpBoost = ImageIO.read(ClassLoader.getSystemResource("images" + SEPARATOR + "jump_powerup.png"));
+        BufferedImage speedBoost = ImageIO.read(ClassLoader.getSystemResource("images" + SEPARATOR + "speed_powerup.png"));
+        BufferedImage enemy = ImageIO.read(ClassLoader.getSystemResource("images" + SEPARATOR + "wizard4.png"));
+        BufferedImage enemyAttack = ImageIO.read(ClassLoader.getSystemResource("images" + SEPARATOR + "enemy_attack3.png"));
+
+
 
         EnumMap<EntityType, BufferedImage> tileMap = new EnumMap<>(EntityType.class);
         tileMap.put(EntityType.WALL, wall);
@@ -149,14 +134,14 @@ public class GamePanel extends JComponent implements  Runnable
         }
 
     }
-    public void playMusic(int i){
+    public void playMusic(int i) throws UnsupportedAudioFileException, LineUnavailableException, IOException {
         sound.setFileMusic(i);
         sound.loop();
     }
     public void stopMusic(){
         sound.stop();
     }
-    public void playSoundEffect(int i){
+    public void playSoundEffect(int i) throws UnsupportedAudioFileException, LineUnavailableException, IOException {
         sound.setFileSound(i);
         sound.playSound();
 
@@ -173,9 +158,23 @@ public class GamePanel extends JComponent implements  Runnable
 
             if(gameOver){
                 stopMusic();
-                updatePauseKeys();
+                try {
+                    logger.addHandler(fileHandler);
+                    fileHandler.setFormatter(formatter);
+                    updatePauseKeys();
+                } catch (IOException | UnsupportedAudioFileException | LineUnavailableException e) {
+                    logger.info(e.getMessage());
+                    e.printStackTrace();
+                }
                 if(replay){
-                    world = new GameWorld(this);
+                    try {
+                        logger.addHandler(fileHandler);
+                        fileHandler.setFormatter(formatter);
+                        world = new GameWorld(this);
+                    }  catch (IOException | UnsupportedAudioFileException | LineUnavailableException e) {
+                    logger.info(e.getMessage());
+                    e.printStackTrace();
+                }
                     keyH.resetKeys();
                     gameOver = false;
                     replay = false;
@@ -183,8 +182,16 @@ public class GamePanel extends JComponent implements  Runnable
                 }
             }else{
 
-                world.updateWorld();
-                updateGameKeys();
+
+                try {
+                    logger.addHandler(fileHandler);
+                    fileHandler.setFormatter(formatter);
+                    world.updateWorld();
+                    updateGameKeys();
+                } catch (UnsupportedAudioFileException| LineUnavailableException| IOException e) {
+                    logger.info(e.getMessage());
+                    e.printStackTrace();
+                }
 
             }
 
@@ -192,7 +199,7 @@ public class GamePanel extends JComponent implements  Runnable
 
 
             try {
-                LOGGER.addHandler(fileHandler);
+                logger.addHandler(fileHandler);
                 fileHandler.setFormatter(formatter);
 
                 double remainingTime = nextDrawTime - System.nanoTime();
@@ -205,7 +212,7 @@ public class GamePanel extends JComponent implements  Runnable
 
                 nextDrawTime += drawInterval;
             } catch (InterruptedException e) {
-                LOGGER.info(e.getMessage());
+                logger.info(e.getMessage());
                 e.printStackTrace();
             }
 
@@ -214,7 +221,7 @@ public class GamePanel extends JComponent implements  Runnable
 
     }
 
-    public void updateGameKeys(){
+    public void updateGameKeys() throws UnsupportedAudioFileException, LineUnavailableException, IOException {
         if (keyH.isUpPressed()){
             world.getPlayer().movePlayer(Direction.UP);
         }
@@ -233,7 +240,7 @@ public class GamePanel extends JComponent implements  Runnable
         }
 
     }
-    public void updatePauseKeys(){
+    public void updatePauseKeys() throws IOException, UnsupportedAudioFileException, LineUnavailableException {
         if(keyH.isReplayPressed()){
             stopMusic();
             replay = true;

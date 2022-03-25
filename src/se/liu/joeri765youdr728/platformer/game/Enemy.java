@@ -1,5 +1,8 @@
 package se.liu.joeri765youdr728.platformer.game;
 
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -26,7 +29,7 @@ public class Enemy extends AbstractEntity
 	this.enemyAttacks = new ArrayList<>();
     }
 
-    public void shootAttack(){
+    public void shootAttack() throws UnsupportedAudioFileException, LineUnavailableException, IOException {
 	if(attackCounter == randomNumber){
 	    final int slowestAttack = 50;
 	    final int fastestAttack = 30;
