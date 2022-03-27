@@ -48,18 +48,7 @@ public class World
     private Enemy enemy = null;
 
     private final static String SEPARATOR = File.separator;
-    private static final Logger LOGGER = Logger.getLogger(World.class.getName() );
-    private SimpleFormatter formatter = new SimpleFormatter();
-    private FileHandler fileHandler;
 
-    {
-	try {
-	    fileHandler = new FileHandler("LogFile.log", 0, 1, true);
-	} catch (IOException e) {
-	    LOGGER.info(e.getMessage());
-	    e.printStackTrace();
-	}
-    }
 
     public World(GamePanel panel) {
 	this.mapTileNum = new int[ROW][COL];
@@ -74,7 +63,11 @@ public class World
 
 
     public void loadMapFromFile(String mapFile){
+	Logger LOGGER = Logger.getLogger(World.class.getName() );
+	SimpleFormatter formatter = new SimpleFormatter();
 	try (InputStream is = getClass().getResourceAsStream(mapFile)) {
+
+	    FileHandler fileHandler = new FileHandler("LogFile.log", 0, 1, true);
 	    LOGGER.addHandler(fileHandler);
 	    fileHandler.setFormatter(formatter);
 
