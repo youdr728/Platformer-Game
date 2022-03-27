@@ -6,6 +6,7 @@ import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
+import javax.swing.*;
 
 import java.io.File;
 import java.io.IOException;
@@ -76,23 +77,29 @@ public class Sound
 	Logger logger = Logger.getLogger(Sound.class.getName() );
 	SimpleFormatter formatter = new SimpleFormatter();
 	FileHandler fileHandler = null;
-	try {
-	    fileHandler = new FileHandler("LogFile.log", 0, 1, true);
-	    logger.addHandler(fileHandler);
-	    fileHandler.setFormatter(formatter);
+	while(true){
+	    try {
+		fileHandler = new FileHandler("LogFile.log", 0, 1, true);
+		logger.addHandler(fileHandler);
+		fileHandler.setFormatter(formatter);
 
-	    gameBackground = ClassLoader.getSystemResource("audio" + SEPARATOR +"game_background_music.wav");
-	    bossBackground = ClassLoader.getSystemResource("audio" + SEPARATOR +"boss_background_music.wav");
-	    menuBackground = ClassLoader.getSystemResource("audio" + SEPARATOR +"menu_background_music.wav");
-	    scoreBackground = ClassLoader.getSystemResource("audio" + SEPARATOR +"score_background_music.wav");
+		gameBackground = ClassLoader.getSystemResource("audio" + SEPARATOR +"game_background_music.wav");
+		bossBackground = ClassLoader.getSystemResource("audio" + SEPARATOR +"boss_background_music.wav");
+		menuBackground = ClassLoader.getSystemResource("audio" + SEPARATOR +"menu_background_music.wav");
+		scoreBackground = ClassLoader.getSystemResource("audio" + SEPARATOR +"score_background_music.wav");
+		break;
 
-	} catch (IOException e) {
-	    logger.info(e.getMessage());
-	    e.printStackTrace();
-	    System.exit(0);
+	    } catch (IOException e) {
+		logger.info(e.getMessage());
+		e.printStackTrace();
+		if(!(JOptionPane.showConfirmDialog(null, "Do you want to try again", "IOException", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION)){
+		    break;
+		}
+	    }
+	    logger.removeHandler(fileHandler);
+	    fileHandler.close();
 	}
-	logger.removeHandler(fileHandler);
-	fileHandler.close();
+
 
 	EnumMap<MusicType, URL> musicMap = new EnumMap<>(MusicType.class);
 	musicMap.put(MusicType.GAME_BACKGROUND, gameBackground);
