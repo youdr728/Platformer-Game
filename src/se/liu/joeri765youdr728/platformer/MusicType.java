@@ -1,6 +1,5 @@
 package se.liu.joeri765youdr728.platformer;
 
-import se.liu.joeri765youdr728.platformer.game.EntityType;
 
 /**
  * @author      Johannes Eriksson <joeri765 @ student.liu.se>
