@@ -77,7 +77,6 @@ public class Sound
 	Logger logger = Logger.getLogger(Sound.class.getName() );
 	SimpleFormatter formatter = new SimpleFormatter();
 	FileHandler fileHandler = null;
-	while(true){
 	    try {
 		fileHandler = new FileHandler("LogFile.log", 0, 1, true);
 		logger.addHandler(fileHandler);
@@ -87,18 +86,17 @@ public class Sound
 		bossBackground = ClassLoader.getSystemResource("audio" + SEPARATOR +"boss_background_music.wav");
 		menuBackground = ClassLoader.getSystemResource("audio" + SEPARATOR +"menu_background_music.wav");
 		scoreBackground = ClassLoader.getSystemResource("audio" + SEPARATOR +"score_background_music.wav");
-		break;
+
 
 	    } catch (IOException e) {
 		logger.info(e.getMessage());
 		e.printStackTrace();
-		if(!(JOptionPane.showConfirmDialog(null, "Do you want to try again", "IOException", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION)){
-		    break;
-		}
-	    }
+
+
 	    logger.removeHandler(fileHandler);
 	    fileHandler.close();
 	}
+
 
 
 	EnumMap<MusicType, URL> musicMap = new EnumMap<>(MusicType.class);
