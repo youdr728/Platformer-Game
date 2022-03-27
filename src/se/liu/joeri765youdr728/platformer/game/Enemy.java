@@ -26,7 +26,7 @@ public class Enemy extends AbstractEntity
 	this.enemyAttacks = new ArrayList<>();
     }
 
-    public void shootAttack() throws Exception {
+    public void shootAttack(){
 	if(attackCounter == randomNumber){
 	    final int slowestAttack = 50;
 	    final int fastestAttack = 30;

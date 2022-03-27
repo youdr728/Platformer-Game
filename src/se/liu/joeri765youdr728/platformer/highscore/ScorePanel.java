@@ -6,12 +6,14 @@ import se.liu.joeri765youdr728.platformer.input.MyButton;
 import se.liu.joeri765youdr728.platformer.Sound;
 
 import javax.imageio.ImageIO;
-import javax.sound.sampled.LineUnavailableException;
-import javax.sound.sampled.UnsupportedAudioFileException;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.logging.FileHandler;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.util.logging.SimpleFormatter;
 
 /**
  * @author      Johannes Eriksson <joeri765 @ student.liu.se>
@@ -38,17 +40,38 @@ public class ScorePanel extends AbstractPanel
 
     private final static String SEPARATOR = File.separator;
 
-    public ScorePanel(MainFrame mainFrame) throws Exception {
+    private static final Logger LOGGER = Logger.getLogger(ScorePanel.class.getName() );
+    private static SimpleFormatter formatter = new SimpleFormatter();
+    private static FileHandler fh;
+
+    static {
+        try {
+            fh = new FileHandler("LogFile.log", 0, 1, true);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public ScorePanel(MainFrame mainFrame) {
         this.mainFrame = mainFrame;
         scores = new String[SCORES_HEIGHT][SCORES_WIDTH];
         playMusic(3);
         createButtons();
 
+        try {
+            LOGGER.addHandler(fh);
+            fh.setFormatter(formatter);
+
             background = ImageIO.read(ClassLoader.getSystemResource("images" + SEPARATOR + "HighScore_list.png"));
+        }
+        catch (IOException e) {
+            LOGGER.log(Level.FINE, e.getMessage());
+            e.printStackTrace();
+        }
 
     }
 
-    public void playMusic(int i) throws Exception {
+    public void playMusic(int i){
         sound.setFileMusic(i);
         sound.loop();
     }
@@ -57,7 +80,7 @@ public class ScorePanel extends AbstractPanel
     }
 
 
-    public void createButtons() throws Exception {
+    public void createButtons(){
         buttonBack = new MyButton(4, SCREEN_WIDTH - 210, SCREEN_HEIGHT / 2 + 130, 100, 50);
         sortScoreTime = new MyButton(5, SCREEN_WIDTH / 2 - 170, 135, 150, 65);
         sortScoreDeaths = new MyButton(6, SCREEN_WIDTH / 2 + 10, 135, 150, 65);
@@ -72,7 +95,7 @@ public class ScorePanel extends AbstractPanel
     }
 
     @Override
-    public void mouseClicked(int x, int y) throws Exception {
+    public void mouseClicked(int x, int y){
         if(buttonBack.getBounds().contains(x, y)){
             mainFrame.setCurrentFrame("highscoreFrame");
             mainFrame.startMenu();

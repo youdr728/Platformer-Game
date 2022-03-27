@@ -10,8 +10,10 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.IOException;
 import java.util.EnumMap;
 import java.util.logging.FileHandler;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
 
@@ -29,17 +31,17 @@ public class GamePanel extends JComponent implements  Runnable
     private GameWorld world;
     private Sound sound = new Sound();
     private KeyHandler keyH = new KeyHandler();
-    private volatile Thread gameThread = null;
+    private Thread gameThread = null;
 
     //------Logging
-    private Logger logger = Logger.getLogger(GamePanel.class.getName() );
+    private static final Logger LOGGER = Logger.getLogger(GamePanel.class.getName() );
     private SimpleFormatter formatter = new SimpleFormatter();
-    private FileHandler fileHandler = null;
+    private FileHandler fileHandler;
     {
         try {
             fileHandler = new FileHandler("LogFile.log", 0, 1, true);
-        } catch (Exception e) {
-            logger.info(e.getMessage());
+        } catch (IOException e) {
+            LOGGER.info(e.getMessage());
             e.printStackTrace();
         }
     }
@@ -70,7 +72,7 @@ public class GamePanel extends JComponent implements  Runnable
 
 
 
-    public GamePanel(MainFrame mainFrame) throws Exception {
+    public GamePanel(MainFrame mainFrame) {
         this.mainFrame = mainFrame;
 
 	this.setPreferredSize(new Dimension(SCREEN_WIDTH, SCREEN_HEIGHT));
@@ -80,28 +82,44 @@ public class GamePanel extends JComponent implements  Runnable
         this.addKeyListener(keyH);
         this.setFocusable(true);
 
+        try {
+            LOGGER.addHandler(fileHandler);
+            fileHandler.setFormatter(formatter);
 
             loseImage = ImageIO.read(ClassLoader.getSystemResource("images" + SEPARATOR + "lose_image.png"));
             winImage = ImageIO.read(ClassLoader.getSystemResource("images" + SEPARATOR + "win_image2.png"));
 
+        } catch (IOException e) {
+            LOGGER.info(e.getMessage());
+            e.printStackTrace();
+        }
     }
 
-    public EnumMap<EntityType, BufferedImage> createTileMap() throws Exception {
+    public EnumMap<EntityType, BufferedImage> createTileMap(){
+        BufferedImage wall = null, platform = null, player = null, spikes = null, door = null, chest = null, timeBoost = null,
+                jumpBoost = null, speedBoost = null, enemy = null, enemyAttack = null;
+
+        try{
+            LOGGER.addHandler(fileHandler);
+            fileHandler.setFormatter(formatter);
+
+            platform = ImageIO.read(ClassLoader.getSystemResource("images" + SEPARATOR + "platform2.png"));
+            wall = ImageIO.read(ClassLoader.getSystemResource("images" + SEPARATOR + "wall.png"));
+            player = ImageIO.read(ClassLoader.getSystemResource("images" + SEPARATOR + "knight3.png"));
+            spikes = ImageIO.read(ClassLoader.getSystemResource("images" + SEPARATOR + "spikes4.png"));
+            door = ImageIO.read(ClassLoader.getSystemResource("images" + SEPARATOR + "door.png"));
+            chest = ImageIO.read(ClassLoader.getSystemResource("images" + SEPARATOR + "chest.png"));
+            timeBoost = ImageIO.read(ClassLoader.getSystemResource("images" + SEPARATOR + "time_powerup.png"));
+            jumpBoost = ImageIO.read(ClassLoader.getSystemResource("images" + SEPARATOR + "jump_powerup.png"));
+            speedBoost = ImageIO.read(ClassLoader.getSystemResource("images" + SEPARATOR + "speed_powerup.png"));
+            enemy = ImageIO.read(ClassLoader.getSystemResource("images" + SEPARATOR + "wizard4.png"));
+            enemyAttack = ImageIO.read(ClassLoader.getSystemResource("images" + SEPARATOR + "enemy_attack3.png"));
 
 
-        BufferedImage platform = ImageIO.read(ClassLoader.getSystemResource("images" + SEPARATOR + "platform2.png"));
-        BufferedImage wall = ImageIO.read(ClassLoader.getSystemResource("images" + SEPARATOR + "wall.png"));
-        BufferedImage player = ImageIO.read(ClassLoader.getSystemResource("images" + SEPARATOR + "knight3.png"));
-        BufferedImage spikes = ImageIO.read(ClassLoader.getSystemResource("images" + SEPARATOR + "spikes4.png"));
-        BufferedImage door = ImageIO.read(ClassLoader.getSystemResource("images" + SEPARATOR + "door.png"));
-        BufferedImage chest = ImageIO.read(ClassLoader.getSystemResource("images" + SEPARATOR + "chest.png"));
-        BufferedImage timeBoost = ImageIO.read(ClassLoader.getSystemResource("images" + SEPARATOR + "time_powerup.png"));
-        BufferedImage jumpBoost = ImageIO.read(ClassLoader.getSystemResource("images" + SEPARATOR + "jump_powerup.png"));
-        BufferedImage speedBoost = ImageIO.read(ClassLoader.getSystemResource("images" + SEPARATOR + "speed_powerup.png"));
-        BufferedImage enemy = ImageIO.read(ClassLoader.getSystemResource("images" + SEPARATOR + "wizard4.png"));
-        BufferedImage enemyAttack = ImageIO.read(ClassLoader.getSystemResource("images" + SEPARATOR + "enemy_attack3.png"));
-
-
+        } catch (IOException e) {
+            LOGGER.info(e.getMessage());
+            e.printStackTrace();
+        }
 
         EnumMap<EntityType, BufferedImage> tileMap = new EnumMap<>(EntityType.class);
         tileMap.put(EntityType.WALL, wall);
@@ -131,14 +149,14 @@ public class GamePanel extends JComponent implements  Runnable
         }
 
     }
-    public void playMusic(int i) throws Exception {
+    public void playMusic(int i){
         sound.setFileMusic(i);
         sound.loop();
     }
     public void stopMusic(){
         sound.stop();
     }
-    public void playSoundEffect(int i) throws Exception {
+    public void playSoundEffect(int i){
         sound.setFileSound(i);
         sound.playSound();
 
@@ -155,23 +173,9 @@ public class GamePanel extends JComponent implements  Runnable
 
             if(gameOver){
                 stopMusic();
-                try {
-                    logger.addHandler(fileHandler);
-                    fileHandler.setFormatter(formatter);
-                    updatePauseKeys();
-                } catch (Exception e) {
-                    logger.info(e.getMessage());
-                    e.printStackTrace();
-                }
+                updatePauseKeys();
                 if(replay){
-                    try {
-                        logger.addHandler(fileHandler);
-                        fileHandler.setFormatter(formatter);
-                        world = new GameWorld(this);
-                    }  catch (Exception e) {
-                    logger.info(e.getMessage());
-                    e.printStackTrace();
-                }
+                    world = new GameWorld(this);
                     keyH.resetKeys();
                     gameOver = false;
                     replay = false;
@@ -179,16 +183,8 @@ public class GamePanel extends JComponent implements  Runnable
                 }
             }else{
 
-
-                try {
-                    logger.addHandler(fileHandler);
-                    fileHandler.setFormatter(formatter);
-                    world.updateWorld();
-                    updateGameKeys();
-                } catch (Exception e) {
-                    logger.info(e.getMessage());
-                    e.printStackTrace();
-                }
+                world.updateWorld();
+                updateGameKeys();
 
             }
 
@@ -196,7 +192,7 @@ public class GamePanel extends JComponent implements  Runnable
 
 
             try {
-                logger.addHandler(fileHandler);
+                LOGGER.addHandler(fileHandler);
                 fileHandler.setFormatter(formatter);
 
                 double remainingTime = nextDrawTime - System.nanoTime();
@@ -208,8 +204,8 @@ public class GamePanel extends JComponent implements  Runnable
                 Thread.sleep((long) remainingTime);
 
                 nextDrawTime += drawInterval;
-            } catch (Exception e) {
-                logger.info(e.getMessage());
+            } catch (InterruptedException e) {
+                LOGGER.info(e.getMessage());
                 e.printStackTrace();
             }
 
@@ -218,7 +214,7 @@ public class GamePanel extends JComponent implements  Runnable
 
     }
 
-    public void updateGameKeys() throws Exception {
+    public void updateGameKeys(){
         if (keyH.isUpPressed()){
             world.getPlayer().movePlayer(Direction.UP);
         }
@@ -237,7 +233,7 @@ public class GamePanel extends JComponent implements  Runnable
         }
 
     }
-    public void updatePauseKeys() throws Exception {
+    public void updatePauseKeys(){
         if(keyH.isReplayPressed()){
             stopMusic();
             replay = true;

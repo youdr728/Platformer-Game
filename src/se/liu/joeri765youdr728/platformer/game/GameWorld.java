@@ -4,10 +4,15 @@ import se.liu.joeri765youdr728.platformer.highscore.HighScoreList;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.FileHandler;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.util.logging.SimpleFormatter;
 
 /**
  * @author      Johannes Eriksson <joeri765 @ student.liu.se>
@@ -44,21 +49,36 @@ public class GameWorld
     private Enemy enemy = null;
 
     private final static String SEPARATOR = File.separator;
+    private static final Logger LOGGER = Logger.getLogger(GameWorld.class.getName() );
+    private SimpleFormatter formatter = new SimpleFormatter();
+    private FileHandler fileHandler;
 
-    public GameWorld(GamePanel panel) throws Exception {
+    {
+	try {
+	    fileHandler = new FileHandler("LogFile.log", 0, 1, true);
+	} catch (IOException e) {
+	    LOGGER.info(e.getMessage());
+	    e.printStackTrace();
+	}
+    }
+
+    public GameWorld(GamePanel panel) {
 	this.mapTileNum = new int[ROW][COL];
 	this.entities = new ArrayList<>();
 	this.gameTime = 120;
 	this.panel = panel;
 	loadMapFromFile("maps" + SEPARATOR + "map0" + mapNumber);
 	createEntityList();
-	panel.playMusic(0);
+	panel.playMusic(1);
     }
 
 
 
-    public void loadMapFromFile(String mapFile) throws Exception {
-	InputStream is = getClass().getResourceAsStream(mapFile);
+    public void loadMapFromFile(String mapFile){
+	try (InputStream is = getClass().getResourceAsStream(mapFile)) {
+	    LOGGER.addHandler(fileHandler);
+	    fileHandler.setFormatter(formatter);
+
 	    BufferedReader br = new BufferedReader(new InputStreamReader(is));
 
 	    for (int h = 0; h < ROW; h++) {
@@ -68,38 +88,45 @@ public class GameWorld
 		    mapTileNum[h][w] = Integer.parseInt(numbers[w]);
 		}
 	    }
+	}catch(IOException e){
+	    LOGGER.info(e.getMessage());
+	    e.printStackTrace();
+	}
     }
     public void createEntityList(){
 	for (int h = 0; h < ROW; h++) {
 	    for (int w = 0; w < COL; w++) {
 		if (mapTileNum[h][w] != 0){
 		    int n = mapTileNum[h][w];
-		    switch (n) {
-			case 1:
+
+		    EntityType entityType = EntityType.getEntityType(n);
+
+		    switch (entityType) {
+			case PLATFORM:
 			    entities.add(new Platform(w * TILE_SIZE, h * TILE_SIZE, n, 0, 0 , TILE_SIZE, TILE_SIZE));
 			    break;
-			case 2:
+			case PLAYER:
 			    player = new Player(w * TILE_SIZE, h * TILE_SIZE, n, 9, 3, 30, 45, this);
 			    break;
-			case 3:
+			case OBSTACLE:
 			    entities.add(new Obstacle(w * TILE_SIZE, h * TILE_SIZE, n, 3, 15, 42, 33));
 			    break;
-			case 4:
+			case GOAL:
 			    entities.add(new Goal(w * TILE_SIZE, h * TILE_SIZE, n, 24, 36, 6, 12, this));
 			    break;
-			case 5:
+			case COINS:
 			    entities.add(new Coin(w * TILE_SIZE, h * TILE_SIZE, n, 3, 24, 42, 24));
 			    break;
-			case 6:
+			case POWER_UP_TIME:
 			    entities.add(new TimeBoost(w * TILE_SIZE, h * TILE_SIZE, n, 9, 12, 30, 30));
 			    break;
-			case 7:
-			    entities.add(new TimeBoost(w * TILE_SIZE, h * TILE_SIZE, n, 12, 18, 24, 24));
+			case POWER_UP_SPEED:
+			    entities.add(new SpeedBoost(w * TILE_SIZE, h * TILE_SIZE, n, 12, 18, 24, 24));
 			    break;
-			case 8:
+			case POWER_UP_JUMP:
 			    entities.add(new JumpBoost(w * TILE_SIZE, h * TILE_SIZE, n, 12, 18, 24, 24));
 			    break;
-			case 9:
+			case ENEMY:
 			    enemy = new Enemy(w * TILE_SIZE, h * TILE_SIZE, n, 0, 0, 48, 48, this);
 			    entities.add(enemy);
 			    break;
@@ -114,7 +141,7 @@ public class GameWorld
 	}
     }
 
-    public void updateWorld() throws Exception {
+    public void updateWorld(){
 	startPowerupTimer();
 	timer();
 	if(enemy != null){
@@ -133,7 +160,7 @@ public class GameWorld
 	}
 
     }
-    public void updateEnemy() throws Exception {
+    public void updateEnemy(){
 	enemy.shootAttack();
 	enemy.moveAttack();
     }
@@ -174,7 +201,7 @@ public class GameWorld
 
 
 
-    public void applyCollision(Entity entity) throws Exception {
+    public void applyCollision(Entity entity) {
 	EntityType entityType = entity.getEntityType();
 
 	switch(entityType) {
@@ -252,7 +279,7 @@ public class GameWorld
 
 
     }
-    public void playSound(int i) throws Exception {
+    public void playSound(int i){
 	panel.playSoundEffect(i);
     }
 

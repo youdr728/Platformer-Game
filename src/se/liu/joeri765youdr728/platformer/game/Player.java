@@ -2,11 +2,7 @@ package se.liu.joeri765youdr728.platformer.game;
 
 import se.liu.joeri765youdr728.platformer.input.Direction;
 
-import javax.sound.sampled.LineUnavailableException;
-import javax.sound.sampled.UnsupportedAudioFileException;
 import java.awt.*;
-import java.io.IOException;
-
 /**
  * @author      Johannes Eriksson <joeri765 @ student.liu.se>
  * @author      Yousef Drgham <youdr728 @ student.liu.se>
@@ -33,10 +29,10 @@ public class Player extends AbstractEntity
 
     private GameWorld world;
     private boolean platformCollision;
-    private boolean jumping = false;
+    private boolean isJumping = false;
     private boolean canJump = true;
-    private boolean onJumpBoost = false;
-    private boolean onSpeedBoost = false;
+    private boolean isOnJumpBoost = false;
+    private boolean isOnSpeedBoost = false;
 
 
 
@@ -59,14 +55,14 @@ public class Player extends AbstractEntity
 	this.y = startY;
 
     }
-    public void jump() throws Exception {
+    public void jump(){
 
 	canJump = false;
 	this.y -= jumpSpeed;
 	tryCollision();
 	if (platformCollision || this.y < 0 || jumpSpeed == 0) {
 	    this.y += jumpSpeed;
-	    if(onJumpBoost) {
+	    if(isOnJumpBoost) {
 		jumpSpeed = BOOST_JUMP_SPEED;
 	    }
 	    else{
@@ -82,7 +78,7 @@ public class Player extends AbstractEntity
 
 
     }
-    public void moveDown() throws Exception {
+    public void moveDown(){
 	canJump = false;
 	this.y += FALL_SPEED;
 	tryCollision();
@@ -96,7 +92,7 @@ public class Player extends AbstractEntity
 	}
 
     }
-    public void movePlayer(Direction dir) throws Exception {
+    public void movePlayer(Direction dir){
 	if (dir.equals(Direction.RIGHT)){
 	    this.x += speed;
 	    tryCollision();
@@ -116,7 +112,7 @@ public class Player extends AbstractEntity
 
     }
 
-    public void tryCollision() throws Exception {
+    public void tryCollision() {
 	Rectangle playerRec = this.getRectangle();
 
 	for (int i = 0; i<world.getEntities().size(); i++) {
@@ -141,22 +137,22 @@ public class Player extends AbstractEntity
     }
 
     public void setJumpBoostOn() {
-	onJumpBoost = true;
+	isOnJumpBoost = true;
 	jumpSpeed = BOOST_JUMP_SPEED;
     }
 
     public void setJumpBoostOff() {
-	onJumpBoost = false;
+	isOnJumpBoost = false;
 	jumpSpeed = NORMAL_JUMP_SPEED;
     }
 
     public void setSpeedBoostOn() {
-	onSpeedBoost = true;
+	isOnSpeedBoost = true;
 	speed = BOOST_SPEED;
     }
 
     public void setSpeedBoostOff() {
-	onSpeedBoost = false;
+	isOnSpeedBoost = false;
 	speed = NORMAL_SPEED;
     }
 
@@ -171,11 +167,11 @@ public class Player extends AbstractEntity
     public void setPlatformCollision(boolean b) {this.platformCollision = b;}
 
     public void setIsJumping(boolean jumping) {
-	this.jumping = jumping;
+	this.isJumping = jumping;
     }
 
     public boolean isJumping() {
-	return jumping;
+	return isJumping;
     }
 
     public boolean isPlatformCollision() {
@@ -191,11 +187,11 @@ public class Player extends AbstractEntity
     }
 
     public boolean isOnJumpBoost() {
-	return onJumpBoost;
+	return isOnJumpBoost;
     }
 
     public boolean isOnSpeedBoost() {
-	return onSpeedBoost;
+	return isOnSpeedBoost;
     }
 }
 

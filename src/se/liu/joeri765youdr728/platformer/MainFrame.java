@@ -3,13 +3,7 @@ package se.liu.joeri765youdr728.platformer;
 import se.liu.joeri765youdr728.platformer.game.GamePanel;
 import se.liu.joeri765youdr728.platformer.highscore.ScorePanel;
 import se.liu.joeri765youdr728.platformer.menu.MenuPanel;
-
 import javax.swing.*;
-import java.io.IOException;
-import java.util.logging.FileHandler;
-import java.util.logging.Logger;
-import java.util.logging.SimpleFormatter;
-
 /**
  * @author      Johannes Eriksson <joeri765 @ student.liu.se>
  * @author      Yousef Drgham <youdr728 @ student.liu.se>
@@ -30,10 +24,7 @@ public class MainFrame
 
     private String currentFrame = menuFrameString;
 
-
-
-    public void startMenu() throws Exception {
-
+    public void startMenu(){
 	menuPanel = new MenuPanel(this);
 
 	String gameFrameString = "gameFrame";
@@ -59,7 +50,7 @@ public class MainFrame
 
     }
 
-    public void startGame() throws Exception {
+    public void startGame(){
 	gamePanel = new GamePanel(this);
 
 	menuFrame.remove(menuPanel);
@@ -74,7 +65,7 @@ public class MainFrame
 
     }
 
-    public void startHighscore() throws Exception {
+    public void startHighscore() {
 	scorePanel = new ScorePanel(this);
 
 	menuPanel.stopMusic();
@@ -93,22 +84,8 @@ public class MainFrame
 	this.currentFrame = currentFrame;
     }
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
 	MainFrame mainFrame = new MainFrame();
-	Logger logger = Logger.getLogger(MainFrame.class.getName() );
-	SimpleFormatter formatter = new SimpleFormatter();
-	FileHandler fileHandler = new FileHandler("LogFile.log", 0, 1, true);
-
-	try {
-	    logger.addHandler(fileHandler);
-	    fileHandler.setFormatter(formatter);
-	    mainFrame.startMenu();
-
-	}
-	catch (Exception e) {
-	    System.out.println("hey");
-	    logger.info(e.getMessage());
-	    e.printStackTrace();
-	}
+	mainFrame.startMenu();
     }
 }

@@ -33,7 +33,7 @@ public abstract class AbstractPanel extends JPanel
     }
 
 
-    public abstract void mouseClicked(int x, int y) throws Exception;
+    public abstract void mouseClicked(int x, int y);
 
     public abstract void mouseMoved(int x, int y);
 
