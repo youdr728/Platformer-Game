@@ -35,17 +35,6 @@ public class MenuPanel extends AbstractPanel
 
     private final static String SEPARATOR = File.separator;
 
-    private static final Logger LOGGER = Logger.getLogger(MenuPanel.class.getName());
-    private static SimpleFormatter formatter = new SimpleFormatter();
-    private static FileHandler fh;
-
-    static {
-	try {
-	    fh = new FileHandler("LogFile.log", 0, 1, true);
-	} catch (IOException e) {
-	    e.printStackTrace();
-	}
-    }
 
 
     public MenuPanel(MainFrame mainFrame) {
