@@ -89,6 +89,7 @@ public class Sound
 	} catch (IOException e) {
 	    logger.info(e.getMessage());
 	    e.printStackTrace();
+	    System.exit(0);
 	}
 	logger.removeHandler(fileHandler);
 	fileHandler.close();
@@ -127,6 +128,7 @@ public class Sound
 	} catch (UnsupportedAudioFileException | LineUnavailableException | IOException e) {
 	    logger.info(e.getMessage());
 	    e.printStackTrace();
+	    System.exit(0);
 	}
 	logger.removeHandler(fileHandler);
 	fileHandler.close();
