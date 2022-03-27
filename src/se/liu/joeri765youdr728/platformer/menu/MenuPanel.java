@@ -12,7 +12,6 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.logging.FileHandler;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
 
@@ -47,6 +46,7 @@ public class MenuPanel extends AbstractPanel
 	try {
 	    fileHandler = new FileHandler("LogFile.log", 0, 1, true);
 	    logger.addHandler(fileHandler);
+	    fileHandler.setFormatter(formatter);
 	    background = ImageIO.read(ClassLoader.getSystemResource("images" + SEPARATOR + "menu_background.png"));
 	} catch (IOException e) {
 	    logger.info(e.getMessage());

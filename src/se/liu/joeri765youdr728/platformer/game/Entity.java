@@ -17,14 +17,6 @@ public interface Entity
 
     int getWidth();
 
-    int getCollisionX();
-
-    int getCollisionY();
-
-    int getCollisionWidth();
-
-    int getCollisionHeight();
-
     Rectangle getRectangle();
 
     EntityType getEntityType();

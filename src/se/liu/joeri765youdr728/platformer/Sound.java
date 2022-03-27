@@ -27,8 +27,6 @@ public class Sound
 
     private Clip clipSound = null;
     private Clip clipMusic = null;
-    private URL[] soundURL = new URL[10];
-    private URL[] musicURL = new URL[10];
 
     protected final EnumMap<MusicType, URL> soundMap = createSoundURLMap();
     protected final EnumMap<MusicType, URL> musicMap = createMusicURLMap();
@@ -49,7 +47,7 @@ public class Sound
 
 	    playerDeath = ClassLoader.getSystemResource("audio" + SEPARATOR + "player_death.wav");
 	    door = ClassLoader.getSystemResource("audio" + SEPARATOR +"door.wav");
-	    point = ClassLoader.getSystemResource("audio" + SEPARATOR +"speed_jump_powerup.wav");
+	    point = ClassLoader.getSystemResource("audio" + SEPARATOR +"point.wav");
 	    speedJumpPowerup = ClassLoader.getSystemResource("audio" + SEPARATOR +"speed_jump_powerup.wav");
 	    timePowerup = ClassLoader.getSystemResource("audio" + SEPARATOR +"time_powerup.wav");
 	    jump = ClassLoader.getSystemResource("audio" + SEPARATOR +"jump8bits.wav");

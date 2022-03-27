@@ -39,6 +39,7 @@ public class HighScoreList
 	FileHandler fileHandler = null;
 	try  (PrintWriter pw = new PrintWriter("Highscores.txt")){
 	    fileHandler = new FileHandler("LogFile.log", 0, 1, true);
+	    fileHandler.setFormatter(formatter);
 	    logger.addHandler(fileHandler);
 
 

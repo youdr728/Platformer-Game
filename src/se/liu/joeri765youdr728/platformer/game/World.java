@@ -96,34 +96,36 @@ public class World
 		    int n = mapTileNum[h][w];
 
 		    EntityType entityType = EntityType.getEntityType(n);
+		    int xPosition = w * TILE_SIZE;
+		    int yPosition = h * TILE_SIZE;
 
 		    switch (entityType) {
 			case PLATFORM:
-			    entities.add(new Platform(w * TILE_SIZE, h * TILE_SIZE, EntityType.PLATFORM, 0, 0 , TILE_SIZE, TILE_SIZE));
+			    entities.add(new Platform(xPosition, yPosition, EntityType.PLATFORM, 0, 0 , TILE_SIZE, TILE_SIZE));
 			    break;
 			case PLAYER:
-			    player = new Player(w * TILE_SIZE, h * TILE_SIZE, EntityType.PLAYER, 9, 3, 30, 45, this);
+			    player = new Player(xPosition, yPosition, EntityType.PLAYER, 9, 3, 30, 45, this);
 			    break;
 			case OBSTACLE:
-			    entities.add(new Obstacle(w * TILE_SIZE, h * TILE_SIZE, EntityType.OBSTACLE, 3, 15, 42, 33));
+			    entities.add(new Obstacle(xPosition, yPosition, EntityType.OBSTACLE, 3, 15, 42, 33));
 			    break;
 			case GOAL:
-			    entities.add(new Goal(w * TILE_SIZE, h * TILE_SIZE, EntityType.GOAL, 24, 36, 6, 12));
+			    entities.add(new Goal(xPosition, yPosition, EntityType.GOAL, 24, 36, 6, 12));
 			    break;
 			case COINS:
-			    entities.add(new Coin(w * TILE_SIZE, h * TILE_SIZE, EntityType.COINS, 3, 24, 42, 24));
+			    entities.add(new Coin(xPosition, yPosition, EntityType.COINS, 3, 24, 42, 24));
 			    break;
 			case POWER_UP_TIME:
-			    entities.add(new TimeBoost(w * TILE_SIZE, h * TILE_SIZE, EntityType.POWER_UP_TIME, 9, 12, 30, 30));
+			    entities.add(new TimeBoost(xPosition, yPosition, EntityType.POWER_UP_TIME, 9, 12, 30, 30));
 			    break;
 			case POWER_UP_SPEED:
-			    entities.add(new SpeedBoost(w * TILE_SIZE, h * TILE_SIZE, EntityType.POWER_UP_SPEED, 12, 18, 24, 24));
+			    entities.add(new SpeedBoost(xPosition, yPosition, EntityType.POWER_UP_SPEED, 12, 18, 24, 24));
 			    break;
 			case POWER_UP_JUMP:
-			    entities.add(new JumpBoost(w * TILE_SIZE, h * TILE_SIZE, EntityType.POWER_UP_JUMP, 12, 18, 24, 24));
+			    entities.add(new JumpBoost(xPosition, yPosition, EntityType.POWER_UP_JUMP, 12, 18, 24, 24));
 			    break;
 			case ENEMY:
-			    enemy = new Enemy(w * TILE_SIZE, h * TILE_SIZE, EntityType.ENEMY, 0, 0, 48, 48, this);
+			    enemy = new Enemy(xPosition, yPosition, EntityType.ENEMY, 0, 0, 48, 48, this);
 			    entities.add(enemy);
 			    break;
 
@@ -215,6 +217,7 @@ public class World
 	    case GOAL:
 		if(mapNumber == 4){
 		    panel.stopMusic();
+		    panel.playSoundEffect(MusicType.DOOR);
 		    panel.playMusic(MusicType.BOSS_BACKGROUND);
 		}
 		else if(mapNumber == 5){
@@ -229,6 +232,7 @@ public class World
 		    gameTime = 120;
 		    this.createEntityList();
 		    player.respawnPlayer();
+		    panel.playSoundEffect(MusicType.DOOR);
 
 		}
 

@@ -6,6 +6,7 @@ import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
@@ -94,7 +95,7 @@ public class MyButton
 	    deathsImage = ImageIO.read(ClassLoader.getSystemResource("images" + SEPARATOR + "button_deaths.png"));
 	    coinsImage = ImageIO.read(ClassLoader.getSystemResource("images" + SEPARATOR + "button_coins.png"));
 
-	} catch (IOException e) {
+	} catch (IOException e){
 	    logger.info(e.getMessage());
 	    e.printStackTrace();
 	}

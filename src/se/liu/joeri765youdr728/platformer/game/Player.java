@@ -174,10 +174,6 @@ public class Player extends AbstractEntity
 	return isJumping;
     }
 
-    public boolean isPlatformCollision() {
-	return platformCollision;
-    }
-
     public boolean canJump() {
 	return canJump;
     }

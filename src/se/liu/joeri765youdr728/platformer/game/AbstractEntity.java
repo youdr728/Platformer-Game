@@ -52,22 +52,23 @@ public abstract class AbstractEntity implements Entity
 	return entityType;
     }
 
-    @Override public int getCollisionX() {
+    @Override public Rectangle getRectangle() {return new Rectangle(getCollisionX(),
+								    getCollisionY(), getCollisionWidth(), getCollisionHeight());}
+
+    public int getCollisionX() {
 	return getX() + collisionX;
     }
 
-    @Override public int getCollisionY() {
+    public int getCollisionY() {
 	return getY() + collisionY;
     }
 
-    @Override public int getCollisionWidth() {
+    public int getCollisionWidth() {
 	return collisionWidth;
     }
 
-    @Override public int getCollisionHeight() {
+    public int getCollisionHeight() {
 	return collisionHeight;
     }
 
-    @Override public Rectangle getRectangle() {return new Rectangle(getCollisionX(),
-						getCollisionY(), getCollisionWidth(), getCollisionHeight());}
 }

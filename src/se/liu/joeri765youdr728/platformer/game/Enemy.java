@@ -18,7 +18,7 @@ public class Enemy extends AbstractEntity
 
     private int attackCounter = 0;
     private int randomNumber;
-    private int enemyAttackSpeed = 6;
+    private final static int ENEMY_ATTACK_SPEED = 6;
 
     private static final Random RANDOM = new Random();
 
@@ -53,7 +53,7 @@ public class Enemy extends AbstractEntity
 
     public void moveAttack(){
 	for (int i = 0; i < enemyAttacks.size(); i++) {
-	    enemyAttacks.get(i).x -= enemyAttackSpeed;
+	    enemyAttacks.get(i).x -= ENEMY_ATTACK_SPEED;
 	    if( enemyAttacks.get(i).x < 0){
 		enemyAttacks.remove(enemyAttacks.get(i));
 		break;
