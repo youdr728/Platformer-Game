@@ -147,14 +147,14 @@ public class GamePanel extends JComponent implements  Runnable
 
     }
     public void playMusic(int i){
-        sound.setFileMusic(i);
+        sound.setFileSound(i, "music");
         sound.loop();
     }
     public void stopMusic(){
         sound.stop();
     }
     public void playSoundEffect(int i){
-        sound.setFileSound(i);
+        sound.setFileSound(i, "sound");
         sound.playSound();
 
     }

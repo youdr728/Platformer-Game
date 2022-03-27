@@ -52,7 +52,7 @@ public class Sound
     }
 
 
-    public void setFileSound(int i){
+    public void setFileSound(int i, String type){
 	Logger logger = Logger.getLogger(Sound.class.getName() );
 	SimpleFormatter formatter = new SimpleFormatter();
 	FileHandler fileHandler = null;
@@ -61,9 +61,18 @@ public class Sound
 	    logger.addHandler(fileHandler);
 	    fileHandler.setFormatter(formatter);
 
-	    AudioInputStream ais = AudioSystem.getAudioInputStream(soundURL[i]);
-	    clipSound = AudioSystem.getClip();
-	    clipSound.open(ais);
+	    if(type == "sound"){
+		AudioInputStream ais = AudioSystem.getAudioInputStream(soundURL[i]);
+		clipSound = AudioSystem.getClip();
+		clipSound.open(ais);
+	    }
+	    else{
+		AudioInputStream ais = AudioSystem.getAudioInputStream(musicURL[i]);
+
+		clipMusic = AudioSystem.getClip();
+		clipMusic.open(ais);
+	    }
+
 
 	} catch (UnsupportedAudioFileException | LineUnavailableException | IOException e) {
 	    logger.log(Level.FINE, e.getMessage());
@@ -72,27 +81,7 @@ public class Sound
 	logger.removeHandler(fileHandler);
 	fileHandler.close();
     }
-    public void setFileMusic(int i){
-	Logger logger = Logger.getLogger(Sound.class.getName() );
-	SimpleFormatter formatter = new SimpleFormatter();
-	FileHandler fileHandler = null;
-	try{
-	    fileHandler = new FileHandler("LogFile.log", 0, 1, true);
-	    logger.addHandler(fileHandler);
-	    fileHandler.setFormatter(formatter);
 
-	    AudioInputStream ais = AudioSystem.getAudioInputStream(musicURL[i]);
-
-	    clipMusic = AudioSystem.getClip();
-	    clipMusic.open(ais);
-
-	} catch (UnsupportedAudioFileException | LineUnavailableException | IOException e) {
-	    logger.log(Level.FINE, e.getMessage());
-	    e.printStackTrace();
-	}
-	logger.removeHandler(fileHandler);
-	fileHandler.close();
-    }
 
     public void playSound(){
 	clipSound.start();

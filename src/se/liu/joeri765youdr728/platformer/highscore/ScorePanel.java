@@ -68,7 +68,7 @@ public class ScorePanel extends AbstractPanel
     }
 
     public void playMusic(int i){
-        sound.setFileMusic(i);
+        sound.setFileSound(i, "music");
         sound.loop();
     }
     public void stopMusic(){
