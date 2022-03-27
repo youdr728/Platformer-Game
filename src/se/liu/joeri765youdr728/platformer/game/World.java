@@ -241,7 +241,7 @@ public class World
 
 	    case POWER_UP_TIME:
 		entities.remove(entity);
-		gameTime += TimeBoost.getTime();
+		gameTime += TimeBoost.getTimeBoost();
 		panel.playSoundEffect(4);
 		break;
 
