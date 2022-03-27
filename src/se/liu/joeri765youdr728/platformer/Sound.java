@@ -128,7 +128,7 @@ public class Sound
 	} catch (UnsupportedAudioFileException | LineUnavailableException | IOException e) {
 	    logger.info(e.getMessage());
 	    e.printStackTrace();
-	    System.exit(0);
+	    System.exit(1);
 	}
 	logger.removeHandler(fileHandler);
 	fileHandler.close();
