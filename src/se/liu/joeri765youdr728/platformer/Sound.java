@@ -1,6 +1,5 @@
 package se.liu.joeri765youdr728.platformer;
 
-import se.liu.joeri765youdr728.platformer.input.MyButton;
 
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
@@ -11,7 +10,6 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.logging.FileHandler;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
 

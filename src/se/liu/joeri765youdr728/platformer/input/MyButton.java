@@ -1,7 +1,6 @@
 package se.liu.joeri765youdr728.platformer.input;
 
 
-import se.liu.joeri765youdr728.platformer.highscore.ScorePanel;
 
 import javax.imageio.ImageIO;
 import java.awt.*;

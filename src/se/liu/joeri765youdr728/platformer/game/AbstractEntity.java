@@ -1,8 +1,6 @@
 package se.liu.joeri765youdr728.platformer.game;
 
 import java.awt.*;
-import java.util.HashMap;
-import java.util.Map;
 /**
  * @author      Johannes Eriksson <joeri765 @ student.liu.se>
  * @author      Yousef Drgham <youdr728 @ student.liu.se>

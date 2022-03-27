@@ -1,7 +1,6 @@
 package se.liu.joeri765youdr728.platformer.highscore;
 
 import com.google.gson.Gson;
-import se.liu.joeri765youdr728.platformer.game.GamePanel;
 import se.liu.joeri765youdr728.platformer.game.World;
 
 import java.io.FileReader;
@@ -10,7 +9,6 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.FileHandler;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
 
