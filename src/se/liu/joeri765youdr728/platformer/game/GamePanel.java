@@ -1,5 +1,6 @@
 package se.liu.joeri765youdr728.platformer.game;
 
+import se.liu.joeri765youdr728.platformer.MusicType;
 import se.liu.joeri765youdr728.platformer.input.Direction;
 import se.liu.joeri765youdr728.platformer.MainFrame;
 import se.liu.joeri765youdr728.platformer.Sound;
@@ -145,15 +146,15 @@ public class GamePanel extends JComponent implements  Runnable
         }
 
     }
-    public void playMusic(int i){
-        sound.setFileSound(i, "music");
+    public void playMusic(MusicType musicType){
+        sound.setFileSound(musicType, "music");
         sound.loop();
     }
     public void stopMusic(){
         sound.stop();
     }
-    public void playSoundEffect(int i){
-        sound.setFileSound(i, "sound");
+    public void playSoundEffect(MusicType musicType){
+        sound.setFileSound(musicType, "sound");
         sound.playSound();
 
     }
@@ -232,7 +233,7 @@ public class GamePanel extends JComponent implements  Runnable
         }
         if (keyH.isSpacePressed() && world.getPlayer().canJump()){
             world.getPlayer().setIsJumping(true);
-            playSoundEffect(5);
+            playSoundEffect(MusicType.JUMP);
         }
 
     }

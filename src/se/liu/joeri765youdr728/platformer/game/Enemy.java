@@ -1,5 +1,7 @@
 package se.liu.joeri765youdr728.platformer.game;
 
+import se.liu.joeri765youdr728.platformer.MusicType;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -16,6 +18,7 @@ public class Enemy extends AbstractEntity
 
     private int attackCounter = 0;
     private int randomNumber;
+    private int enemyAttackSpeed = 6;
 
     private static final Random RANDOM = new Random();
 
@@ -35,7 +38,7 @@ public class Enemy extends AbstractEntity
 	    randomNumber = getRandomNumberUsingNextInt(fastestAttack, slowestAttack);
 	    EnemyAttack
 		    attack = new EnemyAttack(x - tileSize, y, EntityType.ENEMY_ATTACK, 12, 12, 27, 27);
-	    world.playSound(6);
+	    world.playSound(MusicType.FIREBALL);
 	    enemyAttacks.add(attack);
 	    attackCounter = 0;
 	}
@@ -50,7 +53,7 @@ public class Enemy extends AbstractEntity
 
     public void moveAttack(){
 	for (int i = 0; i < enemyAttacks.size(); i++) {
-	    enemyAttacks.get(i).x -= 6;
+	    enemyAttacks.get(i).x -= enemyAttackSpeed;
 	    if( enemyAttacks.get(i).x < 0){
 		enemyAttacks.remove(enemyAttacks.get(i));
 		break;

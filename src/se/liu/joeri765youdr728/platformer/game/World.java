@@ -1,5 +1,6 @@
 package se.liu.joeri765youdr728.platformer.game;
 
+import se.liu.joeri765youdr728.platformer.MusicType;
 import se.liu.joeri765youdr728.platformer.highscore.HighScoreList;
 
 import java.io.BufferedReader;
@@ -57,7 +58,7 @@ public class World
 	this.panel = panel;
 	loadMapFromFile("maps" + SEPARATOR + "map0" + mapNumber);
 	createEntityList();
-	panel.playMusic(0);
+	panel.playMusic(MusicType.GAME_BACKGROUND);
     }
 
 
@@ -207,14 +208,14 @@ public class World
 
 	    case COINS:
 		entities.remove(entity);
-		panel.playSoundEffect(2);
+		panel.playSoundEffect(MusicType.POINT);
 		coinCounter += 1;
 		break;
 
 	    case GOAL:
 		if(mapNumber == 4){
 		    panel.stopMusic();
-		    panel.playMusic(1);
+		    panel.playMusic(MusicType.BOSS_BACKGROUND);
 		}
 		else if(mapNumber == 5){
 		    this.gameWon = true;
@@ -228,21 +229,21 @@ public class World
 		    gameTime = 120;
 		    this.createEntityList();
 		    player.respawnPlayer();
-		    panel.playSoundEffect(1);
+
 		}
 
 		break;
 
 	    case OBSTACLE:
 		player.respawnPlayer();
-		panel.playSoundEffect(0);
+		panel.playSoundEffect(MusicType.PLAYER_DEATH);
 		playerDead = true;
 		break;
 
 	    case POWER_UP_TIME:
 		entities.remove(entity);
 		gameTime += TimeBoost.getTimeBoost();
-		panel.playSoundEffect(4);
+		panel.playSoundEffect(MusicType.TIME_POWERUP);
 		break;
 
 	    case POWER_UP_JUMP:
@@ -250,7 +251,7 @@ public class World
 		player.setJumpBoostOn();
 		player.setSpeedBoostOff();
 		boostTimeCounter = 0;
-		panel.playSoundEffect(3);
+		panel.playSoundEffect(MusicType.SPEED_JUMP_POWERUP);
 		break;
 
 	    case POWER_UP_SPEED:
@@ -258,15 +259,16 @@ public class World
 		player.setSpeedBoostOn();
 		player.setJumpBoostOff();
 		boostTimeCounter = 0;
-		panel.playSoundEffect(3);
+		panel.playSoundEffect(MusicType.SPEED_JUMP_POWERUP);
 		break;
 
 	    case ENEMY:
 		player.respawnPlayer();
+		panel.playSoundEffect(MusicType.PLAYER_DEATH);
 		break;
 
 	    case ENEMY_ATTACK:
-		panel.playSoundEffect(0);
+		panel.playSoundEffect(MusicType.PLAYER_DEATH);
 		player.respawnPlayer();
 		getEnemyAttack().remove(entity);
 		break;
@@ -274,8 +276,8 @@ public class World
 
 
     }
-    public void playSound(int i){
-	panel.playSoundEffect(i);
+    public void playSound(MusicType musicType){
+	panel.playSoundEffect(musicType);
     }
 
     public Enemy getEnemy() {

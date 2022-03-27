@@ -2,6 +2,7 @@ package se.liu.joeri765youdr728.platformer.menu;
 
 import se.liu.joeri765youdr728.platformer.AbstractPanel;
 import se.liu.joeri765youdr728.platformer.MainFrame;
+import se.liu.joeri765youdr728.platformer.MusicType;
 import se.liu.joeri765youdr728.platformer.input.MyButton;
 import se.liu.joeri765youdr728.platformer.Sound;
 
@@ -54,7 +55,7 @@ public class MenuPanel extends AbstractPanel
 	logger.removeHandler(fileHandler);
 	fileHandler.close();
 
-	playMusic(2);
+	playMusic(MusicType.MENU_BACKGROUND);
 	createButtons();
     }
 
@@ -72,8 +73,8 @@ public class MenuPanel extends AbstractPanel
 	buttonQuit.draw(g);
     }
 
-    public void playMusic(int i){
-	sound.setFileSound(i, "music");
+    public void playMusic(MusicType musicType){
+	sound.setFileSound(musicType, "music");
 	sound.loop();
     }
     public void stopMusic(){
