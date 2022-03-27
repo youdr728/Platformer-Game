@@ -8,8 +8,8 @@ package se.liu.joeri765youdr728.platformer.game;
  */
 public class Platform extends AbstractEntity
 {
-    public Platform(final int x, final int y, final int typeNumber,
+    public Platform(final int x, final int y, final EntityType entityType,
 		    int collisionX, int collisionY, int collisionWidth, int collisionHeight) {
-	super(x, y, typeNumber, collisionX, collisionY, collisionWidth, collisionHeight);
+	super(x, y, entityType, collisionX, collisionY, collisionWidth, collisionHeight);
     }
 }

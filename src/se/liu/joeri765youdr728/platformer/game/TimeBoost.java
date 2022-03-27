@@ -10,10 +10,10 @@ public class TimeBoost extends AbstractEntity
 {
 
     private final static  int TIME_BOOST = 15;
-    public TimeBoost(final int x, final int y, final int typeNumber, final int collisionX, final int collisionY, final int collisionWidth,
+    public TimeBoost(final int x, final int y, final EntityType entityType, final int collisionX, final int collisionY, final int collisionWidth,
 		     final int collisionHeight)
     {
-	super(x, y, typeNumber, collisionX, collisionY, collisionWidth, collisionHeight);
+	super(x, y, entityType, collisionX, collisionY, collisionWidth, collisionHeight);
     }
 
     public static int getTime() {

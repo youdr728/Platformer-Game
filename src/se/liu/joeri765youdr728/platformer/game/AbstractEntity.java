@@ -13,39 +13,25 @@ public abstract class AbstractEntity implements Entity
 {
     protected int x;
     protected int y;
-    protected int typeNumber;
+    protected EntityType entityType;
 
-    protected final Map<Integer, EntityType> entityTypeMap = createEntityTypeMap();
     protected int collisionX, collisionY, collisionWidth, collisionHeight;
 
     protected final static int HEIGHT = 48;
     protected final static int WIDTH = 48;
 
-    protected AbstractEntity(final int x, final int y, final int typeNumber, int collisionX, int collisionY, int collisionWidth,
+    protected AbstractEntity(final int x, final int y, final EntityType entityType, int collisionX, int collisionY, int collisionWidth,
 			     int collisionHeight) {
 	this.x = x;
 	this.y = y;
-	this.typeNumber = typeNumber;
+	this.entityType = entityType;
 	this.collisionX = collisionX;
 	this.collisionY = collisionY;
 	this.collisionWidth = collisionWidth;
 	this.collisionHeight = collisionHeight;
     }
 
-    public static Map<Integer, EntityType> createEntityTypeMap(){
-	Map<Integer, EntityType> entityTypeMap = new HashMap<>();
-	entityTypeMap.put(1, EntityType.PLATFORM);
-	entityTypeMap.put(2, EntityType.PLAYER);
-	entityTypeMap.put(3, EntityType.OBSTACLE);
-	entityTypeMap.put(4, EntityType.GOAL);
-	entityTypeMap.put(5, EntityType.COINS);
-	entityTypeMap.put(6, EntityType.POWER_UP_TIME);
-	entityTypeMap.put(7, EntityType.POWER_UP_JUMP);
-	entityTypeMap.put(8, EntityType.POWER_UP_SPEED);
-	entityTypeMap.put(9, EntityType.ENEMY);
-	entityTypeMap.put(10, EntityType.ENEMY_ATTACK);
-	return entityTypeMap;
-    }
+
 
 
     @Override public int getX() {
@@ -65,7 +51,7 @@ public abstract class AbstractEntity implements Entity
     }
 
     @Override public EntityType getEntityType() {
-	return entityTypeMap.get(typeNumber);
+	return entityType;
     }
 
     @Override public int getCollisionX() {

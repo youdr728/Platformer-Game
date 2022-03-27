@@ -40,9 +40,9 @@ public class Player extends AbstractEntity
 
 
 
-    public Player(final int x, final int y, final int typeNumber,
+    public Player(final int x, final int y, final EntityType entityType,
 		  int collisionX, int collisionY, int collisionWidth, int collisionHeight, final World world) {
-	super(x, y, typeNumber, collisionX, collisionY, collisionWidth, collisionHeight);
+	super(x, y, entityType, collisionX, collisionY, collisionWidth, collisionHeight);
 	this.world = world;
 	this.startX = x;
 	this.startY = y;

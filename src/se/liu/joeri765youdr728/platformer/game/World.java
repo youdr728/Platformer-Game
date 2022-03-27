@@ -98,31 +98,31 @@ public class World
 
 		    switch (entityType) {
 			case PLATFORM:
-			    entities.add(new Platform(w * TILE_SIZE, h * TILE_SIZE, n, 0, 0 , TILE_SIZE, TILE_SIZE));
+			    entities.add(new Platform(w * TILE_SIZE, h * TILE_SIZE, EntityType.PLATFORM, 0, 0 , TILE_SIZE, TILE_SIZE));
 			    break;
 			case PLAYER:
-			    player = new Player(w * TILE_SIZE, h * TILE_SIZE, n, 9, 3, 30, 45, this);
+			    player = new Player(w * TILE_SIZE, h * TILE_SIZE, EntityType.PLAYER, 9, 3, 30, 45, this);
 			    break;
 			case OBSTACLE:
-			    entities.add(new Obstacle(w * TILE_SIZE, h * TILE_SIZE, n, 3, 15, 42, 33));
+			    entities.add(new Obstacle(w * TILE_SIZE, h * TILE_SIZE, EntityType.OBSTACLE, 3, 15, 42, 33));
 			    break;
 			case GOAL:
-			    entities.add(new Goal(w * TILE_SIZE, h * TILE_SIZE, n, 24, 36, 6, 12));
+			    entities.add(new Goal(w * TILE_SIZE, h * TILE_SIZE, EntityType.GOAL, 24, 36, 6, 12));
 			    break;
 			case COINS:
-			    entities.add(new Coin(w * TILE_SIZE, h * TILE_SIZE, n, 3, 24, 42, 24));
+			    entities.add(new Coin(w * TILE_SIZE, h * TILE_SIZE, EntityType.COINS, 3, 24, 42, 24));
 			    break;
 			case POWER_UP_TIME:
-			    entities.add(new TimeBoost(w * TILE_SIZE, h * TILE_SIZE, n, 9, 12, 30, 30));
+			    entities.add(new TimeBoost(w * TILE_SIZE, h * TILE_SIZE, EntityType.POWER_UP_TIME, 9, 12, 30, 30));
 			    break;
 			case POWER_UP_SPEED:
-			    entities.add(new SpeedBoost(w * TILE_SIZE, h * TILE_SIZE, n, 12, 18, 24, 24));
+			    entities.add(new SpeedBoost(w * TILE_SIZE, h * TILE_SIZE, EntityType.POWER_UP_SPEED, 12, 18, 24, 24));
 			    break;
 			case POWER_UP_JUMP:
-			    entities.add(new JumpBoost(w * TILE_SIZE, h * TILE_SIZE, n, 12, 18, 24, 24));
+			    entities.add(new JumpBoost(w * TILE_SIZE, h * TILE_SIZE, EntityType.POWER_UP_JUMP, 12, 18, 24, 24));
 			    break;
 			case ENEMY:
-			    enemy = new Enemy(w * TILE_SIZE, h * TILE_SIZE, n, 0, 0, 48, 48, this);
+			    enemy = new Enemy(w * TILE_SIZE, h * TILE_SIZE, EntityType.ENEMY, 0, 0, 48, 48, this);
 			    entities.add(enemy);
 			    break;
 
