@@ -61,7 +61,7 @@ public class Sound
 	    logger.addHandler(fileHandler);
 	    fileHandler.setFormatter(formatter);
 
-	    if(type == "sound"){
+	    if(type.equals("sound")){
 		AudioInputStream ais = AudioSystem.getAudioInputStream(soundURL[i]);
 		clipSound = AudioSystem.getClip();
 		clipSound.open(ais);
@@ -75,7 +75,7 @@ public class Sound
 
 
 	} catch (UnsupportedAudioFileException | LineUnavailableException | IOException e) {
-	    logger.log(Level.FINE, e.getMessage());
+	    logger.info(e.getMessage());
 	    e.printStackTrace();
 	}
 	logger.removeHandler(fileHandler);

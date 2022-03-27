@@ -51,15 +51,19 @@ public class MenuPanel extends AbstractPanel
     public MenuPanel(MainFrame mainFrame) {
 	this.mainFrame = mainFrame;
 
+	Logger logger = Logger.getLogger(MenuPanel.class.getName() );
+	SimpleFormatter formatter = new SimpleFormatter();
+	FileHandler fileHandler = null;
 	try {
-	    LOGGER.addHandler(fh);
-	    fh.setFormatter(formatter);
-
+	    fileHandler = new FileHandler("LogFile.log", 0, 1, true);
+	    logger.addHandler(fileHandler);
 	    background = ImageIO.read(ClassLoader.getSystemResource("images" + SEPARATOR + "menu_background.png"));
 	} catch (IOException e) {
-	    LOGGER.log(Level.FINE, e.getMessage());
+	    logger.info(e.getMessage());
 	    e.printStackTrace();
 	}
+	logger.removeHandler(fileHandler);
+	fileHandler.close();
 
 	playMusic(2);
 	createButtons();
