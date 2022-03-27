@@ -11,7 +11,7 @@ import java.util.Random;
  */
 public class Enemy extends AbstractEntity
 {
-    private GameWorld world;
+    private World world;
     private List<EnemyAttack> enemyAttacks;
 
     private int attackCounter = 0;
@@ -20,7 +20,7 @@ public class Enemy extends AbstractEntity
     private static final Random RANDOM = new Random();
 
     public Enemy(final int x, final int y, final int typeNumber, final int collisionX, final int collisionY, final int collisionWidth,
-		 final int collisionHeight, final GameWorld world) {
+		 final int collisionHeight, final World world) {
 	super(x, y, typeNumber, collisionX, collisionY, collisionWidth, collisionHeight);
 	this.world = world;
 	this.enemyAttacks = new ArrayList<>();

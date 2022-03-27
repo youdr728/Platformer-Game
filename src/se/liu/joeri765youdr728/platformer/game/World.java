@@ -10,7 +10,6 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.FileHandler;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
 
@@ -20,7 +19,7 @@ import java.util.logging.SimpleFormatter;
  * @version     1.0
  * @since       1.0
  */
-public class GameWorld
+public class World
 {
     private static final int ROW = 20;
     private static final int COL = 20;
@@ -49,7 +48,7 @@ public class GameWorld
     private Enemy enemy = null;
 
     private final static String SEPARATOR = File.separator;
-    private static final Logger LOGGER = Logger.getLogger(GameWorld.class.getName() );
+    private static final Logger LOGGER = Logger.getLogger(World.class.getName() );
     private SimpleFormatter formatter = new SimpleFormatter();
     private FileHandler fileHandler;
 
@@ -62,14 +61,14 @@ public class GameWorld
 	}
     }
 
-    public GameWorld(GamePanel panel) {
+    public World(GamePanel panel) {
 	this.mapTileNum = new int[ROW][COL];
 	this.entities = new ArrayList<>();
 	this.gameTime = 120;
 	this.panel = panel;
 	loadMapFromFile("maps" + SEPARATOR + "map0" + mapNumber);
 	createEntityList();
-	panel.playMusic(1);
+	panel.playMusic(0);
     }
 
 
@@ -112,7 +111,7 @@ public class GameWorld
 			    entities.add(new Obstacle(w * TILE_SIZE, h * TILE_SIZE, n, 3, 15, 42, 33));
 			    break;
 			case GOAL:
-			    entities.add(new Goal(w * TILE_SIZE, h * TILE_SIZE, n, 24, 36, 6, 12, this));
+			    entities.add(new Goal(w * TILE_SIZE, h * TILE_SIZE, n, 24, 36, 6, 12));
 			    break;
 			case COINS:
 			    entities.add(new Coin(w * TILE_SIZE, h * TILE_SIZE, n, 3, 24, 42, 24));
@@ -246,7 +245,7 @@ public class GameWorld
 
 	    case POWER_UP_TIME:
 		entities.remove(entity);
-		gameTime += TimeBoost.getTime(this);
+		gameTime += TimeBoost.getTime();
 		panel.playSoundEffect(4);
 		break;
 

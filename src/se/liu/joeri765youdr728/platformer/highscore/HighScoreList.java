@@ -1,7 +1,7 @@
 package se.liu.joeri765youdr728.platformer.highscore;
 
 import com.google.gson.Gson;
-import se.liu.joeri765youdr728.platformer.game.GameWorld;
+import se.liu.joeri765youdr728.platformer.game.World;
 
 import java.io.FileReader;
 import java.io.IOException;
@@ -36,7 +36,7 @@ public class HighScoreList
 	}
     }
 
-    public void addHighscore(GameWorld world){
+    public void addHighscore(World world){
 
 	HighScore highscore = new HighScore(world.getScoreTime(), world.getDeathCounter(), world.getCoinCounter() );
 	highscoreList.add(highscore);

@@ -16,7 +16,7 @@ public class TimeBoost extends AbstractEntity
 	super(x, y, typeNumber, collisionX, collisionY, collisionWidth, collisionHeight);
     }
 
-    public static int getTime(GameWorld world) {
+    public static int getTime() {
 	return TIME_BOOST;
     }
 }

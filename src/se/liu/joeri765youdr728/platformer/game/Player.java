@@ -27,7 +27,7 @@ public class Player extends AbstractEntity
     private static final int BOOST_JUMP_SPEED = 20;
 
 
-    private GameWorld world;
+    private World world;
     private boolean platformCollision;
     private boolean isJumping = false;
     private boolean canJump = true;
@@ -41,7 +41,7 @@ public class Player extends AbstractEntity
 
 
     public Player(final int x, final int y, final int typeNumber,
-		  int collisionX, int collisionY, int collisionWidth, int collisionHeight, final GameWorld world) {
+		  int collisionX, int collisionY, int collisionWidth, int collisionHeight, final World world) {
 	super(x, y, typeNumber, collisionX, collisionY, collisionWidth, collisionHeight);
 	this.world = world;
 	this.startX = x;

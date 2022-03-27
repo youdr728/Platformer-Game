@@ -28,7 +28,7 @@ public class GamePanel extends JComponent implements  Runnable
 
     //------Classes
     private MainFrame mainFrame;
-    private GameWorld world;
+    private World world;
     private Sound sound = new Sound();
     private KeyHandler keyH = new KeyHandler();
     private Thread gameThread = null;
@@ -78,7 +78,7 @@ public class GamePanel extends JComponent implements  Runnable
 	this.setPreferredSize(new Dimension(SCREEN_WIDTH, SCREEN_HEIGHT));
 	this.setDoubleBuffered(true);
         this.repaint();
-        this.world = new GameWorld(this);
+        this.world = new World(this);
         this.addKeyListener(keyH);
         this.setFocusable(true);
 
@@ -175,7 +175,7 @@ public class GamePanel extends JComponent implements  Runnable
                 stopMusic();
                 updatePauseKeys();
                 if(replay){
-                    world = new GameWorld(this);
+                    world = new World(this);
                     keyH.resetKeys();
                     gameOver = false;
                     replay = false;
