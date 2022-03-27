@@ -1,6 +1,7 @@
 package se.liu.joeri765youdr728.platformer.highscore;
 
 import com.google.gson.Gson;
+import se.liu.joeri765youdr728.platformer.game.GamePanel;
 import se.liu.joeri765youdr728.platformer.game.World;
 
 import java.io.FileReader;
@@ -24,17 +25,6 @@ public class HighScoreList
 
     private List<HighScore> highscoreList = new ArrayList<>();
 
-    private static final Logger LOGGER = Logger.getLogger(HighScoreList.class.getName() );
-    private static SimpleFormatter formatter = new SimpleFormatter();
-    private static FileHandler fh;
-
-    static {
-	try {
-	    fh = new FileHandler("LogFile.log", 0, 1, true);
-	} catch (IOException e) {
-	    e.printStackTrace();
-	}
-    }
 
     public void addHighscore(World world){
 
@@ -46,35 +36,47 @@ public class HighScoreList
     public void saveHighscoreList() {
 
 	Gson gson = new Gson();
-
-
+	Logger logger = Logger.getLogger(HighScoreList.class.getName() );
+	SimpleFormatter formatter = new SimpleFormatter();
+	FileHandler fileHandler = null;
 	try  (PrintWriter pw = new PrintWriter("Highscores.txt")){
-	    LOGGER.addHandler(fh);
-	    fh.setFormatter(formatter);
+	    fileHandler = new FileHandler("LogFile.log", 0, 1, true);
+	    logger.addHandler(fileHandler);
+
 
 	    pw.println(gson.toJson(this));
 	    pw.flush();
 	}
 	catch (IOException e) {
-	    LOGGER.log(Level.FINE,e.getMessage());
+	    logger.info(e.getMessage());
 	    e.printStackTrace();
 	}
+	logger.removeHandler(fileHandler);
+	fileHandler.close();
 
     }
 
     public static HighScoreList loadHighscoreList()  {
+
 	Gson gson = new Gson();
+	Logger logger = Logger.getLogger(HighScoreList.class.getName() );
+	SimpleFormatter formatter = new SimpleFormatter();
+	FileHandler fileHandler = null;
 	try (FileReader fr = new FileReader("Highscores.txt")){
-	    LOGGER.addHandler(fh);
-	    fh.setFormatter(formatter);
+	    fileHandler = new FileHandler("LogFile.log", 0, 1, true);
+	    logger.addHandler(fileHandler);
+	    fileHandler.setFormatter(formatter);
 
 	    HighScoreList scores = gson.fromJson(fr, HighScoreList.class);
 
 	    return scores;
 
 	} catch (IOException e){
-	    LOGGER.log(Level.FINE,e.getMessage());
+	    logger.info(e.getMessage());
+	    e.printStackTrace();
 	}
+	logger.removeHandler(fileHandler);
+	fileHandler.close();
 	return new HighScoreList();
     }
 

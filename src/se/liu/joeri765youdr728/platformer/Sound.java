@@ -1,5 +1,7 @@
 package se.liu.joeri765youdr728.platformer;
 
+import se.liu.joeri765youdr728.platformer.input.MyButton;
+
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
@@ -30,17 +32,7 @@ public class Sound
 
     private final static String SEPARATOR = File.separator;
 
-    private static final Logger LOGGER = Logger.getLogger(Sound.class.getName() );
-    private static SimpleFormatter formatter = new SimpleFormatter();
-    private static FileHandler fh;
 
-    static {
-	try {
-	    fh = new FileHandler("LogFile.log", 0, 1, true);
-	} catch (IOException e) {
-	    e.printStackTrace();
-	}
-    }
 
     public Sound() {
 	soundURL[0] = ClassLoader.getSystemResource("audio" + SEPARATOR + "player_death.wav");
@@ -61,23 +53,33 @@ public class Sound
 
 
     public void setFileSound(int i){
+	Logger logger = Logger.getLogger(Sound.class.getName() );
+	SimpleFormatter formatter = new SimpleFormatter();
+	FileHandler fileHandler = null;
 	try{
-	    LOGGER.addHandler(fh);
-	    fh.setFormatter(formatter);
+	    fileHandler = new FileHandler("LogFile.log", 0, 1, true);
+	    logger.addHandler(fileHandler);
+	    fileHandler.setFormatter(formatter);
 
 	    AudioInputStream ais = AudioSystem.getAudioInputStream(soundURL[i]);
 	    clipSound = AudioSystem.getClip();
 	    clipSound.open(ais);
 
 	} catch (UnsupportedAudioFileException | LineUnavailableException | IOException e) {
-	    LOGGER.log(Level.FINE, e.getMessage());
+	    logger.log(Level.FINE, e.getMessage());
 	    e.printStackTrace();
 	}
+	logger.removeHandler(fileHandler);
+	fileHandler.close();
     }
     public void setFileMusic(int i){
+	Logger logger = Logger.getLogger(Sound.class.getName() );
+	SimpleFormatter formatter = new SimpleFormatter();
+	FileHandler fileHandler = null;
 	try{
-	    LOGGER.addHandler(fh);
-	    fh.setFormatter(formatter);
+	    fileHandler = new FileHandler("LogFile.log", 0, 1, true);
+	    logger.addHandler(fileHandler);
+	    fileHandler.setFormatter(formatter);
 
 	    AudioInputStream ais = AudioSystem.getAudioInputStream(musicURL[i]);
 
@@ -85,9 +87,11 @@ public class Sound
 	    clipMusic.open(ais);
 
 	} catch (UnsupportedAudioFileException | LineUnavailableException | IOException e) {
-	    LOGGER.log(Level.FINE, e.getMessage());
+	    logger.log(Level.FINE, e.getMessage());
 	    e.printStackTrace();
 	}
+	logger.removeHandler(fileHandler);
+	fileHandler.close();
     }
 
     public void playSound(){

@@ -63,12 +63,13 @@ public class World
 
 
     public void loadMapFromFile(String mapFile){
-	Logger LOGGER = Logger.getLogger(World.class.getName() );
+	Logger logger = Logger.getLogger(World.class.getName() );
 	SimpleFormatter formatter = new SimpleFormatter();
-	try (InputStream is = getClass().getResourceAsStream(mapFile)) {
+	FileHandler fileHandler = null;
 
-	    FileHandler fileHandler = new FileHandler("LogFile.log", 0, 1, true);
-	    LOGGER.addHandler(fileHandler);
+	try (InputStream is = getClass().getResourceAsStream(mapFile)) {
+	    fileHandler = new FileHandler("LogFile.log", 0, 1, true);
+	    logger.addHandler(fileHandler);
 	    fileHandler.setFormatter(formatter);
 
 	    BufferedReader br = new BufferedReader(new InputStreamReader(is));
@@ -81,9 +82,11 @@ public class World
 		}
 	    }
 	}catch(IOException e){
-	    LOGGER.info(e.getMessage());
+	    logger.info(e.getMessage());
 	    e.printStackTrace();
 	}
+	logger.removeHandler(fileHandler);
+	fileHandler.close();
     }
     public void createEntityList(){
 	for (int h = 0; h < ROW; h++) {

@@ -33,19 +33,6 @@ public class GamePanel extends JComponent implements  Runnable
     private KeyHandler keyH = new KeyHandler();
     private Thread gameThread = null;
 
-    //------Logging
-    private static final Logger LOGGER = Logger.getLogger(GamePanel.class.getName() );
-    private SimpleFormatter formatter = new SimpleFormatter();
-    private FileHandler fileHandler;
-    {
-        try {
-            fileHandler = new FileHandler("LogFile.log", 0, 1, true);
-        } catch (IOException e) {
-            LOGGER.info(e.getMessage());
-            e.printStackTrace();
-        }
-    }
-
     //------Images and fileReading
     protected final EnumMap<EntityType, BufferedImage> tileMap = createTileMap();
     private BufferedImage loseImage = null, winImage = null;
@@ -82,15 +69,18 @@ public class GamePanel extends JComponent implements  Runnable
         this.addKeyListener(keyH);
         this.setFocusable(true);
 
+        Logger logger = Logger.getLogger(GamePanel.class.getName() );
+        SimpleFormatter formatter = new SimpleFormatter();
         try {
-            LOGGER.addHandler(fileHandler);
+            FileHandler fileHandler = new FileHandler("LogFile.log", 0, 1, true);
+            logger.addHandler(fileHandler);
             fileHandler.setFormatter(formatter);
 
             loseImage = ImageIO.read(ClassLoader.getSystemResource("images" + SEPARATOR + "lose_image.png"));
             winImage = ImageIO.read(ClassLoader.getSystemResource("images" + SEPARATOR + "win_image2.png"));
 
         } catch (IOException e) {
-            LOGGER.info(e.getMessage());
+            logger.info(e.getMessage());
             e.printStackTrace();
         }
     }
@@ -99,8 +89,12 @@ public class GamePanel extends JComponent implements  Runnable
         BufferedImage wall = null, platform = null, player = null, spikes = null, door = null, chest = null, timeBoost = null,
                 jumpBoost = null, speedBoost = null, enemy = null, enemyAttack = null;
 
+        Logger logger = Logger.getLogger(GamePanel.class.getName() );
+        SimpleFormatter formatter = new SimpleFormatter();
+        FileHandler fileHandler = null;
         try{
-            LOGGER.addHandler(fileHandler);
+            fileHandler = new FileHandler("LogFile.log", 0, 1, true);
+            logger.addHandler(fileHandler);
             fileHandler.setFormatter(formatter);
 
             platform = ImageIO.read(ClassLoader.getSystemResource("images" + SEPARATOR + "platform2.png"));
@@ -117,9 +111,12 @@ public class GamePanel extends JComponent implements  Runnable
 
 
         } catch (IOException e) {
-            LOGGER.info(e.getMessage());
+            logger.info(e.getMessage());
             e.printStackTrace();
         }
+        logger.removeHandler(fileHandler);
+        fileHandler.close();
+
 
         EnumMap<EntityType, BufferedImage> tileMap = new EnumMap<>(EntityType.class);
         tileMap.put(EntityType.WALL, wall);
@@ -190,9 +187,12 @@ public class GamePanel extends JComponent implements  Runnable
 
             repaint();
 
-
+            Logger logger = Logger.getLogger(GamePanel.class.getName() );
+            SimpleFormatter formatter = new SimpleFormatter();
+            FileHandler fileHandler = null;
             try {
-                LOGGER.addHandler(fileHandler);
+                fileHandler = new FileHandler("LogFile.log", 0, 1, true);
+                logger.addHandler(fileHandler);
                 fileHandler.setFormatter(formatter);
 
                 double remainingTime = nextDrawTime - System.nanoTime();
@@ -201,13 +201,17 @@ public class GamePanel extends JComponent implements  Runnable
                     remainingTime = 0;
                 }
 
+
                 Thread.sleep((long) remainingTime);
 
                 nextDrawTime += drawInterval;
-            } catch (InterruptedException e) {
-                LOGGER.info(e.getMessage());
+            } catch (InterruptedException | IOException e) {
+                logger.info(e.getMessage());
                 e.printStackTrace();
+
             }
+            logger.removeHandler(fileHandler);
+            fileHandler.close();
 
 
         }

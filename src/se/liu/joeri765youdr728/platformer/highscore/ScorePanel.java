@@ -40,17 +40,7 @@ public class ScorePanel extends AbstractPanel
 
     private final static String SEPARATOR = File.separator;
 
-    private static final Logger LOGGER = Logger.getLogger(ScorePanel.class.getName() );
-    private static SimpleFormatter formatter = new SimpleFormatter();
-    private static FileHandler fh;
 
-    static {
-        try {
-            fh = new FileHandler("LogFile.log", 0, 1, true);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
 
     public ScorePanel(MainFrame mainFrame) {
         this.mainFrame = mainFrame;
@@ -58,16 +48,22 @@ public class ScorePanel extends AbstractPanel
         playMusic(3);
         createButtons();
 
+        Logger logger = Logger.getLogger(ScorePanel.class.getName() );
+        SimpleFormatter formatter = new SimpleFormatter();
+        FileHandler fileHandler = null;
         try {
-            LOGGER.addHandler(fh);
-            fh.setFormatter(formatter);
+            fileHandler = new FileHandler("LogFile.log", 0, 1, true);
+            logger.addHandler(fileHandler);
+            fileHandler.setFormatter(formatter);
 
             background = ImageIO.read(ClassLoader.getSystemResource("images" + SEPARATOR + "HighScore_list.png"));
         }
         catch (IOException e) {
-            LOGGER.log(Level.FINE, e.getMessage());
+            logger.info(e.getMessage());
             e.printStackTrace();
         }
+        logger.removeHandler(fileHandler);
+        fileHandler.close();
 
     }
 

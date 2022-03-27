@@ -1,6 +1,8 @@
 package se.liu.joeri765youdr728.platformer.input;
 
 
+import se.liu.joeri765youdr728.platformer.highscore.ScorePanel;
+
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -36,17 +38,7 @@ public class MyButton
 
     private final static String SEPARATOR = File.separator;
 
-    private static final Logger LOGGER = Logger.getLogger(MyButton.class.getName() );
-    private static SimpleFormatter formatter = new SimpleFormatter();
-    private static FileHandler fh;
 
-    static {
-	try {
-	    fh = new FileHandler("LogFile.log", 0, 1, true);
-	} catch (IOException e) {
-	    e.printStackTrace();
-	}
-    }
 
     public MyButton(int imageNumber, int x,  int y, int width, int height) {
 	this.x = x;
@@ -86,9 +78,14 @@ public class MyButton
     public static Map<Integer, BufferedImage> createButtonImageMap(){
 	BufferedImage playImage = null, highscoreImage = null, quitImage = null, backImage = null, timeImage = null, deathsImage =
 		null, coinsImage = null;
+
+	Logger logger = Logger.getLogger(MyButton.class.getName() );
+	SimpleFormatter formatter = new SimpleFormatter();
+	FileHandler fileHandler = null;
 	try {
-	    LOGGER.addHandler(fh);
-	    fh.setFormatter(formatter);
+	    fileHandler = new FileHandler("LogFile.log", 0, 1, true);
+	    logger.addHandler(fileHandler);
+	    fileHandler.setFormatter(formatter);
 
 	    playImage = ImageIO.read(ClassLoader.getSystemResource("images" + SEPARATOR + "button_start.png"));
 	    highscoreImage = ImageIO.read(ClassLoader.getSystemResource("images" + SEPARATOR + "button_highscore.png"));
@@ -99,9 +96,11 @@ public class MyButton
 	    coinsImage = ImageIO.read(ClassLoader.getSystemResource("images" + SEPARATOR + "button_coins.png"));
 
 	} catch (IOException e) {
-	    LOGGER.info(e.getMessage());
+	    logger.info(e.getMessage());
 	    e.printStackTrace();
 	}
+	logger.removeHandler(fileHandler);
+	fileHandler.close();
 
 	Map<Integer, BufferedImage> buttonImageMap = new HashMap<>();
 	buttonImageMap.put(1, playImage);
