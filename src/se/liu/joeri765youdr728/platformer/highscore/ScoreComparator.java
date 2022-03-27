@@ -19,13 +19,13 @@ public class ScoreComparator implements Comparator<HighScore>
 
     @Override public int compare(final HighScore highScore, final HighScore t1) {
 	if (button.getImageNumber() == 5) {
-	    return highScore.getTime() - t1.getTime();
+	    return Integer.compare(highScore.getTime(), t1.getTime());
 	}
 	else if (button.getImageNumber() ==6) {
-	    return highScore.getDeaths() - t1.getDeaths();
+	    return Integer.compare(highScore.getDeaths(), t1.getDeaths());
 	}
 	else if (button.getImageNumber() == 7) {
-	    return t1.getCoins() - highScore.getCoins();
+	    return Integer.compare(t1.getCoins(), highScore.getCoins());
 	}
 	return 0;
     }
