@@ -1,6 +1,6 @@
 package se.liu.joeri765youdr728.platformer.game;
 
-import se.liu.joeri765youdr728.platformer.input.Direction;
+import se.liu.joeri765youdr728.platformer.input.Keys;
 import se.liu.joeri765youdr728.platformer.MainFrame;
 import se.liu.joeri765youdr728.platformer.input.KeyHandler;
 
@@ -216,28 +216,29 @@ public class GamePanel extends JComponent implements  Runnable
     }
 
     public void updateGameKeys(){
-        if (keyH.isUpPressed()){
-            world.getPlayer().movePlayer(Direction.UP);
+        Player player = world.getPlayer();
+        if (keyH.isMovmentKeyPressed(Keys.UP)){
+            player.movePlayer(Keys.UP);
         }
-        if (keyH.isDownPressed()){
-            world.getPlayer().movePlayer(Direction.DOWN);
+        if (keyH.isMovmentKeyPressed(Keys.DOWN)){
+            player.movePlayer(Keys.DOWN);
         }
-        if (keyH.isLeftPressed()){
-            world.getPlayer().movePlayer(Direction.LEFT);
+        if (keyH.isMovmentKeyPressed(Keys.LEFT)){
+            player.movePlayer(Keys.LEFT);
         }
-        if (keyH.isRightPressed()){
-            world.getPlayer().movePlayer(Direction.RIGHT);
+        if (keyH.isMovmentKeyPressed(Keys.RIGHT)){
+            player.movePlayer(Keys.RIGHT);
         }
-        if (keyH.isSpacePressed() && world.getPlayer().canJump()){
-            world.getPlayer().setIsJumping(true);
+        if (keyH.isMovmentKeyPressed(Keys.SPACE) && world.getPlayer().canJump()){
+            player.setIsJumping(true);
         }
 
     }
     public void updatePauseKeys(){
-        if(keyH.isReplayPressed()){
+        if(keyH.isMovmentKeyPressed(Keys.REPLAY)){
             replay = true;
         }
-        if(keyH.isQuitPressed()){
+        if(keyH.isMovmentKeyPressed(Keys.QUIT)){
             mainFrame.setCurrentFrame("gameFrame");
             mainFrame.startMenu();
 

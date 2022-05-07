@@ -55,8 +55,6 @@ public class World
 	createEntityList();
     }
 
-
-
     public void loadMapFromFile(String mapFile){
 	Logger logger = Logger.getLogger(World.class.getName() );
 	SimpleFormatter formatter = new SimpleFormatter();
@@ -220,7 +218,6 @@ public class World
 		    this.gameWon = true;
 		    highScoreList.addHighscore(this);
 		}
-
 		if (mapNumber != MAP_5) {
 		    this.mapTileNum = new int[ROW][COL];
 		    this.entities = new ArrayList<>();
@@ -230,7 +227,6 @@ public class World
 		    player.respawnPlayer();
 
 		}
-
 		break;
 
 	    case OBSTACLE:

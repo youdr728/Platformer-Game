@@ -1,6 +1,6 @@
 package se.liu.joeri765youdr728.platformer.game;
 
-import se.liu.joeri765youdr728.platformer.input.Direction;
+import se.liu.joeri765youdr728.platformer.input.Keys;
 
 import java.awt.*;
 /**
@@ -92,8 +92,8 @@ public class Player extends AbstractEntity
 	}
 
     }
-    public void movePlayer(Direction dir){
-	if (dir.equals(Direction.RIGHT)){
+    public void movePlayer(Keys dir){
+	if (dir.equals(Keys.RIGHT)){
 	    this.x += speed;
 	    tryCollision();
 	    if (platformCollision || (this.x > world.getWorldWidth() - this.getWidth())) {
@@ -101,7 +101,7 @@ public class Player extends AbstractEntity
 		setPlatformCollision(false);
 	    }
 	}
-	else if (dir.equals(Direction.LEFT)){
+	else if (dir.equals(Keys.LEFT)){
 	    this.x -= speed;
 	    tryCollision();
 	    if (platformCollision || this.x < 0) {

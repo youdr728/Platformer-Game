@@ -67,33 +67,59 @@ public class KeyHandler extends KeyAdapter
 	}
     }
 
-    public boolean isUpPressed() {
-	return upPressed;
+//    public boolean isUpPressed() {
+//	return upPressed;
+//    }
+//
+//    public boolean isDownPressed() {
+//	return downPressed;
+//    }
+//
+//    public boolean isLeftPressed() {
+//	return leftPressed;
+//    }
+//
+//    public boolean isRightPressed() {
+//	return rightPressed;
+//    }
+    public boolean isMovmentKeyPressed(Keys keys){
+	switch (keys){
+	    case LEFT -> {
+		return leftPressed;
+	    }
+	    case RIGHT -> {
+		return rightPressed;
+	    }
+	    case UP -> {
+		return upPressed;
+	    }
+	    case DOWN -> {
+		return downPressed;
+	    }
+	    case SPACE -> {
+		return spacePressed;
+	    }
+	    case QUIT -> {
+		return quitPressed;
+	    }
+	    case REPLAY -> {
+		return replayPressed;
+	    }
+	}
+	return false;
     }
 
-    public boolean isDownPressed() {
-	return downPressed;
-    }
-
-    public boolean isLeftPressed() {
-	return leftPressed;
-    }
-
-    public boolean isRightPressed() {
-	return rightPressed;
-    }
-
-    public boolean isSpacePressed() {
-	return spacePressed;
-    }
-
-    public boolean isReplayPressed() {
-	return replayPressed;
-    }
-
-    public boolean isQuitPressed() {
-	return quitPressed;
-    }
+//    public boolean isSpacePressed() {
+//	return spacePressed;
+//    }
+//
+//    public boolean isReplayPressed() {
+//	return replayPressed;
+//    }
+//
+//    public boolean isQuitPressed() {
+//	return quitPressed;
+//    }
 
     public void resetKeys() {
 	leftPressed = false;

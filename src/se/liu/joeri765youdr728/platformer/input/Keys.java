@@ -5,7 +5,7 @@ package se.liu.joeri765youdr728.platformer.input;
  * @version     1.0
  * @since       1.0
  */
-public enum Direction
+public enum Keys
 {
-    LEFT, RIGHT, UP, DOWN
+    LEFT, RIGHT, UP, DOWN, SPACE, QUIT, REPLAY
 }
