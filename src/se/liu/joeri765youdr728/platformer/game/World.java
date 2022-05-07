@@ -27,7 +27,6 @@ public class World
     private static final int WORLD_HEIGHT = ROW * 48;
     private static final int TILE_SIZE = 48;
 
-    private static final int MAP_4 = 4;
     private static final int MAP_5 = 5;
 
     private int[][] mapTileNum;
@@ -46,7 +45,6 @@ public class World
 
     private boolean gameWon = false;
     private boolean playerDead = false;
-    private GamePanel panel;
 
     private Enemy enemy = null;
 
@@ -57,7 +55,6 @@ public class World
 	this.mapTileNum = new int[ROW][COL];
 	this.entities = new ArrayList<>();
 	this.gameTime = 120;
-	this.panel = panel;
 	loadMapFromFile("maps" + SEPARATOR + "map0" + mapNumber);
 	createEntityList();
     }
@@ -219,9 +216,7 @@ public class World
 		break;
 
 	    case GOAL:
-		if(mapNumber == MAP_4){
-		}
-		else if(mapNumber == MAP_5){
+		if(mapNumber == MAP_5){
 		    this.gameWon = true;
 		    highScoreList.addHighscore(this);
 		}
