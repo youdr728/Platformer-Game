@@ -37,6 +37,24 @@ public class MenuPanel extends AbstractPanel
     private final static String SEPARATOR = File.separator;
 
 
+    //------Buttons location and size
+    private final static int PLAY_BUTTON_X = 240;
+    private final static int PLAY_BUTTON_Y = 505;
+    private final static int PLAY_BUTTON_WIDTH = 480;
+
+
+    private final static int HIGHSCORE_BUTTON_X = 260;
+    private final static int HIGHSCORE_BUTTON_Y = 600;
+    private final static int HIGHSCORE_BUTTON_WIDTH = 440;
+
+
+    private final static int QUIT_BUTTON_X = 360;
+    private final static int QUIT_BUTTON_Y = 695;
+    private final static int QUIT_BUTTON_WIDTH = 240;
+
+    private final static int BUTTON_HEIGHT = 75;
+
+
 
     public MenuPanel(MainFrame mainFrame) {
 	this.mainFrame = mainFrame;
@@ -63,9 +81,9 @@ public class MenuPanel extends AbstractPanel
     }
 
     public void createButtons(){
-	buttonPlay = new MyButton(Buttons.PLAY, SCREEN_WIDTH / 2 - 240, 505, 480, 75);
-	buttonHighscore = new MyButton(Buttons.HIGHSCORE, SCREEN_WIDTH / 2 - 220, 600, 440, 75);
-	buttonQuit = new MyButton(Buttons.QUIT, SCREEN_WIDTH / 2 - 120, 695, 240, 75);
+	buttonPlay = new MyButton(Buttons.PLAY, PLAY_BUTTON_WIDTH, PLAY_BUTTON_Y, PLAY_BUTTON_WIDTH, BUTTON_HEIGHT);
+	buttonHighscore = new MyButton(Buttons.HIGHSCORE, HIGHSCORE_BUTTON_X, HIGHSCORE_BUTTON_Y, HIGHSCORE_BUTTON_WIDTH, BUTTON_HEIGHT);
+	buttonQuit = new MyButton(Buttons.QUIT, QUIT_BUTTON_X, QUIT_BUTTON_Y, QUIT_BUTTON_WIDTH, BUTTON_HEIGHT);
 
 
     }
