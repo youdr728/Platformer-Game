@@ -53,7 +53,9 @@ public class MenuPanel extends AbstractPanel
 	    e.printStackTrace();
 	}
 	logger.removeHandler(fileHandler);
-	fileHandler.close();
+	if(fileHandler != null){
+	    fileHandler.close();
+	}
 
 	playMusic(MusicType.MENU_BACKGROUND);
 	createButtons();

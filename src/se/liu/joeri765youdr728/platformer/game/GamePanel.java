@@ -115,7 +115,9 @@ public class GamePanel extends JComponent implements  Runnable
             e.printStackTrace();
         }
         logger.removeHandler(fileHandler);
-        fileHandler.close();
+        if(fileHandler != null){
+            fileHandler.close();
+        }
 
 
         EnumMap<EntityType, BufferedImage> tileMap = new EnumMap<>(EntityType.class);

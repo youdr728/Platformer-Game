@@ -92,7 +92,9 @@ public class Sound
 
 	}
 	logger.removeHandler(fileHandler);
-	fileHandler.close();
+	if(fileHandler != null){
+	    fileHandler.close();
+	}
 
 
 	EnumMap<MusicType, URL> musicMap = new EnumMap<>(MusicType.class);
@@ -130,7 +132,9 @@ public class Sound
 	    e.printStackTrace();
 	}
 	logger.removeHandler(fileHandler);
-	fileHandler.close();
+	if(fileHandler != null){
+	    fileHandler.close();
+	}
     }
 
 

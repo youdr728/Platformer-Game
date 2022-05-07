@@ -63,7 +63,9 @@ public class ScorePanel extends AbstractPanel
             e.printStackTrace();
         }
         logger.removeHandler(fileHandler);
-        fileHandler.close();
+        if(fileHandler != null){
+            fileHandler.close();
+        }
 
     }
 

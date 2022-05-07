@@ -51,7 +51,9 @@ public class HighScoreList
 	    e.printStackTrace();
 	}
 	logger.removeHandler(fileHandler);
-	fileHandler.close();
+	if(fileHandler != null){
+	    fileHandler.close();
+	}
 
     }
 
@@ -75,7 +77,9 @@ public class HighScoreList
 	    e.printStackTrace();
 	}
 	logger.removeHandler(fileHandler);
-	fileHandler.close();
+	if(fileHandler != null){
+	    fileHandler.close();
+	}
 	return new HighScoreList();
     }
 

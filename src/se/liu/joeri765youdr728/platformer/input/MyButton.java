@@ -100,7 +100,9 @@ public class MyButton
 	    e.printStackTrace();
 	}
 	logger.removeHandler(fileHandler);
-	fileHandler.close();
+	if(fileHandler != null){
+	    fileHandler.close();
+	}
 
 	Map<Integer, BufferedImage> buttonImageMap = new HashMap<>();
 	buttonImageMap.put(1, playImage);
