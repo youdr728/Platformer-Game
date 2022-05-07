@@ -3,6 +3,7 @@ package se.liu.joeri765youdr728.platformer.highscore;
 import se.liu.joeri765youdr728.platformer.AbstractPanel;
 import se.liu.joeri765youdr728.platformer.MainFrame;
 import se.liu.joeri765youdr728.platformer.MusicType;
+import se.liu.joeri765youdr728.platformer.input.Buttons;
 import se.liu.joeri765youdr728.platformer.input.MyButton;
 import se.liu.joeri765youdr728.platformer.Sound;
 
@@ -79,10 +80,10 @@ public class ScorePanel extends AbstractPanel
 
 
     public void createButtons(){
-        buttonBack = new MyButton(4, SCREEN_WIDTH - 210, SCREEN_HEIGHT / 2 + 130, 100, 50);
-        sortScoreTime = new MyButton(5, SCREEN_WIDTH / 2 - 170, 135, 150, 65);
-        sortScoreDeaths = new MyButton(6, SCREEN_WIDTH / 2 + 10, 135, 150, 65);
-        sortScoreCoins = new MyButton(7, SCREEN_WIDTH / 2 + 180, 135, 150, 65);
+        buttonBack = new MyButton(Buttons.BACK, SCREEN_WIDTH - 210, SCREEN_HEIGHT / 2 + 130, 100, 50);
+        sortScoreTime = new MyButton(Buttons.TIME, SCREEN_WIDTH / 2 - 170, 135, 150, 65);
+        sortScoreDeaths = new MyButton(Buttons.DEATHS, SCREEN_WIDTH / 2 + 10, 135, 150, 65);
+        sortScoreCoins = new MyButton(Buttons.COINS, SCREEN_WIDTH / 2 + 180, 135, 150, 65);
     }
 
     public void drawButtons(Graphics g){

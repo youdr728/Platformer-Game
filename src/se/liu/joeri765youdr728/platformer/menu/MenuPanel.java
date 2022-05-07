@@ -3,6 +3,7 @@ package se.liu.joeri765youdr728.platformer.menu;
 import se.liu.joeri765youdr728.platformer.AbstractPanel;
 import se.liu.joeri765youdr728.platformer.MainFrame;
 import se.liu.joeri765youdr728.platformer.MusicType;
+import se.liu.joeri765youdr728.platformer.input.Buttons;
 import se.liu.joeri765youdr728.platformer.input.MyButton;
 import se.liu.joeri765youdr728.platformer.Sound;
 
@@ -62,9 +63,9 @@ public class MenuPanel extends AbstractPanel
     }
 
     public void createButtons(){
-	buttonPlay = new MyButton(1, SCREEN_WIDTH / 2 - 240, 505, 480, 75);
-	buttonHighscore = new MyButton(2, SCREEN_WIDTH / 2 - 220, 600, 440, 75);
-	buttonQuit = new MyButton(3, SCREEN_WIDTH / 2 - 120, 695, 240, 75);
+	buttonPlay = new MyButton(Buttons.PLAY, SCREEN_WIDTH / 2 - 240, 505, 480, 75);
+	buttonHighscore = new MyButton(Buttons.HIGHSCORE, SCREEN_WIDTH / 2 - 220, 600, 440, 75);
+	buttonQuit = new MyButton(Buttons.QUIT, SCREEN_WIDTH / 2 - 120, 695, 240, 75);
 
 
     }

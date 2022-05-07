@@ -1,5 +1,6 @@
 package se.liu.joeri765youdr728.platformer.highscore;
 
+import se.liu.joeri765youdr728.platformer.input.Buttons;
 import se.liu.joeri765youdr728.platformer.input.MyButton;
 
 import java.util.Comparator;
@@ -18,13 +19,13 @@ public class ScoreComparator implements Comparator<HighScore>
     }
 
     @Override public int compare(final HighScore highScore, final HighScore t1) {
-	if (button.getImageNumber() == 5) {
+	if (button.getImageNumber() == Buttons.TIME) {
 	    return Integer.compare(highScore.getTime(), t1.getTime());
 	}
-	else if (button.getImageNumber() == 6) {
+	else if (button.getImageNumber() == Buttons.DEATHS) {
 	    return Integer.compare(highScore.getDeaths(), t1.getDeaths());
 	}
-	else if (button.getImageNumber() == 7) {
+	else if (button.getImageNumber() == Buttons.COINS) {
 	    return Integer.compare(t1.getCoins(), highScore.getCoins());
 	}
 	return 0;

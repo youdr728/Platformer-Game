@@ -7,6 +7,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.FileHandler;
@@ -25,13 +26,13 @@ public class MyButton
     private int y;
     private int width;
     private int height;
-    private int imageNumber;
+    private Buttons imageNumber;
 
     private Rectangle bounds;
 
     private boolean mouseOver;
 
-    protected final Map<Integer, BufferedImage> buttonImageMap = createButtonImageMap();
+    protected final EnumMap<Buttons, BufferedImage> buttonImageMap = createButtonImageMap();
 
 
 
@@ -39,7 +40,7 @@ public class MyButton
 
 
 
-    public MyButton(int imageNumber, int x,  int y, int width, int height) {
+    public MyButton(Buttons imageNumber, int x,  int y, int width, int height) {
 	this.x = x;
 	this.y = y;
 	this.width = width;
@@ -70,11 +71,11 @@ public class MyButton
 	this.mouseOver = mouseOver;
     }
 
-    public int getImageNumber() {
+    public Buttons getImageNumber() {
 	return imageNumber;
     }
 
-    public static Map<Integer, BufferedImage> createButtonImageMap(){
+    public static EnumMap<Buttons, BufferedImage> createButtonImageMap(){
 	BufferedImage playImage = null, highscoreImage = null, quitImage = null, backImage = null, timeImage = null, deathsImage =
 		null, coinsImage = null;
 
@@ -103,14 +104,14 @@ public class MyButton
 	    fileHandler.close();
 	}
 
-	Map<Integer, BufferedImage> buttonImageMap = new HashMap<>();
-	buttonImageMap.put(1, playImage);
-	buttonImageMap.put(2, highscoreImage);
-	buttonImageMap.put(3, quitImage);
-	buttonImageMap.put(4, backImage);
-	buttonImageMap.put(5,timeImage);
-	buttonImageMap.put(6, deathsImage);
-	buttonImageMap.put(7, coinsImage);
+	EnumMap<Buttons, BufferedImage> buttonImageMap = new EnumMap<>(Buttons.class);
+	buttonImageMap.put(Buttons.PLAY, playImage);
+	buttonImageMap.put(Buttons.HIGHSCORE, highscoreImage);
+	buttonImageMap.put(Buttons.QUIT, quitImage);
+	buttonImageMap.put(Buttons.BACK, backImage);
+	buttonImageMap.put(Buttons.TIME,timeImage);
+	buttonImageMap.put(Buttons.DEATHS, deathsImage);
+	buttonImageMap.put(Buttons.COINS, coinsImage);
 
 
 	return buttonImageMap;
