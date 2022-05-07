@@ -85,13 +85,14 @@ public class MyButton
 	    logger.addHandler(fileHandler);
 	    fileHandler.setFormatter(formatter);
 
-	    playImage = ImageIO.read(ClassLoader.getSystemResource("images" + SEPARATOR + "button_start.png"));
-	    highscoreImage = ImageIO.read(ClassLoader.getSystemResource("images" + SEPARATOR + "button_highscore.png"));
-	    quitImage = ImageIO.read(ClassLoader.getSystemResource("images" + SEPARATOR + "button_close.png"));
-	    backImage = ImageIO.read(ClassLoader.getSystemResource("images" + SEPARATOR + "button_back.png"));
-	    timeImage = ImageIO.read(ClassLoader.getSystemResource("images" + SEPARATOR + "button_time.png"));
-	    deathsImage = ImageIO.read(ClassLoader.getSystemResource("images" + SEPARATOR + "button_deaths.png"));
-	    coinsImage = ImageIO.read(ClassLoader.getSystemResource("images" + SEPARATOR + "button_coins.png"));
+	    String urlString = "images" + SEPARATOR;
+	    playImage = ImageIO.read(ClassLoader.getSystemResource(urlString + "button_start.png"));
+	    highscoreImage = ImageIO.read(ClassLoader.getSystemResource(urlString + "button_highscore.png"));
+	    quitImage = ImageIO.read(ClassLoader.getSystemResource(urlString + "button_close.png"));
+	    backImage = ImageIO.read(ClassLoader.getSystemResource(urlString + "button_back.png"));
+	    timeImage = ImageIO.read(ClassLoader.getSystemResource(urlString + "button_time.png"));
+	    deathsImage = ImageIO.read(ClassLoader.getSystemResource(urlString + "button_deaths.png"));
+	    coinsImage = ImageIO.read(ClassLoader.getSystemResource(urlString + "button_coins.png"));
 
 	} catch (IOException e){
 	    logger.info(e.getMessage());

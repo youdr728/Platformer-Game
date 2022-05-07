@@ -34,6 +34,7 @@ public class GamePanel extends JComponent implements  Runnable
     protected final EnumMap<EntityType, BufferedImage> tileMap = createTileMap();
     private BufferedImage loseImage = null, winImage = null;
     private final static String SEPARATOR = File.separator;
+    private final static String URL_STRING = "images" + SEPARATOR;
 
     //------Screen settings
     private static final int ORIGINAL_TILE_SIZE = 16;
@@ -87,8 +88,8 @@ public class GamePanel extends JComponent implements  Runnable
             logger.addHandler(fileHandler);
             fileHandler.setFormatter(formatter);
 
-            loseImage = ImageIO.read(ClassLoader.getSystemResource("images" + SEPARATOR + "lose_image.png"));
-            winImage = ImageIO.read(ClassLoader.getSystemResource("images" + SEPARATOR + "win_image2.png"));
+            loseImage = ImageIO.read(ClassLoader.getSystemResource(URL_STRING + "lose_image.png"));
+            winImage = ImageIO.read(ClassLoader.getSystemResource(URL_STRING + "win_image2.png"));
 
         } catch (IOException e) {
             logger.info(e.getMessage());
@@ -108,17 +109,17 @@ public class GamePanel extends JComponent implements  Runnable
             logger.addHandler(fileHandler);
             fileHandler.setFormatter(formatter);
 
-            platform = ImageIO.read(ClassLoader.getSystemResource("images" + SEPARATOR + "platform2.png"));
-            wall = ImageIO.read(ClassLoader.getSystemResource("images" + SEPARATOR + "wall.png"));
-            player = ImageIO.read(ClassLoader.getSystemResource("images" + SEPARATOR + "knight3.png"));
-            spikes = ImageIO.read(ClassLoader.getSystemResource("images" + SEPARATOR + "spikes4.png"));
-            door = ImageIO.read(ClassLoader.getSystemResource("images" + SEPARATOR + "door.png"));
-            chest = ImageIO.read(ClassLoader.getSystemResource("images" + SEPARATOR + "chest.png"));
-            timeBoost = ImageIO.read(ClassLoader.getSystemResource("images" + SEPARATOR + "time_powerup.png"));
-            jumpBoost = ImageIO.read(ClassLoader.getSystemResource("images" + SEPARATOR + "jump_powerup.png"));
-            speedBoost = ImageIO.read(ClassLoader.getSystemResource("images" + SEPARATOR + "speed_powerup.png"));
-            enemy = ImageIO.read(ClassLoader.getSystemResource("images" + SEPARATOR + "wizard4.png"));
-            enemyAttack = ImageIO.read(ClassLoader.getSystemResource("images" + SEPARATOR + "enemy_attack3.png"));
+            platform = ImageIO.read(ClassLoader.getSystemResource(URL_STRING + "platform2.png"));
+            wall = ImageIO.read(ClassLoader.getSystemResource(URL_STRING + "wall.png"));
+            player = ImageIO.read(ClassLoader.getSystemResource(URL_STRING + "knight3.png"));
+            spikes = ImageIO.read(ClassLoader.getSystemResource(URL_STRING + "spikes4.png"));
+            door = ImageIO.read(ClassLoader.getSystemResource(URL_STRING + "door.png"));
+            chest = ImageIO.read(ClassLoader.getSystemResource(URL_STRING + "chest.png"));
+            timeBoost = ImageIO.read(ClassLoader.getSystemResource(URL_STRING + "time_powerup.png"));
+            jumpBoost = ImageIO.read(ClassLoader.getSystemResource(URL_STRING + "jump_powerup.png"));
+            speedBoost = ImageIO.read(ClassLoader.getSystemResource(URL_STRING + "speed_powerup.png"));
+            enemy = ImageIO.read(ClassLoader.getSystemResource(URL_STRING + "wizard4.png"));
+            enemyAttack = ImageIO.read(ClassLoader.getSystemResource(URL_STRING + "enemy_attack3.png"));
 
 
         } catch (IOException e) {
@@ -177,15 +178,11 @@ public class GamePanel extends JComponent implements  Runnable
                     keyH.resetKeys();
                     gameOver = false;
                     replay = false;
-
                 }
             }else{
-
                 world.updateWorld();
                 updateGameKeys();
-
             }
-
             repaint();
 
             Logger logger = Logger.getLogger(GamePanel.class.getName() );
@@ -215,11 +212,7 @@ public class GamePanel extends JComponent implements  Runnable
             if(fileHandler != null){
                 fileHandler.close();
             }
-
-
-
         }
-
     }
 
     public void updateGameKeys(){
