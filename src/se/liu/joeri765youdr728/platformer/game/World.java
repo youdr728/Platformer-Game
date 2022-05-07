@@ -28,6 +28,9 @@ public class World
     private static final int WORLD_HEIGHT = ROW * 48;
     private static final int TILE_SIZE = 48;
 
+    private static final int MAP_4 = 4;
+    private static final int MAP_5 = 5;
+
     private int[][] mapTileNum;
     private List<Entity> entities;
     private Player player = null;
@@ -219,17 +222,17 @@ public class World
 		break;
 
 	    case GOAL:
-		if(mapNumber == 4){
+		if(mapNumber == MAP_4){
 		    panel.stopMusic();
 		    panel.playSoundEffect(MusicType.DOOR);
 		    panel.playMusic(MusicType.BOSS_BACKGROUND);
 		}
-		else if(mapNumber == 5){
+		else if(mapNumber == MAP_5){
 		    this.gameWon = true;
 		    highScoreList.addHighscore(this);
 		}
 
-		if (mapNumber != 5) {
+		if (mapNumber != MAP_5) {
 		    this.mapTileNum = new int[ROW][COL];
 		    this.entities = new ArrayList<>();
 		    loadMapFromFile(this.getNextMap());

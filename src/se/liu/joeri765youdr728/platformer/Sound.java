@@ -27,14 +27,14 @@ public class Sound
     private Clip clipSound = null;
     private Clip clipMusic = null;
 
-    protected final EnumMap<MusicType, URL> soundMap = createSoundURLMap();
-    protected final EnumMap<MusicType, URL> musicMap = createMusicURLMap();
+    protected final EnumMap<MusicType, AudioInputStream> soundMap = createSoundURLMap();
+    protected final EnumMap<MusicType, AudioInputStream> musicMap = createMusicURLMap();
 
     private final static String SEPARATOR = File.separator;
 
 
-    public static EnumMap<MusicType, URL> createSoundURLMap(){
-	URL playerDeath = null, door = null, point = null, speedJumpPowerup = null, timePowerup = null, jump = null, fireball = null;
+    public static EnumMap<MusicType, AudioInputStream> createSoundURLMap(){
+	AudioInputStream playerDeath = null, door = null, point = null, speedJumpPowerup = null, timePowerup = null, jump = null, fireball = null;
 
 	Logger logger = Logger.getLogger(Sound.class.getName() );
 	SimpleFormatter formatter = new SimpleFormatter();
@@ -44,22 +44,24 @@ public class Sound
 	    logger.addHandler(fileHandler);
 	    fileHandler.setFormatter(formatter);
 
-	    playerDeath = ClassLoader.getSystemResource("audio" + SEPARATOR + "player_death.wav");
-	    door = ClassLoader.getSystemResource("audio" + SEPARATOR +"door.wav");
-	    point = ClassLoader.getSystemResource("audio" + SEPARATOR +"point.wav");
-	    speedJumpPowerup = ClassLoader.getSystemResource("audio" + SEPARATOR +"speed_jump_powerup.wav");
-	    timePowerup = ClassLoader.getSystemResource("audio" + SEPARATOR +"time_powerup.wav");
-	    jump = ClassLoader.getSystemResource("audio" + SEPARATOR +"jump8bits.wav");
-	    fireball = ClassLoader.getSystemResource("audio" + SEPARATOR +"fireball.wav");
+	    playerDeath = AudioSystem.getAudioInputStream(ClassLoader.getSystemResource("audio" + SEPARATOR + "player_death.wav"));
+	    door = AudioSystem.getAudioInputStream(ClassLoader.getSystemResource("audio" + SEPARATOR +"door.wav"));
+	    point = AudioSystem.getAudioInputStream(ClassLoader.getSystemResource("audio" + SEPARATOR +"point.wav"));
+	    speedJumpPowerup = AudioSystem.getAudioInputStream(ClassLoader.getSystemResource("audio" + SEPARATOR +"speed_jump_powerup.wav"));
+	    timePowerup = AudioSystem.getAudioInputStream(ClassLoader.getSystemResource("audio" + SEPARATOR +"time_powerup.wav"));
+	    jump = AudioSystem.getAudioInputStream(ClassLoader.getSystemResource("audio" + SEPARATOR +"jump8bits.wav"));
+	    fireball = AudioSystem.getAudioInputStream(ClassLoader.getSystemResource("audio" + SEPARATOR +"fireball.wav"));
 
 	} catch (IOException e) {
 	    logger.info(e.getMessage());
+	    e.printStackTrace();
+	} catch (UnsupportedAudioFileException e) {
 	    e.printStackTrace();
 	}
 	logger.removeHandler(fileHandler);
 	fileHandler.close();
 
-	EnumMap<MusicType, URL> soundMap = new EnumMap<>(MusicType.class);
+	EnumMap<MusicType, AudioInputStream> soundMap = new EnumMap<>(MusicType.class);
 	soundMap.put(MusicType.PLAYER_DEATH, playerDeath);
 	soundMap.put(MusicType.DOOR, door);
 	soundMap.put(MusicType.POINT, point);
@@ -69,8 +71,8 @@ public class Sound
 	soundMap.put(MusicType.FIREBALL, fireball);
 	return soundMap;
     }
-    public static EnumMap<MusicType, URL> createMusicURLMap(){
-	URL gameBackground = null, bossBackground = null, menuBackground = null, scoreBackground = null;
+    public static EnumMap<MusicType, AudioInputStream> createMusicURLMap(){
+	AudioInputStream gameBackground = null, bossBackground = null, menuBackground = null, scoreBackground = null;
 
 	Logger logger = Logger.getLogger(Sound.class.getName() );
 	SimpleFormatter formatter = new SimpleFormatter();
@@ -80,24 +82,26 @@ public class Sound
 		logger.addHandler(fileHandler);
 		fileHandler.setFormatter(formatter);
 
-		gameBackground = ClassLoader.getSystemResource("audio" + SEPARATOR +"game_background_music.wav");
-		bossBackground = ClassLoader.getSystemResource("audio" + SEPARATOR +"boss_background_music.wav");
-		menuBackground = ClassLoader.getSystemResource("audio" + SEPARATOR +"menu_background_music.wav");
-		scoreBackground = ClassLoader.getSystemResource("audio" + SEPARATOR +"score_background_music.wav");
+		gameBackground = AudioSystem.getAudioInputStream(ClassLoader.getSystemResource("audio" + SEPARATOR +"game_background_music.wav"));
+		bossBackground = AudioSystem.getAudioInputStream(ClassLoader.getSystemResource("audio" + SEPARATOR +"boss_background_music.wav"));
+		menuBackground = AudioSystem.getAudioInputStream(ClassLoader.getSystemResource("audio" + SEPARATOR +"menu_background_music.wav"));
+		scoreBackground = AudioSystem.getAudioInputStream(ClassLoader.getSystemResource("audio" + SEPARATOR +"score_background_music.wav"));
 
 
 	    } catch (IOException e) {
 		logger.info(e.getMessage());
 		e.printStackTrace();
 
-	}
+	} catch (UnsupportedAudioFileException e) {
+		e.printStackTrace();
+	    }
 	logger.removeHandler(fileHandler);
 	if(fileHandler != null){
 	    fileHandler.close();
 	}
 
 
-	EnumMap<MusicType, URL> musicMap = new EnumMap<>(MusicType.class);
+	EnumMap<MusicType, AudioInputStream> musicMap = new EnumMap<>(MusicType.class);
 	musicMap.put(MusicType.GAME_BACKGROUND, gameBackground);
 	musicMap.put(MusicType.BOSS_BACKGROUND, bossBackground);
 	musicMap.put(MusicType.MENU_BACKGROUND, menuBackground);
@@ -116,18 +120,18 @@ public class Sound
 	    fileHandler.setFormatter(formatter);
 
 	    if(type.equals("sound")){
-		AudioInputStream ais = AudioSystem.getAudioInputStream(soundMap.get(musicType));
+		AudioInputStream ais = soundMap.get(musicType);
 		clipSound = AudioSystem.getClip();
 		clipSound.open(ais);
 	    }
 	    else{
-		AudioInputStream ais = AudioSystem.getAudioInputStream(musicMap.get(musicType));
+		AudioInputStream ais = musicMap.get(musicType);
 		clipMusic = AudioSystem.getClip();
 		clipMusic.open(ais);
 	    }
 
 
-	} catch (UnsupportedAudioFileException | LineUnavailableException | IOException e) {
+	} catch (LineUnavailableException | IOException e) {
 	    logger.info(e.getMessage());
 	    e.printStackTrace();
 	}
