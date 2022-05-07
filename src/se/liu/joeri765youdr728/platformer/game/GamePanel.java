@@ -54,10 +54,19 @@ public class GamePanel extends JComponent implements  Runnable
     private boolean gameOver = false;
     private boolean replay = false;
 
+    //------Image size, and location
+    private final static int END_SCREEN_WIDTH = 730;
+    private final static int END_SCREEN_HEIGHT = 500;
+    private final static int END_SCREEN_X_AND_Y = 100;
+
+    private final static int END_SCREEN_TEXT_Y = 352;
+    private final static int END_SCREEN_TEXT_TIME_X = 170;
+    private final static int END_SCREEN_TEXT_DEATHS_X = 422;
+    private final static int END_SCREEN_TEXT_COINS_X = 690;
 
 
-
-
+    //------FontMetrics
+    private FontMetrics fm;
 
     public GamePanel(MainFrame mainFrame) {
         this.mainFrame = mainFrame;
@@ -68,6 +77,11 @@ public class GamePanel extends JComponent implements  Runnable
         this.world = new World(this);
         this.addKeyListener(keyH);
         this.setFocusable(true);
+
+        Canvas c = new Canvas();
+        Font font = new Font("Ubuntu", Font.BOLD, FONT_SIZE);
+        this.fm = c.getFontMetrics(font);
+
 
         Logger logger = Logger.getLogger(GamePanel.class.getName() );
         SimpleFormatter formatter = new SimpleFormatter();
@@ -213,7 +227,10 @@ public class GamePanel extends JComponent implements  Runnable
 
             }
             logger.removeHandler(fileHandler);
-            fileHandler.close();
+            if(fileHandler != null){
+                fileHandler.close();
+            }
+
 
 
         }
@@ -289,9 +306,7 @@ public class GamePanel extends JComponent implements  Runnable
 
         //Paint timer
         String text = Integer.toString(world.getGameTime());
-        Font font = new Font("Ubuntu", Font.BOLD, FONT_SIZE);
-        g.setFont(font);
-        FontMetrics fm = g.getFontMetrics();
+        g.setFont(new Font("Ubuntu", Font.BOLD, FONT_SIZE));
         int x = ((getWidth() - fm.stringWidth(text)) / 2);
         g.setColor(Color.WHITE);
         g.drawString(text, x, TILE_SIZE);
@@ -313,13 +328,13 @@ public class GamePanel extends JComponent implements  Runnable
 
                 g.setFont(new Font("Comic Sans MS", Font.PLAIN, FONT_SIZE));
                 g.setColor(Color.WHITE);
-                g.drawImage(winImage, 100, 100 ,731, 500, this);
-                g.drawString(time, 170, 352);
-                g.drawString(deaths, 422, 352);
-                g.drawString(coins, 690, 352);
+                g.drawImage(winImage, END_SCREEN_X_AND_Y, END_SCREEN_X_AND_Y ,END_SCREEN_WIDTH, END_SCREEN_HEIGHT, this);
+                g.drawString(time, END_SCREEN_TEXT_TIME_X, END_SCREEN_TEXT_Y);
+                g.drawString(deaths, END_SCREEN_TEXT_DEATHS_X, END_SCREEN_TEXT_Y);
+                g.drawString(coins, END_SCREEN_TEXT_COINS_X, END_SCREEN_TEXT_Y);
             }
             else{
-                g.drawImage(loseImage, 100, 100 ,731, 400, this);
+                g.drawImage(loseImage, END_SCREEN_X_AND_Y, END_SCREEN_X_AND_Y ,END_SCREEN_WIDTH, END_SCREEN_HEIGHT, this);
             }
 
         }
