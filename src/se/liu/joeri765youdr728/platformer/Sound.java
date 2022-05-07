@@ -6,8 +6,6 @@ import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
-import javax.swing.*;
-
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -92,11 +90,9 @@ public class Sound
 		logger.info(e.getMessage());
 		e.printStackTrace();
 
-
-	    logger.removeHandler(fileHandler);
-	    fileHandler.close();
 	}
-
+	logger.removeHandler(fileHandler);
+	fileHandler.close();
 
 
 	EnumMap<MusicType, URL> musicMap = new EnumMap<>(MusicType.class);
@@ -133,7 +129,6 @@ public class Sound
 	} catch (UnsupportedAudioFileException | LineUnavailableException | IOException e) {
 	    logger.info(e.getMessage());
 	    e.printStackTrace();
-	    System.exit(1);
 	}
 	logger.removeHandler(fileHandler);
 	fileHandler.close();

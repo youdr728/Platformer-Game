@@ -21,7 +21,7 @@ public class ScoreComparator implements Comparator<HighScore>
 	if (button.getImageNumber() == 5) {
 	    return Integer.compare(highScore.getTime(), t1.getTime());
 	}
-	else if (button.getImageNumber() ==6) {
+	else if (button.getImageNumber() == 6) {
 	    return Integer.compare(highScore.getDeaths(), t1.getDeaths());
 	}
 	else if (button.getImageNumber() == 7) {
