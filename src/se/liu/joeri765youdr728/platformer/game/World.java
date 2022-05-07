@@ -36,12 +36,8 @@ public class World
 
     private int gameTime;
     private int gameTimeCounter = 0;
-
     private int boostTimeCounter = 0;
-
     private int deathCounter = 0, scoreTime = 0, coinCounter = 0;
-
-    private HighScoreList highScoreList = HighScoreList.loadHighscoreList();
 
     private boolean gameWon = false;
     private boolean playerDead = false;
@@ -217,6 +213,7 @@ public class World
 
 	    case GOAL:
 		if(mapNumber == MAP_5){
+		    HighScoreList highScoreList = HighScoreList.loadHighscoreList();
 		    this.gameWon = true;
 		    highScoreList.addHighscore(this);
 		}
