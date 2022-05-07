@@ -120,7 +120,6 @@ public class Sound
 	    }
 	    else{
 		AudioInputStream ais = AudioSystem.getAudioInputStream(musicMap.get(musicType));
-
 		clipMusic = AudioSystem.getClip();
 		clipMusic.open(ais);
 	    }

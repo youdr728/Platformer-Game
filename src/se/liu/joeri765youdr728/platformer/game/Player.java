@@ -23,7 +23,7 @@ public class Player extends AbstractEntity
     private static final int FALL_SPEED = 8;
     private static final int NORMAL_SPEED = 4;
     private static final int NORMAL_JUMP_SPEED = 16;
-    private static final int BOOST_SPEED = 7;
+    private static final int BOOST_SPEED = 6;
     private static final int BOOST_JUMP_SPEED = 20;
 
 

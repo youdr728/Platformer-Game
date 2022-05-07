@@ -73,13 +73,14 @@ public class World
 	    logger.addHandler(fileHandler);
 	    fileHandler.setFormatter(formatter);
 
-	    BufferedReader br = new BufferedReader(new InputStreamReader(is));
+	    try (BufferedReader br = new BufferedReader(new InputStreamReader(is))) {
 
-	    for (int h = 0; h < ROW; h++) {
-		String line = br.readLine();
-		String[] numbers = line.split(" ");
-		for (int w = 0; w < COL; w++) {
-		    mapTileNum[h][w] = Integer.parseInt(numbers[w]);
+		for (int h = 0; h < ROW; h++) {
+		    String line = br.readLine();
+		    String[] numbers = line.split(" ");
+		    for (int w = 0; w < COL; w++) {
+			mapTileNum[h][w] = Integer.parseInt(numbers[w]);
+		    }
 		}
 	    }
 	}catch(IOException e){
@@ -87,7 +88,10 @@ public class World
 	    e.printStackTrace();
 	}
 	logger.removeHandler(fileHandler);
-	fileHandler.close();
+	if(fileHandler != null){
+	    fileHandler.close();
+	}
+
     }
     public void createEntityList(){
 	for (int h = 0; h < ROW; h++) {
