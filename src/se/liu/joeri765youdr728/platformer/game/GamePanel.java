@@ -72,7 +72,7 @@ public class GamePanel extends JComponent implements  Runnable
 	this.setPreferredSize(new Dimension(SCREEN_WIDTH, SCREEN_HEIGHT));
 	this.setDoubleBuffered(true);
         this.repaint();
-        this.world = new World(this);
+        this.world = new World();
         this.addKeyListener(keyH);
         this.setFocusable(true);
 
@@ -174,7 +174,7 @@ public class GamePanel extends JComponent implements  Runnable
             if(gameOver){
                 updatePauseKeys();
                 if(replay){
-                    world = new World(this);
+                    world = new World();
                     keyH.resetKeys();
                     gameOver = false;
                     replay = false;

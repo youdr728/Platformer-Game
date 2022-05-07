@@ -47,7 +47,7 @@ public class World
     private final static String SEPARATOR = File.separator;
 
 
-    public World(GamePanel panel) {
+    public World() {
 	this.mapTileNum = new int[ROW][COL];
 	this.entities = new ArrayList<>();
 	this.gameTime = 120;
