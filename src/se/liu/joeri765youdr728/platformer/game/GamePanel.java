@@ -200,6 +200,7 @@ public class GamePanel extends JComponent implements  Runnable
                 }
 
 
+                //noinspection BusyWait
                 Thread.sleep((long) remainingTime);
 
                 nextDrawTime += drawInterval;
