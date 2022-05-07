@@ -30,7 +30,6 @@ public class MainFrame
 	String gameFrameString = "gameFrame";
 	String highscoreFrameString = "highscoreFrame";
 	if(currentFrame.equals(highscoreFrameString)){
-	    scorePanel.stopMusic();
 	    scoreFrame.remove(scorePanel);
 	    scoreFrame.dispose();
 
@@ -68,7 +67,6 @@ public class MainFrame
     public void startHighscore() {
 	scorePanel = new ScorePanel(this);
 
-	menuPanel.stopMusic();
 	menuFrame.remove(menuPanel);
 	menuFrame.dispose();
 

@@ -1,6 +1,5 @@
 package se.liu.joeri765youdr728.platformer.game;
 
-import se.liu.joeri765youdr728.platformer.MusicType;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,7 +37,6 @@ public class Enemy extends AbstractEntity
 	    randomNumber = getRandomNumberUsingNextInt(fastestAttack, slowestAttack);
 	    EnemyAttack
 		    attack = new EnemyAttack(x - tileSize, y, EntityType.ENEMY_ATTACK, 12, 12, 27, 27);
-	    world.playSound(MusicType.FIREBALL);
 	    enemyAttacks.add(attack);
 	    attackCounter = 0;
 	}

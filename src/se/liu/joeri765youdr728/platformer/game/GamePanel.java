@@ -1,9 +1,7 @@
 package se.liu.joeri765youdr728.platformer.game;
 
-import se.liu.joeri765youdr728.platformer.MusicType;
 import se.liu.joeri765youdr728.platformer.input.Direction;
 import se.liu.joeri765youdr728.platformer.MainFrame;
-import se.liu.joeri765youdr728.platformer.Sound;
 import se.liu.joeri765youdr728.platformer.input.KeyHandler;
 
 import javax.imageio.ImageIO;
@@ -29,7 +27,6 @@ public class GamePanel extends JComponent implements  Runnable
     //------Classes
     private MainFrame mainFrame;
     private World world;
-    private Sound sound = new Sound();
     private KeyHandler keyH = new KeyHandler();
     private Thread gameThread = null;
 
@@ -162,18 +159,7 @@ public class GamePanel extends JComponent implements  Runnable
         }
 
     }
-    public void playMusic(MusicType musicType){
-        sound.setFileSound(musicType, "music");
-        sound.loop();
-    }
-    public void stopMusic(){
-        sound.stop();
-    }
-    public void playSoundEffect(MusicType musicType){
-        sound.setFileSound(musicType, "sound");
-        sound.playSound();
 
-    }
 
     @Override public void run() {
         final int fps = 60;
@@ -185,7 +171,6 @@ public class GamePanel extends JComponent implements  Runnable
             tryIfGameOver();
 
             if(gameOver){
-                stopMusic();
                 updatePauseKeys();
                 if(replay){
                     world = new World(this);
@@ -252,17 +237,14 @@ public class GamePanel extends JComponent implements  Runnable
         }
         if (keyH.isSpacePressed() && world.getPlayer().canJump()){
             world.getPlayer().setIsJumping(true);
-            playSoundEffect(MusicType.JUMP);
         }
 
     }
     public void updatePauseKeys(){
         if(keyH.isReplayPressed()){
-            stopMusic();
             replay = true;
         }
         if(keyH.isQuitPressed()){
-            stopMusic();
             mainFrame.setCurrentFrame("gameFrame");
             mainFrame.startMenu();
 

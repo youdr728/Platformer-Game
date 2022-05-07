@@ -2,10 +2,8 @@ package se.liu.joeri765youdr728.platformer.menu;
 
 import se.liu.joeri765youdr728.platformer.AbstractPanel;
 import se.liu.joeri765youdr728.platformer.MainFrame;
-import se.liu.joeri765youdr728.platformer.MusicType;
 import se.liu.joeri765youdr728.platformer.input.Buttons;
 import se.liu.joeri765youdr728.platformer.input.MyButton;
-import se.liu.joeri765youdr728.platformer.Sound;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -31,8 +29,6 @@ public class MenuPanel extends AbstractPanel
     private MyButton buttonPlay = null, buttonHighscore = null, buttonQuit = null;
 
     private MainFrame mainFrame;
-
-    private Sound sound = new Sound();
 
     private final static String SEPARATOR = File.separator;
 
@@ -76,12 +72,11 @@ public class MenuPanel extends AbstractPanel
 	    fileHandler.close();
 	}
 
-	playMusic(MusicType.MENU_BACKGROUND);
 	createButtons();
     }
 
     public void createButtons(){
-	buttonPlay = new MyButton(Buttons.PLAY, PLAY_BUTTON_WIDTH, PLAY_BUTTON_Y, PLAY_BUTTON_WIDTH, BUTTON_HEIGHT);
+	buttonPlay = new MyButton(Buttons.PLAY, PLAY_BUTTON_X, PLAY_BUTTON_Y, PLAY_BUTTON_WIDTH, BUTTON_HEIGHT);
 	buttonHighscore = new MyButton(Buttons.HIGHSCORE, HIGHSCORE_BUTTON_X, HIGHSCORE_BUTTON_Y, HIGHSCORE_BUTTON_WIDTH, BUTTON_HEIGHT);
 	buttonQuit = new MyButton(Buttons.QUIT, QUIT_BUTTON_X, QUIT_BUTTON_Y, QUIT_BUTTON_WIDTH, BUTTON_HEIGHT);
 
@@ -94,13 +89,6 @@ public class MenuPanel extends AbstractPanel
 	buttonQuit.draw(g);
     }
 
-    public void playMusic(MusicType musicType){
-	sound.setFileSound(musicType, "music");
-	sound.loop();
-    }
-    public void stopMusic(){
-	sound.stop();
-    }
 
 
     @Override protected void paintComponent(final Graphics g) {
@@ -114,7 +102,6 @@ public class MenuPanel extends AbstractPanel
     @Override
     public void mouseClicked(int x, int y){
 	if(buttonPlay.getBounds().contains(x, y)){
-	    stopMusic();
 	    mainFrame.startGame();
 	}
 	if(buttonHighscore.getBounds().contains(x, y)){

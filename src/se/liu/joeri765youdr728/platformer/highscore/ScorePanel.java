@@ -2,10 +2,8 @@ package se.liu.joeri765youdr728.platformer.highscore;
 
 import se.liu.joeri765youdr728.platformer.AbstractPanel;
 import se.liu.joeri765youdr728.platformer.MainFrame;
-import se.liu.joeri765youdr728.platformer.MusicType;
 import se.liu.joeri765youdr728.platformer.input.Buttons;
 import se.liu.joeri765youdr728.platformer.input.MyButton;
-import se.liu.joeri765youdr728.platformer.Sound;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -37,7 +35,6 @@ public class ScorePanel extends AbstractPanel
     private static final int FONT_SIZE = 35, SCORES_WIDTH = 1, SCORES_HEIGHT = 10, OFFSET = 35, START_X = 130, START_Y = 275;
     private String[][] scores;
 
-    private Sound sound = new Sound();
 
     private final static String SEPARATOR = File.separator;
 
@@ -62,7 +59,6 @@ public class ScorePanel extends AbstractPanel
     public ScorePanel(MainFrame mainFrame) {
         this.mainFrame = mainFrame;
         scores = new String[SCORES_HEIGHT][SCORES_WIDTH];
-        playMusic(MusicType.SCORE_BACKGROUND);
         createButtons();
 
         Logger logger = Logger.getLogger(ScorePanel.class.getName() );
@@ -86,13 +82,6 @@ public class ScorePanel extends AbstractPanel
 
     }
 
-    public void playMusic(MusicType musicType){
-        sound.setFileSound(musicType, "music");
-        sound.loop();
-    }
-    public void stopMusic(){
-        sound.stop();
-    }
 
 
     public void createButtons(){
