@@ -249,7 +249,7 @@ public class GamePanel extends JComponent implements  Runnable
     protected void paintComponent(Graphics g) {
 
         super.paintComponent(g);
-
+        Player player = world.getPlayer();
 
 
         //Paint background
@@ -260,8 +260,8 @@ public class GamePanel extends JComponent implements  Runnable
         }
         //Paint start door
         g.drawImage(tileMap.get(EntityType.GOAL),
-                    world.getPlayer().getStartX(),
-                    world.getPlayer().getStartY(), TILE_SIZE, TILE_SIZE, null);
+                    player.getStartX(),
+                    player.getStartY(), TILE_SIZE, TILE_SIZE, null);
         //Paint Entitys
         for (int i = 0; i < world.getEntities().size(); i++) {
             Entity entity= world.getEntities().get(i);
@@ -284,15 +284,10 @@ public class GamePanel extends JComponent implements  Runnable
         g.drawString(text, x, TILE_SIZE);
 
         //Paint player
-        g.drawImage(tileMap.get(EntityType.PLAYER),
-                    world.getPlayer().x,
-                    world.getPlayer().y,
-                    world.getPlayer().getWidth(),
-                    world.getPlayer().getHeight(),null);
+        g.drawImage(tileMap.get(EntityType.PLAYER), player.x, player.y, player.getWidth(), player.getHeight(),null);
 
         // Game Over
         if(gameOver){
-
             if(world.isGameWon()){
                 String time = Integer.toString(world.getScoreTime());
                 String deaths = Integer.toString(world.getDeathCounter());
@@ -308,10 +303,6 @@ public class GamePanel extends JComponent implements  Runnable
             else{
                 g.drawImage(loseImage, END_SCREEN_X_AND_Y, END_SCREEN_X_AND_Y ,END_SCREEN_WIDTH, END_SCREEN_HEIGHT, this);
             }
-
         }
-
     }
-
-
 }
