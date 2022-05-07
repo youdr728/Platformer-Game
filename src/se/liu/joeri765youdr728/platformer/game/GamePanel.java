@@ -66,7 +66,7 @@ public class GamePanel extends JComponent implements  Runnable
 
 
     //------FontMetrics
-    private FontMetrics fm;
+    private FontMetrics fontMetrics;
 
     public GamePanel(MainFrame mainFrame) {
         this.mainFrame = mainFrame;
@@ -80,7 +80,7 @@ public class GamePanel extends JComponent implements  Runnable
 
         Canvas c = new Canvas();
         Font font = new Font("Ubuntu", Font.BOLD, FONT_SIZE);
-        this.fm = c.getFontMetrics(font);
+        this.fontMetrics = c.getFontMetrics(font);
 
 
         Logger logger = Logger.getLogger(GamePanel.class.getName() );
@@ -307,7 +307,7 @@ public class GamePanel extends JComponent implements  Runnable
         //Paint timer
         String text = Integer.toString(world.getGameTime());
         g.setFont(new Font("Ubuntu", Font.BOLD, FONT_SIZE));
-        int x = ((getWidth() - fm.stringWidth(text)) / 2);
+        int x = ((getWidth() - fontMetrics.stringWidth(text)) / 2);
         g.setColor(Color.WHITE);
         g.drawString(text, x, TILE_SIZE);
 

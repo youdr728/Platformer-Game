@@ -46,7 +46,7 @@ public class ScorePanel extends AbstractPanel
 
     private final static int BACK_BUTTON_X = 750;
     private final static int BACK_BUTTON_Y = 610;
-    private final static int BACK_BUTTON_WIDHT = 100;
+    private final static int BACK_BUTTON_WIDTH = 100;
     private final static int BACK_BUTTON_HEIGHT = 50;
 
     private final static int TIME_BUTTON_X = 310;
@@ -96,7 +96,7 @@ public class ScorePanel extends AbstractPanel
 
 
     public void createButtons(){
-        buttonBack = new MyButton(Buttons.BACK, BACK_BUTTON_X, BACK_BUTTON_Y , BACK_BUTTON_WIDHT, BACK_BUTTON_HEIGHT);
+        buttonBack = new MyButton(Buttons.BACK, BACK_BUTTON_X, BACK_BUTTON_Y , BACK_BUTTON_WIDTH, BACK_BUTTON_HEIGHT);
         sortScoreTime = new MyButton(Buttons.TIME, TIME_BUTTON_X, BUTTON_Y, BUTTON_WIDTH, BUTTON_HEIGHT);
         sortScoreDeaths = new MyButton(Buttons.DEATHS, DEATHS_BUTTON_X, BUTTON_Y, BUTTON_WIDTH, BUTTON_HEIGHT);
         sortScoreCoins = new MyButton(Buttons.COINS, COINS_BUTTON_X, BUTTON_Y, BUTTON_WIDTH, BUTTON_HEIGHT);
