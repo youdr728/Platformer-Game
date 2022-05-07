@@ -82,7 +82,7 @@ public class KeyHandler extends KeyAdapter
 //    public boolean isRightPressed() {
 //	return rightPressed;
 //    }
-    public boolean isMovmentKeyPressed(Keys keys){
+    public boolean isMovementKeyPressed(Keys keys){
 	switch (keys){
 	    case LEFT -> {
 		return leftPressed;

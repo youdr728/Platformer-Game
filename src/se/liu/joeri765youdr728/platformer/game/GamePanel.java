@@ -28,7 +28,7 @@ public class GamePanel extends JComponent implements  Runnable
     private MainFrame mainFrame;
     private World world;
     private KeyHandler keyH = new KeyHandler();
-    private Thread gameThread = null;
+    private volatile Thread gameThread = null;
 
     //------Images and fileReading
     protected final EnumMap<EntityType, BufferedImage> tileMap = createTileMap();
@@ -217,28 +217,28 @@ public class GamePanel extends JComponent implements  Runnable
 
     public void updateGameKeys(){
         Player player = world.getPlayer();
-        if (keyH.isMovmentKeyPressed(Keys.UP)){
+        if (keyH.isMovementKeyPressed(Keys.UP)){
             player.movePlayer(Keys.UP);
         }
-        if (keyH.isMovmentKeyPressed(Keys.DOWN)){
+        if (keyH.isMovementKeyPressed(Keys.DOWN)){
             player.movePlayer(Keys.DOWN);
         }
-        if (keyH.isMovmentKeyPressed(Keys.LEFT)){
+        if (keyH.isMovementKeyPressed(Keys.LEFT)){
             player.movePlayer(Keys.LEFT);
         }
-        if (keyH.isMovmentKeyPressed(Keys.RIGHT)){
+        if (keyH.isMovementKeyPressed(Keys.RIGHT)){
             player.movePlayer(Keys.RIGHT);
         }
-        if (keyH.isMovmentKeyPressed(Keys.SPACE) && world.getPlayer().canJump()){
+        if (keyH.isMovementKeyPressed(Keys.SPACE) && world.getPlayer().canJump()){
             player.setIsJumping(true);
         }
 
     }
     public void updatePauseKeys(){
-        if(keyH.isMovmentKeyPressed(Keys.REPLAY)){
+        if(keyH.isMovementKeyPressed(Keys.REPLAY)){
             replay = true;
         }
-        if(keyH.isMovmentKeyPressed(Keys.QUIT)){
+        if(keyH.isMovementKeyPressed(Keys.QUIT)){
             mainFrame.setCurrentFrame("gameFrame");
             mainFrame.startMenu();
 
