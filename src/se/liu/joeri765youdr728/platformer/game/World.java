@@ -67,7 +67,8 @@ public class World
 	    logger.addHandler(fileHandler);
 	    fileHandler.setFormatter(formatter);
 
-	    try (BufferedReader br = new BufferedReader(new InputStreamReader(is))) {
+	    if(is != null){
+		BufferedReader br = new BufferedReader(new InputStreamReader(is));
 
 		for (int h = 0; h < ROW; h++) {
 		    String line = br.readLine();
@@ -77,6 +78,8 @@ public class World
 		    }
 		}
 	    }
+
+
 	}catch(IOException e){
 	    logger.info(e.getMessage());
 	    e.printStackTrace();
@@ -123,7 +126,7 @@ public class World
 			    entities.add(new JumpBoost(xPosition, yPosition, EntityType.POWER_UP_JUMP, 12, 18, 24, 24));
 			    break;
 			case ENEMY:
-			    enemy = new Enemy(xPosition, yPosition, EntityType.ENEMY, 0, 0, 48, 48, this);
+			    enemy = new Enemy(xPosition, yPosition, EntityType.ENEMY, 0, 0, 48, 48);
 			    entities.add(enemy);
 			    break;
 

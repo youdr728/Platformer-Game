@@ -21,7 +21,7 @@ public class Enemy extends AbstractEntity
     private static final Random RANDOM = new Random();
 
     public Enemy(final int x, final int y, final EntityType entityType, final int collisionX, final int collisionY, final int collisionWidth,
-		 final int collisionHeight, final World world) {
+		 final int collisionHeight) {
 	super(x, y, entityType, collisionX, collisionY, collisionWidth, collisionHeight);
 	this.enemyAttacks = new ArrayList<>();
     }

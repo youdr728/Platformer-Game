@@ -105,15 +105,15 @@ public class ScorePanel extends AbstractPanel
             mainFrame.startMenu();
 
         }
-        if(sortScoreTime.getBounds().contains(x, y)){
+        else if(sortScoreTime.getBounds().contains(x, y)){
             highScoreList = HighScoreList.loadHighscoreList();
             showHighScores(sortScoreTime);
         }
-        if(sortScoreDeaths.getBounds().contains(x, y)){
+        else if(sortScoreDeaths.getBounds().contains(x, y)){
             highScoreList = HighScoreList.loadHighscoreList();
             showHighScores(sortScoreDeaths);
         }
-        if(sortScoreCoins.getBounds().contains(x, y)){
+        else if(sortScoreCoins.getBounds().contains(x, y)){
             highScoreList = HighScoreList.loadHighscoreList();
             showHighScores(sortScoreCoins);
         }
@@ -129,13 +129,13 @@ public class ScorePanel extends AbstractPanel
         if(buttonBack.getBounds().contains(x, y)){
             buttonBack.setMouseOver(true);
         }
-        if(sortScoreTime.getBounds().contains(x, y)){
+        else if(sortScoreTime.getBounds().contains(x, y)){
             sortScoreTime.setMouseOver(true);
         }
-        if(sortScoreDeaths.getBounds().contains(x, y)){
+        else if(sortScoreDeaths.getBounds().contains(x, y)){
             sortScoreDeaths.setMouseOver(true);
         }
-        if(sortScoreCoins.getBounds().contains(x, y)){
+        else if(sortScoreCoins.getBounds().contains(x, y)){
             sortScoreCoins.setMouseOver(true);
         }
 
