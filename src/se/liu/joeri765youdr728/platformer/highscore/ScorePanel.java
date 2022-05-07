@@ -43,14 +43,14 @@ public class ScorePanel extends AbstractPanel
 
 
     //------- Button locations
-    private final static int BACK_BUTTON_X = SCORES_WIDTH - 210;
-    private final static int BACK_BUTTON_Y = SCORES_HEIGHT / 2 + 130;
+    private final static int BACK_BUTTON_X = SCREEN_WIDTH - 210;
+    private final static int BACK_BUTTON_Y = SCREEN_HEIGHT / 2 + 130;
     private final static int BACK_BUTTON_WIDHT = 100;
     private final static int BACK_BUTTON_HEIGHT = 50;
 
-    private final static int TIME_BUTTON_X = SCORES_WIDTH / 2 - 170;
-    private final static int DEATHS_BUTTON_X = SCORES_WIDTH / 2 + 10;
-    private final static int COINS_BUTTON_X = SCORES_WIDTH / 2 + 180;
+    private final static int TIME_BUTTON_X = SCREEN_WIDTH / 2 - 170;
+    private final static int DEATHS_BUTTON_X = SCREEN_WIDTH / 2 + 10;
+    private final static int COINS_BUTTON_X = SCREEN_WIDTH / 2 + 180;
 
     private final static int BUTTON_Y = 135;
     private final static int BUTTON_WIDTH = 150;

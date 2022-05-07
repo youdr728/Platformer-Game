@@ -57,7 +57,10 @@ public class Sound
 	    e.printStackTrace();
 	}
 	logger.removeHandler(fileHandler);
-	fileHandler.close();
+	if(fileHandler != null){
+	    fileHandler.close();
+	}
+
 
 	EnumMap<MusicType, URL> soundMap = new EnumMap<>(MusicType.class);
 	soundMap.put(MusicType.PLAYER_DEATH, playerDeath);
