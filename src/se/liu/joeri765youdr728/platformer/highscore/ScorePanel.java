@@ -42,6 +42,21 @@ public class ScorePanel extends AbstractPanel
     private final static String SEPARATOR = File.separator;
 
 
+    //------- Button locations
+    private final static int BACK_BUTTON_X = SCORES_WIDTH - 210;
+    private final static int BACK_BUTTON_Y = SCORES_HEIGHT / 2 + 130;
+    private final static int BACK_BUTTON_WIDHT = 100;
+    private final static int BACK_BUTTON_HEIGHT = 50;
+
+    private final static int TIME_BUTTON_X = SCORES_WIDTH / 2 - 170;
+    private final static int DEATHS_BUTTON_X = SCORES_WIDTH / 2 + 10;
+    private final static int COINS_BUTTON_X = SCORES_WIDTH / 2 + 180;
+
+    private final static int BUTTON_Y = 135;
+    private final static int BUTTON_WIDTH = 150;
+    private final static int BUTTON_HEIGHT = 65;
+
+
 
     public ScorePanel(MainFrame mainFrame) {
         this.mainFrame = mainFrame;
@@ -80,10 +95,10 @@ public class ScorePanel extends AbstractPanel
 
 
     public void createButtons(){
-        buttonBack = new MyButton(Buttons.BACK, SCREEN_WIDTH - 210, SCREEN_HEIGHT / 2 + 130, 100, 50);
-        sortScoreTime = new MyButton(Buttons.TIME, SCREEN_WIDTH / 2 - 170, 135, 150, 65);
-        sortScoreDeaths = new MyButton(Buttons.DEATHS, SCREEN_WIDTH / 2 + 10, 135, 150, 65);
-        sortScoreCoins = new MyButton(Buttons.COINS, SCREEN_WIDTH / 2 + 180, 135, 150, 65);
+        buttonBack = new MyButton(Buttons.BACK, BACK_BUTTON_X, BACK_BUTTON_Y , BACK_BUTTON_WIDHT, BACK_BUTTON_HEIGHT);
+        sortScoreTime = new MyButton(Buttons.TIME, TIME_BUTTON_X, BUTTON_Y, BUTTON_WIDTH, BUTTON_HEIGHT);
+        sortScoreDeaths = new MyButton(Buttons.DEATHS, DEATHS_BUTTON_X, BUTTON_Y, BUTTON_WIDTH, BUTTON_HEIGHT);
+        sortScoreCoins = new MyButton(Buttons.COINS, COINS_BUTTON_X, BUTTON_Y, BUTTON_WIDTH, BUTTON_HEIGHT);
     }
 
     public void drawButtons(Graphics g){
