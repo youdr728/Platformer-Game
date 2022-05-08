@@ -216,6 +216,7 @@ public class GamePanel extends JComponent implements  Runnable
 
     public void updateGameKeys(){
         Player player = world.getPlayer();
+
         if (keyH.isMovementKeyPressed(Keys.UP)){
             player.movePlayer(Keys.UP);
         }

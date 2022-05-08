@@ -3,6 +3,7 @@ package se.liu.joeri765youdr728.platformer.input;
 
 
 import javax.imageio.ImageIO;
+import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -80,28 +81,36 @@ public class MyButton
 	Logger logger = Logger.getLogger(MyButton.class.getName() );
 	SimpleFormatter formatter = new SimpleFormatter();
 	FileHandler fileHandler = null;
-	try {
-	    fileHandler = new FileHandler("LogFile.log", 0, 1, true);
-	    logger.addHandler(fileHandler);
-	    fileHandler.setFormatter(formatter);
+	while (true) {
+	    try {
+		fileHandler = new FileHandler("LogFile.log", 0, 1, true);
+		logger.addHandler(fileHandler);
+		fileHandler.setFormatter(formatter);
 
-	    String urlString = "images" + SEPARATOR;
-	    playImage = ImageIO.read(ClassLoader.getSystemResource(urlString + "button_start.png"));
-	    highscoreImage = ImageIO.read(ClassLoader.getSystemResource(urlString + "button_highscore.png"));
-	    quitImage = ImageIO.read(ClassLoader.getSystemResource(urlString + "button_close.png"));
-	    backImage = ImageIO.read(ClassLoader.getSystemResource(urlString + "button_back.png"));
-	    timeImage = ImageIO.read(ClassLoader.getSystemResource(urlString + "button_time.png"));
-	    deathsImage = ImageIO.read(ClassLoader.getSystemResource(urlString + "button_deaths.png"));
-	    coinsImage = ImageIO.read(ClassLoader.getSystemResource(urlString + "button_coins.png"));
+		String urlString = "images" + SEPARATOR;
+		playImage = ImageIO.read(ClassLoader.getSystemResource(urlString + "button_start.png"));
+		highscoreImage = ImageIO.read(ClassLoader.getSystemResource(urlString + "button_highscore.png"));
+		quitImage = ImageIO.read(ClassLoader.getSystemResource(urlString + "button_close.png"));
+		backImage = ImageIO.read(ClassLoader.getSystemResource(urlString + "button_back.png"));
+		timeImage = ImageIO.read(ClassLoader.getSystemResource(urlString + "button_time.png"));
+		deathsImage = ImageIO.read(ClassLoader.getSystemResource(urlString + "button_deaths.png"));
+		coinsImage = ImageIO.read(ClassLoader.getSystemResource(urlString + "button_coins.png"));
+		break;
 
-	} catch (IOException e){
-	    logger.info(e.getMessage());
-	    e.printStackTrace();
+	    } catch (IOException e) {
+		logger.info(e.getMessage());
+		e.printStackTrace();
+		if(JOptionPane.showConfirmDialog(null, "do you want to retry", "IOException", JOptionPane.YES_NO_OPTION) !=
+		   JOptionPane.YES_OPTION){
+		    break;
+		}
+	    }
 	}
-	logger.removeHandler(fileHandler);
-	if(fileHandler != null){
-	    fileHandler.close();
-	}
+	    logger.removeHandler(fileHandler);
+	    if (fileHandler != null) {
+		fileHandler.close();
+	    }
+
 
 	EnumMap<Buttons, BufferedImage> buttonImageMap = new EnumMap<>(Buttons.class);
 	buttonImageMap.put(Buttons.PLAY, playImage);
