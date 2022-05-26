@@ -10,6 +10,8 @@ import java.awt.event.MouseEvent;
  * @author      Yousef Drgham <youdr728 @ student.liu.se>
  * @version     1.0
  * @since       1.0
+ *
+ * A class for handleing the mouse movement and mout input
  */
 public class MouseHandler extends MouseAdapter
 {

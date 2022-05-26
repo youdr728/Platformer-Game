@@ -6,6 +6,8 @@ import java.awt.*;
  * @author      Yousef Drgham <youdr728 @ student.liu.se>
  * @version     1.0
  * @since       1.0
+ *
+ * Interface for the functions that every entity needs like its position and dimensions
  */
 public interface Entity
 {

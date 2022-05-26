@@ -20,6 +20,8 @@ import java.util.logging.SimpleFormatter;
  * @author      Yousef Drgham <youdr728 @ student.liu.se>
  * @version     1.0
  * @since       1.0
+ *
+ * Class for the panel of the game that has the functions for drawing and updating the background
  */
 public class GamePanel extends JComponent implements  Runnable
 {
@@ -68,7 +70,6 @@ public class GamePanel extends JComponent implements  Runnable
 
     public GamePanel(MainFrame mainFrame) {
         this.mainFrame = mainFrame;
-
 	this.setPreferredSize(new Dimension(SCREEN_WIDTH, SCREEN_HEIGHT));
 	this.setDoubleBuffered(true);
         this.repaint();
@@ -92,12 +93,15 @@ public class GamePanel extends JComponent implements  Runnable
             winImage = ImageIO.read(ClassLoader.getSystemResource(URL_STRING + "win_image2.png"));
 
         } catch (IOException e) {
+            //kod analys varning: Du skrev i ett mail att om vi inte lyckades
+            //komma på en bra lösning till dom här problem att vi skulle lämmna en komentar då
             logger.info(e.getMessage());
             e.printStackTrace();
         }
     }
 
     public EnumMap<EntityType, BufferedImage> createTileMap(){
+        //kod analys varning: Från vad jag kan se av att läsa på felmedelandet så gör vi inte det här på fel sätt
         BufferedImage wall = null, platform = null, player = null, spikes = null, door = null, chest = null, timeBoost = null,
                 jumpBoost = null, speedBoost = null, enemy = null, enemyAttack = null;
 
@@ -123,6 +127,8 @@ public class GamePanel extends JComponent implements  Runnable
 
 
         } catch (IOException e) {
+            //kod analys varning: Du skrev i ett mail att om vi inte lyckades
+            //komma på en bra lösning till dom här problem att vi skulle lämmna en komentar då
             logger.info(e.getMessage());
             e.printStackTrace();
         }
@@ -154,7 +160,7 @@ public class GamePanel extends JComponent implements  Runnable
         gameThread.start();
     }
 
-    public void tryIfGameOver() {
+    public void checkIfGameOver() {
         if (world.getGameTime() == 0 || world.isGameWon()) {
             gameOver = true;
         }
@@ -163,13 +169,14 @@ public class GamePanel extends JComponent implements  Runnable
 
 
     @Override public void run() {
+        // The method that makes the game run by using Threads
         final int fps = 60;
         final int billion = 1000000000;
         double drawInterval = billion/(double)fps; // 1 second in nanoseconds
         double nextDrawTime = System.nanoTime() + drawInterval;
 
         while(gameThread != null){
-            tryIfGameOver();
+            checkIfGameOver();
 
             if(gameOver){
                 updatePauseKeys();
@@ -200,9 +207,13 @@ public class GamePanel extends JComponent implements  Runnable
                 }
 
                 Thread.sleep((long) remainingTime);
+                //Kod analys varning: I varningen står det att det här är okej om man gör som vi gör. Att använda det för att
+                //kontrollera hur många frames per seconds det ska vara
 
                 nextDrawTime += drawInterval;
             } catch (InterruptedException | IOException e) {
+                //kod analys varning: Du skrev i ett mail att om vi inte lyckades
+                //komma på en bra lösning till dom här problem att vi skulle lämmna en komentar då
                 logger.info(e.getMessage());
                 e.printStackTrace();
 
@@ -218,6 +229,8 @@ public class GamePanel extends JComponent implements  Runnable
         Player player = world.getPlayer();
 
         if (keyH.isMovementKeyPressed(Keys.UP)){
+            //Kod analys weakwarning: Har en chain av if statments här för att det ska vara möjligt
+            //att till exempel hoppa samtidigt som man rör på spelaren fram och tillbaka
             player.movePlayer(Keys.UP);
         }
         if (keyH.isMovementKeyPressed(Keys.DOWN)){
@@ -241,7 +254,6 @@ public class GamePanel extends JComponent implements  Runnable
         if(keyH.isMovementKeyPressed(Keys.QUIT)){
             mainFrame.setCurrentFrame("gameFrame");
             mainFrame.startMenu();
-
         }
     }
 

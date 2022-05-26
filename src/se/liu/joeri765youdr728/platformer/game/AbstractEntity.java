@@ -6,6 +6,8 @@ import java.awt.*;
  * @author      Yousef Drgham <youdr728 @ student.liu.se>
  * @version     1.0
  * @since       1.0
+ *
+ * Abstract class for what all entity in the game should contain such as its position, and the functions related to it
  */
 public abstract class AbstractEntity implements Entity
 {
@@ -28,8 +30,6 @@ public abstract class AbstractEntity implements Entity
 	this.collisionWidth = collisionWidth;
 	this.collisionHeight = collisionHeight;
     }
-
-
 
 
     @Override public int getX() {

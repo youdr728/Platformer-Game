@@ -17,6 +17,8 @@ import java.util.logging.SimpleFormatter;
  * @author      Yousef Drgham <youdr728 @ student.liu.se>
  * @version     1.0
  * @since       1.0
+ *
+ * A class for adding, saving, and loading a highscore to and from a file stored in the project
  */
 public class HighScoreList
 {
@@ -25,14 +27,12 @@ public class HighScoreList
 
 
     public void addHighscore(World world){
-
 	HighScore highscore = new HighScore(world.getScoreTime(), world.getDeathCounter(), world.getCoinCounter() );
 	highscoreList.add(highscore);
 	saveHighscoreList();
     }
 
     public void saveHighscoreList() {
-
 	Gson gson = new Gson();
 	Logger logger = Logger.getLogger(HighScoreList.class.getName() );
 	SimpleFormatter formatter = new SimpleFormatter();
@@ -47,6 +47,8 @@ public class HighScoreList
 	    pw.flush();
 	}
 	catch (IOException e) {
+	    //kod analys varning: Du skrev i ett mail att om vi inte lyckades
+	    //komma på en bra lösning till dom här problem att vi skulle lämmna en komentar då
 	    logger.info(e.getMessage());
 	    e.printStackTrace();
 	}
@@ -58,7 +60,6 @@ public class HighScoreList
     }
 
     public static HighScoreList loadHighscoreList()  {
-
 	Gson gson = new Gson();
 	Logger logger = Logger.getLogger(HighScoreList.class.getName() );
 	SimpleFormatter formatter = new SimpleFormatter();
@@ -73,6 +74,8 @@ public class HighScoreList
 	    return scores;
 
 	} catch (IOException e){
+	    //kod analys varning: Du skrev i ett mail att om vi inte lyckades
+	    //komma på en bra lösning till dom här problem att vi skulle lämmna en komentar då
 	    logger.info(e.getMessage());
 	    e.printStackTrace();
 	}

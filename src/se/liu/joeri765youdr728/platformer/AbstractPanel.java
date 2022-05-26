@@ -10,6 +10,8 @@ import java.awt.*;
  * @author      Yousef Drgham <youdr728 @ student.liu.se>
  * @version     1.0
  * @since       1.0
+ *
+ * A Abstract class that contains everything that the panels have in common
  */
 public abstract class AbstractPanel extends JPanel
 {

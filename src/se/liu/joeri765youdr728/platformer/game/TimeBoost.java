@@ -5,6 +5,8 @@ package se.liu.joeri765youdr728.platformer.game;
  * @author      Yousef Drgham <youdr728 @ student.liu.se>
  * @version     1.0
  * @since       1.0
+ * A class for the entity Timeboost which is a powerup that the player can pick up for a small boost in the time left to complete the
+ * map before the time runs out
  */
 public class TimeBoost extends AbstractEntity
 {

@@ -9,6 +9,8 @@ import java.util.Random;
  * @author      Yousef Drgham <youdr728 @ student.liu.se>
  * @version     1.0
  * @since       1.0
+ *
+ * A class for the entity enemy that describes what a enemy is and the functions related to a enemy like creating and moving its attack
  */
 public class Enemy extends AbstractEntity
 {
@@ -27,6 +29,7 @@ public class Enemy extends AbstractEntity
     }
 
     public void shootAttack(){
+	//Shoots an attack at random intervals
 	if(attackCounter == randomNumber){
 	    final int slowestAttack = 50;
 	    final int fastestAttack = 30;

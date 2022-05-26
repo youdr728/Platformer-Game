@@ -8,6 +8,9 @@ import java.awt.*;
  * @author      Yousef Drgham <youdr728 @ student.liu.se>
  * @version     1.0
  * @since       1.0
+ *
+ * A class for the entity player which is the movable avatar that the user controls and it contains the functions related to moving a player,
+ * a players death, and collision between a player and other entitys
  */
 public class Player extends AbstractEntity
 {

@@ -5,6 +5,8 @@ package se.liu.joeri765youdr728.platformer.game;
  * @author      Yousef Drgham <youdr728 @ student.liu.se>
  * @version     1.0
  * @since       1.0
+ *
+ * A class for the entity Jumpboost which is a powerup that the player can pick up for a small boost in jumping height
  */
 public class JumpBoost extends AbstractEntity
 {

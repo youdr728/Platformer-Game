@@ -19,17 +19,18 @@ import java.util.logging.SimpleFormatter;
  * @author      Yousef Drgham <youdr728 @ student.liu.se>
  * @version     1.0
  * @since       1.0
+ *
+ * A class that handles all that happens on the score screen like creating and drawing the background and controling what happens when
+ * the mouse is clicked
  */
 public class ScorePanel extends AbstractPanel
 {
 
 
     private BufferedImage background = null;
-
     private MyButton buttonBack = null, sortScoreTime = null, sortScoreCoins = null, sortScoreDeaths = null;
 
     private MainFrame mainFrame;
-
     private HighScoreList highScoreList = null;
 
     private static final int FONT_SIZE = 35, SCORES_WIDTH = 1, SCORES_HEIGHT = 10, OFFSET = 35, START_X = 130, START_Y = 275;
@@ -72,6 +73,8 @@ public class ScorePanel extends AbstractPanel
             background = ImageIO.read(ClassLoader.getSystemResource("images" + SEPARATOR + "HighScore_list.png"));
         }
         catch (IOException e) {
+            //kod analys varning: Du skrev i ett mail att om vi inte lyckades
+            //komma på en bra lösning till dom här problem att vi skulle lämmna en komentar då
             logger.info(e.getMessage());
             e.printStackTrace();
         }

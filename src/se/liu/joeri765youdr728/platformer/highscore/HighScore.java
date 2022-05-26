@@ -4,6 +4,8 @@ package se.liu.joeri765youdr728.platformer.highscore;
  * @author      Yousef Drgham <youdr728 @ student.liu.se>
  * @version     1.0
  * @since       1.0
+ *
+ * A class that describes what a highscore contains
  */
 public class HighScore
 {

@@ -9,6 +9,8 @@ import javax.swing.*;
  * @author      Yousef Drgham <youdr728 @ student.liu.se>
  * @version     1.0
  * @since       1.0
+ *
+ * Class for the main frame of the program that contains the different frames and panels for the game, menu and highscore
  */
 public class MainFrame
 {

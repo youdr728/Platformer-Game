@@ -17,6 +17,8 @@ import java.util.logging.SimpleFormatter;
  * @author      Yousef Drgham <youdr728 @ student.liu.se>
  * @version     1.0
  * @since       1.0
+ *
+ * Class for a cutsom button that we made that contains its position, dimensions and picture
  */
 public class MyButton
 {
@@ -24,7 +26,7 @@ public class MyButton
     private int y;
     private int width;
     private int height;
-    private Buttons imageNumber;
+    private Buttons imageType;
 
     private Rectangle bounds;
 
@@ -32,18 +34,14 @@ public class MyButton
 
     protected final EnumMap<Buttons, BufferedImage> buttonImageMap = createButtonImageMap();
 
-
-
     private final static String SEPARATOR = File.separator;
 
-
-
-    public MyButton(Buttons imageNumber, int x,  int y, int width, int height) {
+    public MyButton(Buttons imageType, int x,  int y, int width, int height) {
 	this.x = x;
 	this.y = y;
 	this.width = width;
 	this.height = height;
-	this.imageNumber = imageNumber;
+	this.imageType = imageType;
 
 	initBounds();
     }
@@ -53,7 +51,7 @@ public class MyButton
 
     public void draw(Graphics g){
 
-	g.drawImage(buttonImageMap.get(imageNumber), x, y, width, height, null);
+	g.drawImage(buttonImageMap.get(imageType), x, y, width, height, null);
 	g.setColor(Color.WHITE);
 	g.drawRect(x, y, width, height);
 	if(mouseOver){
@@ -69,11 +67,9 @@ public class MyButton
 	this.mouseOver = mouseOver;
     }
 
-    public Buttons getImageNumber() {
-	return imageNumber;
-    }
 
     public static EnumMap<Buttons, BufferedImage> createButtonImageMap(){
+	//kod analys varning: Från vad jag kan se av att läsa på felmedelandet så gör vi inte det här på fel sätt
 	BufferedImage playImage = null, highscoreImage = null, quitImage = null, backImage = null, timeImage = null, deathsImage =
 		null, coinsImage = null;
 
@@ -95,6 +91,9 @@ public class MyButton
 	    coinsImage = ImageIO.read(ClassLoader.getSystemResource(urlString + "button_coins.png"));
 
 	} catch (IOException e){
+	    //kod analys varning: Du skrev i ett mail att om vi inte lyckades
+	    //komma på en bra lösning till dom här problem att vi skulle lämmna en komentar då
+
 	    logger.info(e.getMessage());
 	    e.printStackTrace();
 	}
@@ -118,5 +117,8 @@ public class MyButton
 
     public Rectangle getBounds() {
 	return bounds;
+    }
+    public Buttons getImageType() {
+	return imageType;
     }
 }

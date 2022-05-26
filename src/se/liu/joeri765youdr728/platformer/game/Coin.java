@@ -5,6 +5,8 @@ package se.liu.joeri765youdr728.platformer.game;
  * @author      Yousef Drgham <youdr728 @ student.liu.se>
  * @version     1.0
  * @since       1.0
+ *
+ * A class for the entity coin which is a collectible that the player can pick up and it describes what a coin is in the game
  */
 public class Coin extends AbstractEntity
 {

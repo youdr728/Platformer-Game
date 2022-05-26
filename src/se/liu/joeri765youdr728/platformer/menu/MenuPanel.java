@@ -19,6 +19,9 @@ import java.util.logging.SimpleFormatter;
  * @author      Yousef Drgham <youdr728 @ student.liu.se>
  * @version     1.0
  * @since       1.0
+ *
+ * A class that handles all that happens on the menu screen like drawing and creating the background and controling what happens when
+ * the mouse is clicked
  */
 public class MenuPanel extends AbstractPanel
 {
@@ -64,6 +67,8 @@ public class MenuPanel extends AbstractPanel
 	    fileHandler.setFormatter(formatter);
 	    background = ImageIO.read(ClassLoader.getSystemResource("images" + SEPARATOR + "menu_background.png"));
 	} catch (IOException e) {
+	    //kod analys varning: Du skrev i ett mail att om vi inte lyckades
+	    //komma på en bra lösning till dom här problem att vi skulle lämmna en komentar då
 	    logger.info(e.getMessage());
 	    e.printStackTrace();
 	}

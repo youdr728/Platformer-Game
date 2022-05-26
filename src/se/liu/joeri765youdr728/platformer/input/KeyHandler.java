@@ -7,6 +7,8 @@ import java.awt.event.KeyEvent;
  * @author      Yousef Drgham <youdr728 @ student.liu.se>
  * @version     1.0
  * @since       1.0
+ *
+ * A class for Handeling all the different keyinputs in the game
  */
 public class KeyHandler extends KeyAdapter
 {
@@ -17,6 +19,8 @@ public class KeyHandler extends KeyAdapter
 	int code = e.getKeyCode();
 
 	if(code == KeyEvent.VK_W){
+	    //Kod analys weakwarning: Har en chain av if statments här för att det ska vara möjligt
+	    //att till exempel hoppa samtidigt som man rör på spelaren fram och tillbaka
 	    upPressed = true;
 	}
 	if(code == KeyEvent.VK_S){
@@ -45,6 +49,8 @@ public class KeyHandler extends KeyAdapter
 	int code = e.getKeyCode();
 
 	if(code == KeyEvent.VK_W){
+	    //Kod analys weakwarning: Har en chain av if statments här för att det ska vara möjligt
+	    //att till exempel hoppa samtidigt som man rör på spelaren fram och tillbaka
 	    upPressed = false;
 	}
 	if(code == KeyEvent.VK_S){
@@ -67,21 +73,6 @@ public class KeyHandler extends KeyAdapter
 	}
     }
 
-//    public boolean isUpPressed() {
-//	return upPressed;
-//    }
-//
-//    public boolean isDownPressed() {
-//	return downPressed;
-//    }
-//
-//    public boolean isLeftPressed() {
-//	return leftPressed;
-//    }
-//
-//    public boolean isRightPressed() {
-//	return rightPressed;
-//    }
     public boolean isMovementKeyPressed(Keys keys){
 	switch (keys){
 	    case LEFT -> {
@@ -108,18 +99,6 @@ public class KeyHandler extends KeyAdapter
 	}
 	return false;
     }
-
-//    public boolean isSpacePressed() {
-//	return spacePressed;
-//    }
-//
-//    public boolean isReplayPressed() {
-//	return replayPressed;
-//    }
-//
-//    public boolean isQuitPressed() {
-//	return quitPressed;
-//    }
 
     public void resetKeys() {
 	leftPressed = false;

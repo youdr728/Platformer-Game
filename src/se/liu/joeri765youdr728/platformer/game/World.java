@@ -18,6 +18,8 @@ import java.util.logging.SimpleFormatter;
  * @author      Yousef Drgham <youdr728 @ student.liu.se>
  * @version     1.0
  * @since       1.0
+ *
+ * A class that contains all the functions and variable related to updating and creating what goes on in the background
  */
 public class World
 {
@@ -79,6 +81,8 @@ public class World
 
 
 	}catch(IOException e){
+	    //kod analys varning: Du skrev i ett mail att om vi inte lyckades
+	    //komma på en bra lösning till dom här problem att vi skulle lämmna en komentar då
 	    logger.info(e.getMessage());
 	    e.printStackTrace();
 	}
@@ -89,6 +93,7 @@ public class World
 
     }
     public void createEntityList(){
+	//Creates a list off all the entitys that we load in from loadMapFromFile funtction
 	for (int h = 0; h < ROW; h++) {
 	    for (int w = 0; w < COL; w++) {
 		if (mapTileNum[h][w] != 0){
@@ -128,13 +133,9 @@ public class World
 			    entities.add(enemy);
 			    break;
 
-
 		    }
-
-
 		}
 	    }
-
 	}
     }
 
@@ -182,12 +183,8 @@ public class World
 		player.setJumpBoostOff();
 		boostTimeCounter = 0;
 	    }
-
 	}
-
-
     }
-
 
 
     public String getNextMap(){
@@ -209,6 +206,8 @@ public class World
 
 	    case COINS:
 		entities.remove(entity);
+		//kod analys varning: Inte mycket vi kan göra för att ta bort den här varningen då vi behöver remova entity i flera cases.
+		//Sen kan vi inte heller förenkal statmentet då det är så enkelt det kan vara.
 		coinCounter += 1;
 		break;
 
